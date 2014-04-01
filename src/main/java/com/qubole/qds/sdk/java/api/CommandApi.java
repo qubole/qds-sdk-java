@@ -1,8 +1,5 @@
 package com.qubole.qds.sdk.java.api;
 
-import com.qubole.qds.sdk.java.details.CommandHistoryBuilder;
-import com.qubole.qds.sdk.java.details.HiveCommandBuilder;
-
 /**
  * Corresponds to http://www.qubole.com/docs/documentation/command-api/
  */
