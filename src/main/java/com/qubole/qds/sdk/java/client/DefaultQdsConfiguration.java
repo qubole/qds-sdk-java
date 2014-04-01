@@ -8,6 +8,9 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Standard/default implementation of {@link QdsConfiguration}
+ */
 public class DefaultQdsConfiguration implements QdsConfiguration
 {
     private final Type type;
@@ -21,8 +24,15 @@ public class DefaultQdsConfiguration implements QdsConfiguration
     private static final int DEFAULT_CONNECTION_TIMEOUT = (int)TimeUnit.SECONDS.toMillis(10);
     private static final int DEFAULT_READ_TIMEOUT = (int)TimeUnit.SECONDS.toMillis(10);
 
+    /**
+     * see {@link DefaultQdsConfiguration#DefaultQdsConfiguration(Type, String)}
+     * and {@link DefaultQdsConfiguration#DefaultQdsConfiguration(Type, String, ClientConfig)}
+     */
     public enum Type
     {
+        /**
+         * Endpoint for the staging site
+         */
         STAGING()
         {
             @Override
@@ -32,6 +42,9 @@ public class DefaultQdsConfiguration implements QdsConfiguration
             }
         },
 
+        /**
+         * Endpoing for the production site
+         */
         PRODUCTION()
         {
             @Override
@@ -45,16 +58,28 @@ public class DefaultQdsConfiguration implements QdsConfiguration
         public abstract String getEndpoint();
     }
 
+    /**
+     * @param apiToken your API token
+     */
     public DefaultQdsConfiguration(String apiToken)
     {
         this(Type.PRODUCTION, apiToken, null);
     }
 
+    /**
+     * @param type endpoint type
+     * @param apiToken your API token
+     */
     public DefaultQdsConfiguration(Type type, String apiToken)
     {
         this(type, apiToken, null);
     }
 
+    /**
+     * @param type endpoint type
+     * @param apiToken your API token
+     * @param jerseyConfiguration jersey client configuration or null for default
+     */
     public DefaultQdsConfiguration(Type type, String apiToken, ClientConfig jerseyConfiguration)
     {
         this.type = Preconditions.checkNotNull(type, "type cannot be null");
