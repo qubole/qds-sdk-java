@@ -30,7 +30,11 @@ QdsClient client = QdsClientFactory.newClient(configuration);
 Then, make api calls as needed. E.g.
 
 ```
-Future<HiveCommandResponse> hiveCommandResponseFuture = client.command().hive().query("show tables;").invoke();
+Future<HiveCommandResponse> hiveCommandResponseFuture = client
+    .command()
+    .hive()
+    .query("show tables;")
+    .invoke();
 HiveCommandResponse hiveCommandResponse = hiveCommandResponseFuture.get();
 ...
 ```
