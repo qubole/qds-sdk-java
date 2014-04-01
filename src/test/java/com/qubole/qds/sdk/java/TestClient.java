@@ -40,7 +40,7 @@ public class TestClient
         client.command().history().invoke();
         WebTarget webTarget = webTargetReference.get();
         Assert.assertNotNull(webTarget);
-        Assert.assertEquals(webTarget.getUri(), new URI(configuration.getApiEndpoint() + configuration.getApiVersion() + "/commands"));
+        Assert.assertEquals(webTarget.getUri(), new URI(configuration.getApiEndpoint() + "/" + configuration.getApiVersion() + "/commands"));
     }
 
     @Test
@@ -68,6 +68,6 @@ public class TestClient
         client.command().history().forPage(10, 20).invoke();
         WebTarget webTarget = webTargetReference.get();
         Assert.assertNotNull(webTarget);
-        Assert.assertEquals(webTarget.getUri(), new URI(configuration.getApiEndpoint() + configuration.getApiVersion() + "/commands?page=10&per_page=20"));
+        Assert.assertEquals(webTarget.getUri(), new URI(configuration.getApiEndpoint() + "/" + configuration.getApiVersion() + "/commands?page=10&per_page=20"));
     }
 }

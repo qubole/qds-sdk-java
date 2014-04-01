@@ -17,7 +17,7 @@ public class DefaultQdsConfiguration implements QdsConfiguration
     private final String apiToken;
     private final ClientConfig jerseyConfiguration;
 
-    private static final String API_ENDPOINT = "https://api.qubole.com/api/";
+    private static final String API_ENDPOINT = "https://api.qubole.com/api";
     private static final String STAGING_API_ENDPOINT = "https://colonelhathi.qubole.com/api/";
     private static final String API_VERSION = "v1.2";
 
