@@ -4,7 +4,11 @@ import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
-import com.qubole.qds.sdk.java.entities.Message;
+import com.qubole.qds.sdk.java.entities.Cluster;
+import com.qubole.qds.sdk.java.entities.ClusterItem;
+import com.qubole.qds.sdk.java.entities.Ec2Settings;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -16,9 +20,14 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Future<Message> f = client.cluster().terminate("5678").invoke();
-            Message o = f.get();
-            System.out.println(o);
+            Cluster newConfig = new Cluster();
+            newConfig.setEc2_settings(new Ec2Settings());
+            newConfig.getEc2_settings().setAws_region("us-east-1");
+            newConfig.setEnable_ganglia_monitoring(false);
+            List<String> mask = Arrays.asList("enable_ganglia_monitoring", "ec2_settings.aws_region");
+            Future<ClusterItem> invoke = client.cluster().edit("5678", newConfig).withMask(mask).invoke();
+            ClusterItem value = invoke.get();
+            System.out.println(value);
         }
         finally
         {

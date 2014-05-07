@@ -1,6 +1,7 @@
 package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.ClusterApi;
+import com.qubole.qds.sdk.java.api.ClusterEditBuilder;
 import com.qubole.qds.sdk.java.api.ClusterInformationBuilder;
 import com.qubole.qds.sdk.java.api.ClusterListBuilder;
 import com.qubole.qds.sdk.java.api.ClusterStartBuilder;
@@ -8,6 +9,8 @@ import com.qubole.qds.sdk.java.api.ClusterStateBuilder;
 import com.qubole.qds.sdk.java.api.ClusterStatusBuilder;
 import com.qubole.qds.sdk.java.api.ClusterTerminateBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
+import com.qubole.qds.sdk.java.entities.Cluster;
+import java.util.List;
 
 class ClusterApiImpl implements ClusterApi
 {
@@ -47,6 +50,12 @@ class ClusterApiImpl implements ClusterApi
     public ClusterTerminateBuilder terminate(String labelOrId)
     {
         return new ClusterTerminateBuilderImpl(client, labelOrId);
+    }
+
+    @Override
+    public ClusterEditBuilder edit(String labelOrId, Cluster newConfig, List<String> mask)
+    {
+        return new ClusterEditBuilderImpl(client, labelOrId, newConfig, mask);
     }
 
     ClusterApiImpl(QdsClient client)
