@@ -1,5 +1,6 @@
 package com.qubole.qds.sdk.java;
 
+import com.qubole.qds.sdk.java.api.ClusterConfigBuilder;
 import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
@@ -17,9 +18,10 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Future<ClusterItem> invoke = client.cluster().edit("5678")
+            ClusterConfigBuilder configBuilder = client.clusterConfig()
                 .hadoop_settings().custom_config("mapred.hustler.nodes.lease.period=300001\n" + "qubole.excluded-hosts.allow-removal=false")
-                .enable_ganglia_monitoring(false)
+                .enable_ganglia_monitoring(false);
+            Future<ClusterItem> invoke = client.cluster().edit("5678", configBuilder)
                 .invoke();
             ClusterItem value = invoke.get();
             System.out.println(value);

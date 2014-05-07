@@ -1,8 +1,8 @@
 package com.qubole.qds.sdk.java.api;
 
-public interface ClusterPrestoConfigBuilder<T>
+public interface ClusterPrestoConfigBuilder
 {
-    public T is_presto_enabled(boolean is_presto_enabled);
+    public ClusterConfigBuilder is_presto_enabled(boolean is_presto_enabled);
 
-    public T custom_config(String custom_config);
+    public ClusterConfigBuilder custom_config(String custom_config);
 }

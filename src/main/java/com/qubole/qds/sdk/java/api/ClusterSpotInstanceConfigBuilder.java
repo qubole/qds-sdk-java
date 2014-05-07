@@ -1,7 +1,7 @@
 package com.qubole.qds.sdk.java.api;
 
-public interface ClusterSpotInstanceConfigBuilder<T>
+public interface ClusterSpotInstanceConfigBuilder
 {
-    public T maximum_bid_price_percentage(String maximum_bid_price_percentage);
-    public T timeout_for_request(int timeout_for_request);
+    public ClusterConfigBuilder maximum_bid_price_percentage(String maximum_bid_price_percentage);
+    public ClusterConfigBuilder timeout_for_request(int timeout_for_request);
 }

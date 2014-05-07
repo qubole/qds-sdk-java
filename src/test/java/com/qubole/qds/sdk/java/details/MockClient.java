@@ -1,6 +1,7 @@
 package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.ClusterApi;
+import com.qubole.qds.sdk.java.api.ClusterConfigBuilder;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import javax.ws.rs.core.GenericType;
@@ -83,6 +84,12 @@ public class MockClient implements QdsClient
     @Override
     public void close()
     {
+    }
+
+    @Override
+    public ClusterConfigBuilder clusterConfig()
+    {
+        return new ClusterConfigBuilderImpl();
     }
 
     @Override

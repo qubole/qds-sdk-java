@@ -1,5 +1,7 @@
 package com.qubole.qds.sdk.java.api;
 
+import com.qubole.qds.sdk.java.client.QdsClient;
+
 /**
  * Corresponds to http://www.qubole.com/docs/documentation/cluster-api/
  */
@@ -48,7 +50,8 @@ public interface ClusterApi
      * Corresponds to http://www.qubole.com/docs/edit-cluster/
      *
      * @param labelOrId the Cluster label/id
+     * @param configBuilder config values - use {@link QdsClient#clusterConfig()}
      * @return new builder
      */
-    public ClusterEditBuilder edit(String labelOrId);
+    public ClusterEditBuilder edit(String labelOrId, ClusterConfigBuilder configBuilder);
 }

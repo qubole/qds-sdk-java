@@ -1,8 +1,8 @@
 package com.qubole.qds.sdk.java.api;
 
-public interface ClusterSecurityConfigBuilder<T>
+public interface ClusterSecurityConfigBuilder
 {
-    public T encrypted_ephemerals(boolean encrypted_ephemerals);
+    public ClusterConfigBuilder encrypted_ephemerals(boolean encrypted_ephemerals);
 
-    public T customer_ssh_key(String customer_ssh_key);
+    public ClusterConfigBuilder customer_ssh_key(String customer_ssh_key);
 }

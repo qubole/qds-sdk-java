@@ -1,6 +1,6 @@
 package com.qubole.qds.sdk.java.api;
 
-public interface ClusterFairSchedulerConfigBuilder<T>
+public interface ClusterFairSchedulerConfigBuilder
 {
-    public T default_pool(String default_pool);
+    public ClusterConfigBuilder default_pool(String default_pool);
 }
