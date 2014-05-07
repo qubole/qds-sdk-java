@@ -2,6 +2,7 @@ package com.qubole.qds.sdk.java.client;
 
 import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.CommandApi;
+import com.qubole.qds.sdk.java.details.ClientEntity;
 import com.qubole.qds.sdk.java.details.ForPage;
 import javax.ws.rs.core.GenericType;
 import java.util.concurrent.Future;
@@ -34,7 +35,7 @@ public interface QdsClient extends AutoCloseable
      * @param additionalPaths additional path components
      * @return async result
      */
-    public <T> Future<T> invokeRequest(ForPage forPage, Object entity, Class<T> responseType, String... additionalPaths);
+    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, Class<T> responseType, String... additionalPaths);
 
     /**
      * Low-level request invoker. Not normally used directly. Use the api factories instead.
@@ -45,7 +46,7 @@ public interface QdsClient extends AutoCloseable
      * @param additionalPaths additional path components
      * @return async result
      */
-    public <T> Future<T> invokeRequest(ForPage forPage, Object entity, GenericType<T> responseType, String... additionalPaths);
+    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, GenericType<T> responseType, String... additionalPaths);
 
     @Override
     public void close();

@@ -14,12 +14,12 @@ public class MockClient implements QdsClient
     public static class InvokeDetails
     {
         private final ForPage forPage;
-        private final Object entity;
+        private final ClientEntity entity;
         private final Class<?> responseType;
         private final GenericType<?> genericResponseType;
         private final String[] additionalPaths;
 
-        public InvokeDetails(ForPage forPage, Object entity, GenericType<?> genericResponseType, String[] additionalPaths)
+        public InvokeDetails(ForPage forPage, ClientEntity entity, GenericType<?> genericResponseType, String[] additionalPaths)
         {
             this.forPage = forPage;
             this.entity = entity;
@@ -28,7 +28,7 @@ public class MockClient implements QdsClient
             this.genericResponseType = genericResponseType;
         }
 
-        public InvokeDetails(ForPage forPage, Object entity, Class<?> responseType, String[] additionalPaths)
+        public InvokeDetails(ForPage forPage, ClientEntity entity, Class<?> responseType, String[] additionalPaths)
         {
             this.forPage = forPage;
             this.entity = entity;
@@ -47,7 +47,7 @@ public class MockClient implements QdsClient
             return forPage;
         }
 
-        public Object getEntity()
+        public ClientEntity getEntity()
         {
             return entity;
         }
@@ -86,14 +86,14 @@ public class MockClient implements QdsClient
     }
 
     @Override
-    public <T> Future<T> invokeRequest(ForPage forPage, Object entity, GenericType<T> responseType, String... additionalPaths)
+    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, GenericType<T> responseType, String... additionalPaths)
     {
         results.add(new InvokeDetails(forPage, entity, responseType, additionalPaths));
         return null;
     }
 
     @Override
-    public <T> Future<T> invokeRequest(ForPage forPage, Object entity, Class<T> responseType, String... additionalPaths)
+    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, Class<T> responseType, String... additionalPaths)
     {
         results.add(new InvokeDetails(forPage, entity, responseType, additionalPaths));
         return null;

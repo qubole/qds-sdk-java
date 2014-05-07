@@ -14,6 +14,13 @@ public interface ClusterApi
     public ClusterStatusBuilder status();
 
     /**
+     * Corresponds to http://www.qubole.com/docs/list-clusters/
+     *
+     * @return new builder
+     */
+    public ClusterListBuilder list();
+
+    /**
      * Corresponds to http://www.qubole.com/docs/get-cluster-state/
      *
      * @param labelOrId the Cluster label/id
@@ -30,9 +37,18 @@ public interface ClusterApi
     public ClusterInformationBuilder information(String labelOrId);
 
     /**
-     * Corresponds to http://www.qubole.com/docs/list-clusters/
+     * Corresponds to http://www.qubole.com/docs/start-terminate-cluster/ for "start"
      *
+     * @param labelOrId the Cluster label/id
      * @return new builder
      */
-    public ClusterListBuilder list();
+    public ClusterStartBuilder start(String labelOrId);
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/start-terminate-cluster/ for "terminate"
+     *
+     * @param labelOrId the Cluster label/id
+     * @return new builder
+     */
+    public ClusterTerminateBuilder terminate(String labelOrId);
 }

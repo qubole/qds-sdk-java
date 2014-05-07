@@ -47,14 +47,14 @@ public class QdsClientImpl implements QdsClient
     }
 
     @Override
-    public <T> Future<T> invokeRequest(ForPage forPage, Object entity, Class<T> responseType, String... additionalPaths)
+    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, Class<T> responseType, String... additionalPaths)
     {
         AsyncInvoker invoker = prepareRequest(forPage, additionalPaths);
         return invokePreparedRequest(entity, responseType, invoker);
     }
 
     @Override
-    public <T> Future<T> invokeRequest(ForPage forPage, Object entity, GenericType<T> responseType, String... additionalPaths)
+    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, GenericType<T> responseType, String... additionalPaths)
     {
         AsyncInvoker invoker = prepareRequest(forPage, additionalPaths);
         return invokePreparedRequest(entity, responseType, invoker);
@@ -74,21 +74,21 @@ public class QdsClientImpl implements QdsClient
     }
 
     @VisibleForTesting
-    protected <T> Future<T> invokePreparedRequest(Object entity, Class<T> responseType, AsyncInvoker invoker)
+    protected <T> Future<T> invokePreparedRequest(ClientEntity entity, Class<T> responseType, AsyncInvoker invoker)
     {
         if ( entity != null )
         {
-            return invoker.post(Entity.entity(entity, MediaType.APPLICATION_JSON_TYPE), responseType);
+            return invoker.method(entity.getMethod().name(), Entity.entity(entity.getEntity(), MediaType.APPLICATION_JSON_TYPE), responseType);
         }
         return invoker.get(responseType);
     }
 
     @VisibleForTesting
-    protected <T> Future<T> invokePreparedRequest(Object entity, GenericType<T> responseType, AsyncInvoker invoker)
+    protected <T> Future<T> invokePreparedRequest(ClientEntity entity, GenericType<T> responseType, AsyncInvoker invoker)
     {
         if ( entity != null )
         {
-            return invoker.post(Entity.entity(entity, MediaType.APPLICATION_JSON_TYPE), responseType);
+            return invoker.method(entity.getMethod().name(), Entity.entity(entity.getEntity(), MediaType.APPLICATION_JSON_TYPE), responseType);
         }
         return invoker.get(responseType);
     }

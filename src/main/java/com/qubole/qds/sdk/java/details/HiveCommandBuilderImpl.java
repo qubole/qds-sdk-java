@@ -18,7 +18,7 @@ public class HiveCommandBuilderImpl implements HiveCommandBuilder
     @Override
     public Future<HiveCommandResponse> invoke()
     {
-        return client.invokeRequest(null, hiveCommand, HiveCommandResponse.class, "commands");
+        return client.invokeRequest(null, new ClientEntity(hiveCommand), HiveCommandResponse.class, "commands");
     }
 
     @Override

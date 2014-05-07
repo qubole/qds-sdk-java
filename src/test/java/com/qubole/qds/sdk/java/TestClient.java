@@ -2,12 +2,14 @@ package com.qubole.qds.sdk.java;
 
 import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
+import com.qubole.qds.sdk.java.details.ClientEntity;
 import com.qubole.qds.sdk.java.details.ForPage;
 import com.qubole.qds.sdk.java.details.QdsClientImpl;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import javax.ws.rs.client.AsyncInvoker;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.concurrent.Future;
@@ -23,7 +25,13 @@ public class TestClient
         QdsClientImpl client = new QdsClientImpl(configuration)
         {
             @Override
-            protected <T> Future<T> invokePreparedRequest(Object entity, Class<T> responseType, AsyncInvoker invoker)
+            protected <T> Future<T> invokePreparedRequest(ClientEntity entity, Class<T> responseType, AsyncInvoker invoker)
+            {
+                return null;
+            }
+
+            @Override
+            protected <T> Future<T> invokePreparedRequest(ClientEntity entity, GenericType<T> responseType, AsyncInvoker invoker)
             {
                 return null;
             }
@@ -51,7 +59,13 @@ public class TestClient
         QdsClientImpl client = new QdsClientImpl(configuration)
         {
             @Override
-            protected <T> Future<T> invokePreparedRequest(Object entity, Class<T> responseType, AsyncInvoker invoker)
+            protected <T> Future<T> invokePreparedRequest(ClientEntity entity, Class<T> responseType, AsyncInvoker invoker)
+            {
+                return null;
+            }
+
+            @Override
+            protected <T> Future<T> invokePreparedRequest(ClientEntity entity, GenericType<T> responseType, AsyncInvoker invoker)
             {
                 return null;
             }
