@@ -4,6 +4,7 @@ import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
+import com.qubole.qds.sdk.java.entities.ClusterList;
 import com.qubole.qds.sdk.java.entities.HiveCommandResponse;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -16,9 +17,15 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
+/*
             Future<HiveCommandResponse> hiveCommandResponseFuture = client.command().hive().query("show tables;").invoke();
             HiveCommandResponse hiveCommandResponse = hiveCommandResponseFuture.get();
             System.out.println(hiveCommandResponse);
+*/
+
+            Future<ClusterList> listFuture = client.cluster().list().invoke();
+            ClusterList clusterItems = listFuture.get();
+            System.out.println(clusterItems);
         }
         finally
         {

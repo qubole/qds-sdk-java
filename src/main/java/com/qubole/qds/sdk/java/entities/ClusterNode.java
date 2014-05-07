@@ -2,89 +2,71 @@ package com.qubole.qds.sdk.java.entities;
 
 public class ClusterNode
 {
-    private String state;
-    private String ip;
-    private String type;
-    private String ami;
-    private String alias;
-    private String spot_instance;
+    private String instance_type;
+    private String ec2_instance_id;
+    private boolean is_spot_instance;
+    private String up_time;
     private String private_ip;
-    private String instance;
+    private String last_seen_time;
+    private String role;
+    private String down_time;
+    private String hostname;
 
     public ClusterNode()
     {
     }
 
-    public ClusterNode(String state, String ip, String type, String ami, String alias, String spot_instance, String private_ip, String instance)
+    public ClusterNode(String instance_type, String ec2_instance_id, boolean is_spot_instance, String up_time, String private_ip, String last_seen_time, String role, String down_time, String hostname)
     {
-        this.state = state;
-        this.ip = ip;
-        this.type = type;
-        this.ami = ami;
-        this.alias = alias;
-        this.spot_instance = spot_instance;
+        this.instance_type = instance_type;
+        this.ec2_instance_id = ec2_instance_id;
+        this.is_spot_instance = is_spot_instance;
+        this.up_time = up_time;
         this.private_ip = private_ip;
-        this.instance = instance;
+        this.last_seen_time = last_seen_time;
+        this.role = role;
+        this.down_time = down_time;
+        this.hostname = hostname;
     }
 
-    public String getState()
+    public String getInstance_type()
     {
-        return state;
+        return instance_type;
     }
 
-    public void setState(String state)
+    public void setInstance_type(String instance_type)
     {
-        this.state = state;
+        this.instance_type = instance_type;
     }
 
-    public String getIp()
+    public String getEc2_instance_id()
     {
-        return ip;
+        return ec2_instance_id;
     }
 
-    public void setIp(String ip)
+    public void setEc2_instance_id(String ec2_instance_id)
     {
-        this.ip = ip;
+        this.ec2_instance_id = ec2_instance_id;
     }
 
-    public String getType()
+    public boolean isIs_spot_instance()
     {
-        return type;
+        return is_spot_instance;
     }
 
-    public void setType(String type)
+    public void setIs_spot_instance(boolean is_spot_instance)
     {
-        this.type = type;
+        this.is_spot_instance = is_spot_instance;
     }
 
-    public String getAmi()
+    public String getUp_time()
     {
-        return ami;
+        return up_time;
     }
 
-    public void setAmi(String ami)
+    public void setUp_time(String up_time)
     {
-        this.ami = ami;
-    }
-
-    public String getAlias()
-    {
-        return alias;
-    }
-
-    public void setAlias(String alias)
-    {
-        this.alias = alias;
-    }
-
-    public String getSpot_instance()
-    {
-        return spot_instance;
-    }
-
-    public void setSpot_instance(String spot_instance)
-    {
-        this.spot_instance = spot_instance;
+        this.up_time = up_time;
     }
 
     public String getPrivate_ip()
@@ -97,13 +79,43 @@ public class ClusterNode
         this.private_ip = private_ip;
     }
 
-    public String getInstance()
+    public String getLast_seen_time()
     {
-        return instance;
+        return last_seen_time;
     }
 
-    public void setInstance(String instance)
+    public void setLast_seen_time(String last_seen_time)
     {
-        this.instance = instance;
+        this.last_seen_time = last_seen_time;
+    }
+
+    public String getRole()
+    {
+        return role;
+    }
+
+    public void setRole(String role)
+    {
+        this.role = role;
+    }
+
+    public String getDown_time()
+    {
+        return down_time;
+    }
+
+    public void setDown_time(String down_time)
+    {
+        this.down_time = down_time;
+    }
+
+    public String getHostname()
+    {
+        return hostname;
+    }
+
+    public void setHostname(String hostname)
+    {
+        this.hostname = hostname;
     }
 }

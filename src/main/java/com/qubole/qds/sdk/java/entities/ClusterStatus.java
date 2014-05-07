@@ -12,13 +12,13 @@ public class ClusterStatus
     private String launch_time;
     private String jt_web;
     private DataNode tasktracker;
-    private Map<String, ClusterNode> nodes;
+    private Map<String, ClusterNodeOld> nodes;
 
     public ClusterStatus()
     {
     }
 
-    public ClusterStatus(String state, String launch_ts, String uptime, DataNode datanode, String autoscale_instance_request, String launch_time, String jt_web, DataNode tasktracker, Map<String, ClusterNode> nodes)
+    public ClusterStatus(String state, String launch_ts, String uptime, DataNode datanode, String autoscale_instance_request, String launch_time, String jt_web, DataNode tasktracker, Map<String, ClusterNodeOld> nodes)
     {
         this.state = state;
         this.launch_ts = launch_ts;
@@ -111,12 +111,12 @@ public class ClusterStatus
         this.tasktracker = tasktracker;
     }
 
-    public Map<String, ClusterNode> getNodes()
+    public Map<String, ClusterNodeOld> getNodes()
     {
         return nodes;
     }
 
-    public void setNodes(Map<String, ClusterNode> nodes)
+    public void setNodes(Map<String, ClusterNodeOld> nodes)
     {
         this.nodes = nodes;
     }
