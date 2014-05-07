@@ -22,6 +22,14 @@ public interface ClusterApi
     public ClusterStateBuilder state(String labelOrId);
 
     /**
+     * Corresponds to http://www.qubole.com/docs/get-cluster-information/
+     *
+     * @param labelOrId the Cluster label/id
+     * @return new builder
+     */
+    public ClusterInformationBuilder information(String labelOrId);
+
+    /**
      * Corresponds to http://www.qubole.com/docs/list-clusters/
      *
      * @return new builder

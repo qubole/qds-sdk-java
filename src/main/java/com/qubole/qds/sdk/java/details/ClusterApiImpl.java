@@ -1,6 +1,7 @@
 package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.ClusterApi;
+import com.qubole.qds.sdk.java.api.ClusterInformationBuilder;
 import com.qubole.qds.sdk.java.api.ClusterListBuilder;
 import com.qubole.qds.sdk.java.api.ClusterStateBuilder;
 import com.qubole.qds.sdk.java.api.ClusterStatusBuilder;
@@ -26,6 +27,12 @@ class ClusterApiImpl implements ClusterApi
     public ClusterListBuilder list()
     {
         return new ClusterListBuilderImpl(client);
+    }
+
+    @Override
+    public ClusterInformationBuilder information(String labelOrId)
+    {
+        return new ClusterInformationBuilderImpl(client, labelOrId);
     }
 
     ClusterApiImpl(QdsClient client)
