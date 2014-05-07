@@ -6,7 +6,6 @@ import com.qubole.qds.sdk.java.api.ClusterInformationBuilder;
 import com.qubole.qds.sdk.java.api.ClusterListBuilder;
 import com.qubole.qds.sdk.java.api.ClusterStartBuilder;
 import com.qubole.qds.sdk.java.api.ClusterStateBuilder;
-import com.qubole.qds.sdk.java.api.ClusterStatusBuilder;
 import com.qubole.qds.sdk.java.api.ClusterTerminateBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.Cluster;
@@ -15,12 +14,6 @@ import java.util.List;
 class ClusterApiImpl implements ClusterApi
 {
     private final QdsClient client;
-
-    @Override
-    public ClusterStatusBuilder status()
-    {
-        return new ClusterStatusBuilderImpl(client);
-    }
 
     @Override
     public ClusterStateBuilder state(String labelOrId)

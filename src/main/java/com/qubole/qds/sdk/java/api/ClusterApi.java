@@ -9,14 +9,6 @@ import java.util.List;
 public interface ClusterApi
 {
     /**
-     * Corresponds to http://www.qubole.com/docs/check-cluster-status/
-     *
-     * @return new builder
-     * @deprecated use {@link #state(String)} instead
-     */
-    public ClusterStatusBuilder status();
-
-    /**
      * Corresponds to http://www.qubole.com/docs/list-clusters/
      *
      * @return new builder
