@@ -13,7 +13,7 @@ public class ClusterStateBuilderImpl implements ClusterStateBuilder
     @Override
     public Future<ClusterState> invoke()
     {
-        return client.invokeRequest(null, null, ClusterState.class, labelOrId, "state");
+        return client.invokeRequest(null, null, ClusterState.class, "clusters", labelOrId, "state");
     }
 
     ClusterStateBuilderImpl(QdsClient client, String labelOrId)
