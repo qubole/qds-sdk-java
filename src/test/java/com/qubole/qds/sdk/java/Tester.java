@@ -16,7 +16,7 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Future<Message> f = client.cluster().start("5678").invoke();
+            Future<Message> f = client.cluster().terminate("5678").invoke();
             Message o = f.get();
             System.out.println(o);
         }
