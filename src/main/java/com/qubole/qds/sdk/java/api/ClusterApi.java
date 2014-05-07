@@ -54,4 +54,12 @@ public interface ClusterApi
      * @return new builder
      */
     public ClusterEditBuilder edit(String labelOrId, ClusterConfigBuilder configBuilder);
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/create-new-cluster/
+     *
+     * @param configBuilder config values - use {@link QdsClient#clusterConfig()}
+     * @return new builder
+     */
+    public ClusterCreateBuilder create(ClusterConfigBuilder configBuilder);
 }

@@ -19,9 +19,12 @@ public class Tester
         try
         {
             ClusterConfigBuilder configBuilder = client.clusterConfig()
-                .hadoop_settings().custom_config("mapred.hustler.nodes.lease.period=300001\n" + "qubole.excluded-hosts.allow-removal=false")
-                .enable_ganglia_monitoring(false);
-            Future<ClusterItem> invoke = client.cluster().edit("5678", configBuilder)
+                .label(Arrays.asList("pig_workflow", "us_west"))
+                .ec2_settings().compute_access_key("foo")
+                .ec2_settings().compute_secret_key("bar")
+                .ec2_settings().aws_region("us-east-1")
+                ;
+            Future<ClusterItem> invoke = client.cluster().create(configBuilder)
                 .invoke();
             ClusterItem value = invoke.get();
             System.out.println(value);

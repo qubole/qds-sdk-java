@@ -2,6 +2,7 @@ package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.ClusterConfigBuilder;
+import com.qubole.qds.sdk.java.api.ClusterCreateBuilder;
 import com.qubole.qds.sdk.java.api.ClusterEditBuilder;
 import com.qubole.qds.sdk.java.api.ClusterInformationBuilder;
 import com.qubole.qds.sdk.java.api.ClusterListBuilder;
@@ -48,6 +49,12 @@ class ClusterApiImpl implements ClusterApi
     public ClusterEditBuilder edit(String labelOrId, ClusterConfigBuilder configBuilder)
     {
         return new ClusterEditBuilderImpl(client, labelOrId, configBuilder);
+    }
+
+    @Override
+    public ClusterCreateBuilder create(ClusterConfigBuilder configBuilder)
+    {
+        return new ClusterCreateBuilderImpl(client, configBuilder);
     }
 
     ClusterApiImpl(QdsClient client)
