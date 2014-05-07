@@ -3,6 +3,7 @@ package com.qubole.qds.sdk.java.details;
 import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
+import javax.ws.rs.core.GenericType;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Future;
 
@@ -15,7 +16,17 @@ public class MockClient implements QdsClient
         private final ForPage forPage;
         private final Object entity;
         private final Class<?> responseType;
+        private final GenericType<?> genericResponseType;
         private final String[] additionalPaths;
+
+        public InvokeDetails(ForPage forPage, Object entity, GenericType<?> genericResponseType, String[] additionalPaths)
+        {
+            this.forPage = forPage;
+            this.entity = entity;
+            this.responseType = null;
+            this.additionalPaths = additionalPaths;
+            this.genericResponseType = genericResponseType;
+        }
 
         public InvokeDetails(ForPage forPage, Object entity, Class<?> responseType, String[] additionalPaths)
         {
@@ -23,6 +34,12 @@ public class MockClient implements QdsClient
             this.entity = entity;
             this.responseType = responseType;
             this.additionalPaths = additionalPaths;
+            this.genericResponseType = null;
+        }
+
+        public GenericType<?> getGenericResponseType()
+        {
+            return genericResponseType;
         }
 
         public ForPage getForPage()
@@ -66,6 +83,13 @@ public class MockClient implements QdsClient
     @Override
     public void close()
     {
+    }
+
+    @Override
+    public <T> Future<T> invokeRequest(ForPage forPage, Object entity, GenericType<T> responseType, String... additionalPaths)
+    {
+        results.add(new InvokeDetails(forPage, entity, responseType, additionalPaths));
+        return null;
     }
 
     @Override

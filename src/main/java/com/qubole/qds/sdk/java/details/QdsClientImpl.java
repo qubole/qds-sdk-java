@@ -11,6 +11,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -52,6 +53,13 @@ public class QdsClientImpl implements QdsClient
         return invokePreparedRequest(entity, responseType, invoker);
     }
 
+    @Override
+    public <T> Future<T> invokeRequest(ForPage forPage, Object entity, GenericType<T> responseType, String... additionalPaths)
+    {
+        AsyncInvoker invoker = prepareRequest(forPage, additionalPaths);
+        return invokePreparedRequest(entity, responseType, invoker);
+    }
+
     public AsyncInvoker prepareRequest(ForPage forPage, String... additionalPaths)
     {
         WebTarget localTarget = prepareTarget(forPage, additionalPaths);
@@ -67,6 +75,16 @@ public class QdsClientImpl implements QdsClient
 
     @VisibleForTesting
     protected <T> Future<T> invokePreparedRequest(Object entity, Class<T> responseType, AsyncInvoker invoker)
+    {
+        if ( entity != null )
+        {
+            return invoker.post(Entity.entity(entity, MediaType.APPLICATION_JSON_TYPE), responseType);
+        }
+        return invoker.get(responseType);
+    }
+
+    @VisibleForTesting
+    protected <T> Future<T> invokePreparedRequest(Object entity, GenericType<T> responseType, AsyncInvoker invoker)
     {
         if ( entity != null )
         {

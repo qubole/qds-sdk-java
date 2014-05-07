@@ -1,7 +1,8 @@
 package com.qubole.qds.sdk.java.api;
 
-import com.qubole.qds.sdk.java.entities.ClusterList;
+import com.qubole.qds.sdk.java.entities.ClusterItem;
+import java.util.List;
 
-public interface ClusterListBuilder extends Invokable<ClusterList>
+public interface ClusterListBuilder extends Invokable<List<ClusterItem>>
 {
 }

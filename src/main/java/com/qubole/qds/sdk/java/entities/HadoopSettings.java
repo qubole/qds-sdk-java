@@ -9,12 +9,13 @@ public class HadoopSettings
     private String slave_request_type;
     private int initial_nodes;
     private String custom_config;
+    private SpotInstanceSettings spot_instance_settings;
 
     public HadoopSettings()
     {
     }
 
-    public HadoopSettings(String master_instance_type, FairSchedulerSettings fairscheduler_settings, int max_nodes, String slave_instance_type, String slave_request_type, int initial_nodes, String custom_config)
+    public HadoopSettings(String master_instance_type, FairSchedulerSettings fairscheduler_settings, int max_nodes, String slave_instance_type, String slave_request_type, int initial_nodes, String custom_config, SpotInstanceSettings spot_instance_settings)
     {
         this.master_instance_type = master_instance_type;
         this.fairscheduler_settings = fairscheduler_settings;
@@ -23,6 +24,7 @@ public class HadoopSettings
         this.slave_request_type = slave_request_type;
         this.initial_nodes = initial_nodes;
         this.custom_config = custom_config;
+        this.spot_instance_settings = spot_instance_settings;
     }
 
     public String getMaster_instance_type()
@@ -93,5 +95,15 @@ public class HadoopSettings
     public void setCustom_config(String custom_config)
     {
         this.custom_config = custom_config;
+    }
+
+    public SpotInstanceSettings getSpot_instance_settings()
+    {
+        return spot_instance_settings;
+    }
+
+    public void setSpot_instance_settings(SpotInstanceSettings spot_instance_settings)
+    {
+        this.spot_instance_settings = spot_instance_settings;
     }
 }
