@@ -1,12 +1,11 @@
 package com.qubole.qds.sdk.java;
 
-import com.google.common.collect.Maps;
 import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
-import com.qubole.qds.sdk.java.entities.CommandResponse;
-import java.util.Map;
+import com.qubole.qds.sdk.java.entities.NameAndType;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -18,15 +17,8 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Map<String, Object> parameters = Maps.newHashMap();
-            parameters.put("one", "a");
-            parameters.put("two", 2);
-            Future<CommandResponse> invoke = client.command().pig()
-                .latin_statements("hey")
-                .parameters(parameters)
-                .script_location("yo")
-                .invoke();
-            CommandResponse value = invoke.get();
+            Future<List<NameAndType>> invoke = client.hiveMetadata().table("default_qubole_memetracker").invoke();
+            List<NameAndType> value = invoke.get();
             System.out.println(value);
         }
         finally
