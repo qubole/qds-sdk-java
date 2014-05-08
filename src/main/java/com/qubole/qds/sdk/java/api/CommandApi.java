@@ -3,6 +3,7 @@ package com.qubole.qds.sdk.java.api;
 import com.qubole.qds.sdk.java.entities.Command;
 import com.qubole.qds.sdk.java.entities.Commands;
 import com.qubole.qds.sdk.java.entities.ResultValue;
+import javax.ws.rs.core.Response;
 
 /**
  * Corresponds to http://www.qubole.com/docs/documentation/command-api/
@@ -46,4 +47,12 @@ public interface CommandApi
      * @return new builder
      */
     public InvokableBuilder<String> logs(String queryId);
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/cancel-a-command/
+     *
+     * @param queryId the query id of the command
+     * @return new builder
+     */
+    public InvokableBuilder<Response> cancel(String queryId);
 }

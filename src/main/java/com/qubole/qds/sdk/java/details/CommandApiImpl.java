@@ -8,6 +8,8 @@ import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.Command;
 import com.qubole.qds.sdk.java.entities.Commands;
 import com.qubole.qds.sdk.java.entities.ResultValue;
+import com.qubole.qds.sdk.java.entities.Status;
+import javax.ws.rs.core.Response;
 
 class CommandApiImpl implements CommandApi
 {
@@ -46,5 +48,12 @@ class CommandApiImpl implements CommandApi
     public InvokableBuilder<String> logs(String queryId)
     {
         return new GenericInvokableBuilderImpl<String>(client, null, String.class, "commands", queryId, "logs");
+    }
+
+    @Override
+    public InvokableBuilder<Response> cancel(String queryId)
+    {
+        ClientEntity entity = new ClientEntity(new Status("kill"), ClientEntity.Method.PUT);
+        return new GenericInvokableBuilderImpl<Response>(client, entity, Response.class, "commands", queryId);
     }
 }
