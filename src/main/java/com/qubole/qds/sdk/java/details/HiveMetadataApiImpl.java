@@ -5,6 +5,7 @@ import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.api.StoreTablePropertiesBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.NameAndType;
+import com.qubole.qds.sdk.java.entities.TableProperties;
 import javax.ws.rs.core.GenericType;
 import java.util.List;
 
@@ -23,6 +24,12 @@ class HiveMetadataApiImpl implements HiveMetadataApi
     public StoreTablePropertiesBuilder storeTableProperties(String tableName)
     {
         return new StoreTablePropertiesBuilderImpl(client, tableName);
+    }
+
+    @Override
+    public InvokableBuilder<TableProperties> getTableProperties(String tableName)
+    {
+        return new GenericInvokableBuilderImpl<TableProperties>(client, null, TableProperties.class, "hive", "default", tableName, "properties");
     }
 
     HiveMetadataApiImpl(QdsClient client)

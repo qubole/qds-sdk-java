@@ -1,7 +1,7 @@
 package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.NameAndType;
-import com.qubole.qds.sdk.java.entities.Status;
+import com.qubole.qds.sdk.java.entities.TableProperties;
 import java.util.List;
 
 /**
@@ -24,4 +24,12 @@ public interface HiveMetadataApi
      * @return builder
      */
     public StoreTablePropertiesBuilder storeTableProperties(String tableName);
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/get-table-properties/
+     *
+     * @param tableName the table name
+     * @return builder
+     */
+    public InvokableBuilder<TableProperties> getTableProperties(String tableName);
 }

@@ -2,17 +2,17 @@ package com.qubole.qds.sdk.java.entities;
 
 import java.util.Map;
 
-public class StoreTableProperties
+public class TableProperties
 {
     private String interval;
     private String interval_unit;
     private Map<String, String> columns;
 
-    public StoreTableProperties()
+    public TableProperties()
     {
     }
 
-    public StoreTableProperties(String interval, String interval_unit, Map<String, String> columns)
+    public TableProperties(String interval, String interval_unit, Map<String, String> columns)
     {
         this.interval = interval;
         this.interval_unit = interval_unit;
