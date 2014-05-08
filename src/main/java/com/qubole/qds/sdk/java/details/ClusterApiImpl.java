@@ -30,9 +30,10 @@ class ClusterApiImpl implements ClusterApi
     }
 
     @Override
-    public ClusterStartBuilder start(String labelOrId)
+    public InvokableBuilder<Message> start(String labelOrId)
     {
-        return new ClusterStartBuilderImpl(client, labelOrId);
+        ClientEntity entity = new ClientEntity(new State("start"), ClientEntity.Method.PUT);
+        return new GenericInvokableBuilderImpl<Message>(client, entity, Message.class, "clusters", labelOrId, "state");
     }
 
     @Override

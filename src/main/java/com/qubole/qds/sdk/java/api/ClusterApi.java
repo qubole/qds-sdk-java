@@ -39,7 +39,7 @@ public interface ClusterApi
      * @param labelOrId the Cluster label/id
      * @return new builder
      */
-    public ClusterStartBuilder start(String labelOrId);
+    public InvokableBuilder<Message> start(String labelOrId);
 
     /**
      * Corresponds to http://www.qubole.com/docs/start-terminate-cluster/ for "terminate"
