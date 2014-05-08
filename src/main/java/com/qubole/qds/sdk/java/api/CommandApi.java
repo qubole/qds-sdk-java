@@ -2,6 +2,7 @@ package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.Command;
 import com.qubole.qds.sdk.java.entities.Commands;
+import com.qubole.qds.sdk.java.entities.ResultValue;
 
 /**
  * Corresponds to http://www.qubole.com/docs/documentation/command-api/
@@ -29,4 +30,12 @@ public interface CommandApi
      * @return new builder
      */
     public InvokableBuilder<Command> status(String queryId);
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/view-command-results/
+     *
+     * @param queryId the query id of the command
+     * @return new builder
+     */
+    public InvokableBuilder<ResultValue> results(String queryId);
 }

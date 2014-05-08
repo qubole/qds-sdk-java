@@ -7,6 +7,7 @@ import com.qubole.qds.sdk.java.api.PageableInvokableBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.Command;
 import com.qubole.qds.sdk.java.entities.Commands;
+import com.qubole.qds.sdk.java.entities.ResultValue;
 
 class CommandApiImpl implements CommandApi
 {
@@ -33,5 +34,11 @@ class CommandApiImpl implements CommandApi
     public InvokableBuilder<Command> status(String queryId)
     {
         return new GenericInvokableBuilderImpl<Command>(client, null, Command.class, "commands", queryId);
+    }
+
+    @Override
+    public InvokableBuilder<ResultValue> results(String queryId)
+    {
+        return new GenericInvokableBuilderImpl<ResultValue>(client, null, ResultValue.class, "commands", queryId, "results");
     }
 }
