@@ -4,22 +4,13 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.qubole.qds.sdk.java.api.HiveCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
-import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.entities.HiveCommand;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Future;
 
-public class HiveCommandBuilderImpl implements HiveCommandBuilder
+public class HiveCommandBuilderImpl extends CommandBuilderImplBase implements HiveCommandBuilder
 {
-    private final QdsClient client;
     private final HiveCommand hiveCommand = new HiveCommand();
-
-    @Override
-    public Future<CommandResponse> invoke()
-    {
-        return client.invokeRequest(null, new ClientEntity(hiveCommand), CommandResponse.class, "commands");
-    }
 
     @Override
     public HiveCommandBuilder query(String query)
@@ -91,8 +82,14 @@ public class HiveCommandBuilderImpl implements HiveCommandBuilder
         return this;
     }
 
+    @Override
+    protected Object getEntity()
+    {
+        return hiveCommand;
+    }
+
     HiveCommandBuilderImpl(QdsClient client)
     {
-        this.client = client;
+        super(client);
     }
 }

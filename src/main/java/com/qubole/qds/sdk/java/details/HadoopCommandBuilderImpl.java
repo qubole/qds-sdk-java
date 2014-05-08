@@ -2,13 +2,10 @@ package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.HadoopCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
-import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.entities.HadoopCommand;
-import java.util.concurrent.Future;
 
-class HadoopCommandBuilderImpl implements HadoopCommandBuilder
+class HadoopCommandBuilderImpl extends CommandBuilderImplBase implements HadoopCommandBuilder
 {
-    private final QdsClient client;
     private final HadoopCommand hadoopCommand = new HadoopCommand(SubCommandType.JAR.name().toLowerCase(), "", "HadoopCommand");
 
     @Override
@@ -26,14 +23,13 @@ class HadoopCommandBuilderImpl implements HadoopCommandBuilder
     }
 
     @Override
-    public Future<CommandResponse> invoke()
+    protected Object getEntity()
     {
-        ClientEntity entity = new ClientEntity(hadoopCommand, ClientEntity.Method.POST);
-        return client.invokeRequest(null, entity, CommandResponse.class, "commands");
+        return hadoopCommand;
     }
 
     HadoopCommandBuilderImpl(QdsClient client)
     {
-        this.client = client;
+        super(client);
     }
 }

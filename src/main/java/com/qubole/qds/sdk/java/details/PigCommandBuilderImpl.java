@@ -2,14 +2,11 @@ package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.PigCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
-import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.entities.PigCommand;
 import java.util.Map;
-import java.util.concurrent.Future;
 
-class PigCommandBuilderImpl implements PigCommandBuilder
+class PigCommandBuilderImpl extends CommandBuilderImplBase implements PigCommandBuilder
 {
-    private final QdsClient client;
     private final PigCommand pigCommand = new PigCommand("", null, null, "PigCommand");
 
     @Override
@@ -34,14 +31,13 @@ class PigCommandBuilderImpl implements PigCommandBuilder
     }
 
     @Override
-    public Future<CommandResponse> invoke()
+    protected Object getEntity()
     {
-        ClientEntity entity = new ClientEntity(pigCommand, ClientEntity.Method.POST);
-        return client.invokeRequest(null, entity, CommandResponse.class, "commands");
+        return pigCommand;
     }
 
     PigCommandBuilderImpl(QdsClient client)
     {
-        this.client = client;
+        super(client);
     }
 }

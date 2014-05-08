@@ -2,13 +2,10 @@ package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.DbSimpleImportCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
-import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.entities.DbSimpleImportCommand;
-import java.util.concurrent.Future;
 
-class DbSimpleImportCommandBuilderImpl implements DbSimpleImportCommandBuilder
+class DbSimpleImportCommandBuilderImpl extends CommandBuilderImplBase implements DbSimpleImportCommandBuilder
 {
-    private final QdsClient client;
     private final DbSimpleImportCommand importCommand = new DbSimpleImportCommand();
 
     @Override
@@ -47,15 +44,14 @@ class DbSimpleImportCommandBuilderImpl implements DbSimpleImportCommandBuilder
     }
 
     @Override
-    public Future<CommandResponse> invoke()
+    protected Object getEntity()
     {
-        ClientEntity entity = new ClientEntity(importCommand, ClientEntity.Method.POST);
-        return client.invokeRequest(null, entity, CommandResponse.class, "commands");
+        return importCommand;
     }
 
     DbSimpleImportCommandBuilderImpl(QdsClient client)
     {
-        this.client = client;
+        super(client);
         importCommand.setCommand_type("DbImportCommand");
         importCommand.setMode(1);
     }
