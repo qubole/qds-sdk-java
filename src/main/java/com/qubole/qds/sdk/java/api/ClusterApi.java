@@ -1,6 +1,7 @@
 package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.client.QdsClient;
+import com.qubole.qds.sdk.java.entities.ClusterState;
 
 /**
  * Corresponds to http://www.qubole.com/docs/documentation/cluster-api/
@@ -20,7 +21,7 @@ public interface ClusterApi
      * @param labelOrId the Cluster label/id
      * @return new builder
      */
-    public ClusterStateBuilder state(String labelOrId);
+    public Invokable<ClusterState> state(String labelOrId);
 
     /**
      * Corresponds to http://www.qubole.com/docs/get-cluster-information/

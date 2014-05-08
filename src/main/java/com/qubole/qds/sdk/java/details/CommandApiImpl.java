@@ -2,9 +2,10 @@ package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.CommandHistoryBuilder;
-import com.qubole.qds.sdk.java.api.CommandStatusBuilder;
 import com.qubole.qds.sdk.java.api.HiveCommandBuilder;
+import com.qubole.qds.sdk.java.api.Invokable;
 import com.qubole.qds.sdk.java.client.QdsClient;
+import com.qubole.qds.sdk.java.entities.Command;
 
 class CommandApiImpl implements CommandApi
 {
@@ -28,8 +29,8 @@ class CommandApiImpl implements CommandApi
     }
 
     @Override
-    public CommandStatusBuilder status(String queryId)
+    public Invokable<Command> status(String queryId)
     {
-        return new CommandStatusBuilderImpl(client, queryId);
+        return new GenericInvokableBuilderImpl<Command>(client, null, Command.class, "commands", queryId);
     }
 }

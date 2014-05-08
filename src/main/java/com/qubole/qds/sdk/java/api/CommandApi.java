@@ -1,5 +1,7 @@
 package com.qubole.qds.sdk.java.api;
 
+import com.qubole.qds.sdk.java.entities.Command;
+
 /**
  * Corresponds to http://www.qubole.com/docs/documentation/command-api/
  */
@@ -25,5 +27,5 @@ public interface CommandApi
      * @param queryId the query id of the command
      * @return new builder
      */
-    public CommandStatusBuilder status(String queryId);
+    public Invokable<Command> status(String queryId);
 }

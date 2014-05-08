@@ -1,24 +1,17 @@
 package com.qubole.qds.sdk.java.details;
 
-import com.qubole.qds.sdk.java.api.ClusterApi;
-import com.qubole.qds.sdk.java.api.ClusterConfigBuilder;
-import com.qubole.qds.sdk.java.api.ClusterCreateBuilder;
-import com.qubole.qds.sdk.java.api.ClusterEditBuilder;
-import com.qubole.qds.sdk.java.api.ClusterInformationBuilder;
-import com.qubole.qds.sdk.java.api.ClusterListBuilder;
-import com.qubole.qds.sdk.java.api.ClusterStartBuilder;
-import com.qubole.qds.sdk.java.api.ClusterStateBuilder;
-import com.qubole.qds.sdk.java.api.ClusterTerminateBuilder;
+import com.qubole.qds.sdk.java.api.*;
 import com.qubole.qds.sdk.java.client.QdsClient;
+import com.qubole.qds.sdk.java.entities.ClusterState;
 
 class ClusterApiImpl implements ClusterApi
 {
     private final QdsClient client;
 
     @Override
-    public ClusterStateBuilder state(String labelOrId)
+    public Invokable<ClusterState> state(String labelOrId)
     {
-        return new ClusterStateBuilderImpl(client, labelOrId);
+        return new GenericInvokableBuilderImpl<ClusterState>(client, null, ClusterState.class, "clusters", labelOrId, "state");
     }
 
     @Override
