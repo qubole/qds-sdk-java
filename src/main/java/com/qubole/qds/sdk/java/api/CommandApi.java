@@ -25,6 +25,13 @@ public interface CommandApi
     public HiveCommandBuilder hive();
 
     /**
+     * Corresponds to http://www.qubole.com/docs/submit-a-hadoop-jar-command/
+     *
+     * @return new builder
+     */
+    public HadoopCommandBuilder hadoop();
+
+    /**
      * Corresponds to http://www.qubole.com/docs/view-command-status/
      *
      * @param queryId the query id of the command

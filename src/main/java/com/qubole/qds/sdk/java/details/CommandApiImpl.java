@@ -1,6 +1,7 @@
 package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.CommandApi;
+import com.qubole.qds.sdk.java.api.HadoopCommandBuilder;
 import com.qubole.qds.sdk.java.api.HiveCommandBuilder;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.api.PageableInvokableBuilder;
@@ -55,5 +56,11 @@ class CommandApiImpl implements CommandApi
     {
         ClientEntity entity = new ClientEntity(new Status("kill"), ClientEntity.Method.PUT);
         return new GenericInvokableBuilderImpl<Response>(client, entity, Response.class, "commands", queryId);
+    }
+
+    @Override
+    public HadoopCommandBuilder hadoop()
+    {
+        return new HadoopCommandBuilderImpl(client);
     }
 }

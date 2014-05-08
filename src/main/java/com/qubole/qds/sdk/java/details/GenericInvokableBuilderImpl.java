@@ -5,7 +5,7 @@ import com.qubole.qds.sdk.java.client.QdsClient;
 import javax.ws.rs.core.GenericType;
 import java.util.concurrent.Future;
 
-public class GenericInvokableBuilderImpl<T> implements InvokableBuilder<T>
+class GenericInvokableBuilderImpl<T> implements InvokableBuilder<T>
 {
     private final QdsClient client;
     private final ClientEntity entity;

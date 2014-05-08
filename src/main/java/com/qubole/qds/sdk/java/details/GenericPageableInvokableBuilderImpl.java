@@ -5,7 +5,7 @@ import com.qubole.qds.sdk.java.api.PageableInvokableBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import java.util.concurrent.Future;
 
-public class GenericPageableInvokableBuilderImpl<T> implements PageableInvokableBuilder<T>
+class GenericPageableInvokableBuilderImpl<T> implements PageableInvokableBuilder<T>
 {
     private final QdsClient client;
     private final ClientEntity entity;

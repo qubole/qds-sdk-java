@@ -4,8 +4,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.qubole.qds.sdk.java.api.HiveCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
+import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.entities.HiveCommand;
-import com.qubole.qds.sdk.java.entities.HiveCommandResponse;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Future;
@@ -16,9 +16,9 @@ public class HiveCommandBuilderImpl implements HiveCommandBuilder
     private final HiveCommand hiveCommand = new HiveCommand();
 
     @Override
-    public Future<HiveCommandResponse> invoke()
+    public Future<CommandResponse> invoke()
     {
-        return client.invokeRequest(null, new ClientEntity(hiveCommand), HiveCommandResponse.class, "commands");
+        return client.invokeRequest(null, new ClientEntity(hiveCommand), CommandResponse.class, "commands");
     }
 
     @Override

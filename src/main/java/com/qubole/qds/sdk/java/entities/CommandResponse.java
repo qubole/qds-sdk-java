@@ -1,9 +1,8 @@
 package com.qubole.qds.sdk.java.entities;
 
-import java.util.List;
 import java.util.Map;
 
-public class HiveCommandResponse
+public class CommandResponse
 {
     private Map<String, String> command;
     private int qbol_session_id;
@@ -30,11 +29,11 @@ public class HiveCommandResponse
     private String submit_time;
     private String qlog;
 
-    public HiveCommandResponse()
+    public CommandResponse()
     {
     }
 
-    public HiveCommandResponse(Map<String, String> command, int qbol_session_id, String created_at, String pool, int user_id, String status, String command_type, int id, int progress, Map<String, String> meta_data, String template, Map<String, String> resolved_macros, String nominal_time, String sequence_id, int pid, String label, int num_result_dir, boolean can_notify, String start_time, String end_time, String path, int timeout, String submit_time, String qlog)
+    public CommandResponse(Map<String, String> command, int qbol_session_id, String created_at, String pool, int user_id, String status, String command_type, int id, int progress, Map<String, String> meta_data, String template, Map<String, String> resolved_macros, String nominal_time, String sequence_id, int pid, String label, int num_result_dir, boolean can_notify, String start_time, String end_time, String path, int timeout, String submit_time, String qlog)
     {
         this.command = command;
         this.qbol_session_id = qbol_session_id;
