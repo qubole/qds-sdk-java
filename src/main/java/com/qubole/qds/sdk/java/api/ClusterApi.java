@@ -2,6 +2,7 @@ package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.ClusterState;
+import com.qubole.qds.sdk.java.entities.Message;
 
 /**
  * Corresponds to http://www.qubole.com/docs/documentation/cluster-api/
@@ -21,7 +22,7 @@ public interface ClusterApi
      * @param labelOrId the Cluster label/id
      * @return new builder
      */
-    public Invokable<ClusterState> state(String labelOrId);
+    public InvokableBuilder<ClusterState> state(String labelOrId);
 
     /**
      * Corresponds to http://www.qubole.com/docs/get-cluster-information/
@@ -45,7 +46,7 @@ public interface ClusterApi
      * @param labelOrId the Cluster label/id
      * @return new builder
      */
-    public ClusterTerminateBuilder terminate(String labelOrId);
+    public InvokableBuilder<Message> terminate(String labelOrId);
 
     /**
      * Corresponds to http://www.qubole.com/docs/edit-cluster/

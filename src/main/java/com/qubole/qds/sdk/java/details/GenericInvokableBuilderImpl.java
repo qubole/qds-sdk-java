@@ -1,10 +1,10 @@
 package com.qubole.qds.sdk.java.details;
 
-import com.qubole.qds.sdk.java.api.Invokable;
+import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import java.util.concurrent.Future;
 
-public class GenericInvokableBuilderImpl<T> implements Invokable<T>
+public class GenericInvokableBuilderImpl<T> implements InvokableBuilder<T>
 {
     private final QdsClient client;
     private final ClientEntity entity;

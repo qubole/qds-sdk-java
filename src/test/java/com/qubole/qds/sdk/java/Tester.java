@@ -4,7 +4,7 @@ import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
-import com.qubole.qds.sdk.java.entities.Command;
+import com.qubole.qds.sdk.java.entities.Message;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -16,8 +16,8 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Future<Command> invoke = client.command().status("222070").invoke();
-            Command value = invoke.get();
+            Future<Message> invoke = client.cluster().terminate("5678").invoke();
+            Message value = invoke.get();
             System.out.println(value);
         }
         finally

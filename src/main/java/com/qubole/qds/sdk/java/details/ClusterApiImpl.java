@@ -3,13 +3,15 @@ package com.qubole.qds.sdk.java.details;
 import com.qubole.qds.sdk.java.api.*;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.ClusterState;
+import com.qubole.qds.sdk.java.entities.Message;
+import com.qubole.qds.sdk.java.entities.State;
 
 class ClusterApiImpl implements ClusterApi
 {
     private final QdsClient client;
 
     @Override
-    public Invokable<ClusterState> state(String labelOrId)
+    public InvokableBuilder<ClusterState> state(String labelOrId)
     {
         return new GenericInvokableBuilderImpl<ClusterState>(client, null, ClusterState.class, "clusters", labelOrId, "state");
     }
@@ -33,9 +35,10 @@ class ClusterApiImpl implements ClusterApi
     }
 
     @Override
-    public ClusterTerminateBuilder terminate(String labelOrId)
+    public InvokableBuilder<Message> terminate(String labelOrId)
     {
-        return new ClusterTerminateBuilderImpl(client, labelOrId);
+        ClientEntity entity = new ClientEntity(new State("terminate"), ClientEntity.Method.PUT);
+        return new GenericInvokableBuilderImpl<Message>(client, entity, Message.class, "clusters", labelOrId, "state");
     }
 
     @Override

@@ -27,5 +27,5 @@ public interface CommandApi
      * @param queryId the query id of the command
      * @return new builder
      */
-    public Invokable<Command> status(String queryId);
+    public InvokableBuilder<Command> status(String queryId);
 }
