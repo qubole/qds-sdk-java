@@ -94,7 +94,11 @@ public class QdsClientImpl implements QdsClient
     {
         if ( entity != null )
         {
-            return invoker.method(entity.getMethod().name(), Entity.entity(entity.getEntity(), MediaType.APPLICATION_JSON_TYPE), responseType);
+            if ( entity.getEntity() != null )
+            {
+                return invoker.method(entity.getMethod().name(), Entity.entity(entity.getEntity(), MediaType.APPLICATION_JSON_TYPE), responseType);
+            }
+            return invoker.method(entity.getMethod().name(), responseType);
         }
         return invoker.get(responseType);
     }
@@ -104,7 +108,11 @@ public class QdsClientImpl implements QdsClient
     {
         if ( entity != null )
         {
-            return invoker.method(entity.getMethod().name(), Entity.entity(entity.getEntity(), MediaType.APPLICATION_JSON_TYPE), responseType);
+            if ( entity.getEntity() != null )
+            {
+                return invoker.method(entity.getMethod().name(), Entity.entity(entity.getEntity(), MediaType.APPLICATION_JSON_TYPE), responseType);
+            }
+            return invoker.method(entity.getMethod().name(), responseType);
         }
         return invoker.get(responseType);
     }

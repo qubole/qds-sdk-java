@@ -1,5 +1,7 @@
 package com.qubole.qds.sdk.java.details;
 
+import com.google.common.base.Preconditions;
+
 public class ClientEntity
 {
     private final Object entity;
@@ -19,7 +21,7 @@ public class ClientEntity
 
     public ClientEntity(Object entity, Method method)
     {
-        this.entity = entity;
+        this.entity = Preconditions.checkNotNull(entity, "entity cannot be null");
         this.method = method;
     }
 
@@ -31,5 +33,16 @@ public class ClientEntity
     public Method getMethod()
     {
         return method;
+    }
+
+    public static ClientEntity forDelete()
+    {
+        return new ClientEntity();
+    }
+
+    private ClientEntity()
+    {
+        entity = null;
+        method = Method.DELETE;
     }
 }
