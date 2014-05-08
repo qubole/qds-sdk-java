@@ -1,12 +1,10 @@
 package com.qubole.qds.sdk.java;
 
-import com.qubole.qds.sdk.java.api.ClusterConfigBuilder;
 import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
-import com.qubole.qds.sdk.java.entities.ClusterItem;
-import java.util.Arrays;
+import com.qubole.qds.sdk.java.entities.Command;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -18,15 +16,8 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            ClusterConfigBuilder configBuilder = client.clusterConfig()
-                .label(Arrays.asList("pig_workflow", "us_west"))
-                .ec2_settings().compute_access_key("foo")
-                .ec2_settings().compute_secret_key("bar")
-                .ec2_settings().aws_region("us-east-1")
-                ;
-            Future<ClusterItem> invoke = client.cluster().create(configBuilder)
-                .invoke();
-            ClusterItem value = invoke.get();
+            Future<Command> invoke = client.command().status("222070").invoke();
+            Command value = invoke.get();
             System.out.println(value);
         }
         finally

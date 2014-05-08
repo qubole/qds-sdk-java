@@ -18,4 +18,12 @@ public interface CommandApi
      * @return new builder
      */
     public HiveCommandBuilder hive();
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/view-command-status/
+     *
+     * @param queryId the query id of the command
+     * @return new builder
+     */
+    public CommandStatusBuilder status(String queryId);
 }
