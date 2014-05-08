@@ -89,4 +89,10 @@ class CommandApiImpl implements CommandApi
     {
         return new DbAdvancedExportCommandBuilderImpl(client);
     }
+
+    @Override
+    public PrestoCommandBuilder presto()
+    {
+        return new PrestoCommandBuilderImpl(client);
+    }
 }

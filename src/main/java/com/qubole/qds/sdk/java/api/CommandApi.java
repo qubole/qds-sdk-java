@@ -39,6 +39,13 @@ public interface CommandApi
     public PigCommandBuilder pig();
 
     /**
+     * Corresponds to http://www.qubole.com/docs/submit-a-presto-command-2/
+     *
+     * @return new builder
+     */
+    public PrestoCommandBuilder presto();
+
+    /**
      * Corresponds to http://www.qubole.com/docs/submit-a-db-import-command/ - simple mode
      *
      * @return new builder
