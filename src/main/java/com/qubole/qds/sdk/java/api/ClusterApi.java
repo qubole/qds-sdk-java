@@ -64,5 +64,5 @@ public interface ClusterApi
      * @param configBuilder config values - use {@link QdsClient#clusterConfig()}
      * @return new builder
      */
-    public ClusterCreateBuilder create(ClusterConfigBuilder configBuilder);
+    public InvokableBuilder<ClusterItem> create(ClusterConfigBuilder configBuilder);
 }
