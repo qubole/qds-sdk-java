@@ -9,27 +9,25 @@ import java.util.concurrent.Future;
 class HadoopCommandBuilderImpl implements HadoopCommandBuilder
 {
     private final QdsClient client;
-    private SubCommandType subCommandType = SubCommandType.JAR;
-    private String sub_command_args = "";
+    private final HadoopCommand hadoopCommand = new HadoopCommand(SubCommandType.JAR.name().toLowerCase(), "", "HadoopCommand");
 
     @Override
     public HadoopCommandBuilder sub_command(SubCommandType subCommandType)
     {
-        this.subCommandType = subCommandType;
+        hadoopCommand.setSub_command(subCommandType.name().toLowerCase());
         return this;
     }
 
     @Override
     public HadoopCommandBuilder sub_command_args(String sub_command_args)
     {
-        this.sub_command_args = sub_command_args;
+        hadoopCommand.setSub_command_args(sub_command_args);
         return this;
     }
 
     @Override
     public Future<CommandResponse> invoke()
     {
-        HadoopCommand hadoopCommand = new HadoopCommand(subCommandType.name().toLowerCase(), sub_command_args, "HadoopCommand");
         ClientEntity entity = new ClientEntity(hadoopCommand, ClientEntity.Method.POST);
         return client.invokeRequest(null, entity, CommandResponse.class, "commands");
     }
