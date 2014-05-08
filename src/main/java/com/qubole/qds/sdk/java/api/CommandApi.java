@@ -32,6 +32,13 @@ public interface CommandApi
     public HadoopCommandBuilder hadoop();
 
     /**
+     * Corresponds to http://www.qubole.com/docs/submit-a-pig-command/
+     *
+     * @return new builder
+     */
+    public PigCommandBuilder pig();
+
+    /**
      * Corresponds to http://www.qubole.com/docs/view-command-status/
      *
      * @param queryId the query id of the command

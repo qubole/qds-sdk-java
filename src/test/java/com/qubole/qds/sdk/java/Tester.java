@@ -1,11 +1,12 @@
 package com.qubole.qds.sdk.java;
 
-import com.qubole.qds.sdk.java.api.HadoopCommandBuilder;
+import com.google.common.collect.Maps;
 import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.entities.CommandResponse;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -17,8 +18,13 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Future<CommandResponse> invoke = client.command().hadoop()
-                .sub_command(HadoopCommandBuilder.SubCommandType.JAR).sub_command_args("s3://paid-qubole/HadoopAPIExamples/jars/hadoop-0.20.1-dev-streaming.jar -mapper wc -numReduceTasks 0 -input s3://paid-qubole/HadoopAPITests/data/3.tsv -output s3://paid-qubole/HadoopAPITests/data/3_wc")
+            Map<String, Object> parameters = Maps.newHashMap();
+            parameters.put("one", "a");
+            parameters.put("two", 2);
+            Future<CommandResponse> invoke = client.command().pig()
+                .latin_statements("hey")
+                .parameters(parameters)
+                .script_location("yo")
                 .invoke();
             CommandResponse value = invoke.get();
             System.out.println(value);

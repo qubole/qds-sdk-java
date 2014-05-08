@@ -5,6 +5,7 @@ import com.qubole.qds.sdk.java.api.HadoopCommandBuilder;
 import com.qubole.qds.sdk.java.api.HiveCommandBuilder;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.api.PageableInvokableBuilder;
+import com.qubole.qds.sdk.java.api.PigCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.Command;
 import com.qubole.qds.sdk.java.entities.Commands;
@@ -62,5 +63,11 @@ class CommandApiImpl implements CommandApi
     public HadoopCommandBuilder hadoop()
     {
         return new HadoopCommandBuilderImpl(client);
+    }
+
+    @Override
+    public PigCommandBuilder pig()
+    {
+        return new PigCommandBuilderImpl(client);
     }
 }
