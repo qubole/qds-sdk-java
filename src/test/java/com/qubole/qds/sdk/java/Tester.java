@@ -1,11 +1,11 @@
 package com.qubole.qds.sdk.java;
 
-import com.qubole.qds.sdk.java.api.ClusterConfigBuilder;
 import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.entities.ClusterItem;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -17,9 +17,8 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            ClusterConfigBuilder configBuilder = client.clusterConfig().enable_ganglia_monitoring(false);
-            Future<ClusterItem> invoke = client.cluster().edit("5678", configBuilder).invoke();
-            ClusterItem value = invoke.get();
+            Future<List<ClusterItem>> invoke = client.cluster().list().invoke();
+            List<ClusterItem> value = invoke.get();
             System.out.println(value);
         }
         finally

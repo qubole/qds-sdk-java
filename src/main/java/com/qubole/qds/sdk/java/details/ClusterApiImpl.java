@@ -6,6 +6,8 @@ import com.qubole.qds.sdk.java.entities.ClusterItem;
 import com.qubole.qds.sdk.java.entities.ClusterState;
 import com.qubole.qds.sdk.java.entities.Message;
 import com.qubole.qds.sdk.java.entities.State;
+import javax.ws.rs.core.GenericType;
+import java.util.List;
 
 class ClusterApiImpl implements ClusterApi
 {
@@ -18,9 +20,10 @@ class ClusterApiImpl implements ClusterApi
     }
 
     @Override
-    public ClusterListBuilder list()
+    public InvokableBuilder<List<ClusterItem>> list()
     {
-        return new ClusterListBuilderImpl(client);
+        GenericType<List<ClusterItem>> type = new GenericType<List<ClusterItem>>(){};
+        return new GenericInvokableBuilderImpl<List<ClusterItem>>(client, null, type, "clusters");
     }
 
     @Override

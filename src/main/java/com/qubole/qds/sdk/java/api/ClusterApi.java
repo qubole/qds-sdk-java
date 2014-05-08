@@ -4,6 +4,7 @@ import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.ClusterItem;
 import com.qubole.qds.sdk.java.entities.ClusterState;
 import com.qubole.qds.sdk.java.entities.Message;
+import java.util.List;
 
 /**
  * Corresponds to http://www.qubole.com/docs/documentation/cluster-api/
@@ -15,7 +16,7 @@ public interface ClusterApi
      *
      * @return new builder
      */
-    public ClusterListBuilder list();
+    public InvokableBuilder<List<ClusterItem>> list();
 
     /**
      * Corresponds to http://www.qubole.com/docs/get-cluster-state/

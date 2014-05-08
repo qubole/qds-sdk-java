@@ -2,7 +2,6 @@ package com.qubole.qds.sdk.java.client;
 
 import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.ClusterConfigBuilder;
-import com.qubole.qds.sdk.java.api.ClusterEditBuilder;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.details.ClientEntity;
 import com.qubole.qds.sdk.java.details.ForPage;
