@@ -1,11 +1,12 @@
 package com.qubole.qds.sdk.java;
 
+import com.google.common.collect.Maps;
 import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
-import com.qubole.qds.sdk.java.entities.NameAndType;
-import java.util.List;
+import com.qubole.qds.sdk.java.entities.Status;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -17,8 +18,15 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Future<List<NameAndType>> invoke = client.hiveMetadata().table("default_qubole_memetracker").invoke();
-            List<NameAndType> value = invoke.get();
+            Map<String, String> columns = Maps.newHashMap();
+            columns.put("stock_exchange", "");
+            columns.put("year", "%Y");
+            Future<Status> invoke = client.hiveMetadata().storeTableProperties("default_qubole_memetracker")
+                .interval("1")
+                .interval_unit("days")
+                .columns(columns)
+                .invoke();
+            Status value = invoke.get();
             System.out.println(value);
         }
         finally

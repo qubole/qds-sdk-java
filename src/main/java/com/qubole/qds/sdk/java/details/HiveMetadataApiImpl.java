@@ -2,6 +2,7 @@ package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
+import com.qubole.qds.sdk.java.api.StoreTablePropertiesBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.NameAndType;
 import javax.ws.rs.core.GenericType;
@@ -16,6 +17,12 @@ class HiveMetadataApiImpl implements HiveMetadataApi
     {
         GenericType<List<NameAndType>> genericType = new GenericType<List<NameAndType>>(){};
         return new GenericInvokableBuilderImpl<List<NameAndType>>(client, null, genericType, "hive", "default", tableName);
+    }
+
+    @Override
+    public StoreTablePropertiesBuilder storeTableProperties(String tableName)
+    {
+        return new StoreTablePropertiesBuilderImpl(client, tableName);
     }
 
     HiveMetadataApiImpl(QdsClient client)
