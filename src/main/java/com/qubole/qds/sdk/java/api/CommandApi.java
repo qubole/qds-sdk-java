@@ -1,6 +1,7 @@
 package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.Command;
+import com.qubole.qds.sdk.java.entities.Commands;
 
 /**
  * Corresponds to http://www.qubole.com/docs/documentation/command-api/
@@ -12,7 +13,7 @@ public interface CommandApi
      *
      * @return new builder
      */
-    public CommandHistoryBuilder history();
+    public PageableInvokableBuilder<Commands> history();
 
     /**
      * Corresponds to http://www.qubole.com/docs/submit-a-hive-command/

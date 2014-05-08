@@ -1,11 +1,12 @@
 package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.CommandApi;
-import com.qubole.qds.sdk.java.api.CommandHistoryBuilder;
 import com.qubole.qds.sdk.java.api.HiveCommandBuilder;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
+import com.qubole.qds.sdk.java.api.PageableInvokableBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.Command;
+import com.qubole.qds.sdk.java.entities.Commands;
 
 class CommandApiImpl implements CommandApi
 {
@@ -23,9 +24,9 @@ class CommandApiImpl implements CommandApi
     }
 
     @Override
-    public CommandHistoryBuilder history()
+    public PageableInvokableBuilder<Commands> history()
     {
-        return new CommandHistoryBuilderImpl(client);
+        return new GenericPageableInvokableBuilderImpl<Commands>(client, null, Commands.class, "commands");
     }
 
     @Override
