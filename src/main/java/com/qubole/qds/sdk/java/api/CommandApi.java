@@ -38,4 +38,12 @@ public interface CommandApi
      * @return new builder
      */
     public InvokableBuilder<ResultValue> results(String queryId);
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/view-command-logs/
+     *
+     * @param queryId the query id of the command
+     * @return new builder
+     */
+    public InvokableBuilder<String> logs(String queryId);
 }

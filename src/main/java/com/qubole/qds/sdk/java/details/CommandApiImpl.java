@@ -41,4 +41,10 @@ class CommandApiImpl implements CommandApi
     {
         return new GenericInvokableBuilderImpl<ResultValue>(client, null, ResultValue.class, "commands", queryId, "results");
     }
+
+    @Override
+    public InvokableBuilder<String> logs(String queryId)
+    {
+        return new GenericInvokableBuilderImpl<String>(client, null, String.class, "commands", queryId, "logs");
+    }
 }

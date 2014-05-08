@@ -16,8 +16,8 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Future<ResultValue> invoke = client.command().results("222070").invoke();
-            ResultValue value = invoke.get();
+            Future<String> invoke = client.command().logs("222070").invoke();
+            String value = invoke.get();
             System.out.println(value);
         }
         finally
