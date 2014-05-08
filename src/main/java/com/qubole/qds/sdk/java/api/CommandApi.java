@@ -39,6 +39,20 @@ public interface CommandApi
     public PigCommandBuilder pig();
 
     /**
+     * Corresponds to http://www.qubole.com/docs/submit-a-db-import-command/ - simple mode
+     *
+     * @return new builder
+     */
+    public DbSimpleImportCommandBuilder dbImportSimple();
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/submit-a-db-import-command/ - advanced mode
+     *
+     * @return new builder
+     */
+    public DbAdvancedImportCommandBuilder dbImportAdvanced();
+
+    /**
      * Corresponds to http://www.qubole.com/docs/view-command-status/
      *
      * @param queryId the query id of the command

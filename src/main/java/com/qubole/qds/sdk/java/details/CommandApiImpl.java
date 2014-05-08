@@ -1,6 +1,8 @@
 package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.CommandApi;
+import com.qubole.qds.sdk.java.api.DbAdvancedImportCommandBuilder;
+import com.qubole.qds.sdk.java.api.DbSimpleImportCommandBuilder;
 import com.qubole.qds.sdk.java.api.HadoopCommandBuilder;
 import com.qubole.qds.sdk.java.api.HiveCommandBuilder;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
@@ -69,5 +71,17 @@ class CommandApiImpl implements CommandApi
     public PigCommandBuilder pig()
     {
         return new PigCommandBuilderImpl(client);
+    }
+
+    @Override
+    public DbSimpleImportCommandBuilder dbImportSimple()
+    {
+        return new DbSimpleImportCommandBuilderImpl(client);
+    }
+
+    @Override
+    public DbAdvancedImportCommandBuilder dbImportAdvanced()
+    {
+        return new DbAdvancedImportCommandBuilderImpl(client);
     }
 }
