@@ -4,8 +4,7 @@ import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
-import com.qubole.qds.sdk.java.entities.Commands;
-import com.qubole.qds.sdk.java.entities.Message;
+import com.qubole.qds.sdk.java.entities.ClusterItem;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -17,8 +16,8 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Future<Commands> invoke = client.command().history().invoke();
-            Commands value = invoke.get();
+            Future<ClusterItem> invoke = client.cluster().information("5678").invoke();
+            ClusterItem value = invoke.get();
             System.out.println(value);
         }
         finally

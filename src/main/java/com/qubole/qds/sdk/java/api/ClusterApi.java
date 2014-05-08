@@ -1,6 +1,7 @@
 package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.client.QdsClient;
+import com.qubole.qds.sdk.java.entities.ClusterItem;
 import com.qubole.qds.sdk.java.entities.ClusterState;
 import com.qubole.qds.sdk.java.entities.Message;
 
@@ -30,7 +31,7 @@ public interface ClusterApi
      * @param labelOrId the Cluster label/id
      * @return new builder
      */
-    public ClusterInformationBuilder information(String labelOrId);
+    public InvokableBuilder<ClusterItem> information(String labelOrId);
 
     /**
      * Corresponds to http://www.qubole.com/docs/start-terminate-cluster/ for "start"
