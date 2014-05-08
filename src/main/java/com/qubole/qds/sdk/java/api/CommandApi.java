@@ -46,11 +46,25 @@ public interface CommandApi
     public DbSimpleImportCommandBuilder dbImportSimple();
 
     /**
+     * Corresponds to http://www.qubole.com/docs/submit-a-db-export-command/ - simple mode
+     *
+     * @return new builder
+     */
+    public DbSimpleExportCommandBuilder dbExportSimple();
+
+    /**
      * Corresponds to http://www.qubole.com/docs/submit-a-db-import-command/ - advanced mode
      *
      * @return new builder
      */
     public DbAdvancedImportCommandBuilder dbImportAdvanced();
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/submit-a-db-export-command/ - advanced mode
+     *
+     * @return new builder
+     */
+    public DbAdvancedExportCommandBuilder dbExportAdvanced();
 
     /**
      * Corresponds to http://www.qubole.com/docs/view-command-status/
