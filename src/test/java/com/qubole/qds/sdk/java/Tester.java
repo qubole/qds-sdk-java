@@ -1,5 +1,6 @@
 package com.qubole.qds.sdk.java;
 
+import com.qubole.qds.sdk.java.api.ClusterConfigBuilder;
 import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
@@ -16,7 +17,8 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Future<ClusterItem> invoke = client.cluster().information("5678").invoke();
+            ClusterConfigBuilder configBuilder = client.clusterConfig().enable_ganglia_monitoring(false);
+            Future<ClusterItem> invoke = client.cluster().edit("5678", configBuilder).invoke();
             ClusterItem value = invoke.get();
             System.out.println(value);
         }

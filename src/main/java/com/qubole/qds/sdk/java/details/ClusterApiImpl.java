@@ -44,9 +44,10 @@ class ClusterApiImpl implements ClusterApi
     }
 
     @Override
-    public ClusterEditBuilder edit(String labelOrId, ClusterConfigBuilder configBuilder)
+    public InvokableBuilder<ClusterItem> edit(String labelOrId, ClusterConfigBuilder configBuilder)
     {
-        return new ClusterEditBuilderImpl(client, labelOrId, configBuilder);
+        ClientEntity entity = new ClientEntity(configBuilder.toString(), ClientEntity.Method.PUT);
+        return new GenericInvokableBuilderImpl<ClusterItem>(client, entity, ClusterItem.class, "clusters", labelOrId);
     }
 
     @Override
