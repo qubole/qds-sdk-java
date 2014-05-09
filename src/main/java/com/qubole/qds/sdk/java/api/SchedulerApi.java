@@ -1,6 +1,7 @@
 package com.qubole.qds.sdk.java.api;
 
 
+import com.qubole.qds.sdk.java.entities.Schedule;
 import com.qubole.qds.sdk.java.entities.SchedulesResponse;
 import com.qubole.qds.sdk.java.entities.SuccessAndStatus;
 
@@ -36,4 +37,11 @@ public interface SchedulerApi
      * @return builder
      */
     public InvokableBuilder<SuccessAndStatus> resume(int scheduleId);
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/view-a-schedule/
+     *
+     * @return builder
+     */
+    public InvokableBuilder<Schedule> view(int scheduleId);
 }

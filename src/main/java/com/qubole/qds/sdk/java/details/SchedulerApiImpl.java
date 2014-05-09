@@ -4,6 +4,7 @@ import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.api.PageableInvokableBuilder;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
+import com.qubole.qds.sdk.java.entities.Schedule;
 import com.qubole.qds.sdk.java.entities.SchedulesResponse;
 import com.qubole.qds.sdk.java.entities.Status;
 import com.qubole.qds.sdk.java.entities.SuccessAndStatus;
@@ -34,6 +35,12 @@ class SchedulerApiImpl implements SchedulerApi
     public InvokableBuilder<SuccessAndStatus> resume(int scheduleId)
     {
         return suspendKillResume(scheduleId, "resume");
+    }
+
+    @Override
+    public InvokableBuilder<Schedule> view(int scheduleId)
+    {
+        return new GenericInvokableBuilderImpl<Schedule>(client, null, Schedule.class, "scheduler", Integer.toString(scheduleId));
     }
 
     SchedulerApiImpl(QdsClient client)

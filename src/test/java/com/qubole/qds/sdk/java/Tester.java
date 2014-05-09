@@ -4,7 +4,7 @@ import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
-import com.qubole.qds.sdk.java.entities.SuccessAndStatus;
+import com.qubole.qds.sdk.java.entities.Schedule;
 import java.util.concurrent.Future;
 
 public class Tester
@@ -15,8 +15,8 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Future<SuccessAndStatus> invoke = client.scheduler().kill(28837).invoke();
-            SuccessAndStatus value = invoke.get();
+            Future<Schedule> invoke = client.scheduler().view(28837).invoke();
+            Schedule value = invoke.get();
             System.out.println(value);
         }
         finally
