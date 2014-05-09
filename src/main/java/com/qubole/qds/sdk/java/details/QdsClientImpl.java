@@ -7,6 +7,7 @@ import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.api.ReportsApi;
+import com.qubole.qds.sdk.java.api.SchedulerApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -32,6 +33,7 @@ public class QdsClientImpl implements QdsClient
     private final HiveMetadataApiImpl hiveMetadataApi;
     private final DbTapApiImpl dbTapsApi;
     private final ReportsApiImpl reportsApi;
+    private final SchedulerApiImpl schedulerApi;
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -50,6 +52,7 @@ public class QdsClientImpl implements QdsClient
         hiveMetadataApi = new HiveMetadataApiImpl(this);
         dbTapsApi = new DbTapApiImpl(this);
         reportsApi = new ReportsApiImpl(this);
+        schedulerApi = new SchedulerApiImpl(this);
     }
 
     @Override
@@ -80,6 +83,12 @@ public class QdsClientImpl implements QdsClient
     public ReportsApi reports()
     {
         return reportsApi;
+    }
+
+    @Override
+    public SchedulerApi scheduler()
+    {
+        return schedulerApi;
     }
 
     @Override
