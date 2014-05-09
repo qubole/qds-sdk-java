@@ -31,37 +31,48 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <h2>
+<a name="qubole-data-service-java-sdk" class="anchor" href="#qubole-data-service-java-sdk"><span class="octicon octicon-link"></span></a>Qubole Data Service Java SDK</h2>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>A Java library that provides the tools you need to authenticate with, and use the Qubole Data Service API.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Currently, you will need to download and build from source:</p>
+
+<ul>
+<li>Clone the project: git clone <a href="mailto:git@github.com">git@github.com</a>:qubole/qds-sdk-java.git</li>
+<li>cd to the directory</li>
+<li>mvn install</li>
+</ul><p>Then, in your Java application, using Maven, add a dependency:</p>
+
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.qubole.qds-sdk-java&lt;/groupId&gt;
+    &lt;artifactId&gt;qds-sdk-java&lt;/artifactId&gt;
+    &lt;version&gt;THE-VERSION&lt;/version&gt;
+&lt;/dependency&gt;
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<p>In your application initialization code, allocate a QdsClient object:</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<pre><code>QdsConfiguration configuration = new DefaultQdsConfiguration(YOUR_API_KEY);
+QdsClient client = QdsClientFactory.newClient(configuration);
+</code></pre>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<p>Then, make api calls as needed. E.g.</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<pre><code>Future&lt;HiveCommandResponse&gt; hiveCommandResponseFuture = client
+    .command()
+    .hive()
+    .query("show tables;")
+    .invoke();
+HiveCommandResponse hiveCommandResponse = hiveCommandResponseFuture.get();
+...
+</code></pre>
       </section>
     </div>
 
