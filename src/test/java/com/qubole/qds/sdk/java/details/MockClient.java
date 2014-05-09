@@ -3,6 +3,7 @@ package com.qubole.qds.sdk.java.details;
 import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.ClusterConfigBuilder;
 import com.qubole.qds.sdk.java.api.CommandApi;
+import com.qubole.qds.sdk.java.api.DbTapsApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import javax.ws.rs.core.GenericType;
@@ -86,6 +87,12 @@ public class MockClient implements QdsClient
     public HiveMetadataApi hiveMetadata()
     {
         return new HiveMetadataApiImpl(this);
+    }
+
+    @Override
+    public DbTapsApi dbTapsApi()
+    {
+        return new DbTapsApiImpl(this);
     }
 
     @Override

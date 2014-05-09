@@ -4,8 +4,7 @@ import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
-import com.qubole.qds.sdk.java.entities.Schema;
-import java.util.List;
+import com.qubole.qds.sdk.java.entities.DbTapResponse;
 import java.util.concurrent.Future;
 
 public class Tester
@@ -16,8 +15,8 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Future<List<Schema>> invoke = client.hiveMetadata().schema().filter(".*memetracker").invoke();
-            List<Schema> value = invoke.get();
+            Future<DbTapResponse> invoke = client.dbTapsApi().create().db_host("localhost").db_name("doc_example").db_user("doc_writer").db_passwd("hey").db_type("mysql").db_location("us-east-1").invoke();
+            DbTapResponse value = invoke.get();
             System.out.println(value);
         }
         finally

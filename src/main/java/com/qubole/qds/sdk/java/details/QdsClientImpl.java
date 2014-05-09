@@ -5,6 +5,7 @@ import com.google.common.base.Preconditions;
 import com.qubole.qds.sdk.java.api.ClusterConfigBuilder;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.ClusterApi;
+import com.qubole.qds.sdk.java.api.DbTapsApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
@@ -28,6 +29,7 @@ public class QdsClientImpl implements QdsClient
     private final CommandApiImpl commandApi;
     private final ClusterApiImpl clusterApi;
     private final HiveMetadataApiImpl hiveMetadataApi;
+    private final DbTapsApiImpl dbTapsApi;
 
     public QdsClientImpl(QdsConfiguration configuration)
     {
@@ -37,6 +39,7 @@ public class QdsClientImpl implements QdsClient
         commandApi = new CommandApiImpl(this);
         clusterApi = new ClusterApiImpl(this);
         hiveMetadataApi = new HiveMetadataApiImpl(this);
+        dbTapsApi = new DbTapsApiImpl(this);
     }
 
     @Override
@@ -61,6 +64,12 @@ public class QdsClientImpl implements QdsClient
     public HiveMetadataApi hiveMetadata()
     {
         return hiveMetadataApi;
+    }
+
+    @Override
+    public DbTapsApi dbTapsApi()
+    {
+        return dbTapsApi;
     }
 
     @Override

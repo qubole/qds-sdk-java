@@ -3,6 +3,7 @@ package com.qubole.qds.sdk.java.client;
 import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.ClusterConfigBuilder;
 import com.qubole.qds.sdk.java.api.CommandApi;
+import com.qubole.qds.sdk.java.api.DbTapsApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.details.ClientEntity;
 import com.qubole.qds.sdk.java.details.ForPage;
@@ -42,6 +43,13 @@ public interface QdsClient extends AutoCloseable
      * @return hive metadata factory
      */
     public HiveMetadataApi hiveMetadata();
+
+    /**
+     * Return DbTaps api factory
+     *
+     * @return DbTaps factory
+     */
+    public DbTapsApi dbTapsApi();
 
     /**
      * Low-level request invoker. Not normally used directly. Use the api factories instead.
