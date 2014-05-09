@@ -2,7 +2,7 @@ package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.CommandApi;
-import com.qubole.qds.sdk.java.api.DbTapsApi;
+import com.qubole.qds.sdk.java.api.DbTapApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import javax.ws.rs.core.GenericType;
@@ -89,9 +89,9 @@ public class MockClient implements QdsClient
     }
 
     @Override
-    public DbTapsApi dbTapsApi()
+    public DbTapApi dbTapApi()
     {
-        return new DbTapsApiImpl(this);
+        return new DbTapApiImpl(this);
     }
 
     @Override

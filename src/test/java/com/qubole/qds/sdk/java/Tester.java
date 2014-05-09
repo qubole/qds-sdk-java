@@ -1,10 +1,11 @@
 package com.qubole.qds.sdk.java;
 
+import com.qubole.qds.sdk.java.api.DbTapBuilder;
 import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
-import com.qubole.qds.sdk.java.entities.DbTapResponse;
+import com.qubole.qds.sdk.java.entities.DbTap;
 import java.util.concurrent.Future;
 
 public class Tester
@@ -15,8 +16,9 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Future<DbTapResponse> invoke = client.dbTapsApi().create().db_host("localhost").db_name("doc_example").db_user("doc_writer").db_passwd("hey").db_type("mysql").db_location("us-east-1").invoke();
-            DbTapResponse value = invoke.get();
+            DbTapBuilder dbTapBuilder = client.dbTapApi().dbTap().db_port(100);
+            Future<DbTap> invoke = client.dbTapApi().edit(2573, dbTapBuilder).invoke();
+            DbTap value = invoke.get();
             System.out.println(value);
         }
         finally

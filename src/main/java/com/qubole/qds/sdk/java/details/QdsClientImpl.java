@@ -4,10 +4,11 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.CommandApi;
-import com.qubole.qds.sdk.java.api.DbTapsApi;
+import com.qubole.qds.sdk.java.api.DbTapApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
+import org.codehaus.jackson.map.ObjectMapper;
 import javax.ws.rs.client.AsyncInvoker;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
@@ -28,7 +29,14 @@ public class QdsClientImpl implements QdsClient
     private final CommandApiImpl commandApi;
     private final ClusterApiImpl clusterApi;
     private final HiveMetadataApiImpl hiveMetadataApi;
-    private final DbTapsApiImpl dbTapsApi;
+    private final DbTapApiImpl dbTapsApi;
+
+    private static final ObjectMapper mapper = new ObjectMapper();
+
+    static ObjectMapper getMapper()
+    {
+        return mapper;
+    }
 
     public QdsClientImpl(QdsConfiguration configuration)
     {
@@ -38,7 +46,7 @@ public class QdsClientImpl implements QdsClient
         commandApi = new CommandApiImpl(this);
         clusterApi = new ClusterApiImpl(this);
         hiveMetadataApi = new HiveMetadataApiImpl(this);
-        dbTapsApi = new DbTapsApiImpl(this);
+        dbTapsApi = new DbTapApiImpl(this);
     }
 
     @Override
@@ -60,7 +68,7 @@ public class QdsClientImpl implements QdsClient
     }
 
     @Override
-    public DbTapsApi dbTapsApi()
+    public DbTapApi dbTapApi()
     {
         return dbTapsApi;
     }

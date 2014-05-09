@@ -7,26 +7,23 @@ import com.qubole.qds.sdk.java.api.ClusterHadoopConfigBuilder;
 import com.qubole.qds.sdk.java.api.ClusterPrestoConfigBuilder;
 import com.qubole.qds.sdk.java.api.ClusterSecurityConfigBuilder;
 import com.qubole.qds.sdk.java.api.ClusterSpotInstanceConfigBuilder;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
 import java.io.IOException;
 import java.util.List;
 
 class ClusterConfigBuilderImpl implements ClusterConfigBuilder
 {
-    private static final ObjectMapper mapper = new ObjectMapper();
-
-    private final ObjectNode node = mapper.createObjectNode();
-    private final ObjectNode presto_settings = mapper.createObjectNode();
-    private final ObjectNode security_settings = mapper.createObjectNode();
-    private final ObjectNode hadoop_settings = mapper.createObjectNode();
-    private final ObjectNode fairscheduler_settings = mapper.createObjectNode();
-    private final ObjectNode spot_instance_settings = mapper.createObjectNode();
-    private final ObjectNode ec2_settings = mapper.createObjectNode();
+    private final ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
+    private final ObjectNode presto_settings = QdsClientImpl.getMapper().createObjectNode();
+    private final ObjectNode security_settings = QdsClientImpl.getMapper().createObjectNode();
+    private final ObjectNode hadoop_settings = QdsClientImpl.getMapper().createObjectNode();
+    private final ObjectNode fairscheduler_settings = QdsClientImpl.getMapper().createObjectNode();
+    private final ObjectNode spot_instance_settings = QdsClientImpl.getMapper().createObjectNode();
+    private final ObjectNode ec2_settings = QdsClientImpl.getMapper().createObjectNode();
 
     public ObjectNode getNode()
     {
-        ObjectNode clusterNode = mapper.createObjectNode();
+        ObjectNode clusterNode = QdsClientImpl.getMapper().createObjectNode();
         clusterNode.put("cluster", node);
         return clusterNode;
     }
@@ -36,7 +33,7 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
     {
         try
         {
-            return mapper.writer().writeValueAsString(getNode());
+            return QdsClientImpl.getMapper().writer().writeValueAsString(getNode());
         }
         catch ( IOException e )
         {
