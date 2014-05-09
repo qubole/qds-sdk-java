@@ -1,6 +1,7 @@
 package com.qubole.qds.sdk.java.api;
 
 
+import com.qubole.qds.sdk.java.entities.Command;
 import com.qubole.qds.sdk.java.entities.Commands;
 import com.qubole.qds.sdk.java.entities.Schedule;
 import com.qubole.qds.sdk.java.entities.SchedulesResponse;
@@ -57,4 +58,13 @@ public interface SchedulerApi
      * @return builder
      */
     public PageableInvokableBuilder<Commands> listInstances(int scheduleId);
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/view-a-schedule/
+     *
+     * @param scheduleId schedule id
+     * @param instanceId instance id
+     * @return builder
+     */
+    public InvokableBuilder<Command> viewCommand(int scheduleId, int instanceId);
 }
