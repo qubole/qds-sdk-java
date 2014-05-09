@@ -13,7 +13,8 @@ public class Tester
 {
     public static void main(String[] args) throws Exception
     {
-        QdsConfiguration configuration = new DefaultQdsConfiguration(DefaultQdsConfiguration.Type.STAGING, System.getProperty("API_KEY"));
+        String endpoint = System.getProperty("API_ENDPOINT", DefaultQdsConfiguration.API_ENDPOINT);
+        QdsConfiguration configuration = new DefaultQdsConfiguration(endpoint, System.getProperty("API_KEY"));
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {

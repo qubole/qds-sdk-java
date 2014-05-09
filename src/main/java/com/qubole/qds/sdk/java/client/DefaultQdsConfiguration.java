@@ -13,76 +13,41 @@ import java.util.concurrent.TimeUnit;
  */
 public class DefaultQdsConfiguration implements QdsConfiguration
 {
-    private final Type type;
+    private final String apiEndpoint;
     private final String apiToken;
     private final ClientConfig jerseyConfiguration;
 
-    private static final String API_ENDPOINT = "https://api.qubole.com/api";
-    private static final String STAGING_API_ENDPOINT = "https://colonelhathi.qubole.com/api/";
-    private static final String API_VERSION = "v1.2";
+    public static final String API_ENDPOINT = "https://api.qubole.com/api";
+    public static final String API_VERSION = "v1.2";
 
     private static final int DEFAULT_CONNECTION_TIMEOUT = (int)TimeUnit.SECONDS.toMillis(10);
     private static final int DEFAULT_READ_TIMEOUT = (int)TimeUnit.SECONDS.toMillis(10);
-
-    /**
-     * see {@link DefaultQdsConfiguration#DefaultQdsConfiguration(Type, String)}
-     * and {@link DefaultQdsConfiguration#DefaultQdsConfiguration(Type, String, ClientConfig)}
-     */
-    public enum Type
-    {
-        /**
-         * Endpoint for the staging site
-         */
-        STAGING()
-        {
-            @Override
-            public String getEndpoint()
-            {
-                return STAGING_API_ENDPOINT;
-            }
-        },
-
-        /**
-         * Endpoing for the production site
-         */
-        PRODUCTION()
-        {
-            @Override
-            public String getEndpoint()
-            {
-                return API_ENDPOINT;
-            }
-        }
-        ;
-
-        public abstract String getEndpoint();
-    }
 
     /**
      * @param apiToken your API token
      */
     public DefaultQdsConfiguration(String apiToken)
     {
-        this(Type.PRODUCTION, apiToken, null);
+        this(API_ENDPOINT, apiToken, null);
     }
 
     /**
-     * @param type endpoint type
+     * @param apiEndpoint endpoint
      * @param apiToken your API token
      */
-    public DefaultQdsConfiguration(Type type, String apiToken)
+    public DefaultQdsConfiguration(String apiEndpoint, String apiToken)
     {
-        this(type, apiToken, null);
+        this(apiEndpoint, apiToken, null);
     }
 
     /**
-     * @param type endpoint type
+     * @param apiEndpoint endpoint
      * @param apiToken your API token
      * @param jerseyConfiguration jersey client configuration or null for default
      */
-    public DefaultQdsConfiguration(Type type, String apiToken, ClientConfig jerseyConfiguration)
+    public DefaultQdsConfiguration(String apiEndpoint, String apiToken, ClientConfig jerseyConfiguration)
     {
-        this.type = Preconditions.checkNotNull(type, "type cannot be null");
+        this.apiEndpoint = Preconditions.checkNotNull(apiEndpoint, "apiEndpoint cannot be null");
         this.apiToken = Preconditions.checkNotNull(apiToken, "apiToken cannot be null");
 
         if ( jerseyConfiguration == null )
@@ -111,7 +76,7 @@ public class DefaultQdsConfiguration implements QdsConfiguration
     @Override
     public String getApiEndpoint()
     {
-        return type.getEndpoint();
+        return apiEndpoint;
     }
 
     @Override
