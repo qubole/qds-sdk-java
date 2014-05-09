@@ -4,7 +4,7 @@ import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
-import java.util.List;
+import com.qubole.qds.sdk.java.entities.Status;
 import java.util.concurrent.Future;
 
 public class Tester
@@ -15,8 +15,8 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Future<List<String>> invoke = client.dbTapApi().listTables(2573).invoke();
-            List<String> value = invoke.get();
+            Future<Status> invoke = client.dbTapApi().delete(2573).invoke();
+            Status value = invoke.get();
             System.out.println(value);
         }
         finally

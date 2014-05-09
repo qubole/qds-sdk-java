@@ -2,6 +2,7 @@ package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.DbTap;
 import com.qubole.qds.sdk.java.entities.DbTapList;
+import com.qubole.qds.sdk.java.entities.Status;
 import java.util.List;
 
 /**
@@ -48,6 +49,14 @@ public interface DbTapApi
      * @return new builder
      */
     public InvokableBuilder<List<String>> listTables(int dbTapId);
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/delete-a-dbtap/
+     *
+     * @param dbTapId id to delete
+     * @return new builder
+     */
+    public InvokableBuilder<Status> delete(int dbTapId);
 
     /**
      * Return a new db tap builder. Can be used with

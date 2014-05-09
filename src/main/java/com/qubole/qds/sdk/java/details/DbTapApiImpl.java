@@ -7,6 +7,7 @@ import com.qubole.qds.sdk.java.api.PageableInvokableBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.DbTap;
 import com.qubole.qds.sdk.java.entities.DbTapList;
+import com.qubole.qds.sdk.java.entities.Status;
 import javax.ws.rs.core.GenericType;
 import java.util.List;
 
@@ -45,6 +46,13 @@ class DbTapApiImpl implements DbTapApi
     {
         GenericType<List<String>> responseType = new GenericType<List<String>>(){};
         return new GenericInvokableBuilderImpl<List<String>>(client, null, responseType, "db_taps", Integer.toString(dbTapId), "tables");
+    }
+
+    @Override
+    public InvokableBuilder<Status> delete(int dbTapId)
+    {
+        ClientEntity entity = new ClientEntity(null, ClientEntity.Method.DELETE);
+        return new GenericInvokableBuilderImpl<Status>(client, entity, Status.class, "db_taps", Integer.toString(dbTapId));
     }
 
     @Override
