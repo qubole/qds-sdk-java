@@ -1,18 +1,19 @@
 package com.qubole.qds.sdk.java.entities;
 
+import java.util.List;
 import java.util.Map;
 
 public class TableProperties
 {
     private String interval;
     private String interval_unit;
-    private Map<String, String> columns;
+    private List<Map<String, String>> columns;
 
     public TableProperties()
     {
     }
 
-    public TableProperties(String interval, String interval_unit, Map<String, String> columns)
+    public TableProperties(String interval, String interval_unit, List<Map<String, String>> columns)
     {
         this.interval = interval;
         this.interval_unit = interval_unit;
@@ -39,12 +40,12 @@ public class TableProperties
         this.interval_unit = interval_unit;
     }
 
-    public Map<String, String> getColumns()
+    public List<Map<String, String>> getColumns()
     {
         return columns;
     }
 
-    public void setColumns(Map<String, String> columns)
+    public void setColumns(List<Map<String, String>> columns)
     {
         this.columns = columns;
     }

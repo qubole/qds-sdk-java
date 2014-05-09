@@ -15,7 +15,12 @@ abstract class CommandBuilderImplBase implements InvokableBuilder<CommandRespons
     @Override
     public final Future<CommandResponse> invoke()
     {
-        ObjectNode node = getEntity();
+        ClientEntity entity = makeJsonEntity(getEntity(), method);
+        return client.invokeRequest(null, entity, CommandResponse.class, "commands");
+    }
+
+    static ClientEntity makeJsonEntity(ObjectNode node, ClientEntity.Method method)
+    {
         String json;
         try
         {
@@ -25,8 +30,7 @@ abstract class CommandBuilderImplBase implements InvokableBuilder<CommandRespons
         {
             throw new RuntimeException("Could not serialize " + node, e);
         }
-        ClientEntity entity = new ClientEntity(json, method);
-        return client.invokeRequest(null, entity, CommandResponse.class, "commands");
+        return new ClientEntity(json, method);
     }
 
     protected abstract ObjectNode getEntity();
