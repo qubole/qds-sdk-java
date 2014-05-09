@@ -38,3 +38,7 @@ Future<HiveCommandResponse> hiveCommandResponseFuture = client
 HiveCommandResponse hiveCommandResponse = hiveCommandResponseFuture.get();
 ...
 ```
+
+## Javadoc
+
+http://qubole.github.io/qds-sdk-java/apidocs/
