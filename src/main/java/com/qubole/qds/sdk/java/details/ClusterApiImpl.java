@@ -60,6 +60,12 @@ class ClusterApiImpl implements ClusterApi
         return new GenericInvokableBuilderImpl<ClusterItem>(client, entity, ClusterItem.class, "clusters");
     }
 
+    @Override
+    public ClusterConfigBuilder clusterConfig()
+    {
+        return new ClusterConfigBuilderImpl();
+    }
+
     ClusterApiImpl(QdsClient client)
     {
         this.client = client;

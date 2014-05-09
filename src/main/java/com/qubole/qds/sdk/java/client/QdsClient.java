@@ -1,7 +1,6 @@
 package com.qubole.qds.sdk.java.client;
 
 import com.qubole.qds.sdk.java.api.ClusterApi;
-import com.qubole.qds.sdk.java.api.ClusterConfigBuilder;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapsApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
@@ -15,14 +14,6 @@ import java.util.concurrent.Future;
  */
 public interface QdsClient extends AutoCloseable
 {
-    /**
-     * Return a new cluster config builder. Can be used with
-     * apis such as {@link ClusterApi#edit(String, ClusterConfigBuilder)}
-     *
-     * @return builder
-     */
-    public ClusterConfigBuilder clusterConfig();
-
     /**
      * Return cluster api factory
      *

@@ -2,9 +2,8 @@ package com.qubole.qds.sdk.java.details;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
-import com.qubole.qds.sdk.java.api.ClusterConfigBuilder;
-import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.ClusterApi;
+import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapsApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
@@ -52,12 +51,6 @@ public class QdsClientImpl implements QdsClient
     public CommandApi command()
     {
         return commandApi;
-    }
-
-    @Override
-    public ClusterConfigBuilder clusterConfig()
-    {
-        return new ClusterConfigBuilderImpl();
     }
 
     @Override

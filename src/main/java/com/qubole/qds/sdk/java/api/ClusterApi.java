@@ -1,6 +1,5 @@
 package com.qubole.qds.sdk.java.api;
 
-import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.ClusterItem;
 import com.qubole.qds.sdk.java.entities.ClusterState;
 import com.qubole.qds.sdk.java.entities.Message;
@@ -54,7 +53,7 @@ public interface ClusterApi
      * Corresponds to http://www.qubole.com/docs/edit-cluster/
      *
      * @param labelOrId the Cluster label/id
-     * @param configBuilder config values - use {@link QdsClient#clusterConfig()}
+     * @param configBuilder config values - use {@link #clusterConfig()}
      * @return new builder
      */
     public InvokableBuilder<ClusterItem> edit(String labelOrId, ClusterConfigBuilder configBuilder);
@@ -62,8 +61,16 @@ public interface ClusterApi
     /**
      * Corresponds to http://www.qubole.com/docs/create-new-cluster/
      *
-     * @param configBuilder config values - use {@link QdsClient#clusterConfig()}
+     * @param configBuilder config values - use {@link #clusterConfig()}
      * @return new builder
      */
     public InvokableBuilder<ClusterItem> create(ClusterConfigBuilder configBuilder);
+
+    /**
+     * Return a new cluster config builder. Can be used with
+     * apis such as {@link ClusterApi#edit(String, ClusterConfigBuilder)}
+     *
+     * @return builder
+     */
+    public ClusterConfigBuilder clusterConfig();
 }
