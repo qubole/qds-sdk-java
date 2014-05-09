@@ -85,4 +85,11 @@ public interface SchedulerApi
      * @return builder
      */
     public InvokableBuilder<String> instanceResults(int scheduleId, int instanceId);
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/create-a-schedule/
+     *
+     * @return builder
+     */
+    public CreateScheduleCommandBuilder create();
 }

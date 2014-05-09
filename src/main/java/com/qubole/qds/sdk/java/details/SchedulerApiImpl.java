@@ -1,5 +1,6 @@
 package com.qubole.qds.sdk.java.details;
 
+import com.qubole.qds.sdk.java.api.CreateScheduleCommandBuilder;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.api.PageableInvokableBuilder;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
@@ -67,6 +68,12 @@ class SchedulerApiImpl implements SchedulerApi
     public InvokableBuilder<String> instanceResults(int scheduleId, int instanceId)
     {
         return new GenericInvokableBuilderImpl<String>(client, null, String.class, "scheduler", Integer.toString(scheduleId), "instances", Integer.toString(instanceId), "results");
+    }
+
+    @Override
+    public CreateScheduleCommandBuilder create()
+    {
+        return new CreateScheduleCommandBuilderImpl(client);
     }
 
     SchedulerApiImpl(QdsClient client)
