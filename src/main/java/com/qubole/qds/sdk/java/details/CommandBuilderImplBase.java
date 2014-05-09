@@ -3,6 +3,8 @@ package com.qubole.qds.sdk.java.details;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.CommandResponse;
+import org.codehaus.jackson.node.ObjectNode;
+import java.io.IOException;
 import java.util.concurrent.Future;
 
 abstract class CommandBuilderImplBase implements InvokableBuilder<CommandResponse>
@@ -13,11 +15,21 @@ abstract class CommandBuilderImplBase implements InvokableBuilder<CommandRespons
     @Override
     public final Future<CommandResponse> invoke()
     {
-        ClientEntity entity = new ClientEntity(getEntity(), method);
+        ObjectNode node = getEntity();
+        String json;
+        try
+        {
+            json = QdsClientImpl.getMapper().writeValueAsString(node);
+        }
+        catch ( IOException e )
+        {
+            throw new RuntimeException("Could not serialize " + node, e);
+        }
+        ClientEntity entity = new ClientEntity(json, method);
         return client.invokeRequest(null, entity, CommandResponse.class, "commands");
     }
 
-    protected abstract Object getEntity();
+    protected abstract ObjectNode getEntity();
 
     protected CommandBuilderImplBase(QdsClient client)
     {

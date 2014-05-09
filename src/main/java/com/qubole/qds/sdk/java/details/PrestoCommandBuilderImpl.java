@@ -2,34 +2,35 @@ package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.PrestoCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
-import com.qubole.qds.sdk.java.entities.PrestoCommand;
+import org.codehaus.jackson.node.ObjectNode;
 
 class PrestoCommandBuilderImpl extends CommandBuilderImplBase implements PrestoCommandBuilder
 {
-    private final PrestoCommand prestoCommand = new PrestoCommand("", "", "PrestoCommand");
+    private final ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
 
     @Override
     public PrestoCommandBuilder script_location(String script_location)
     {
-        prestoCommand.setScript_location(script_location);
+        node.put("script_location", script_location);
         return this;
     }
 
     @Override
     public PrestoCommandBuilder query(String query)
     {
-        prestoCommand.setQuery(query);
+        node.put("query", query);
         return this;
     }
 
     @Override
-    protected Object getEntity()
+    protected ObjectNode getEntity()
     {
-        return prestoCommand;
+        return node;
     }
 
     PrestoCommandBuilderImpl(QdsClient client)
     {
         super(client);
+        node.put("command_type", "PrestoCommand");
     }
 }

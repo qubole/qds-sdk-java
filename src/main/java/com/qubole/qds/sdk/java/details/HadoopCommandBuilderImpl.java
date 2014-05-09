@@ -2,34 +2,35 @@ package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.HadoopCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
-import com.qubole.qds.sdk.java.entities.HadoopCommand;
+import org.codehaus.jackson.node.ObjectNode;
 
 class HadoopCommandBuilderImpl extends CommandBuilderImplBase implements HadoopCommandBuilder
 {
-    private final HadoopCommand hadoopCommand = new HadoopCommand(SubCommandType.JAR.name().toLowerCase(), "", "HadoopCommand");
+    private final ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
 
     @Override
     public HadoopCommandBuilder sub_command(SubCommandType subCommandType)
     {
-        hadoopCommand.setSub_command(subCommandType.name().toLowerCase());
+        node.put("sub_command", subCommandType.name().toLowerCase());
         return this;
     }
 
     @Override
     public HadoopCommandBuilder sub_command_args(String sub_command_args)
     {
-        hadoopCommand.setSub_command_args(sub_command_args);
+        node.put("sub_command_args", sub_command_args);
         return this;
     }
 
     @Override
-    protected Object getEntity()
+    protected ObjectNode getEntity()
     {
-        return hadoopCommand;
+        return node;
     }
 
     HadoopCommandBuilderImpl(QdsClient client)
     {
         super(client);
+        node.put("command_type", "HadoopCommand");
     }
 }
