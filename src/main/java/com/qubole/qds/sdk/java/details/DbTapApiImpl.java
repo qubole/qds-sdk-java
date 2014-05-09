@@ -7,6 +7,8 @@ import com.qubole.qds.sdk.java.api.PageableInvokableBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.DbTap;
 import com.qubole.qds.sdk.java.entities.DbTapList;
+import javax.ws.rs.core.GenericType;
+import java.util.List;
 
 class DbTapApiImpl implements DbTapApi
 {
@@ -36,6 +38,13 @@ class DbTapApiImpl implements DbTapApi
     public InvokableBuilder<DbTap> view(int dbTapId)
     {
         return new GenericInvokableBuilderImpl<DbTap>(client, null, DbTap.class, "db_taps", Integer.toString(dbTapId));
+    }
+
+    @Override
+    public InvokableBuilder<List<String>> listTables(int dbTapId)
+    {
+        GenericType<List<String>> responseType = new GenericType<List<String>>(){};
+        return new GenericInvokableBuilderImpl<List<String>>(client, null, responseType, "db_taps", Integer.toString(dbTapId), "tables");
     }
 
     @Override
