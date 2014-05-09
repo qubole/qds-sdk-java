@@ -4,7 +4,7 @@ import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
-import com.qubole.qds.sdk.java.entities.Status;
+import com.qubole.qds.sdk.java.entities.CanonicalHiveCommandsReport;
 import java.util.concurrent.Future;
 
 public class Tester
@@ -15,8 +15,8 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Future<Status> invoke = client.dbTapApi().delete(2573).invoke();
-            Status value = invoke.get();
+            Future<CanonicalHiveCommandsReport> invoke = client.reports().canonicalHiveCommands().sort_column("cpu").limit(2).invoke();
+            CanonicalHiveCommandsReport value = invoke.get();
             System.out.println(value);
         }
         finally

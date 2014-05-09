@@ -4,6 +4,7 @@ import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
+import com.qubole.qds.sdk.java.api.ReportsApi;
 import com.qubole.qds.sdk.java.details.ClientEntity;
 import com.qubole.qds.sdk.java.details.ForPage;
 import javax.ws.rs.core.GenericType;
@@ -40,7 +41,14 @@ public interface QdsClient extends AutoCloseable
      *
      * @return DbTaps factory
      */
-    public DbTapApi dbTapApi();
+    public DbTapApi dbTaps();
+
+    /**
+     * Return reports api factory
+     *
+     * @return reports factory
+     */
+    public ReportsApi reports();
 
     /**
      * Low-level request invoker. Not normally used directly. Use the api factories instead.
