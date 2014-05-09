@@ -1,14 +1,17 @@
 package com.qubole.qds.sdk.java.details;
 
-import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
+import java.util.Map;
 
 public class ClientEntity
 {
     private final Object entity;
     private final Method method;
+    private final Map<String, String> queryParams;
 
     public enum Method
     {
+        GET,
         POST,
         PUT,
         DELETE
@@ -16,13 +19,19 @@ public class ClientEntity
 
     public ClientEntity(Object entity)
     {
-        this(entity, Method.POST);
+        this(entity, Method.POST, null);
     }
 
     public ClientEntity(Object entity, Method method)
     {
-        this.entity = Preconditions.checkNotNull(entity, "entity cannot be null");
+        this(entity, method, null);
+    }
+
+    public ClientEntity(Object entity, Method method, Map<String, String> queryParams)
+    {
+        this.entity = entity;
         this.method = method;
+        this.queryParams = (queryParams != null) ? ImmutableMap.copyOf(queryParams) : null;
     }
 
     public Object getEntity()
@@ -35,14 +44,8 @@ public class ClientEntity
         return method;
     }
 
-    public static ClientEntity forDelete()
+    public Map<String, String> getQueryParams()
     {
-        return new ClientEntity();
-    }
-
-    private ClientEntity()
-    {
-        entity = null;
-        method = Method.DELETE;
+        return queryParams;
     }
 }

@@ -2,7 +2,6 @@ package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.NameAndType;
 import com.qubole.qds.sdk.java.entities.Status;
-import com.qubole.qds.sdk.java.entities.TableProperties;
 import com.qubole.qds.sdk.java.entities.TablePropertiesResponse;
 import java.util.List;
 
@@ -42,4 +41,11 @@ public interface HiveMetadataApi
      * @return builder
      */
     public InvokableBuilder<Status> deleteTableProperties(String tableName);
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/schema-or-database/
+     *
+     * @return builder
+     */
+    public SchemaCommandBuilder schema();
 }

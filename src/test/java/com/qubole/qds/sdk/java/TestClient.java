@@ -37,9 +37,9 @@ public class TestClient
             }
 
             @Override
-            protected WebTarget prepareTarget(ForPage forPage, String[] additionalPaths)
+            protected WebTarget prepareTarget(ForPage forPage, ClientEntity entity, String[] additionalPaths)
             {
-                WebTarget webTarget = super.prepareTarget(forPage, additionalPaths);
+                WebTarget webTarget = super.prepareTarget(forPage, entity, additionalPaths);
                 webTargetReference.set(webTarget);
                 return webTarget;
             }
@@ -71,9 +71,9 @@ public class TestClient
             }
 
             @Override
-            protected WebTarget prepareTarget(ForPage forPage, String[] additionalPaths)
+            protected WebTarget prepareTarget(ForPage forPage, ClientEntity entity, String[] additionalPaths)
             {
-                WebTarget webTarget = super.prepareTarget(forPage, additionalPaths);
+                WebTarget webTarget = super.prepareTarget(forPage, entity, additionalPaths);
                 webTargetReference.set(webTarget);
                 return webTarget;
             }

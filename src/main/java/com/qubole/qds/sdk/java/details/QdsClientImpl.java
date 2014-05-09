@@ -15,6 +15,7 @@ import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
+import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -65,28 +66,15 @@ public class QdsClientImpl implements QdsClient
     @Override
     public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, Class<T> responseType, String... additionalPaths)
     {
-        AsyncInvoker invoker = prepareRequest(forPage, additionalPaths);
+        AsyncInvoker invoker = prepareRequest(forPage, entity, additionalPaths);
         return invokePreparedRequest(entity, responseType, invoker);
     }
 
     @Override
     public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, GenericType<T> responseType, String... additionalPaths)
     {
-        AsyncInvoker invoker = prepareRequest(forPage, additionalPaths);
+        AsyncInvoker invoker = prepareRequest(forPage, entity, additionalPaths);
         return invokePreparedRequest(entity, responseType, invoker);
-    }
-
-    public AsyncInvoker prepareRequest(ForPage forPage, String... additionalPaths)
-    {
-        WebTarget localTarget = prepareTarget(forPage, additionalPaths);
-
-        Invocation.Builder builder = localTarget.request().accept(MediaType.APPLICATION_JSON_TYPE);
-        if ( configuration.getApiToken() != null )
-        {
-            builder = builder.header("X-AUTH-TOKEN", configuration.getApiToken());
-        }
-
-        return builder.async();
     }
 
     @VisibleForTesting
@@ -118,7 +106,7 @@ public class QdsClientImpl implements QdsClient
     }
 
     @VisibleForTesting
-    protected WebTarget prepareTarget(ForPage forPage, String[] additionalPaths)
+    protected WebTarget prepareTarget(ForPage forPage, ClientEntity entity, String[] additionalPaths)
     {
         WebTarget localTarget = target;
         if ( additionalPaths != null )
@@ -133,6 +121,15 @@ public class QdsClientImpl implements QdsClient
         {
             localTarget = localTarget.queryParam("page", forPage.getPage()).queryParam("per_page", forPage.getPerPage());
         }
+
+        if ( (entity != null) && (entity.getQueryParams() != null) )
+        {
+            for ( Map.Entry<String, String> entry : entity.getQueryParams().entrySet() )
+            {
+                localTarget = localTarget.queryParam(entry.getKey(), entry.getValue());
+            }
+        }
+
         return localTarget;
     }
 
@@ -143,5 +140,18 @@ public class QdsClientImpl implements QdsClient
         {
             client.close();
         }
+    }
+
+    private AsyncInvoker prepareRequest(ForPage forPage, ClientEntity entity, String... additionalPaths)
+    {
+        WebTarget localTarget = prepareTarget(forPage, entity, additionalPaths);
+
+        Invocation.Builder builder = localTarget.request().accept(MediaType.APPLICATION_JSON_TYPE);
+        if ( configuration.getApiToken() != null )
+        {
+            builder = builder.header("X-AUTH-TOKEN", configuration.getApiToken());
+        }
+
+        return builder.async();
     }
 }

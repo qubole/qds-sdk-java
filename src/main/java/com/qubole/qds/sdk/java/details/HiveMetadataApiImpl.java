@@ -2,6 +2,7 @@ package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
+import com.qubole.qds.sdk.java.api.SchemaCommandBuilder;
 import com.qubole.qds.sdk.java.api.StoreTablePropertiesBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.NameAndType;
@@ -36,7 +37,13 @@ class HiveMetadataApiImpl implements HiveMetadataApi
     @Override
     public InvokableBuilder<Status> deleteTableProperties(String tableName)
     {
-        return new GenericInvokableBuilderImpl<Status>(client, ClientEntity.forDelete(), Status.class, "hive", "default", tableName, "properties");
+        return new GenericInvokableBuilderImpl<Status>(client, new ClientEntity(null, ClientEntity.Method.DELETE), Status.class, "hive", "default", tableName, "properties");
+    }
+
+    @Override
+    public SchemaCommandBuilder schema()
+    {
+        return new SchemaCommandBuilderImpl(client);
     }
 
     HiveMetadataApiImpl(QdsClient client)
