@@ -8,6 +8,7 @@ import com.qubole.qds.sdk.java.api.ReportsApi;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
 import com.qubole.qds.sdk.java.details.ClientEntity;
 import com.qubole.qds.sdk.java.details.ForPage;
+import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.core.GenericType;
 import java.util.concurrent.Future;
 
@@ -79,6 +80,17 @@ public interface QdsClient extends AutoCloseable
      * @return async result
      */
     public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, GenericType<T> responseType, String... additionalPaths);
+
+    /**
+     * Low-level request invoker. Not normally used directly. Use the api factories instead.
+     *
+     * @param forPage paging info or null
+     * @param entity request entity or null
+     * @param callback response callback
+     * @param additionalPaths additional path components
+     * @return async result
+     */
+    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, InvocationCallback<T> callback, String... additionalPaths);
 
     @Override
     public void close();

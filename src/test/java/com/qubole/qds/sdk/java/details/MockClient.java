@@ -7,6 +7,7 @@ import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.api.ReportsApi;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
+import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.core.GenericType;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Future;
@@ -21,6 +22,7 @@ public class MockClient implements QdsClient
         private final ClientEntity entity;
         private final Class<?> responseType;
         private final GenericType<?> genericResponseType;
+        private final InvocationCallback<?> callback;
         private final String[] additionalPaths;
 
         public InvokeDetails(ForPage forPage, ClientEntity entity, GenericType<?> genericResponseType, String[] additionalPaths)
@@ -30,6 +32,7 @@ public class MockClient implements QdsClient
             this.responseType = null;
             this.additionalPaths = additionalPaths;
             this.genericResponseType = genericResponseType;
+            this.callback = null;
         }
 
         public InvokeDetails(ForPage forPage, ClientEntity entity, Class<?> responseType, String[] additionalPaths)
@@ -39,6 +42,22 @@ public class MockClient implements QdsClient
             this.responseType = responseType;
             this.additionalPaths = additionalPaths;
             this.genericResponseType = null;
+            this.callback = null;
+        }
+
+        public InvokeDetails(ForPage forPage, ClientEntity entity, InvocationCallback<?> callback, String[] additionalPaths)
+        {
+            this.forPage = forPage;
+            this.entity = entity;
+            this.responseType = null;
+            this.additionalPaths = additionalPaths;
+            this.genericResponseType = null;
+            this.callback = callback;
+        }
+
+        public InvocationCallback<?> getCallback()
+        {
+            return callback;
         }
 
         public GenericType<?> getGenericResponseType()
@@ -111,6 +130,13 @@ public class MockClient implements QdsClient
     @Override
     public void close()
     {
+    }
+
+    @Override
+    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, InvocationCallback<T> callback, String... additionalPaths)
+    {
+        results.add(new InvokeDetails(forPage, entity, callback, additionalPaths));
+        return null;
     }
 
     @Override

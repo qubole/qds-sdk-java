@@ -15,6 +15,7 @@ import javax.ws.rs.client.AsyncInvoker;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
@@ -103,6 +104,27 @@ public class QdsClientImpl implements QdsClient
     {
         AsyncInvoker invoker = prepareRequest(forPage, entity, additionalPaths);
         return invokePreparedRequest(entity, responseType, invoker);
+    }
+
+    @Override
+    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, InvocationCallback<T> callback, String... additionalPaths)
+    {
+        AsyncInvoker invoker = prepareRequest(forPage, entity, additionalPaths);
+        return invokePreparedRequest(entity, callback, invoker);
+    }
+
+    @VisibleForTesting
+    protected <T> Future<T> invokePreparedRequest(ClientEntity entity, InvocationCallback<T> callback, AsyncInvoker invoker)
+    {
+        if ( entity != null )
+        {
+            if ( entity.getEntity() != null )
+            {
+                return invoker.method(entity.getMethod().name(), Entity.entity(entity.getEntity(), MediaType.APPLICATION_JSON_TYPE), callback);
+            }
+            return invoker.method(entity.getMethod().name(), callback);
+        }
+        return invoker.get(callback);
     }
 
     @VisibleForTesting
