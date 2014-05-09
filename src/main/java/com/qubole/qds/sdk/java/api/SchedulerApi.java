@@ -60,11 +60,20 @@ public interface SchedulerApi
     public PageableInvokableBuilder<Commands> listInstances(int scheduleId);
 
     /**
-     * Corresponds to http://www.qubole.com/docs/view-a-schedule/
+     * Corresponds to http://www.qubole.com/docs/view-a-scheduled-command/
      *
      * @param scheduleId schedule id
      * @param instanceId instance id
      * @return builder
      */
     public InvokableBuilder<Command> viewCommand(int scheduleId, int instanceId);
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/get-logs-of-scheduled-instances/
+     *
+     * @param scheduleId schedule id
+     * @param instanceId instance id
+     * @return builder
+     */
+    public InvokableBuilder<String> instanceLogs(int scheduleId, int instanceId);
 }
