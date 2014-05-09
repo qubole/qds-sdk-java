@@ -1,6 +1,7 @@
 package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.DbTap;
+import com.qubole.qds.sdk.java.entities.DbTapList;
 
 /**
  * Corresponds to http://www.qubole.com/docs/documentation/dbtaps-api-qds-api-reference/
@@ -16,13 +17,20 @@ public interface DbTapApi
     public InvokableBuilder<DbTap> create(DbTapBuilder dbTap);
 
     /**
-     * Corresponds to http://www.qubole.com/docs/create-a-dbtap/
+     * Corresponds to http://www.qubole.com/docs/edit-a-dbtap/
      *
      * @param dbTapId id to edit
      * @param dbTap the data
      * @return new builder
      */
     public InvokableBuilder<DbTap> edit(int dbTapId, DbTapBuilder dbTap);
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/list-dbtaps/
+     *
+     * @return new builder
+     */
+    public PageableInvokableBuilder<DbTapList> list();
 
     /**
      * Return a new db tap builder. Can be used with
