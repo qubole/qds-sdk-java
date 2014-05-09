@@ -39,6 +39,31 @@ HiveCommandResponse hiveCommandResponse = hiveCommandResponseFuture.get();
 ...
 ```
 
+Alternatively, you can use Jersey's callback mechanism. E.g.
+
+```
+InvocationCallback<HiveCommandResponse> callback = new InvocationCallback<HiveCommandResponse>()
+{
+    @Override
+    public void completed(HiveCommandResponse clusterItems)
+    {
+        // ...
+    }
+
+    @Override
+    public void failed(Throwable throwable)
+    {
+        // ...
+    }
+};
+client.command()
+    .hive()
+    .query("show tables;")
+    .withCallback(callback)
+    .invoke();
+...
+```
+
 ## Javadoc
 
 http://qubole.github.io/qds-sdk-java/apidocs/
