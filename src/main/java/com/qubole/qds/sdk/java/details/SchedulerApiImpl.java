@@ -63,6 +63,12 @@ class SchedulerApiImpl implements SchedulerApi
         return new GenericInvokableBuilderImpl<String>(client, null, String.class, "scheduler", Integer.toString(scheduleId), "instances", Integer.toString(instanceId), "logs");
     }
 
+    @Override
+    public InvokableBuilder<String> instanceResults(int scheduleId, int instanceId)
+    {
+        return new GenericInvokableBuilderImpl<String>(client, null, String.class, "scheduler", Integer.toString(scheduleId), "instances", Integer.toString(instanceId), "results");
+    }
+
     SchedulerApiImpl(QdsClient client)
     {
         this.client = client;

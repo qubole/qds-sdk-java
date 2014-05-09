@@ -76,4 +76,13 @@ public interface SchedulerApi
      * @return builder
      */
     public InvokableBuilder<String> instanceLogs(int scheduleId, int instanceId);
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/get-results-of-a-scheduled-instance/
+     *
+     * @param scheduleId schedule id
+     * @param instanceId instance id
+     * @return builder
+     */
+    public InvokableBuilder<String> instanceResults(int scheduleId, int instanceId);
 }
