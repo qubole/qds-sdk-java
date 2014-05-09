@@ -33,6 +33,14 @@ public interface DbTapApi
     public PageableInvokableBuilder<DbTapList> list();
 
     /**
+     * Corresponds to http://www.qubole.com/docs/view-a-dbtap/
+     *
+     * @param dbTapId id to view
+     * @return new builder
+     */
+    public InvokableBuilder<DbTap> view(int dbTapId);
+
+    /**
      * Return a new db tap builder. Can be used with
      * apis such as {@link #create(DbTapBuilder)}
      *

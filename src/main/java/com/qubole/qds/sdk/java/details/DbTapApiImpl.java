@@ -33,6 +33,12 @@ class DbTapApiImpl implements DbTapApi
     }
 
     @Override
+    public InvokableBuilder<DbTap> view(int dbTapId)
+    {
+        return new GenericInvokableBuilderImpl<DbTap>(client, null, DbTap.class, "db_taps", Integer.toString(dbTapId));
+    }
+
+    @Override
     public DbTapBuilder dbTap()
     {
         return new DbTapBuilderImpl();

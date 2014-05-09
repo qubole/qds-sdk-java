@@ -4,7 +4,7 @@ import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
-import com.qubole.qds.sdk.java.entities.DbTapList;
+import com.qubole.qds.sdk.java.entities.DbTap;
 import java.util.concurrent.Future;
 
 public class Tester
@@ -15,8 +15,8 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Future<DbTapList> invoke = client.dbTapApi().list().invoke();
-            DbTapList value = invoke.get();
+            Future<DbTap> invoke = client.dbTapApi().view(2573).invoke();
+            DbTap value = invoke.get();
             System.out.println(value);
         }
         finally
