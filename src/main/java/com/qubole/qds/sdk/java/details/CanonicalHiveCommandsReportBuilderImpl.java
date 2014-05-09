@@ -7,7 +7,7 @@ import com.qubole.qds.sdk.java.entities.CanonicalHiveCommandsReport;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-class CanonicalHiveCommandsReportBuilderImpl implements CanonicalHiveCommandsReportBuilder
+class CanonicalHiveCommandsReportBuilderImpl extends InvocationCallbackBase<CanonicalHiveCommandsReport> implements CanonicalHiveCommandsReportBuilder
 {
     private final QdsClient client;
     private final Map<String, String> parameters = Maps.newHashMap();
@@ -50,7 +50,7 @@ class CanonicalHiveCommandsReportBuilderImpl implements CanonicalHiveCommandsRep
     public Future<CanonicalHiveCommandsReport> invoke()
     {
         ClientEntity entity = new ClientEntity(null, ClientEntity.Method.GET, parameters);
-        return client.invokeRequest(null, entity, CanonicalHiveCommandsReport.class, "reports", "canonical_hive_commands");
+        return invokeRequest(client, null, entity, CanonicalHiveCommandsReport.class, "reports", "canonical_hive_commands");
     }
 
     CanonicalHiveCommandsReportBuilderImpl(QdsClient client)

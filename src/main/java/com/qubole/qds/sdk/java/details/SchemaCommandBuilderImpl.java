@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-class SchemaCommandBuilderImpl implements SchemaCommandBuilder
+class SchemaCommandBuilderImpl extends InvocationCallbackBase<List<Schema>> implements SchemaCommandBuilder
 {
     private final QdsClient client;
     private String filter;
@@ -43,7 +43,7 @@ class SchemaCommandBuilderImpl implements SchemaCommandBuilder
         }
 
         GenericType<List<Schema>> responseType = new GenericType<List<Schema>>(){};
-        return client.invokeRequest(null, new ClientEntity(null, ClientEntity.Method.GET, params), responseType, "hive", "default");
+        return invokeRequest(client, null, new ClientEntity(null, ClientEntity.Method.GET, params), responseType, "hive", "default");
     }
 
     SchemaCommandBuilderImpl(QdsClient client)

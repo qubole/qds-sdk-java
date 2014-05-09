@@ -7,7 +7,7 @@ import org.codehaus.jackson.node.ObjectNode;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-class StoreTablePropertiesBuilderImpl implements StoreTablePropertiesBuilder
+class StoreTablePropertiesBuilderImpl extends InvocationCallbackBase<Status> implements StoreTablePropertiesBuilder
 {
     private final ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
     private final QdsClient client;
@@ -38,7 +38,7 @@ class StoreTablePropertiesBuilderImpl implements StoreTablePropertiesBuilder
     public Future<Status> invoke()
     {
         ClientEntity entity = CommandBuilderImplBase.makeJsonEntity(node, ClientEntity.Method.POST);
-        return client.invokeRequest(null, entity, Status.class, "hive", "default", tableName, "properties");
+        return invokeRequest(client, null, entity, Status.class, "hive", "default", tableName, "properties");
     }
 
     StoreTablePropertiesBuilderImpl(QdsClient client, String tableName)

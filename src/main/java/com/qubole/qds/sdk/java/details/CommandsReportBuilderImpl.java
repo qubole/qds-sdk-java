@@ -7,7 +7,7 @@ import com.qubole.qds.sdk.java.entities.CommandsReport;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-class CommandsReportBuilderImpl implements CommandsReportBuilder
+class CommandsReportBuilderImpl extends InvocationCallbackBase<CommandsReport> implements CommandsReportBuilder
 {
     private final QdsClient client;
     private final Map<String, String> parameters = Maps.newHashMap();
@@ -58,7 +58,7 @@ class CommandsReportBuilderImpl implements CommandsReportBuilder
     public Future<CommandsReport> invoke()
     {
         ClientEntity entity = new ClientEntity(null, ClientEntity.Method.GET, parameters);
-        return client.invokeRequest(null, entity, CommandsReport.class, "reports", "all_commands");
+        return invokeRequest(client, null, entity, CommandsReport.class, "reports", "all_commands");
     }
 
     CommandsReportBuilderImpl(QdsClient client)

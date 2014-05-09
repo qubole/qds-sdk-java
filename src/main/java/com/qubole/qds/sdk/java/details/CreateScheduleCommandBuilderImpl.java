@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-class CreateScheduleCommandBuilderImpl implements CreateScheduleCommandBuilder
+class CreateScheduleCommandBuilderImpl extends InvocationCallbackBase<Schedule> implements CreateScheduleCommandBuilder
 {
     private final ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
     private final QdsClient client;
@@ -96,7 +96,7 @@ class CreateScheduleCommandBuilderImpl implements CreateScheduleCommandBuilder
     public Future<Schedule> invoke()
     {
         ClientEntity entity = CommandBuilderImplBase.makeJsonEntity(node, ClientEntity.Method.POST);
-        return client.invokeRequest(null, entity, Schedule.class, "scheduler");
+        return invokeRequest(client, null, entity, Schedule.class, "scheduler");
     }
 
     CreateScheduleCommandBuilderImpl(QdsClient client)
