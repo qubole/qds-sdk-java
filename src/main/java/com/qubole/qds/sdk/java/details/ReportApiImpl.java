@@ -2,10 +2,10 @@ package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.CanonicalHiveCommandsReportBuilder;
 import com.qubole.qds.sdk.java.api.AllCommandsReportBuilder;
-import com.qubole.qds.sdk.java.api.ReportsApi;
+import com.qubole.qds.sdk.java.api.ReportApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
 
-class ReportsApiImpl implements ReportsApi
+class ReportApiImpl implements ReportApi
 {
     private final QdsClient client;
 
@@ -21,7 +21,7 @@ class ReportsApiImpl implements ReportsApi
         return new AllCommandsReportBuilderImpl(client);
     }
 
-    ReportsApiImpl(QdsClient client)
+    ReportApiImpl(QdsClient client)
     {
         this.client = client;
     }

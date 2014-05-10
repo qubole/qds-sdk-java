@@ -6,7 +6,7 @@ import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
-import com.qubole.qds.sdk.java.api.ReportsApi;
+import com.qubole.qds.sdk.java.api.ReportApi;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
@@ -33,7 +33,7 @@ public class QdsClientImpl implements QdsClient
     private final ClusterApiImpl clusterApi;
     private final HiveMetadataApiImpl hiveMetadataApi;
     private final DbTapApiImpl dbTapsApi;
-    private final ReportsApiImpl reportsApi;
+    private final ReportApiImpl reportApi;
     private final SchedulerApiImpl schedulerApi;
 
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -52,7 +52,7 @@ public class QdsClientImpl implements QdsClient
         clusterApi = new ClusterApiImpl(this);
         hiveMetadataApi = new HiveMetadataApiImpl(this);
         dbTapsApi = new DbTapApiImpl(this);
-        reportsApi = new ReportsApiImpl(this);
+        reportApi = new ReportApiImpl(this);
         schedulerApi = new SchedulerApiImpl(this);
     }
 
@@ -81,9 +81,9 @@ public class QdsClientImpl implements QdsClient
     }
 
     @Override
-    public ReportsApi reports()
+    public ReportApi report()
     {
-        return reportsApi;
+        return reportApi;
     }
 
     @Override

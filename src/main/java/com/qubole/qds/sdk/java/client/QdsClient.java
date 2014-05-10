@@ -4,7 +4,7 @@ import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
-import com.qubole.qds.sdk.java.api.ReportsApi;
+import com.qubole.qds.sdk.java.api.ReportApi;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
 import com.qubole.qds.sdk.java.details.ClientEntity;
 import com.qubole.qds.sdk.java.details.ForPage;
@@ -46,11 +46,11 @@ public interface QdsClient extends AutoCloseable
     public DbTapApi dbTaps();
 
     /**
-     * Return reports api factory
+     * Return report api factory
      *
-     * @return reports factory
+     * @return report factory
      */
-    public ReportsApi reports();
+    public ReportApi report();
 
     /**
      * Return scheduler api factory

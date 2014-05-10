@@ -4,7 +4,7 @@ import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
-import com.qubole.qds.sdk.java.api.ReportsApi;
+import com.qubole.qds.sdk.java.api.ReportApi;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import javax.ws.rs.client.InvocationCallback;
@@ -116,9 +116,9 @@ public class MockClient implements QdsClient
     }
 
     @Override
-    public ReportsApi reports()
+    public ReportApi report()
     {
-        return new ReportsApiImpl(this);
+        return new ReportApiImpl(this);
     }
 
     @Override
