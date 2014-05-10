@@ -30,22 +30,22 @@ QdsClient client = QdsClientFactory.newClient(configuration);
 Then, make api calls as needed. E.g.
 
 ```
-Future<HiveCommandResponse> hiveCommandResponseFuture = client
+Future<CommandResponse> hiveCommandResponseFuture = client
     .command()
     .hive()
     .query("show tables;")
     .invoke();
-HiveCommandResponse hiveCommandResponse = hiveCommandResponseFuture.get();
+CommandResponse hiveCommandResponse = hiveCommandResponseFuture.get();
 ...
 ```
 
 Alternatively, you can use Jersey's callback mechanism. E.g.
 
 ```
-InvocationCallback<HiveCommandResponse> callback = new InvocationCallback<HiveCommandResponse>()
+InvocationCallback<CommandResponse> callback = new InvocationCallback<CommandResponse>()
 {
     @Override
-    public void completed(HiveCommandResponse clusterItems)
+    public void completed(CommandResponse clusterItems)
     {
         // ...
     }
