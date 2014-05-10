@@ -10,12 +10,12 @@ public interface ReportsApi
      *
      * @return builder
      */
-    public CanonicalHiveCommandsReportBuilder canonicalHiveCommands();
+    public CanonicalHiveCommandsReportBuilder canonicalHiveCommandsReport();
 
     /**
      * Corresponds to http://www.qubole.com/docs/commands-report/
      *
      * @return builder
      */
-    public CommandsReportBuilder commandsReport();
+    public AllCommandsReportBuilder allCommandsReport();
 }

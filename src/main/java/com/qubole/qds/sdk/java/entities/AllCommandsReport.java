@@ -2,18 +2,18 @@ package com.qubole.qds.sdk.java.entities;
 
 import java.util.List;
 
-public class CommandsReport
+public class AllCommandsReport
 {
     private String sort_column;
     private String start_date;
     private String end_date;
     private List<Query> queries;
 
-    public CommandsReport()
+    public AllCommandsReport()
     {
     }
 
-    public CommandsReport(String sort_column, String start_date, String end_date, List<Query> queries)
+    public AllCommandsReport(String sort_column, String start_date, String end_date, List<Query> queries)
     {
         this.sort_column = sort_column;
         this.start_date = start_date;
