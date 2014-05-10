@@ -66,6 +66,12 @@ client.command()
 ...
 ```
 
+As part of your application's shutdown, close the client:
+
+```
+client.close();
+```
+
 ## APIs
 
 Using the QdsClient, you can access any of the Qubole APIs:
