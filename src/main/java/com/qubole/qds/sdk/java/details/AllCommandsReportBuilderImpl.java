@@ -1,67 +1,67 @@
 package com.qubole.qds.sdk.java.details;
 
 import com.google.common.collect.Maps;
-import com.qubole.qds.sdk.java.api.CommandsReportBuilder;
+import com.qubole.qds.sdk.java.api.AllCommandsReportBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
-import com.qubole.qds.sdk.java.entities.CommandsReport;
+import com.qubole.qds.sdk.java.entities.AllCommandsReport;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-class CommandsReportBuilderImpl extends InvocationCallbackBase<CommandsReport> implements CommandsReportBuilder
+class AllCommandsReportBuilderImpl extends InvocationCallbackBase<AllCommandsReport> implements AllCommandsReportBuilder
 {
     private final QdsClient client;
     private final Map<String, String> parameters = Maps.newHashMap();
 
     @Override
-    public CommandsReportBuilder start_date(String start_date)
+    public AllCommandsReportBuilder start_date(String start_date)
     {
         parameters.put("start_date", start_date);
         return this;
     }
 
     @Override
-    public CommandsReportBuilder end_date(String end_date)
+    public AllCommandsReportBuilder end_date(String end_date)
     {
         parameters.put("end_date", end_date);
         return this;
     }
 
     @Override
-    public CommandsReportBuilder offset(int offset)
+    public AllCommandsReportBuilder offset(int offset)
     {
         parameters.put("offset", Integer.toString(offset));
         return this;
     }
 
     @Override
-    public CommandsReportBuilder limit(int limit)
+    public AllCommandsReportBuilder limit(int limit)
     {
         parameters.put("limit", Integer.toString(limit));
         return this;
     }
 
     @Override
-    public CommandsReportBuilder sort_column(String sort_column)
+    public AllCommandsReportBuilder sort_column(String sort_column)
     {
         parameters.put("sort_column", sort_column);
         return this;
     }
 
     @Override
-    public CommandsReportBuilder by_user(String by_user)
+    public AllCommandsReportBuilder by_user(String by_user)
     {
         parameters.put("by_user", by_user);
         return this;
     }
 
     @Override
-    public Future<CommandsReport> invoke()
+    public Future<AllCommandsReport> invoke()
     {
         ClientEntity entity = new ClientEntity(null, ClientEntity.Method.GET, parameters);
-        return invokeRequest(client, null, entity, CommandsReport.class, "reports", "all_commands");
+        return invokeRequest(client, null, entity, AllCommandsReport.class, "reports", "all_commands");
     }
 
-    CommandsReportBuilderImpl(QdsClient client)
+    AllCommandsReportBuilderImpl(QdsClient client)
     {
         this.client = client;
     }
