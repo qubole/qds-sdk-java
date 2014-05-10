@@ -70,7 +70,7 @@ Using the QdsClient, you can access any of the Qubole APIs:
 
 | API | Example |
 | --- | ------- |
-| [Reports](http://www.qubole.com/docs/documentation/reports-api/) | client.report().allCommandsReport() ... |
+| [Reports](http://www.qubole.com/docs/documentation/reports-api/) | client.report().allCommandsReport().start_date(...).end_date(...).limit(...).invoke(); |
 | [Scheduler](http://www.qubole.com/docs/documentation/scheduler-api/) | client.scheduler().list().invoke(); |
 | [DbTaps](http://www.qubole.com/docs/documentation/dbtaps-api-qds-api-reference/) | client.dbTaps().list().invoke(); |
 | [Hive Metadata](http://www.qubole.com/docs/documentation/hive-metadata-api/) | client.hiveMetadata().getTableProperties("table").invoke(); |
