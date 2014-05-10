@@ -64,6 +64,16 @@ client.command()
 ...
 ```
 
+## APIs
+
+Using the QdsClient, you can access any of the Qubole APIs:
+
+| API | Example | Documentation |
+| --- | ------- | ------------- |
+| Reports API | client.report().allCommandsReport() ... | http://www.qubole.com/docs/documentation/reports-api/ |
+| Scheduler API | client.scheduler().list().invoke(); | http://www.qubole.com/docs/documentation/scheduler-api/ |
+| DbTaps API | client.dbTaps().list().invoke(); | http://www.qubole.com/docs/documentation/dbtaps-api-qds-api-reference/ |
+
 ## Javadoc
 
 http://qubole.github.io/qds-sdk-java/apidocs/
