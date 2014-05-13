@@ -10,12 +10,13 @@ import com.qubole.qds.sdk.java.details.ClientEntity;
 import com.qubole.qds.sdk.java.details.ForPage;
 import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.core.GenericType;
+import java.io.Closeable;
 import java.util.concurrent.Future;
 
 /**
  * client interface
  */
-public interface QdsClient extends AutoCloseable
+public interface QdsClient extends Closeable
 {
     /**
      * Return cluster api factory
