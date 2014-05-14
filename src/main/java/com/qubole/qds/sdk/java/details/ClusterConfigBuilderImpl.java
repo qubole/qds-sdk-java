@@ -206,6 +206,13 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
                         spot_instance_settings.put("timeout_for_request", timeout_for_request);
                         return ClusterConfigBuilderImpl.this;
                     }
+
+                    @Override
+                    public ClusterConfigBuilder maximum_spot_instance_percentage(int maximum_spot_instance_percentage)
+                    {
+                        spot_instance_settings.put("maximum_spot_instance_percentage", maximum_spot_instance_percentage);
+                        return ClusterConfigBuilderImpl.this;
+                    }
                 };
             }
         };
