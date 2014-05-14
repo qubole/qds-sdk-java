@@ -59,9 +59,9 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
         return new ClusterPrestoConfigBuilder()
         {
             @Override
-            public ClusterConfigBuilder is_presto_enabled(boolean is_presto_enabled)
+            public ClusterConfigBuilder enable_presto(boolean enable_presto)
             {
-                presto_settings.put("is_presto_enabled", is_presto_enabled);
+                presto_settings.put("enable_presto", enable_presto);
                 return ClusterConfigBuilderImpl.this;
             }
 

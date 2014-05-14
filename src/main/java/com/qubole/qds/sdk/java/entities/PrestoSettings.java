@@ -2,27 +2,27 @@ package com.qubole.qds.sdk.java.entities;
 
 public class PrestoSettings
 {
-    private boolean is_presto_enabled;
+    private boolean enable_presto;
     private String custom_config;
 
     public PrestoSettings()
     {
     }
 
-    public PrestoSettings(boolean is_presto_enabled, String custom_config)
+    public PrestoSettings(boolean enable_presto, String custom_config)
     {
-        this.is_presto_enabled = is_presto_enabled;
+        this.enable_presto = enable_presto;
         this.custom_config = custom_config;
     }
 
-    public boolean isIs_presto_enabled()
+    public boolean isEnable_presto()
     {
-        return is_presto_enabled;
+        return enable_presto;
     }
 
-    public void setIs_presto_enabled(boolean is_presto_enabled)
+    public void setEnable_presto(boolean enable_presto)
     {
-        this.is_presto_enabled = is_presto_enabled;
+        this.enable_presto = enable_presto;
     }
 
     public String getCustom_config()
