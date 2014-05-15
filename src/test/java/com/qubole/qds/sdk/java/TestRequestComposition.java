@@ -1,9 +1,9 @@
 package com.qubole.qds.sdk.java;
 
+import com.google.common.collect.Queues;
 import com.qubole.qds.sdk.java.details.ForPage;
 import com.qubole.qds.sdk.java.details.MockClient;
 import com.qubole.qds.sdk.java.entities.Commands;
-import jersey.repackaged.com.google.common.collect.Queues;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.util.concurrent.BlockingQueue;
