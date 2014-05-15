@@ -28,7 +28,7 @@ class ResultsCommandBuilderImpl extends InvocationCallbackBase<ResultValue> impl
         {
             ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
             node.put("inline", inline);
-            entity = CommandBuilderImplBase.makeJsonEntity(node, ClientEntity.Method.GET);
+            entity = CommandBuilderImplBase.makeJsonEntity(node, ClientEntity.Method.POST);
         }
         return invokeRequest(client, null, entity, ResultValue.class, "commands", queryId, "results");
     }
