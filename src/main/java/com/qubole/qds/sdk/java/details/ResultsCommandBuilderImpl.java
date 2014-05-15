@@ -1,10 +1,11 @@
 package com.qubole.qds.sdk.java.details;
 
+import com.google.common.collect.Maps;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.api.ResultsCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.ResultValue;
-import org.codehaus.jackson.node.ObjectNode;
+import java.util.Map;
 import java.util.concurrent.Future;
 
 class ResultsCommandBuilderImpl extends InvocationCallbackBase<ResultValue> implements ResultsCommandBuilder
@@ -26,9 +27,9 @@ class ResultsCommandBuilderImpl extends InvocationCallbackBase<ResultValue> impl
         ClientEntity entity = null;
         if ( inline != null )
         {
-            ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
-            node.put("inline", inline);
-            entity = CommandBuilderImplBase.makeJsonEntity(node, ClientEntity.Method.POST);
+            Map<String, String> queryParams = Maps.newHashMap();
+            queryParams.put("inline", inline.toString());
+            entity = new ClientEntity(null, ClientEntity.Method.GET, queryParams);
         }
         return invokeRequest(client, null, entity, ResultValue.class, "commands", queryId, "results");
     }
