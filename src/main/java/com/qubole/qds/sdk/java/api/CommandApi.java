@@ -2,7 +2,6 @@ package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.Command;
 import com.qubole.qds.sdk.java.entities.Commands;
-import com.qubole.qds.sdk.java.entities.ResultValue;
 import javax.ws.rs.core.Response;
 
 /**
@@ -87,7 +86,7 @@ public interface CommandApi
      * @param queryId the query id of the command
      * @return new builder
      */
-    public InvokableBuilder<ResultValue> results(String queryId);
+    public ResultsCommandBuilder results(String queryId);
 
     /**
      * Corresponds to http://www.qubole.com/docs/view-command-logs/
