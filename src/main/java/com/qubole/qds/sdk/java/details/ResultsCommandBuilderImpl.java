@@ -17,7 +17,7 @@ class ResultsCommandBuilderImpl extends InvocationCallbackBase<ResultValue> impl
     @Override
     public InvokableBuilder<ResultValue> inline(Boolean value)
     {
-        inline = true;
+        inline = value;
         return this;
     }
 
