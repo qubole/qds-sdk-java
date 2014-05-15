@@ -18,7 +18,7 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Future<Response> invoke = client.cluster().list().invokeRaw();
+            Future<Response> invoke = client.cluster().list().raw().invoke();
             Response value = invoke.get();
             InputStream inputStream = value.readEntity(InputStream.class);
             String rawJson = new String(ByteStreams.toByteArray(inputStream));

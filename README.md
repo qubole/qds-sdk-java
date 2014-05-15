@@ -75,14 +75,14 @@ client.close();
 ## Streaming Results
 
 For large responses, you might want to stream instead of having Jersey de-serialize into an entity. For
-this, use invokeRaw(). E.g.
+this, use raw().invoke(). E.g.
 
 ```
 Future<Response> responseFuture = client.command()
     .hive()
     .query("show tables;")
-    .withCallback(callback)
-    .invokeRaw();
+    .raw()
+    .invoke();
 
 Response response = responseFuture.get();
 InputStream stream = response.readEntity(InputStream.class);

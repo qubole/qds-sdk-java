@@ -1,7 +1,6 @@
 package com.qubole.qds.sdk.java.api;
 
 import javax.ws.rs.client.InvocationCallback;
-import javax.ws.rs.core.Response;
 import java.util.concurrent.Future;
 
 /**
@@ -17,11 +16,11 @@ public interface InvokableBuilder<T>
     public Future<T> invoke();
 
     /**
-     * Invoke the API and return the result as a raw client response
+     * Cause invoke() to return the result as a raw client response
      *
      * @return result
      */
-    public Future<Response> invokeRaw();
+    public RawInvokableBuilder raw();
 
     /**
      * Make the API call using the specified notification callback
