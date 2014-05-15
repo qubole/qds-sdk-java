@@ -1,7 +1,9 @@
 package com.qubole.qds.sdk.java.entities;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SchedulesResponse
 {
     private PagingInfo paging_info;

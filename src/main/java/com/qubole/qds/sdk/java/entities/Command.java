@@ -1,7 +1,9 @@
 package com.qubole.qds.sdk.java.entities;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import java.util.Map;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Command
 {
     private String status;

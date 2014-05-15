@@ -1,5 +1,8 @@
 package com.qubole.qds.sdk.java.entities;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class NameAndType
 {
     private String name;

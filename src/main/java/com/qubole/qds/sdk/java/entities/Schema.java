@@ -1,9 +1,11 @@
 package com.qubole.qds.sdk.java.entities;
 
 import org.codehaus.jackson.annotate.JsonAnySetter;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import java.util.List;
 import java.util.Map;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Schema
 {
     private String table_name;
