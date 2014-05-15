@@ -3,7 +3,6 @@ package com.qubole.qds.sdk.java.details;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.api.PageableInvokableBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
-import java.util.concurrent.Future;
 
 class GenericPageableInvokableBuilderImpl<T> extends InvocationCallbackBase<T> implements PageableInvokableBuilder<T>
 {
@@ -21,9 +20,9 @@ class GenericPageableInvokableBuilderImpl<T> extends InvocationCallbackBase<T> i
     }
 
     @Override
-    public Future<T> invoke()
+    protected InvokeArguments<T> getInvokeArguments()
     {
-        return invokeRequest(client, forPage, entity, responseType, additionalPaths);
+        return new InvokeArguments<T>(client, forPage, entity, responseType, additionalPaths);
     }
 
     GenericPageableInvokableBuilderImpl(QdsClient client, ClientEntity entity, Class<T> responseType, String... additionalPaths)
