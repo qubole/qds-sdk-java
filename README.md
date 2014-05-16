@@ -89,6 +89,15 @@ InputStream stream = response.readEntity(InputStream.class);
 ...
 ```
 
+## Paging
+
+Some of the APIs support paging. These APIs have the "forPage" method. E.g.
+
+```
+// return page 2 using 3 per page
+client.command().history().forPage(2, 3).invoke();
+```
+
 ## APIs
 
 Using the QdsClient, you can access any of the Qubole APIs:
@@ -101,15 +110,6 @@ Using the QdsClient, you can access any of the Qubole APIs:
 | [Hive Metadata](http://www.qubole.com/docs/documentation/hive-metadata-api/) | client.hiveMetadata().getTableProperties("table").invoke(); |
 | [Cluster](http://www.qubole.com/docs/documentation/cluster-api/) | client.cluster().list().invoke(); |
 | [Command](http://www.qubole.com/docs/documentation/command-api/) | client.command().history().invoke(); |
-
-_Paging_
-
-Some of the APIs support paging. These APIs have the "forPage" method. E.g.
-
-```
-// return page 2 using 3 per page
-client.command().history().forPage(2, 3).invoke();
-```
 
 ## Javadoc
 
