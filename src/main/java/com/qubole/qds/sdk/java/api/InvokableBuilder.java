@@ -16,6 +16,13 @@ public interface InvokableBuilder<T>
     public Future<T> invoke();
 
     /**
+     * Cause invoke() to return the result as a raw client response
+     *
+     * @return result
+     */
+    public RawInvokableBuilder raw();
+
+    /**
      * Make the API call using the specified notification callback
      *
      * @param callback the callback to use

@@ -4,9 +4,7 @@ import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 import org.codehaus.jackson.node.ObjectNode;
-import javax.ws.rs.client.InvocationCallback;
 import java.io.IOException;
-import java.util.concurrent.Future;
 
 abstract class CommandBuilderImplBase extends InvocationCallbackBase<CommandResponse> implements InvokableBuilder<CommandResponse>
 {
@@ -14,10 +12,10 @@ abstract class CommandBuilderImplBase extends InvocationCallbackBase<CommandResp
     private final ClientEntity.Method method;
 
     @Override
-    public final Future<CommandResponse> invoke()
+    protected InvokeArguments<CommandResponse> getInvokeArguments()
     {
         ClientEntity entity = makeJsonEntity(getEntity(), method);
-        return invokeRequest(client, null, entity, CommandResponse.class, "commands");
+        return new InvokeArguments<CommandResponse>(client, null, entity, CommandResponse.class, "commands");
     }
 
     static ClientEntity makeJsonEntity(ObjectNode node, ClientEntity.Method method)

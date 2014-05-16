@@ -5,7 +5,6 @@ import com.qubole.qds.sdk.java.api.AllCommandsReportBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.AllCommandsReport;
 import java.util.Map;
-import java.util.concurrent.Future;
 
 class AllCommandsReportBuilderImpl extends InvocationCallbackBase<AllCommandsReport> implements AllCommandsReportBuilder
 {
@@ -55,10 +54,10 @@ class AllCommandsReportBuilderImpl extends InvocationCallbackBase<AllCommandsRep
     }
 
     @Override
-    public Future<AllCommandsReport> invoke()
+    protected InvokeArguments<AllCommandsReport> getInvokeArguments()
     {
         ClientEntity entity = new ClientEntity(null, ClientEntity.Method.GET, parameters);
-        return invokeRequest(client, null, entity, AllCommandsReport.class, "reports", "all_commands");
+        return new InvokeArguments<AllCommandsReport>(client, null, entity, AllCommandsReport.class, "reports", "all_commands");
     }
 
     AllCommandsReportBuilderImpl(QdsClient client)

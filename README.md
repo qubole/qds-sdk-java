@@ -72,6 +72,23 @@ As part of your application's shutdown, close the client:
 client.close();
 ```
 
+## Streaming Results
+
+For large responses, you might want to stream instead of having Jersey de-serialize into an entity. For
+this, use raw().invoke(). E.g.
+
+```
+Future<Response> responseFuture = client.command()
+    .hive()
+    .query("show tables;")
+    .raw()
+    .invoke();
+
+Response response = responseFuture.get();
+InputStream stream = response.readEntity(InputStream.class);
+...
+```
+
 ## APIs
 
 Using the QdsClient, you can access any of the Qubole APIs:

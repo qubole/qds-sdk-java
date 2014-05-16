@@ -7,7 +7,6 @@ import com.qubole.qds.sdk.java.entities.Schema;
 import javax.ws.rs.core.GenericType;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Future;
 
 class SchemaCommandBuilderImpl extends InvocationCallbackBase<List<Schema>> implements SchemaCommandBuilder
 {
@@ -30,7 +29,7 @@ class SchemaCommandBuilderImpl extends InvocationCallbackBase<List<Schema>> impl
     }
 
     @Override
-    public Future<List<Schema>> invoke()
+    protected InvokeArguments<List<Schema>> getInvokeArguments()
     {
         Map<String, String> params = Maps.newHashMap();
         if ( filter != null )
@@ -43,7 +42,7 @@ class SchemaCommandBuilderImpl extends InvocationCallbackBase<List<Schema>> impl
         }
 
         GenericType<List<Schema>> responseType = new GenericType<List<Schema>>(){};
-        return invokeRequest(client, null, new ClientEntity(null, ClientEntity.Method.GET, params), responseType, "hive", "default");
+        return new InvokeArguments<List<Schema>>(client, null, new ClientEntity(null, ClientEntity.Method.GET, params), responseType, "hive", "default");
     }
 
     SchemaCommandBuilderImpl(QdsClient client)
