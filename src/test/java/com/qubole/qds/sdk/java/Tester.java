@@ -1,12 +1,10 @@
 package com.qubole.qds.sdk.java;
 
-import com.google.common.io.ByteStreams;
 import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
-import javax.ws.rs.core.Response;
-import java.io.InputStream;
+import com.qubole.qds.sdk.java.entities.ResultValue;
 import java.util.concurrent.Future;
 
 public class Tester
@@ -18,11 +16,9 @@ public class Tester
         QdsClient client = QdsClientFactory.newClient(configuration);
         try
         {
-            Future<Response> invoke = client.cluster().list().raw().invoke();
-            Response value = invoke.get();
-            InputStream inputStream = value.readEntity(InputStream.class);
-            String rawJson = new String(ByteStreams.toByteArray(inputStream));
-            System.out.println(rawJson);
+            Future<ResultValue> invoke = client.command().results("222070").inline(false).invoke();
+            ResultValue value = invoke.get();
+            System.out.println(value);
         }
         finally
         {

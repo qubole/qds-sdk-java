@@ -4,7 +4,6 @@ import com.qubole.qds.sdk.java.api.*;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.Command;
 import com.qubole.qds.sdk.java.entities.Commands;
-import com.qubole.qds.sdk.java.entities.ResultValue;
 import com.qubole.qds.sdk.java.entities.Status;
 import javax.ws.rs.core.Response;
 
@@ -36,9 +35,9 @@ class CommandApiImpl implements CommandApi
     }
 
     @Override
-    public InvokableBuilder<ResultValue> results(String queryId)
+    public ResultsCommandBuilder results(String queryId)
     {
-        return new GenericInvokableBuilderImpl<ResultValue>(client, null, ResultValue.class, "commands", queryId, "results");
+        return new ResultsCommandBuilderImpl(client, queryId);
     }
 
     @Override
