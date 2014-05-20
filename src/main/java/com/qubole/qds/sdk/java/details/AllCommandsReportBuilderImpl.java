@@ -48,7 +48,7 @@ class AllCommandsReportBuilderImpl extends InvocationCallbackBase<AllCommandsRep
     }
 
     @Override
-    public AllCommandsReportBuilder by_user(Boolean by_user)
+    public AllCommandsReportBuilder by_user(boolean by_user)
     {
         parameters.put("by_user", String.valueOf(by_user));
         return this;

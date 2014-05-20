@@ -14,5 +14,5 @@ public interface AllCommandsReportBuilder extends InvokableBuilder<AllCommandsRe
 
     public AllCommandsReportBuilder sort_column(String sort_column);
 
-    public AllCommandsReportBuilder by_user(Boolean by_user);
+    public AllCommandsReportBuilder by_user(boolean by_user);
 }
