@@ -3,7 +3,6 @@ package com.qubole.qds.sdk.java.details;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import javax.ws.rs.core.GenericType;
-import java.util.concurrent.Future;
 
 class GenericInvokableBuilderImpl<T> extends InvocationCallbackBase<T> implements InvokableBuilder<T>
 {
@@ -14,13 +13,13 @@ class GenericInvokableBuilderImpl<T> extends InvocationCallbackBase<T> implement
     private final String[] additionalPaths;
 
     @Override
-    public Future<T> invoke()
+    protected InvokeArguments<T> getInvokeArguments()
     {
         if ( genericResponseType != null )
         {
-            return invokeRequest(client, null, entity, genericResponseType, additionalPaths);
+            return new InvokeArguments<T>(client, null, entity, genericResponseType, additionalPaths);
         }
-        return invokeRequest(client, null, entity, responseType, additionalPaths);
+        return new InvokeArguments<T>(client, null, entity, responseType, additionalPaths);
     }
 
     GenericInvokableBuilderImpl(QdsClient client, ClientEntity entity, Class<T> responseType, String... additionalPaths)

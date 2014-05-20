@@ -8,7 +8,6 @@ import com.qubole.qds.sdk.java.entities.ScheduleCommand;
 import org.codehaus.jackson.node.ObjectNode;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Future;
 
 class CreateScheduleCommandBuilderImpl extends InvocationCallbackBase<Schedule> implements CreateScheduleCommandBuilder
 {
@@ -93,10 +92,10 @@ class CreateScheduleCommandBuilderImpl extends InvocationCallbackBase<Schedule> 
     }
 
     @Override
-    public Future<Schedule> invoke()
+    protected InvokeArguments<Schedule> getInvokeArguments()
     {
         ClientEntity entity = CommandBuilderImplBase.makeJsonEntity(node, ClientEntity.Method.POST);
-        return invokeRequest(client, null, entity, Schedule.class, "scheduler");
+        return new InvokeArguments<Schedule>(client, null, entity, Schedule.class, "scheduler");
     }
 
     CreateScheduleCommandBuilderImpl(QdsClient client)

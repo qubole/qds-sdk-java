@@ -5,7 +5,6 @@ import com.qubole.qds.sdk.java.api.CanonicalHiveCommandsReportBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.CanonicalHiveCommandsReport;
 import java.util.Map;
-import java.util.concurrent.Future;
 
 class CanonicalHiveCommandsReportBuilderImpl extends InvocationCallbackBase<CanonicalHiveCommandsReport> implements CanonicalHiveCommandsReportBuilder
 {
@@ -47,10 +46,10 @@ class CanonicalHiveCommandsReportBuilderImpl extends InvocationCallbackBase<Cano
     }
 
     @Override
-    public Future<CanonicalHiveCommandsReport> invoke()
+    protected InvokeArguments<CanonicalHiveCommandsReport> getInvokeArguments()
     {
         ClientEntity entity = new ClientEntity(null, ClientEntity.Method.GET, parameters);
-        return invokeRequest(client, null, entity, CanonicalHiveCommandsReport.class, "reports", "canonical_hive_commands");
+        return new InvokeArguments<CanonicalHiveCommandsReport>(client, null, entity, CanonicalHiveCommandsReport.class, "reports", "canonical_hive_commands");
     }
 
     CanonicalHiveCommandsReportBuilderImpl(QdsClient client)

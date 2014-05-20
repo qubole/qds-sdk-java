@@ -5,7 +5,6 @@ import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.Status;
 import org.codehaus.jackson.node.ObjectNode;
 import java.util.Map;
-import java.util.concurrent.Future;
 
 class StoreTablePropertiesBuilderImpl extends InvocationCallbackBase<Status> implements StoreTablePropertiesBuilder
 {
@@ -35,10 +34,10 @@ class StoreTablePropertiesBuilderImpl extends InvocationCallbackBase<Status> imp
     }
 
     @Override
-    public Future<Status> invoke()
+    protected InvokeArguments<Status> getInvokeArguments()
     {
         ClientEntity entity = CommandBuilderImplBase.makeJsonEntity(node, ClientEntity.Method.POST);
-        return invokeRequest(client, null, entity, Status.class, "hive", "default", tableName, "properties");
+        return new InvokeArguments<Status>(client, null, entity, Status.class, "hive", "default", tableName, "properties");
     }
 
     StoreTablePropertiesBuilderImpl(QdsClient client, String tableName)
