@@ -6,7 +6,6 @@ import com.qubole.qds.sdk.java.api.ResultsCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.ResultValue;
 import java.util.Map;
-import java.util.concurrent.Future;
 
 class ResultsCommandBuilderImpl extends InvocationCallbackBase<ResultValue> implements ResultsCommandBuilder
 {
@@ -22,7 +21,7 @@ class ResultsCommandBuilderImpl extends InvocationCallbackBase<ResultValue> impl
     }
 
     @Override
-    public Future<ResultValue> invoke()
+    protected InvokeArguments<ResultValue> getInvokeArguments()
     {
         ClientEntity entity = null;
         if ( inline != null )
@@ -31,7 +30,7 @@ class ResultsCommandBuilderImpl extends InvocationCallbackBase<ResultValue> impl
             queryParams.put("inline", inline.toString());
             entity = new ClientEntity(null, ClientEntity.Method.GET, queryParams);
         }
-        return invokeRequest(client, null, entity, ResultValue.class, "commands", queryId, "results");
+        return new InvokeArguments<ResultValue>(client, null, entity, ResultValue.class, "commands", queryId, "results");
     }
 
     ResultsCommandBuilderImpl(QdsClient client, String queryId)
