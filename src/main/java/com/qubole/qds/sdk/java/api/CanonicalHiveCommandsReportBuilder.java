@@ -13,4 +13,6 @@ public interface CanonicalHiveCommandsReportBuilder extends InvokableBuilder<Can
     public CanonicalHiveCommandsReportBuilder limit(int limit);
 
     public CanonicalHiveCommandsReportBuilder sort_column(String sort_column);
+
+    public CanonicalHiveCommandsReportBuilder show_ast(Boolean show_ast);
 }
