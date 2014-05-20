@@ -74,19 +74,16 @@ client.close();
 
 ## Streaming Results
 
-For large responses, you might want to stream instead of having Jersey de-serialize into an entity. For
-this, use raw().invoke(). E.g.
+Some Qubole APIs write large result sets to S3. If you would like to stream those results, use ResultStreamer.
+E.g.
 
 ```
-Future<Response> responseFuture = client.command()
-    .hive()
-    .query("show tables;")
-    .raw()
-    .invoke();
+ResultStreamer streamer = new ResultStreamer(client);  // save this until the end of your application
 
-Response response = responseFuture.get();
-InputStream stream = response.readEntity(InputStream.class);
 ...
+
+Future<ResultValue> results = client.command().results(id)...invoke();
+Reader in = streamer.getResults(results.get());
 ```
 
 ## Paging
