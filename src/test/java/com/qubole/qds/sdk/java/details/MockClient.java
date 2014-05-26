@@ -1,5 +1,6 @@
 package com.qubole.qds.sdk.java.details;
 
+import com.google.common.collect.Queues;
 import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapApi;
@@ -84,6 +85,11 @@ public class MockClient implements QdsClient
         {
             return additionalPaths;
         }
+    }
+
+    public MockClient()
+    {
+        this(Queues.<InvokeDetails>newLinkedBlockingQueue());
     }
 
     public MockClient(BlockingQueue<InvokeDetails> results)
