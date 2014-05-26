@@ -86,6 +86,12 @@ Future<ResultValue> results = client.command().results(id)...invoke();
 Reader in = streamer.getResults(results.get());
 ```
 
+As part of your application's shutdown, close the client:
+
+```
+streamer.close();
+```
+
 ## Paging
 
 Some of the APIs support paging. These APIs have the "forPage" method. E.g.
