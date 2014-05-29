@@ -46,6 +46,13 @@ class CanonicalHiveCommandsReportBuilderImpl extends InvocationCallbackBase<Cano
     }
 
     @Override
+    public CanonicalHiveCommandsReportBuilder show_ast(boolean show_ast)
+    {
+        parameters.put("show_ast", String.valueOf(show_ast));
+        return this;
+    }
+
+    @Override
     protected InvokeArguments<CanonicalHiveCommandsReport> getInvokeArguments()
     {
         ClientEntity entity = new ClientEntity(null, ClientEntity.Method.GET, parameters);

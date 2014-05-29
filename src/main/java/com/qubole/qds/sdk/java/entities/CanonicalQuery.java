@@ -6,6 +6,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 public class CanonicalQuery
 {
     private String canonical_query;
+    private String canonical_query_id;
     private long fs_bytes_written;
     private long fs_bytes_read;
     private int frequency;
@@ -34,6 +35,14 @@ public class CanonicalQuery
     public void setCanonical_query(String canonical_query)
     {
         this.canonical_query = canonical_query;
+    }
+
+    public String getCanonical_query_id() {
+        return canonical_query_id;
+    }
+
+    public void setCanonical_query_id(String canonical_query_id) {
+        this.canonical_query_id = canonical_query_id;
     }
 
     public long getFs_bytes_written()
