@@ -46,7 +46,7 @@ class CanonicalHiveCommandsReportBuilderImpl extends InvocationCallbackBase<Cano
     }
 
     @Override
-    public CanonicalHiveCommandsReportBuilder show_ast(Boolean show_ast)
+    public CanonicalHiveCommandsReportBuilder show_ast(boolean show_ast)
     {
         parameters.put("show_ast", String.valueOf(show_ast));
         return this;
