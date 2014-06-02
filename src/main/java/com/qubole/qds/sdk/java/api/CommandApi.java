@@ -45,6 +45,12 @@ public interface CommandApi
     public PrestoCommandBuilder presto();
 
     /**
+     *
+     * @return new builder
+     */
+    public DbTapQueryCommandBuilder dbTapQuery();
+
+    /**
      * Corresponds to http://www.qubole.com/docs/submit-a-db-import-command/ - simple mode
      *
      * @return new builder

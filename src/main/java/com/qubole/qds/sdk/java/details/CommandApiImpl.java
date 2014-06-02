@@ -66,6 +66,9 @@ class CommandApiImpl implements CommandApi
     }
 
     @Override
+    public DbTapQueryCommandBuilder dbTapQuery() { return new DbTapQueryCommandBuilderImpl(client); }
+
+    @Override
     public DbSimpleImportCommandBuilder dbImportSimple()
     {
         return new DbSimpleImportCommandBuilderImpl(client);
