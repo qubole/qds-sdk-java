@@ -46,10 +46,11 @@ public interface CommandApi
     public PrestoCommandBuilder presto();
 
     /**
-     *
+     * @param query the query to be run
+     * @param db_tap_id the db_tap id where the query will be run
      * @return new builder
      */
-    public InvokableBuilder<CommandResponse> dbTapQuery(String query, int db_tap_id);
+    public InvokableBuilder<CommandResponse> dbTapQuery(String query, int dbTapId);
 
     /**
      * Corresponds to http://www.qubole.com/docs/submit-a-db-import-command/ - simple mode
