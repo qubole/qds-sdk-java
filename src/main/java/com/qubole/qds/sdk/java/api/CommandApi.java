@@ -1,6 +1,7 @@
 package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.Command;
+import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.entities.Commands;
 import javax.ws.rs.core.Response;
 
@@ -48,7 +49,7 @@ public interface CommandApi
      *
      * @return new builder
      */
-    public DbTapQueryCommandBuilder dbTapQuery();
+    public InvokableBuilder<CommandResponse> dbTapQuery(String query, int db_tap_id);
 
     /**
      * Corresponds to http://www.qubole.com/docs/submit-a-db-import-command/ - simple mode

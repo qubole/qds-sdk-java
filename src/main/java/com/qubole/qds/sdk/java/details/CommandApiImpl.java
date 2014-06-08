@@ -3,8 +3,11 @@ package com.qubole.qds.sdk.java.details;
 import com.qubole.qds.sdk.java.api.*;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.Command;
+import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.entities.Commands;
 import com.qubole.qds.sdk.java.entities.Status;
+import org.codehaus.jackson.node.ObjectNode;
+
 import javax.ws.rs.core.Response;
 
 class CommandApiImpl implements CommandApi
@@ -66,9 +69,6 @@ class CommandApiImpl implements CommandApi
     }
 
     @Override
-    public DbTapQueryCommandBuilder dbTapQuery() { return new DbTapQueryCommandBuilderImpl(client); }
-
-    @Override
     public DbSimpleImportCommandBuilder dbImportSimple()
     {
         return new DbSimpleImportCommandBuilderImpl(client);
@@ -97,4 +97,14 @@ class CommandApiImpl implements CommandApi
     {
         return new PrestoCommandBuilderImpl(client);
     }
+
+    @Override
+    public InvokableBuilder<CommandResponse> dbTapQuery(String query, int db_tap_id) {
+        ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
+        node.put("command_type", "DbTapQueryCommand");
+        node.put("query", query);
+        node.put("db_tap_id", db_tap_id);
+        return new GenericInvokableBuilderImpl<CommandResponse>(client, new ClientEntity(node), CommandResponse.class, "commands");
+    }
+
 }
