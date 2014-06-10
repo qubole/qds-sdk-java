@@ -120,6 +120,7 @@ public class TestResultStreamer
                     S3ObjectSummary summary = new S3ObjectSummary();
                     summary.setBucketName(input.bucket);
                     summary.setKey(input.key);
+                    summary.setSize(1); // needs to be non-zero
                     return summary;
                 }
             }
