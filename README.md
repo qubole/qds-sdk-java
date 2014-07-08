@@ -9,6 +9,7 @@ Currently, you will need to download and build from source:
  * Or download one of the releases from https://github.com/qubole/qds-sdk-java/releases
 * cd to the directory
 * mvn install
+* NOTE: see the bullet below regarding Jersery 2.0
 
 Then, in your Java application, using Maven, add a dependency:
 
@@ -113,6 +114,16 @@ Using the QdsClient, you can access any of the Qubole APIs:
 | [Hive Metadata](http://www.qubole.com/docs/documentation/hive-metadata-api/) | client.hiveMetadata().getTableProperties("table").invoke(); |
 | [Cluster](http://www.qubole.com/docs/documentation/cluster-api/) | client.cluster().list().invoke(); |
 | [Command](http://www.qubole.com/docs/documentation/command-api/) | client.command().history().invoke(); |
+
+## Jersey 2.0
+
+The SDK uses Jersey 2.0. Some widely used open source libraries such as Dropwizard are incompatible with Jersey 2.0.
+To workaround this incompatiblity, you can build the SDK using the Maven shade plugin which will hide the SDK's usage
+of Jersey 2.0. To build a shaded version of the SDK, execute:
+
+```
+mvn -P shaded install
+```
 
 ## Javadoc
 
