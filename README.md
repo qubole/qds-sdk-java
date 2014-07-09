@@ -73,6 +73,38 @@ As part of your application's shutdown, close the client:
 client.close();
 ```
 
+## Waiting for Results
+
+Important: when you submit a command/query, it can take time for it to execute. You cannot get the result until it is ready.
+A utility is provided that polls the command and waits for the results: ResultLatch. You can use it to block in the foreground
+or using a callback.
+
+Blocking:
+```
+ResultLatch latch = new ResultLatch(client, queryId);
+ResultValue = latch.awaitResult();
+```
+
+With callback:
+```
+ResultLatch.Callback callback = new ResultLatch.Callback()
+{
+    @Override
+    public void result(String queryId, ResultValue resultValue)
+    {
+        // use results
+    }
+
+    @Override
+    public void error(String queryId, Exception e)
+    {
+        // handle error
+    }
+};
+ResultLatch latch = new ResultLatch(client, queryId);
+latch.callback(callback);
+```
+
 ## Streaming Results
 
 Some Qubole APIs write large result sets to S3. If you would like to stream those results, use ResultStreamer.
