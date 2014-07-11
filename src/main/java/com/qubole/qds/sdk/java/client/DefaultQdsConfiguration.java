@@ -1,11 +1,18 @@
 package com.qubole.qds.sdk.java.client;
 
 import com.google.common.base.Preconditions;
+import com.qubole.qds.sdk.java.client.retry.Retry;
+import com.qubole.qds.sdk.java.client.retry.RetryConnector;
+import com.qubole.qds.sdk.java.details.StandardRetry;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
+import org.glassfish.jersey.client.HttpUrlConnectorProvider;
+import org.glassfish.jersey.client.spi.Connector;
+import org.glassfish.jersey.client.spi.ConnectorProvider;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.Configuration;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -37,7 +44,7 @@ public class DefaultQdsConfiguration implements QdsConfiguration
      */
     public DefaultQdsConfiguration(String apiEndpoint, String apiToken)
     {
-        this(apiEndpoint, apiToken, null);
+        this(apiEndpoint, apiToken, null, new StandardRetry());
     }
 
     /**
@@ -46,6 +53,17 @@ public class DefaultQdsConfiguration implements QdsConfiguration
      * @param jerseyConfiguration jersey client configuration or null for default
      */
     public DefaultQdsConfiguration(String apiEndpoint, String apiToken, ClientConfig jerseyConfiguration)
+    {
+        this(apiEndpoint, apiToken, jerseyConfiguration, new StandardRetry());
+    }
+
+    /**
+     * @param apiEndpoint endpoint
+     * @param apiToken your API token
+     * @param jerseyConfiguration jersey client configuration or null for default
+     * @param retry the retry to use
+     */
+    public DefaultQdsConfiguration(String apiEndpoint, String apiToken, ClientConfig jerseyConfiguration, final Retry retry)
     {
         this.apiEndpoint = Preconditions.checkNotNull(apiEndpoint, "apiEndpoint cannot be null");
         this.apiToken = Preconditions.checkNotNull(apiToken, "apiToken cannot be null");
@@ -56,6 +74,17 @@ public class DefaultQdsConfiguration implements QdsConfiguration
             jerseyConfiguration.property(ClientProperties.CONNECT_TIMEOUT, DEFAULT_CONNECTION_TIMEOUT);
             jerseyConfiguration.property(ClientProperties.READ_TIMEOUT, DEFAULT_READ_TIMEOUT);
         }
+
+        ConnectorProvider connectorProvider = new HttpUrlConnectorProvider()
+        {
+            @Override
+            public Connector getConnector(Client client, Configuration config)
+            {
+                return new RetryConnector(super.getConnector(client, config), retry);
+            }
+        };
+        jerseyConfiguration.connectorProvider(connectorProvider);
+
         this.jerseyConfiguration = jerseyConfiguration;
     }
 

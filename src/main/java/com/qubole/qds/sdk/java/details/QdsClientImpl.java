@@ -10,6 +10,7 @@ import com.qubole.qds.sdk.java.api.ReportApi;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
+import com.qubole.qds.sdk.java.client.retry.RetryConnector;
 import org.codehaus.jackson.map.ObjectMapper;
 import javax.ws.rs.client.AsyncInvoker;
 import javax.ws.rs.client.Client;
@@ -200,6 +201,11 @@ public class QdsClientImpl implements QdsClient
         if ( configuration.getApiToken() != null )
         {
             builder = builder.header("X-AUTH-TOKEN", configuration.getApiToken());
+        }
+
+        if ( entity.canBeRetried() )
+        {
+            builder = builder.property(RetryConnector.PROPERTY_ENABLE, true);
         }
 
         return builder.async();
