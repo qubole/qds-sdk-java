@@ -1,5 +1,6 @@
 package com.qubole.qds.sdk.java.client.retry;
 
+import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.SettableFuture;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.glassfish.jersey.client.ClientRequest;
@@ -34,7 +35,8 @@ public class RetryConnector implements Connector
     @Override
     public Future<?> apply(ClientRequest request, final AsyncConnectorCallback callback)
     {
-        return isEnabledForRequest(request) ? internalApply(request, callback, SettableFuture.create(), 0) : connector.apply(request, callback);
+        Preconditions.checkNotNull(callback, "callback is assumed to be non null");
+        return isEnabledForRequest(request) ? internalApply(request, callback, 0) : connector.apply(request, callback);
     }
 
     @Override
@@ -73,14 +75,14 @@ public class RetryConnector implements Connector
         return clientResponse;
     }
 
-    private Future<?> internalApply(final ClientRequest request, final AsyncConnectorCallback callback, SettableFuture<?> settableFuture, final int tryCount)
+    private Future<?> internalApply(final ClientRequest request, final AsyncConnectorCallback callback, final int tryCount)
     {
         AsyncConnectorCallback localCallback = new AsyncConnectorCallback()
         {
             @Override
             public void response(ClientResponse response)
             {
-                if ( !isRetry(request, response, null, this, tryCount) && (callback != null) )
+                if ( !isRetry(request, response, null, this, tryCount) )
                 {
                     callback.response(response);
                 }
@@ -89,14 +91,14 @@ public class RetryConnector implements Connector
             @Override
             public void failure(Throwable failure)
             {
-                if ( !isRetry(request, null, failure, this, tryCount) && (callback != null) )
+                if ( !isRetry(request, null, failure, this, tryCount) )
                 {
                     callback.failure(failure);
                 }
             }
         };
         connector.apply(request, localCallback);
-        return settableFuture;
+        return SettableFuture.create(); // just a dummy
     }
 
     private boolean isRetry(final ClientRequest request, ClientResponse response, Throwable failure, final AsyncConnectorCallback callback, final int tryCount)

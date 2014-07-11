@@ -34,7 +34,7 @@ class CommandApiImpl implements CommandApi
     @Override
     public InvokableBuilder<Command> status(String queryId)
     {
-        return new GenericInvokableBuilderImpl<Command>(client, null, Command.class, "commands", queryId);
+        return new GenericInvokableBuilderImpl<Command>(client, ClientEntity.retry(), Command.class, "commands", queryId);
     }
 
     @Override

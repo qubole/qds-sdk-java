@@ -19,6 +19,13 @@ public class ClientEntity
         DELETE
     }
 
+    public static ClientEntity retry()
+    {
+        ClientEntity entity = new ClientEntity(null, Method.GET);
+        entity.allowToBeRetried();
+        return entity;
+    }
+
     public ClientEntity(Object entity)
     {
         this(entity, Method.POST, null);

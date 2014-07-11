@@ -203,7 +203,7 @@ public class QdsClientImpl implements QdsClient
             builder = builder.header("X-AUTH-TOKEN", configuration.getApiToken());
         }
 
-        if ( entity.canBeRetried() )
+        if ( (entity != null) && entity.canBeRetried() )
         {
             builder = builder.property(RetryConnector.PROPERTY_ENABLE, true);
         }
