@@ -16,20 +16,20 @@ class ClusterApiImpl implements ClusterApi
     @Override
     public InvokableBuilder<ClusterState> state(String labelOrId)
     {
-        return new GenericInvokableBuilderImpl<ClusterState>(client, null, ClusterState.class, "clusters", labelOrId, "state");
+        return new GenericInvokableBuilderImpl<ClusterState>(client, RequestDetails.retry(), ClusterState.class, "clusters", labelOrId, "state");
     }
 
     @Override
     public InvokableBuilder<List<ClusterItem>> list()
     {
         GenericType<List<ClusterItem>> type = new GenericType<List<ClusterItem>>(){};
-        return new GenericInvokableBuilderImpl<List<ClusterItem>>(client, null, type, "clusters");
+        return new GenericInvokableBuilderImpl<List<ClusterItem>>(client, RequestDetails.retry(), type, "clusters");
     }
 
     @Override
     public InvokableBuilder<ClusterItem> information(String labelOrId)
     {
-        return new GenericInvokableBuilderImpl<ClusterItem>(client, null, ClusterItem.class, "clusters", labelOrId);
+        return new GenericInvokableBuilderImpl<ClusterItem>(client, RequestDetails.retry(), ClusterItem.class, "clusters", labelOrId);
     }
 
     @Override

@@ -28,7 +28,7 @@ class CommandApiImpl implements CommandApi
     @Override
     public PageableInvokableBuilder<Commands> history()
     {
-        return new GenericPageableInvokableBuilderImpl<Commands>(client, null, Commands.class, "commands");
+        return new GenericPageableInvokableBuilderImpl<Commands>(client, RequestDetails.retry(), Commands.class, "commands");
     }
 
     @Override
@@ -53,6 +53,7 @@ class CommandApiImpl implements CommandApi
     public InvokableBuilder<Response> cancel(String queryId)
     {
         RequestDetails entity = new RequestDetails(new Status("kill"), RequestDetails.Method.PUT);
+        entity.allowToBeRetried();
         return new GenericInvokableBuilderImpl<Response>(client, entity, Response.class, "commands", queryId);
     }
 

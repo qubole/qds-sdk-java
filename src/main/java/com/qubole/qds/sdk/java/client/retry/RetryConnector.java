@@ -67,28 +67,41 @@ public class RetryConnector implements Connector
         }
         catch ( ProcessingException e )
         {
-            if ( retry.getRetryPolicy().shouldBeRetried(tryCount, null, e, getRetryMode(request)) )
+            if ( tryRetry(request, tryCount, null, e) )
             {
                 return internalApply(request, tryCount + 1);
             }
             throw e;
         }
 
-        if ( retry.getRetryPolicy().shouldBeRetried(tryCount, clientResponse, null, getRetryMode(request)) )
+        if ( retry.getRetryPolicy().shouldBeRetried(request.getUri(), tryCount, clientResponse, null, getRetryMode(request)) )
+        {
+            if ( tryRetry(request, tryCount, clientResponse, null) )
+            {
+                return internalApply(request, tryCount + 1);
+            }
+        }
+
+        return clientResponse;
+    }
+
+    private boolean tryRetry(ClientRequest request, int tryCount, ClientResponse clientResponse, ProcessingException e)
+    {
+        if ( retry.getRetryPolicy().shouldBeRetried(request.getUri(), tryCount, clientResponse, e, getRetryMode(request)) )
         {
             try
             {
                 retry.getRetrySleeper().sleep(tryCount);
             }
-            catch ( InterruptedException e )
+            catch ( InterruptedException e1 )
             {
                 Thread.currentThread().interrupt();
-                throw new ProcessingException(e);
+                throw new ProcessingException(e1);
             }
-            return internalApply(request, tryCount + 1);
-        }
 
-        return clientResponse;
+            return true;
+        }
+        return false;
     }
 
     @VisibleForTesting
@@ -120,7 +133,7 @@ public class RetryConnector implements Connector
 
     private boolean isRetry(final ClientRequest request, ClientResponse response, Throwable failure, final AsyncConnectorCallback callback, final int tryCount)
     {
-        if ( retry.getRetryPolicy().shouldBeRetried(tryCount, response, failure, getRetryMode(request)) )
+        if ( retry.getRetryPolicy().shouldBeRetried(request.getUri(), tryCount, response, failure, getRetryMode(request)) )
         {
             Runnable runnable = new Runnable()
             {
@@ -134,6 +147,7 @@ public class RetryConnector implements Connector
                     }
                     catch ( InterruptedException e )
                     {
+                        Thread.currentThread().interrupt();
                         callback.failure(e);
                     }
                 }

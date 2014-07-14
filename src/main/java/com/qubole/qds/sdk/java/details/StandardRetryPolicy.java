@@ -5,9 +5,13 @@ import org.glassfish.jersey.client.ClientResponse;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.net.ConnectException;
+import java.net.URI;
+import java.util.logging.Logger;
 
 public class StandardRetryPolicy implements RetryPolicy
 {
+    private static final Logger log = Logger.getLogger(StandardRetryPolicy.class.getName());
+
     private final int maxRetries;
 
     private static final int DEFAULT_MAX_RETRIES = 3;
@@ -24,10 +28,11 @@ public class StandardRetryPolicy implements RetryPolicy
 
     @SuppressWarnings("SimplifiableIfStatement")
     @Override
-    public boolean shouldBeRetried(int retryCount, ClientResponse response, Throwable exception, Mode mode)
+    public boolean shouldBeRetried(URI uri, int retryCount, ClientResponse response, Throwable exception, Mode mode)
     {
         if ( retryCount >= maxRetries )
         {
+            log.warning(String.format("Retries exceeded. retryCount: %d - maxRetries: %d", retryCount, maxRetries));
             return false;
         }
 
@@ -35,14 +40,15 @@ public class StandardRetryPolicy implements RetryPolicy
         {
             if ( response.getStatusInfo().getFamily() == Response.Status.Family.SERVER_ERROR )
             {
+                log.info(String.format("Retrying request due to Status %d. retryCount: %d - request: %s", response.getStatus(), retryCount, uri));
                 return true;
             }
         }
-        return shouldBeRetried(exception, mode);
+        return shouldBeRetried(uri, exception, mode);
     }
 
     @SuppressWarnings("SimplifiableIfStatement")
-    private boolean shouldBeRetried(Throwable exception, Mode mode)
+    private boolean shouldBeRetried(URI uri, Throwable exception, Mode mode)
     {
         if ( exception == null )
         {
@@ -53,6 +59,7 @@ public class StandardRetryPolicy implements RetryPolicy
         {
             if ( exception instanceof IOException )
             {
+                log.info(String.format("Retrying request due to exception %s. request: %s", exception.getClass().getSimpleName(), uri));
                 return true;
             }
         }
@@ -60,10 +67,11 @@ public class StandardRetryPolicy implements RetryPolicy
         {
             if ( exception instanceof ConnectException )
             {
+                log.info(String.format("Retrying request due to exception %s. request: %s", exception.getClass().getSimpleName(), uri));
                 return true;
             }
         }
 
-        return shouldBeRetried(exception.getCause(), mode);
+        return shouldBeRetried(uri, exception.getCause(), mode);
     }
 }

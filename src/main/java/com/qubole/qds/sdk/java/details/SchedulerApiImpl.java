@@ -19,7 +19,7 @@ class SchedulerApiImpl implements SchedulerApi
     @Override
     public PageableInvokableBuilder<SchedulesResponse> list()
     {
-        return new GenericPageableInvokableBuilderImpl<SchedulesResponse>(client, null, SchedulesResponse.class, "scheduler");
+        return new GenericPageableInvokableBuilderImpl<SchedulesResponse>(client, RequestDetails.retry(), SchedulesResponse.class, "scheduler");
     }
 
     @Override
@@ -43,31 +43,31 @@ class SchedulerApiImpl implements SchedulerApi
     @Override
     public InvokableBuilder<Schedule> view(int scheduleId)
     {
-        return new GenericInvokableBuilderImpl<Schedule>(client, null, Schedule.class, "scheduler", Integer.toString(scheduleId));
+        return new GenericInvokableBuilderImpl<Schedule>(client, RequestDetails.retry(), Schedule.class, "scheduler", Integer.toString(scheduleId));
     }
 
     @Override
     public PageableInvokableBuilder<Commands> listInstances(int scheduleId)
     {
-        return new GenericPageableInvokableBuilderImpl<Commands>(client, null, Commands.class, "scheduler", Integer.toString(scheduleId), "instances");
+        return new GenericPageableInvokableBuilderImpl<Commands>(client, RequestDetails.retry(), Commands.class, "scheduler", Integer.toString(scheduleId), "instances");
     }
 
     @Override
     public InvokableBuilder<Command> viewCommand(int scheduleId, int instanceId)
     {
-        return new GenericInvokableBuilderImpl<Command>(client, null, Command.class, "scheduler", Integer.toString(scheduleId), "instances", Integer.toString(instanceId));
+        return new GenericInvokableBuilderImpl<Command>(client, RequestDetails.retry(), Command.class, "scheduler", Integer.toString(scheduleId), "instances", Integer.toString(instanceId));
     }
 
     @Override
     public InvokableBuilder<String> instanceLogs(int scheduleId, int instanceId)
     {
-        return new GenericInvokableBuilderImpl<String>(client, null, String.class, "scheduler", Integer.toString(scheduleId), "instances", Integer.toString(instanceId), "logs");
+        return new GenericInvokableBuilderImpl<String>(client, RequestDetails.retry(), String.class, "scheduler", Integer.toString(scheduleId), "instances", Integer.toString(instanceId), "logs");
     }
 
     @Override
     public InvokableBuilder<String> instanceResults(int scheduleId, int instanceId)
     {
-        return new GenericInvokableBuilderImpl<String>(client, null, String.class, "scheduler", Integer.toString(scheduleId), "instances", Integer.toString(instanceId), "results");
+        return new GenericInvokableBuilderImpl<String>(client, RequestDetails.retry(), String.class, "scheduler", Integer.toString(scheduleId), "instances", Integer.toString(instanceId), "results");
     }
 
     @Override
