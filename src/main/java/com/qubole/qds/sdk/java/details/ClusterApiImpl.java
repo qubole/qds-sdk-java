@@ -35,28 +35,28 @@ class ClusterApiImpl implements ClusterApi
     @Override
     public InvokableBuilder<Message> start(String labelOrId)
     {
-        ClientEntity entity = new ClientEntity(new State("start"), ClientEntity.Method.PUT);
+        RequestDetails entity = new RequestDetails(new State("start"), RequestDetails.Method.PUT);
         return new GenericInvokableBuilderImpl<Message>(client, entity, Message.class, "clusters", labelOrId, "state");
     }
 
     @Override
     public InvokableBuilder<Message> terminate(String labelOrId)
     {
-        ClientEntity entity = new ClientEntity(new State("terminate"), ClientEntity.Method.PUT);
+        RequestDetails entity = new RequestDetails(new State("terminate"), RequestDetails.Method.PUT);
         return new GenericInvokableBuilderImpl<Message>(client, entity, Message.class, "clusters", labelOrId, "state");
     }
 
     @Override
     public InvokableBuilder<ClusterItem> edit(String labelOrId, ClusterConfigBuilder configBuilder)
     {
-        ClientEntity entity = new ClientEntity(configBuilder.toString(), ClientEntity.Method.PUT);
+        RequestDetails entity = new RequestDetails(configBuilder.toString(), RequestDetails.Method.PUT);
         return new GenericInvokableBuilderImpl<ClusterItem>(client, entity, ClusterItem.class, "clusters", labelOrId);
     }
 
     @Override
     public InvokableBuilder<ClusterItem> create(ClusterConfigBuilder configBuilder)
     {
-        ClientEntity entity = new ClientEntity(configBuilder.toString(), ClientEntity.Method.POST);
+        RequestDetails entity = new RequestDetails(configBuilder.toString(), RequestDetails.Method.POST);
         return new GenericInvokableBuilderImpl<ClusterItem>(client, entity, ClusterItem.class, "clusters");
     }
 

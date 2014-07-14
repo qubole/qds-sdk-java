@@ -23,12 +23,12 @@ class ResultsCommandBuilderImpl extends InvocationCallbackBase<ResultValue> impl
     @Override
     protected InvokeArguments<ResultValue> getInvokeArguments()
     {
-        ClientEntity entity = null;
+        RequestDetails entity = null;
         if ( inline != null )
         {
             Map<String, String> queryParams = Maps.newHashMap();
             queryParams.put("inline", inline.toString());
-            entity = new ClientEntity(null, ClientEntity.Method.GET, queryParams);
+            entity = new RequestDetails(null, RequestDetails.Method.GET, queryParams);
         }
         return new InvokeArguments<ResultValue>(client, null, entity, ResultValue.class, "commands", queryId, "results");
     }

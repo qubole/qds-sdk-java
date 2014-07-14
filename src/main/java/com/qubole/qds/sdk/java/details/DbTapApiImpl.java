@@ -18,14 +18,14 @@ class DbTapApiImpl implements DbTapApi
     @Override
     public InvokableBuilder<DbTap> create(DbTapBuilder dbTap)
     {
-        ClientEntity entity = new ClientEntity(dbTap.toString(), ClientEntity.Method.POST);
+        RequestDetails entity = new RequestDetails(dbTap.toString(), RequestDetails.Method.POST);
         return new GenericInvokableBuilderImpl<DbTap>(client, entity, DbTap.class, "db_taps");
     }
 
     @Override
     public InvokableBuilder<DbTap> edit(int dbTapId, DbTapBuilder dbTap)
     {
-        ClientEntity entity = new ClientEntity(dbTap.toString(), ClientEntity.Method.PUT);
+        RequestDetails entity = new RequestDetails(dbTap.toString(), RequestDetails.Method.PUT);
         return new GenericInvokableBuilderImpl<DbTap>(client, entity, DbTap.class, "db_taps", Integer.toString(dbTapId));
     }
 
@@ -51,7 +51,7 @@ class DbTapApiImpl implements DbTapApi
     @Override
     public InvokableBuilder<Status> delete(int dbTapId)
     {
-        ClientEntity entity = new ClientEntity(null, ClientEntity.Method.DELETE);
+        RequestDetails entity = new RequestDetails(null, RequestDetails.Method.DELETE);
         return new GenericInvokableBuilderImpl<Status>(client, entity, Status.class, "db_taps", Integer.toString(dbTapId));
     }
 

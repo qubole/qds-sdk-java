@@ -10,9 +10,10 @@ public interface RetryPolicy
     /**
      * Return true if the given arguments require a retry
      *
+     * @param retryCount 0 based retry count
      * @param response the client response (might be null)
      * @param exception any exception (might be null)
      * @return true/false
      */
-    public boolean shouldBeRetried(ClientResponse response, Throwable exception);
+    public boolean shouldBeRetried(int retryCount, ClientResponse response, Throwable exception);
 }

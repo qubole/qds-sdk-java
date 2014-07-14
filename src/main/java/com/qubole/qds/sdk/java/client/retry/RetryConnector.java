@@ -11,6 +11,7 @@ import javax.ws.rs.ProcessingException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class RetryConnector implements Connector
 {
@@ -19,6 +20,8 @@ public class RetryConnector implements Connector
     private final ExecutorService retryService = Executors.newCachedThreadPool(new ThreadFactoryBuilder().setNameFormat("RetryConnector-%d").setDaemon(true).build());
 
     public static final String PROPERTY_ENABLE = RetryConnector.class.getName();
+
+    public static final String RESPONSE_HEADER_HAD_RETRIES = RetryConnector.class.getName();
 
     public RetryConnector(Connector connector, Retry retry)
     {
@@ -36,7 +39,7 @@ public class RetryConnector implements Connector
     public Future<?> apply(ClientRequest request, final AsyncConnectorCallback callback)
     {
         Preconditions.checkNotNull(callback, "callback is assumed to be non null");
-        return isEnabledForRequest(request) ? internalApply(request, callback, 0) : connector.apply(request, callback);
+        return isEnabledForRequest(request) ? internalApply(request, callback, new AtomicInteger()) : connector.apply(request, callback);
     }
 
     @Override
@@ -58,8 +61,21 @@ public class RetryConnector implements Connector
 
     private ClientResponse internalApply(ClientRequest request, int tryCount)
     {
-        ClientResponse clientResponse = connector.apply(request);
-        if ( retry.getRetryPolicy().shouldBeRetried(clientResponse, null) )
+        ClientResponse clientResponse;
+        try
+        {
+            clientResponse = connector.apply(request);
+        }
+        catch ( ProcessingException e )
+        {
+            if ( retry.getRetryPolicy().shouldBeRetried(tryCount, null, e) )
+            {
+                return internalApply(request, tryCount + 1);
+            }
+            throw wrapException(e);
+        }
+
+        if ( retry.getRetryPolicy().shouldBeRetried(tryCount, clientResponse, null) )
         {
             try
             {
@@ -72,18 +88,27 @@ public class RetryConnector implements Connector
             }
             return internalApply(request, tryCount + 1);
         }
+
+        if ( tryCount > 0 )
+        {
+            clientResponse.header(RESPONSE_HEADER_HAD_RETRIES, true);
+        }
         return clientResponse;
     }
 
-    private Future<?> internalApply(final ClientRequest request, final AsyncConnectorCallback callback, final int tryCount)
+    private Future<?> internalApply(final ClientRequest request, final AsyncConnectorCallback callback, final AtomicInteger tryCount)
     {
         AsyncConnectorCallback localCallback = new AsyncConnectorCallback()
         {
             @Override
             public void response(ClientResponse response)
             {
-                if ( !isRetry(request, response, null, this, tryCount) )
+                if ( !isRetry(request, response, null, callback, tryCount) )
                 {
+                    if ( tryCount.get() > 0 )
+                    {
+                        response.header(RESPONSE_HEADER_HAD_RETRIES, true);
+                    }
                     callback.response(response);
                 }
             }
@@ -91,9 +116,9 @@ public class RetryConnector implements Connector
             @Override
             public void failure(Throwable failure)
             {
-                if ( !isRetry(request, null, failure, this, tryCount) )
+                if ( !isRetry(request, null, failure, callback, tryCount) )
                 {
-                    callback.failure(failure);
+                    callback.failure(wrapException(failure));
                 }
             }
         };
@@ -101,9 +126,9 @@ public class RetryConnector implements Connector
         return SettableFuture.create(); // just a dummy
     }
 
-    private boolean isRetry(final ClientRequest request, ClientResponse response, Throwable failure, final AsyncConnectorCallback callback, final int tryCount)
+    private boolean isRetry(final ClientRequest request, ClientResponse response, Throwable failure, final AsyncConnectorCallback callback, final AtomicInteger tryCount)
     {
-        if ( retry.getRetryPolicy().shouldBeRetried(response, failure) )
+        if ( retry.getRetryPolicy().shouldBeRetried(tryCount.get(), response, failure) )
         {
             Runnable runnable = new Runnable()
             {
@@ -112,8 +137,10 @@ public class RetryConnector implements Connector
                 {
                     try
                     {
-                        retry.getRetrySleeper().sleep(tryCount);
-                        connector.apply(request, callback);
+                        retry.getRetrySleeper().sleep(tryCount.get());
+
+                        tryCount.incrementAndGet();
+                        internalApply(request, callback, tryCount);
                     }
                     catch ( InterruptedException e )
                     {
@@ -125,5 +152,14 @@ public class RetryConnector implements Connector
             return true;
         }
         return false;
+    }
+
+    private ProcessingException wrapException(Throwable failure)
+    {
+        if ( failure instanceof ProcessingException )
+        {
+            return new RetryExpirationException(failure.getCause());
+        }
+        return new RetryExpirationException(failure);
     }
 }

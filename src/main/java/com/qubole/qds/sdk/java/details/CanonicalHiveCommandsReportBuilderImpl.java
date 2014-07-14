@@ -55,7 +55,7 @@ class CanonicalHiveCommandsReportBuilderImpl extends InvocationCallbackBase<Cano
     @Override
     protected InvokeArguments<CanonicalHiveCommandsReport> getInvokeArguments()
     {
-        ClientEntity entity = new ClientEntity(null, ClientEntity.Method.GET, parameters);
+        RequestDetails entity = new RequestDetails(null, RequestDetails.Method.GET, parameters);
         return new InvokeArguments<CanonicalHiveCommandsReport>(client, null, entity, CanonicalHiveCommandsReport.class, "reports", "canonical_hive_commands");
     }
 

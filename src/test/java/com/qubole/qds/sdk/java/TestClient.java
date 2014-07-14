@@ -2,7 +2,7 @@ package com.qubole.qds.sdk.java;
 
 import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
-import com.qubole.qds.sdk.java.details.ClientEntity;
+import com.qubole.qds.sdk.java.details.RequestDetails;
 import com.qubole.qds.sdk.java.details.ForPage;
 import com.qubole.qds.sdk.java.details.QdsClientImpl;
 import org.testng.Assert;
@@ -25,19 +25,19 @@ public class TestClient
         QdsClientImpl client = new QdsClientImpl(configuration)
         {
             @Override
-            protected <T> Future<T> invokePreparedRequest(ClientEntity entity, Class<T> responseType, AsyncInvoker invoker)
+            protected <T> Future<T> invokePreparedRequest(RequestDetails entity, Class<T> responseType, AsyncInvoker invoker)
             {
                 return null;
             }
 
             @Override
-            protected <T> Future<T> invokePreparedRequest(ClientEntity entity, GenericType<T> responseType, AsyncInvoker invoker)
+            protected <T> Future<T> invokePreparedRequest(RequestDetails entity, GenericType<T> responseType, AsyncInvoker invoker)
             {
                 return null;
             }
 
             @Override
-            protected WebTarget prepareTarget(ForPage forPage, ClientEntity entity, String[] additionalPaths)
+            protected WebTarget prepareTarget(ForPage forPage, RequestDetails entity, String[] additionalPaths)
             {
                 WebTarget webTarget = super.prepareTarget(forPage, entity, additionalPaths);
                 webTargetReference.set(webTarget);
@@ -59,19 +59,19 @@ public class TestClient
         QdsClientImpl client = new QdsClientImpl(configuration)
         {
             @Override
-            protected <T> Future<T> invokePreparedRequest(ClientEntity entity, Class<T> responseType, AsyncInvoker invoker)
+            protected <T> Future<T> invokePreparedRequest(RequestDetails entity, Class<T> responseType, AsyncInvoker invoker)
             {
                 return null;
             }
 
             @Override
-            protected <T> Future<T> invokePreparedRequest(ClientEntity entity, GenericType<T> responseType, AsyncInvoker invoker)
+            protected <T> Future<T> invokePreparedRequest(RequestDetails entity, GenericType<T> responseType, AsyncInvoker invoker)
             {
                 return null;
             }
 
             @Override
-            protected WebTarget prepareTarget(ForPage forPage, ClientEntity entity, String[] additionalPaths)
+            protected WebTarget prepareTarget(ForPage forPage, RequestDetails entity, String[] additionalPaths)
             {
                 WebTarget webTarget = super.prepareTarget(forPage, entity, additionalPaths);
                 webTargetReference.set(webTarget);

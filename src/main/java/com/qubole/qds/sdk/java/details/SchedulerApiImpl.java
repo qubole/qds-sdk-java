@@ -83,7 +83,7 @@ class SchedulerApiImpl implements SchedulerApi
 
     private InvokableBuilder<SuccessAndStatus> suspendKillResume(int scheduleId, String status)
     {
-        ClientEntity entity = new ClientEntity(new Status(status), ClientEntity.Method.PUT);
+        RequestDetails entity = new RequestDetails(new Status(status), RequestDetails.Method.PUT);
         return new GenericInvokableBuilderImpl<SuccessAndStatus>(client, entity, SuccessAndStatus.class, "scheduler", Integer.toString(scheduleId));
     }
 }

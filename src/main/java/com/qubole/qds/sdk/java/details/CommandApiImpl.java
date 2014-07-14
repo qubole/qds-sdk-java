@@ -34,7 +34,7 @@ class CommandApiImpl implements CommandApi
     @Override
     public InvokableBuilder<Command> status(String queryId)
     {
-        return new GenericInvokableBuilderImpl<Command>(client, ClientEntity.retry(), Command.class, "commands", queryId);
+        return new GenericInvokableBuilderImpl<Command>(client, RequestDetails.retry(), Command.class, "commands", queryId);
     }
 
     @Override
@@ -52,7 +52,7 @@ class CommandApiImpl implements CommandApi
     @Override
     public InvokableBuilder<Response> cancel(String queryId)
     {
-        ClientEntity entity = new ClientEntity(new Status("kill"), ClientEntity.Method.PUT);
+        RequestDetails entity = new RequestDetails(new Status("kill"), RequestDetails.Method.PUT);
         return new GenericInvokableBuilderImpl<Response>(client, entity, Response.class, "commands", queryId);
     }
 
@@ -104,7 +104,7 @@ class CommandApiImpl implements CommandApi
         node.put("command_type", "DbTapQueryCommand");
         node.put("query", query);
         node.put("db_tap_id", dbTapId);
-        return new GenericInvokableBuilderImpl<CommandResponse>(client, new ClientEntity(node), CommandResponse.class, "commands");
+        return new GenericInvokableBuilderImpl<CommandResponse>(client, new RequestDetails(node), CommandResponse.class, "commands");
     }
 
 }

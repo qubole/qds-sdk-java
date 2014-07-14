@@ -7,10 +7,29 @@ import java.io.IOException;
 
 public class StandardRetryPolicy implements RetryPolicy
 {
+    private final int maxRetries;
+
+    private static final int DEFAULT_MAX_RETRIES = 3;
+
+    public StandardRetryPolicy()
+    {
+        this(DEFAULT_MAX_RETRIES);
+    }
+
+    public StandardRetryPolicy(int maxRetries)
+    {
+        this.maxRetries = maxRetries;
+    }
+
     @SuppressWarnings("SimplifiableIfStatement")
     @Override
-    public boolean shouldBeRetried(ClientResponse response, Throwable exception)
+    public boolean shouldBeRetried(int retryCount, ClientResponse response, Throwable exception)
     {
+        if ( retryCount >= maxRetries )
+        {
+            return false;
+        }
+
         if ( response != null )
         {
             if ( response.getStatusInfo().getFamily() == Response.Status.Family.SERVER_ERROR )
@@ -18,6 +37,22 @@ public class StandardRetryPolicy implements RetryPolicy
                 return true;
             }
         }
-        return exception instanceof IOException;
+        return shouldBeRetried(exception);
+    }
+
+    @SuppressWarnings("SimplifiableIfStatement")
+    private boolean shouldBeRetried(Throwable exception)
+    {
+        if ( exception == null )
+        {
+            return false;
+        }
+
+        if ( exception instanceof IOException )
+        {
+            return true;
+        }
+
+        return shouldBeRetried(exception.getCause());
     }
 }

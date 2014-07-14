@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class ClientEntity
+public class RequestDetails
 {
     private final Object entity;
     private final Method method;
@@ -19,24 +19,24 @@ public class ClientEntity
         DELETE
     }
 
-    public static ClientEntity retry()
+    public static RequestDetails retry()
     {
-        ClientEntity entity = new ClientEntity(null, Method.GET);
+        RequestDetails entity = new RequestDetails(null, Method.GET);
         entity.allowToBeRetried();
         return entity;
     }
 
-    public ClientEntity(Object entity)
+    public RequestDetails(Object entity)
     {
         this(entity, Method.POST, null);
     }
 
-    public ClientEntity(Object entity, Method method)
+    public RequestDetails(Object entity, Method method)
     {
         this(entity, method, null);
     }
 
-    public ClientEntity(Object entity, Method method, Map<String, String> queryParams)
+    public RequestDetails(Object entity, Method method, Map<String, String> queryParams)
     {
         this.entity = entity;
         this.method = method;

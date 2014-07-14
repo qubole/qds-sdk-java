@@ -94,7 +94,7 @@ class CreateScheduleCommandBuilderImpl extends InvocationCallbackBase<Schedule> 
     @Override
     protected InvokeArguments<Schedule> getInvokeArguments()
     {
-        ClientEntity entity = CommandBuilderImplBase.makeJsonEntity(node, ClientEntity.Method.POST);
+        RequestDetails entity = CommandBuilderImplBase.makeJsonEntity(node, RequestDetails.Method.POST);
         return new InvokeArguments<Schedule>(client, null, entity, Schedule.class, "scheduler");
     }
 

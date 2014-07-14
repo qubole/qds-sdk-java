@@ -56,7 +56,7 @@ class AllCommandsReportBuilderImpl extends InvocationCallbackBase<AllCommandsRep
     @Override
     protected InvokeArguments<AllCommandsReport> getInvokeArguments()
     {
-        ClientEntity entity = new ClientEntity(null, ClientEntity.Method.GET, parameters);
+        RequestDetails entity = new RequestDetails(null, RequestDetails.Method.GET, parameters);
         return new InvokeArguments<AllCommandsReport>(client, null, entity, AllCommandsReport.class, "reports", "all_commands");
     }
 

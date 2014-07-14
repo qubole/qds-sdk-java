@@ -20,13 +20,13 @@ public class MockClient implements QdsClient
     public static class InvokeDetails
     {
         private final ForPage forPage;
-        private final ClientEntity entity;
+        private final RequestDetails entity;
         private final Class<?> responseType;
         private final GenericType<?> genericResponseType;
         private final InvocationCallback<?> callback;
         private final String[] additionalPaths;
 
-        public InvokeDetails(ForPage forPage, ClientEntity entity, GenericType<?> genericResponseType, String[] additionalPaths)
+        public InvokeDetails(ForPage forPage, RequestDetails entity, GenericType<?> genericResponseType, String[] additionalPaths)
         {
             this.forPage = forPage;
             this.entity = entity;
@@ -36,7 +36,7 @@ public class MockClient implements QdsClient
             this.callback = null;
         }
 
-        public InvokeDetails(ForPage forPage, ClientEntity entity, Class<?> responseType, String[] additionalPaths)
+        public InvokeDetails(ForPage forPage, RequestDetails entity, Class<?> responseType, String[] additionalPaths)
         {
             this.forPage = forPage;
             this.entity = entity;
@@ -46,7 +46,7 @@ public class MockClient implements QdsClient
             this.callback = null;
         }
 
-        public InvokeDetails(ForPage forPage, ClientEntity entity, InvocationCallback<?> callback, String[] additionalPaths)
+        public InvokeDetails(ForPage forPage, RequestDetails entity, InvocationCallback<?> callback, String[] additionalPaths)
         {
             this.forPage = forPage;
             this.entity = entity;
@@ -71,7 +71,7 @@ public class MockClient implements QdsClient
             return forPage;
         }
 
-        public ClientEntity getEntity()
+        public RequestDetails getEntity()
         {
             return entity;
         }
@@ -139,23 +139,23 @@ public class MockClient implements QdsClient
     }
 
     @Override
-    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, InvocationCallback<T> callback, String... additionalPaths)
+    public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, InvocationCallback<T> callback, String... additionalPaths)
     {
-        results.add(new InvokeDetails(forPage, entity, callback, additionalPaths));
+        results.add(new InvokeDetails(forPage, requestDetails, callback, additionalPaths));
         return null;
     }
 
     @Override
-    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, GenericType<T> responseType, String... additionalPaths)
+    public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, GenericType<T> responseType, String... additionalPaths)
     {
-        results.add(new InvokeDetails(forPage, entity, responseType, additionalPaths));
+        results.add(new InvokeDetails(forPage, requestDetails, responseType, additionalPaths));
         return null;
     }
 
     @Override
-    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, Class<T> responseType, String... additionalPaths)
+    public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, Class<T> responseType, String... additionalPaths)
     {
-        results.add(new InvokeDetails(forPage, entity, responseType, additionalPaths));
+        results.add(new InvokeDetails(forPage, requestDetails, responseType, additionalPaths));
         return null;
     }
 }

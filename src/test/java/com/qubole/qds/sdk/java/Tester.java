@@ -21,6 +21,9 @@ public class Tester
             ResultLatch resultLatch = new ResultLatch(client, commandResponse.getId());
             ResultValue resultValue = resultLatch.awaitResult();
             System.out.println(resultValue);
+
+            String s = client.command().logs("" + commandResponse.getId()).invoke().get();
+            System.out.println(s);
         }
         finally
         {

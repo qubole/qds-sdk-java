@@ -94,28 +94,28 @@ public class QdsClientImpl implements QdsClient
     }
 
     @Override
-    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, Class<T> responseType, String... additionalPaths)
+    public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, Class<T> responseType, String... additionalPaths)
     {
-        AsyncInvoker invoker = prepareRequest(forPage, entity, additionalPaths);
-        return invokePreparedRequest(entity, responseType, invoker);
+        AsyncInvoker invoker = prepareRequest(forPage, requestDetails, additionalPaths);
+        return invokePreparedRequest(requestDetails, responseType, invoker);
     }
 
     @Override
-    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, GenericType<T> responseType, String... additionalPaths)
+    public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, GenericType<T> responseType, String... additionalPaths)
     {
-        AsyncInvoker invoker = prepareRequest(forPage, entity, additionalPaths);
-        return invokePreparedRequest(entity, responseType, invoker);
+        AsyncInvoker invoker = prepareRequest(forPage, requestDetails, additionalPaths);
+        return invokePreparedRequest(requestDetails, responseType, invoker);
     }
 
     @Override
-    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, InvocationCallback<T> callback, String... additionalPaths)
+    public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, InvocationCallback<T> callback, String... additionalPaths)
     {
-        AsyncInvoker invoker = prepareRequest(forPage, entity, additionalPaths);
-        return invokePreparedRequest(entity, callback, invoker);
+        AsyncInvoker invoker = prepareRequest(forPage, requestDetails, additionalPaths);
+        return invokePreparedRequest(requestDetails, callback, invoker);
     }
 
     @VisibleForTesting
-    protected <T> Future<T> invokePreparedRequest(ClientEntity entity, InvocationCallback<T> callback, AsyncInvoker invoker)
+    protected <T> Future<T> invokePreparedRequest(RequestDetails entity, InvocationCallback<T> callback, AsyncInvoker invoker)
     {
         if ( entity != null )
         {
@@ -129,7 +129,7 @@ public class QdsClientImpl implements QdsClient
     }
 
     @VisibleForTesting
-    protected <T> Future<T> invokePreparedRequest(ClientEntity entity, Class<T> responseType, AsyncInvoker invoker)
+    protected <T> Future<T> invokePreparedRequest(RequestDetails entity, Class<T> responseType, AsyncInvoker invoker)
     {
         if ( entity != null )
         {
@@ -143,7 +143,7 @@ public class QdsClientImpl implements QdsClient
     }
 
     @VisibleForTesting
-    protected <T> Future<T> invokePreparedRequest(ClientEntity entity, GenericType<T> responseType, AsyncInvoker invoker)
+    protected <T> Future<T> invokePreparedRequest(RequestDetails entity, GenericType<T> responseType, AsyncInvoker invoker)
     {
         if ( entity != null )
         {
@@ -157,7 +157,7 @@ public class QdsClientImpl implements QdsClient
     }
 
     @VisibleForTesting
-    protected WebTarget prepareTarget(ForPage forPage, ClientEntity entity, String[] additionalPaths)
+    protected WebTarget prepareTarget(ForPage forPage, RequestDetails entity, String[] additionalPaths)
     {
         WebTarget localTarget = target;
         if ( additionalPaths != null )
@@ -193,7 +193,7 @@ public class QdsClientImpl implements QdsClient
         }
     }
 
-    private AsyncInvoker prepareRequest(ForPage forPage, ClientEntity entity, String... additionalPaths)
+    private AsyncInvoker prepareRequest(ForPage forPage, RequestDetails entity, String... additionalPaths)
     {
         WebTarget localTarget = prepareTarget(forPage, entity, additionalPaths);
 
