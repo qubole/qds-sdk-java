@@ -18,40 +18,40 @@ class DbTapApiImpl implements DbTapApi
     @Override
     public InvokableBuilder<DbTap> create(DbTapBuilder dbTap)
     {
-        ClientEntity entity = new ClientEntity(dbTap.toString(), ClientEntity.Method.POST);
+        RequestDetails entity = new RequestDetails(dbTap.toString(), RequestDetails.Method.POST);
         return new GenericInvokableBuilderImpl<DbTap>(client, entity, DbTap.class, "db_taps");
     }
 
     @Override
     public InvokableBuilder<DbTap> edit(int dbTapId, DbTapBuilder dbTap)
     {
-        ClientEntity entity = new ClientEntity(dbTap.toString(), ClientEntity.Method.PUT);
+        RequestDetails entity = new RequestDetails(dbTap.toString(), RequestDetails.Method.PUT);
         return new GenericInvokableBuilderImpl<DbTap>(client, entity, DbTap.class, "db_taps", Integer.toString(dbTapId));
     }
 
     @Override
     public PageableInvokableBuilder<DbTapList> list()
     {
-        return new GenericPageableInvokableBuilderImpl<DbTapList>(client, null, DbTapList.class, "db_taps");
+        return new GenericPageableInvokableBuilderImpl<DbTapList>(client, RequestDetails.retry(), DbTapList.class, "db_taps");
     }
 
     @Override
     public InvokableBuilder<DbTap> view(int dbTapId)
     {
-        return new GenericInvokableBuilderImpl<DbTap>(client, null, DbTap.class, "db_taps", Integer.toString(dbTapId));
+        return new GenericInvokableBuilderImpl<DbTap>(client, RequestDetails.retry(), DbTap.class, "db_taps", Integer.toString(dbTapId));
     }
 
     @Override
     public InvokableBuilder<List<String>> listTables(int dbTapId)
     {
         GenericType<List<String>> responseType = new GenericType<List<String>>(){};
-        return new GenericInvokableBuilderImpl<List<String>>(client, null, responseType, "db_taps", Integer.toString(dbTapId), "tables");
+        return new GenericInvokableBuilderImpl<List<String>>(client, RequestDetails.retry(), responseType, "db_taps", Integer.toString(dbTapId), "tables");
     }
 
     @Override
     public InvokableBuilder<Status> delete(int dbTapId)
     {
-        ClientEntity entity = new ClientEntity(null, ClientEntity.Method.DELETE);
+        RequestDetails entity = new RequestDetails(null, RequestDetails.Method.DELETE);
         return new GenericInvokableBuilderImpl<Status>(client, entity, Status.class, "db_taps", Integer.toString(dbTapId));
     }
 

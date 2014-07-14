@@ -36,7 +36,7 @@ class StoreTablePropertiesBuilderImpl extends InvocationCallbackBase<Status> imp
     @Override
     protected InvokeArguments<Status> getInvokeArguments()
     {
-        ClientEntity entity = CommandBuilderImplBase.makeJsonEntity(node, ClientEntity.Method.POST);
+        RequestDetails entity = CommandBuilderImplBase.makeJsonEntity(node, RequestDetails.Method.POST);
         return new InvokeArguments<Status>(client, null, entity, Status.class, "hive", "default", tableName, "properties");
     }
 

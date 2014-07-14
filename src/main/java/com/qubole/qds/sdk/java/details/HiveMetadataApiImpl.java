@@ -31,13 +31,13 @@ class HiveMetadataApiImpl implements HiveMetadataApi
     @Override
     public InvokableBuilder<TableProperties> getTableProperties(String tableName)
     {
-        return new GenericInvokableBuilderImpl<TableProperties>(client, null, TableProperties.class, "hive", "default", tableName, "properties");
+        return new GenericInvokableBuilderImpl<TableProperties>(client, RequestDetails.retry(), TableProperties.class, "hive", "default", tableName, "properties");
     }
 
     @Override
     public InvokableBuilder<Status> deleteTableProperties(String tableName)
     {
-        return new GenericInvokableBuilderImpl<Status>(client, new ClientEntity(null, ClientEntity.Method.DELETE), Status.class, "hive", "default", tableName, "properties");
+        return new GenericInvokableBuilderImpl<Status>(client, new RequestDetails(null, RequestDetails.Method.DELETE), Status.class, "hive", "default", tableName, "properties");
     }
 
     @Override

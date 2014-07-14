@@ -2,12 +2,14 @@ package com.qubole.qds.sdk.java.details;
 
 import com.google.common.collect.ImmutableMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-public class ClientEntity
+public class RequestDetails
 {
     private final Object entity;
     private final Method method;
     private final Map<String, String> queryParams;
+    private final AtomicBoolean canBeRetried = new AtomicBoolean(false);
 
     public enum Method
     {
@@ -17,17 +19,24 @@ public class ClientEntity
         DELETE
     }
 
-    public ClientEntity(Object entity)
+    public static RequestDetails retry()
+    {
+        RequestDetails entity = new RequestDetails(null, Method.GET);
+        entity.allowToBeRetried();
+        return entity;
+    }
+
+    public RequestDetails(Object entity)
     {
         this(entity, Method.POST, null);
     }
 
-    public ClientEntity(Object entity, Method method)
+    public RequestDetails(Object entity, Method method)
     {
         this(entity, method, null);
     }
 
-    public ClientEntity(Object entity, Method method, Map<String, String> queryParams)
+    public RequestDetails(Object entity, Method method, Map<String, String> queryParams)
     {
         this.entity = entity;
         this.method = method;
@@ -47,5 +56,15 @@ public class ClientEntity
     public Map<String, String> getQueryParams()
     {
         return queryParams;
+    }
+
+    public boolean canBeRetried()
+    {
+        return canBeRetried.get();
+    }
+
+    public void allowToBeRetried()
+    {
+        canBeRetried.set(true);
     }
 }

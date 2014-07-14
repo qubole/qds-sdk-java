@@ -7,12 +7,12 @@ class InvokeArguments<T>
 {
     private final QdsClient client;
     private final ForPage forPage;
-    private final ClientEntity entity;
+    private final RequestDetails entity;
     private final GenericType<T> genericResponseType;
     private final Class<T> responseType;
     private final String[] additionalPaths;
 
-    InvokeArguments(QdsClient client, ForPage forPage, ClientEntity entity, Class<T> responseType, String... additionalPaths)
+    InvokeArguments(QdsClient client, ForPage forPage, RequestDetails entity, Class<T> responseType, String... additionalPaths)
     {
         this.client = client;
         this.forPage = forPage;
@@ -22,7 +22,7 @@ class InvokeArguments<T>
         this.genericResponseType = null;
     }
 
-    InvokeArguments(QdsClient client, ForPage forPage, ClientEntity entity, GenericType<T> genericResponseType, String... additionalPaths)
+    InvokeArguments(QdsClient client, ForPage forPage, RequestDetails entity, GenericType<T> genericResponseType, String... additionalPaths)
     {
         this.client = client;
         this.forPage = forPage;
@@ -42,7 +42,7 @@ class InvokeArguments<T>
         return forPage;
     }
 
-    ClientEntity getEntity()
+    RequestDetails getEntity()
     {
         return entity;
     }

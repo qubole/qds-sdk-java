@@ -6,7 +6,7 @@ import com.qubole.qds.sdk.java.api.DbTapApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.api.ReportApi;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
-import com.qubole.qds.sdk.java.details.ClientEntity;
+import com.qubole.qds.sdk.java.details.RequestDetails;
 import com.qubole.qds.sdk.java.details.ForPage;
 import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.core.GenericType;
@@ -64,34 +64,34 @@ public interface QdsClient extends Closeable
      * Low-level request invoker. Not normally used directly. Use the api factories instead.
      *
      * @param forPage paging info or null
-     * @param entity request entity or null
+     * @param requestDetails request entity or null
      * @param responseType type of the response
      * @param additionalPaths additional path components
      * @return async result
      */
-    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, Class<T> responseType, String... additionalPaths);
+    public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, Class<T> responseType, String... additionalPaths);
 
     /**
      * Low-level request invoker. Not normally used directly. Use the api factories instead.
      *
      * @param forPage paging info or null
-     * @param entity request entity or null
+     * @param requestDetails request entity or null
      * @param responseType type of the response
      * @param additionalPaths additional path components
      * @return async result
      */
-    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, GenericType<T> responseType, String... additionalPaths);
+    public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, GenericType<T> responseType, String... additionalPaths);
 
     /**
      * Low-level request invoker. Not normally used directly. Use the api factories instead.
      *
      * @param forPage paging info or null
-     * @param entity request entity or null
+     * @param requestDetails request entity or null
      * @param callback response callback
      * @param additionalPaths additional path components
      * @return async result
      */
-    public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, InvocationCallback<T> callback, String... additionalPaths);
+    public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, InvocationCallback<T> callback, String... additionalPaths);
 
     @Override
     public void close();

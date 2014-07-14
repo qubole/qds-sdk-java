@@ -7,7 +7,7 @@ import com.qubole.qds.sdk.java.client.QdsClient;
 class GenericPageableInvokableBuilderImpl<T> extends InvocationCallbackBase<T> implements PageableInvokableBuilder<T>
 {
     private final QdsClient client;
-    private final ClientEntity entity;
+    private final RequestDetails entity;
     private final Class<T> responseType;
     private final String[] additionalPaths;
     private ForPage forPage;
@@ -25,7 +25,7 @@ class GenericPageableInvokableBuilderImpl<T> extends InvocationCallbackBase<T> i
         return new InvokeArguments<T>(client, forPage, entity, responseType, additionalPaths);
     }
 
-    GenericPageableInvokableBuilderImpl(QdsClient client, ClientEntity entity, Class<T> responseType, String... additionalPaths)
+    GenericPageableInvokableBuilderImpl(QdsClient client, RequestDetails entity, Class<T> responseType, String... additionalPaths)
     {
         this.client = client;
         this.entity = entity;

@@ -9,16 +9,16 @@ import java.io.IOException;
 abstract class CommandBuilderImplBase extends InvocationCallbackBase<CommandResponse> implements InvokableBuilder<CommandResponse>
 {
     private final QdsClient client;
-    private final ClientEntity.Method method;
+    private final RequestDetails.Method method;
 
     @Override
     protected InvokeArguments<CommandResponse> getInvokeArguments()
     {
-        ClientEntity entity = makeJsonEntity(getEntity(), method);
+        RequestDetails entity = makeJsonEntity(getEntity(), method);
         return new InvokeArguments<CommandResponse>(client, null, entity, CommandResponse.class, "commands");
     }
 
-    static ClientEntity makeJsonEntity(ObjectNode node, ClientEntity.Method method)
+    static RequestDetails makeJsonEntity(ObjectNode node, RequestDetails.Method method)
     {
         String json;
         try
@@ -29,17 +29,17 @@ abstract class CommandBuilderImplBase extends InvocationCallbackBase<CommandResp
         {
             throw new RuntimeException("Could not serialize " + node, e);
         }
-        return new ClientEntity(json, method);
+        return new RequestDetails(json, method);
     }
 
     protected abstract ObjectNode getEntity();
 
     protected CommandBuilderImplBase(QdsClient client)
     {
-        this(client, ClientEntity.Method.POST);
+        this(client, RequestDetails.Method.POST);
     }
 
-    protected CommandBuilderImplBase(QdsClient client, ClientEntity.Method method)
+    protected CommandBuilderImplBase(QdsClient client, RequestDetails.Method method)
     {
         this.client = client;
         this.method = method;

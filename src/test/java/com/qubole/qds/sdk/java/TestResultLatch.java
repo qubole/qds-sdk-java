@@ -3,7 +3,7 @@ package com.qubole.qds.sdk.java;
 import com.google.common.util.concurrent.Futures;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.ResultLatch;
-import com.qubole.qds.sdk.java.details.ClientEntity;
+import com.qubole.qds.sdk.java.details.RequestDetails;
 import com.qubole.qds.sdk.java.details.ForPage;
 import com.qubole.qds.sdk.java.details.MockClient;
 import com.qubole.qds.sdk.java.entities.Command;
@@ -25,7 +25,7 @@ public class TestResultLatch
         QdsClient mockClient = new MockClient()
         {
             @Override
-            public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, Class<T> responseType, String... additionalPaths)
+            public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, Class<T> responseType, String... additionalPaths)
             {
                 Command command = new Command();
                 command.setStatus("done");
@@ -43,7 +43,7 @@ public class TestResultLatch
         QdsClient mockClient = new MockClient()
         {
             @Override
-            public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, Class<T> responseType, String... additionalPaths)
+            public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, Class<T> responseType, String... additionalPaths)
             {
                 Command command = new Command();
                 command.setStatus((count.decrementAndGet() <= 0) ? "done" : "waiting");
@@ -61,7 +61,7 @@ public class TestResultLatch
         QdsClient mockClient = new MockClient()
         {
             @Override
-            public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, Class<T> responseType, String... additionalPaths)
+            public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, Class<T> responseType, String... additionalPaths)
             {
                 if ( responseType.equals(Command.class) )
                 {
@@ -85,7 +85,7 @@ public class TestResultLatch
         QdsClient mockClient = new MockClient()
         {
             @Override
-            public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, Class<T> responseType, String... additionalPaths)
+            public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, Class<T> responseType, String... additionalPaths)
             {
                 if ( responseType.equals(Command.class) )
                 {
@@ -129,7 +129,7 @@ public class TestResultLatch
         QdsClient mockClient = new MockClient()
         {
             @Override
-            public <T> Future<T> invokeRequest(ForPage forPage, ClientEntity entity, Class<T> responseType, String... additionalPaths)
+            public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, Class<T> responseType, String... additionalPaths)
             {
                 Command command = new Command();
                 command.setStatus("foo");
