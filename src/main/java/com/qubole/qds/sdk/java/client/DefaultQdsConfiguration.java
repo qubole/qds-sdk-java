@@ -1,5 +1,6 @@
 package com.qubole.qds.sdk.java.client;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 import com.qubole.qds.sdk.java.client.retry.Retry;
 import com.qubole.qds.sdk.java.client.retry.RetryConnector;
@@ -35,7 +36,7 @@ public class DefaultQdsConfiguration implements QdsConfiguration
      */
     public DefaultQdsConfiguration(String apiToken)
     {
-        this(API_ENDPOINT, apiToken, null);
+        this(API_ENDPOINT, apiToken, null, new StandardRetry(), newRetryConnectorAllocator());
     }
 
     /**
@@ -44,7 +45,7 @@ public class DefaultQdsConfiguration implements QdsConfiguration
      */
     public DefaultQdsConfiguration(String apiEndpoint, String apiToken)
     {
-        this(apiEndpoint, apiToken, null, new StandardRetry());
+        this(apiEndpoint, apiToken, null, new StandardRetry(), newRetryConnectorAllocator());
     }
 
     /**
@@ -54,7 +55,26 @@ public class DefaultQdsConfiguration implements QdsConfiguration
      */
     public DefaultQdsConfiguration(String apiEndpoint, String apiToken, ClientConfig jerseyConfiguration)
     {
-        this(apiEndpoint, apiToken, jerseyConfiguration, new StandardRetry());
+        this(apiEndpoint, apiToken, jerseyConfiguration, new StandardRetry(), newRetryConnectorAllocator());
+    }
+
+    @VisibleForTesting
+    public interface RetryConnectorAllocator
+    {
+        public RetryConnector newRetryConnector(Connector parentConnector, Retry retry);
+    }
+
+    @VisibleForTesting
+    public static RetryConnectorAllocator newRetryConnectorAllocator()
+    {
+        return new RetryConnectorAllocator()
+        {
+            @Override
+            public RetryConnector newRetryConnector(Connector parentConnector, Retry retry)
+            {
+                return new RetryConnector(parentConnector, retry);
+            }
+        };
     }
 
     /**
@@ -63,7 +83,7 @@ public class DefaultQdsConfiguration implements QdsConfiguration
      * @param jerseyConfiguration jersey client configuration or null for default
      * @param retry the retry to use
      */
-    public DefaultQdsConfiguration(String apiEndpoint, String apiToken, ClientConfig jerseyConfiguration, final Retry retry)
+    public DefaultQdsConfiguration(String apiEndpoint, String apiToken, ClientConfig jerseyConfiguration, final Retry retry, final RetryConnectorAllocator retryConnectorAllocator)
     {
         this.apiEndpoint = Preconditions.checkNotNull(apiEndpoint, "apiEndpoint cannot be null");
         this.apiToken = Preconditions.checkNotNull(apiToken, "apiToken cannot be null");
@@ -80,7 +100,7 @@ public class DefaultQdsConfiguration implements QdsConfiguration
             @Override
             public Connector getConnector(Client client, Configuration config)
             {
-                return new RetryConnector(super.getConnector(client, config), retry);
+                return retryConnectorAllocator.newRetryConnector(super.getConnector(client, config), retry);
             }
         };
         jerseyConfiguration.connectorProvider(connectorProvider);
