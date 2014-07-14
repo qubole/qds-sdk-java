@@ -20,7 +20,6 @@ public class TestRequestComposition
 
         MockClient.InvokeDetails details = results.poll(1, TimeUnit.SECONDS);
         Assert.assertNotNull(details);
-        Assert.assertNull(details.getEntity());
         Assert.assertEquals(details.getAdditionalPaths(), new String[]{"commands"});
         Assert.assertEquals(details.getResponseType(), Commands.class);
         Assert.assertNull(details.getForPage());
@@ -35,7 +34,6 @@ public class TestRequestComposition
 
         MockClient.InvokeDetails details = results.poll(1, TimeUnit.SECONDS);
         Assert.assertNotNull(details);
-        Assert.assertNull(details.getEntity());
         Assert.assertEquals(details.getAdditionalPaths(), new String[]{"commands"});
         Assert.assertEquals(details.getResponseType(), Commands.class);
         Assert.assertEquals(details.getForPage(), new ForPage(10, 20));
