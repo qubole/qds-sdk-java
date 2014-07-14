@@ -4,6 +4,7 @@ import com.qubole.qds.sdk.java.client.retry.RetryPolicy;
 import org.glassfish.jersey.client.ClientResponse;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.net.ConnectException;
 
 public class StandardRetryPolicy implements RetryPolicy
 {
@@ -23,36 +24,46 @@ public class StandardRetryPolicy implements RetryPolicy
 
     @SuppressWarnings("SimplifiableIfStatement")
     @Override
-    public boolean shouldBeRetried(int retryCount, ClientResponse response, Throwable exception)
+    public boolean shouldBeRetried(int retryCount, ClientResponse response, Throwable exception, Mode mode)
     {
         if ( retryCount >= maxRetries )
         {
             return false;
         }
 
-        if ( response != null )
+        if ( (response != null) && (mode == Mode.RETRY_ALL) )
         {
             if ( response.getStatusInfo().getFamily() == Response.Status.Family.SERVER_ERROR )
             {
                 return true;
             }
         }
-        return shouldBeRetried(exception);
+        return shouldBeRetried(exception, mode);
     }
 
     @SuppressWarnings("SimplifiableIfStatement")
-    private boolean shouldBeRetried(Throwable exception)
+    private boolean shouldBeRetried(Throwable exception, Mode mode)
     {
         if ( exception == null )
         {
             return false;
         }
 
-        if ( exception instanceof IOException )
+        if ( mode == Mode.RETRY_ALL )
         {
-            return true;
+            if ( exception instanceof IOException )
+            {
+                return true;
+            }
+        }
+        else
+        {
+            if ( exception instanceof ConnectException )
+            {
+                return true;
+            }
         }
 
-        return shouldBeRetried(exception.getCause());
+        return shouldBeRetried(exception.getCause(), mode);
     }
 }
