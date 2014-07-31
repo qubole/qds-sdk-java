@@ -140,12 +140,12 @@ Using the QdsClient, you can access any of the Qubole APIs:
 
 | API | Example |
 | --- | ------- |
-| [Reports](http://www.qubole.com/docs/documentation/reports-api/) | client.report().allCommandsReport().start_date(...).end_date(...).limit(...).invoke(); |
-| [Scheduler](http://www.qubole.com/docs/documentation/scheduler-api/) | client.scheduler().list().invoke(); |
-| [DbTaps](http://www.qubole.com/docs/documentation/dbtaps-api-qds-api-reference/) | client.dbTaps().list().invoke(); |
-| [Hive Metadata](http://www.qubole.com/docs/documentation/hive-metadata-api/) | client.hiveMetadata().getTableProperties("table").invoke(); |
-| [Cluster](http://www.qubole.com/docs/documentation/cluster-api/) | client.cluster().list().invoke(); |
-| [Command](http://www.qubole.com/docs/documentation/command-api/) | client.command().history().invoke(); |
+| [Reports](http://www.qubole.com/documentation/en/latest/rest-api/reports_api/index.html) | client.report().allCommandsReport().start_date(...).end_date(...).limit(...).invoke(); |
+| [Scheduler](http://www.qubole.com/documentation/en/latest/rest-api/scheduler_api/index.html) | client.scheduler().list().invoke(); |
+| [DbTaps](http://www.qubole.com/documentation/en/latest/rest-api/dbtap_api/index.html) | client.dbTaps().list().invoke(); |
+| [Hive Metadata](http://www.qubole.com/documentation/en/latest/rest-api/hive_metadata_api/index.html) | client.hiveMetadata().getTableProperties("table").invoke(); |
+| [Cluster](http://www.qubole.com/documentation/en/latest/rest-api/cluster_api/index.html) | client.cluster().list().invoke(); |
+| [Command](http://www.qubole.com/documentation/en/latest/rest-api/command_api/index.html) | client.command().history().invoke(); |
 
 ## Jersey 2.0
 
