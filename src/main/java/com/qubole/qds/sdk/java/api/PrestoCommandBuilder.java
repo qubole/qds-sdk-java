@@ -7,4 +7,6 @@ public interface PrestoCommandBuilder extends InvokableBuilder<CommandResponse>
     public PrestoCommandBuilder script_location(String script_location);
 
     public PrestoCommandBuilder query(String query);
+
+    public PrestoCommandBuilder clusterLabel(String clusterLabel);
 }

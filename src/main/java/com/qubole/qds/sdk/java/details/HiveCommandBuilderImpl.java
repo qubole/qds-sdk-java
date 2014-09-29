@@ -76,6 +76,13 @@ public class HiveCommandBuilderImpl extends CommandBuilderImplBase implements Hi
     }
 
     @Override
+    public HiveCommandBuilder clusterLabel(String clusterLabel)
+    {
+        node.put("label", clusterLabel);
+        return this;
+    }
+
+    @Override
     protected ObjectNode getEntity()
     {
         return node;

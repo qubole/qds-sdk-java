@@ -23,6 +23,13 @@ class PrestoCommandBuilderImpl extends CommandBuilderImplBase implements PrestoC
     }
 
     @Override
+    public PrestoCommandBuilder clusterLabel(String clusterLabel)
+    {
+        node.put("label", clusterLabel);
+        return this;
+    }
+
+    @Override
     protected ObjectNode getEntity()
     {
         return node;

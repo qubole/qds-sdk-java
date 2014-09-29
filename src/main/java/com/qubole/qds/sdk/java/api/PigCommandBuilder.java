@@ -10,4 +10,6 @@ public interface PigCommandBuilder extends InvokableBuilder<CommandResponse>
     public PigCommandBuilder parameters(Map<String, Object> parameters);
 
     public PigCommandBuilder latin_statements(String latin_statements);
+
+    public PigCommandBuilder clusterLabel(String clusterLabel);
 }

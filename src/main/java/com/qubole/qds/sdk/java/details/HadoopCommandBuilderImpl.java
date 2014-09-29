@@ -23,6 +23,13 @@ class HadoopCommandBuilderImpl extends CommandBuilderImplBase implements HadoopC
     }
 
     @Override
+    public HadoopCommandBuilder clusterLabel(String clusterLabel)
+    {
+        node.put("label", clusterLabel);
+        return this;
+    }
+
+    @Override
     protected ObjectNode getEntity()
     {
         return node;
