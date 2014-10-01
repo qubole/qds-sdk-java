@@ -31,6 +31,13 @@ class PigCommandBuilderImpl extends CommandBuilderImplBase implements PigCommand
     }
 
     @Override
+    public PigCommandBuilder clusterLabel(String clusterLabel)
+    {
+        node.put("label", clusterLabel);
+        return this;
+    }
+
+    @Override
     protected ObjectNode getEntity()
     {
         return node;

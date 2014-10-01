@@ -21,4 +21,6 @@ public interface HiveCommandBuilder extends InvokableBuilder<CommandResponse>
     public HiveCommandBuilder approxAggregations(boolean approxAggregations);
 
     public HiveCommandBuilder macro(String name, String value);
+
+    public HiveCommandBuilder clusterLabel(String clusterLabel);
 }
