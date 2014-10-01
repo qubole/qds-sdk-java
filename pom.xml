@@ -15,7 +15,7 @@
         <guava-version>16.0.1</guava-version>
         <testng-version>6.8.8</testng-version>
         <aws-java-sdk-version>1.8.9</aws-java-sdk-version>
-        <jackson.version>2.3.3</jackson.version>
+        <jackson-version>2.3.3</jackson-version>
     </properties>
 
     <dependencyManagement>
@@ -23,17 +23,17 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>${jackson.version}</version>
+                <version>${jackson-version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
-                <version>${jackson.version}</version>
+                <version>${jackson-version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>${jackson.version}</version>
+                <version>${jackson-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
