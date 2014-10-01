@@ -4,22 +4,7 @@
 
     <groupId>com.qubole.qds-sdk-java</groupId>
     <artifactId>qds-sdk-java</artifactId>
-    <version>0.4.3-dw-compat-SNAPSHOT</version>
-
-        <scm>
-            <url>https://github.com/jeffbeard/qds-sdk-java.git</url>
-            <connection>scm:git:git://github.com/jeffbeard/qds-sdk-java.git</connection>
-            <developerConnection>scm:git:git@github.com:jeffbeard:qds-sdk-java.git</developerConnection>
-        </scm>
-
-        <developers>
-            <developer>
-                <email>kevinsawicki@gmail.com</email>
-                <name>Kevin Sawicki</name>
-                <url>https://github.com/kevinsawicki</url>
-                <id>kevinsawicki</id>
-            </developer>
-        </developers>
+    <version>0.4.3-dw-compat</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
