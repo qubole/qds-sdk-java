@@ -46,6 +46,11 @@ public interface CommandApi
     public PrestoCommandBuilder presto();
 
     /**
+     * @return new builder
+     */
+    public ShellCommandBuilder shell();
+
+    /**
      * @param query the query to be run
      * @param db_tap_id the db_tap id where the query will be run
      * @return new builder
