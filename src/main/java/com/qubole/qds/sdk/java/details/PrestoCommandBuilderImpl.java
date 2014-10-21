@@ -30,6 +30,12 @@ class PrestoCommandBuilderImpl extends CommandBuilderImplBase implements PrestoC
     }
 
     @Override
+    public PrestoCommandBuilder name(String queryName) {
+        node.put("name", queryName);
+        return this;
+    }
+
+    @Override
     protected ObjectNode getEntity()
     {
         return node;

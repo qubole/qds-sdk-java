@@ -83,6 +83,12 @@ public class HiveCommandBuilderImpl extends CommandBuilderImplBase implements Hi
     }
 
     @Override
+    public HiveCommandBuilder name(String queryName) {
+        node.put("name", queryName);
+        return this;
+    }
+
+    @Override
     protected ObjectNode getEntity()
     {
         return node;

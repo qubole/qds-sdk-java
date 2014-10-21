@@ -49,6 +49,12 @@ public class ShellCommandBuilderImpl extends CommandBuilderImplBase implements S
     }
 
     @Override
+    public ShellCommandBuilder name(String commandName) {
+        node.put("name", commandName);
+        return this;
+    }
+
+    @Override
     protected ObjectNode getEntity()
     {
         return node;

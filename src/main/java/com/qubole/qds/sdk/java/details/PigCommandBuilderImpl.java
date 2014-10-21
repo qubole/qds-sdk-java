@@ -38,6 +38,12 @@ class PigCommandBuilderImpl extends CommandBuilderImplBase implements PigCommand
     }
 
     @Override
+    public PigCommandBuilder name(String commmandName) {
+        node.put("name", commmandName);
+        return this;
+    }
+
+    @Override
     protected ObjectNode getEntity()
     {
         return node;
