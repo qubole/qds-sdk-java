@@ -9,4 +9,6 @@ public interface PrestoCommandBuilder extends InvokableBuilder<CommandResponse>
     public PrestoCommandBuilder query(String query);
 
     public PrestoCommandBuilder clusterLabel(String clusterLabel);
+
+    public PrestoCommandBuilder name(String queryName);
 }

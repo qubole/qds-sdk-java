@@ -30,6 +30,12 @@ class HadoopCommandBuilderImpl extends CommandBuilderImplBase implements HadoopC
     }
 
     @Override
+    public HadoopCommandBuilder name(String commandName) {
+        node.put("name", commandName);
+        return this;
+    }
+
+    @Override
     protected ObjectNode getEntity()
     {
         return node;

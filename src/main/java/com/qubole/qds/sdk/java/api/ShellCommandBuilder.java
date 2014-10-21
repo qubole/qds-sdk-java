@@ -15,4 +15,6 @@ public interface ShellCommandBuilder extends InvokableBuilder<CommandResponse>
     public ShellCommandBuilder archives(List<String> archiveList);
 
     public ShellCommandBuilder clusterLabel(String clusterLabel);
+
+    public ShellCommandBuilder name(String commandName);
 }
