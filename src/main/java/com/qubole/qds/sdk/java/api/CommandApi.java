@@ -52,7 +52,7 @@ public interface CommandApi
 
     /**
      * @param query the query to be run
-     * @param db_tap_id the db_tap id where the query will be run
+     * @param dbTapId the db_tap id where the query will be run
      * @return new builder
      */
     public InvokableBuilder<CommandResponse> dbTapQuery(String query, int dbTapId);
