@@ -7,6 +7,7 @@ import com.qubole.qds.sdk.java.client.retry.Retry;
 import com.qubole.qds.sdk.java.client.retry.RetryConnector;
 import com.qubole.qds.sdk.java.details.QdsClientImpl;
 import com.qubole.qds.sdk.java.details.StandardRetry;
+
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
 import org.glassfish.jersey.client.ClientRequest;
@@ -15,6 +16,7 @@ import org.glassfish.jersey.client.spi.Connector;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -84,7 +86,8 @@ public class TestRetries
             }
         };
         DefaultQdsConfiguration configuration = new DefaultQdsConfiguration("http://localhost:" + TEST_PORT, "bar", clientConfig, new StandardRetry(), retryConnectorAllocator);
-        QdsClient client = new QdsClientImpl(configuration);
+        @SuppressWarnings("resource")
+		QdsClient client = new QdsClientImpl(configuration);
         try
         {
             client.command().status("100").invoke().get();  // status is set to retry
@@ -129,7 +132,8 @@ public class TestRetries
             }
         };
         DefaultQdsConfiguration configuration = new DefaultQdsConfiguration("http://localhost:" + TEST_PORT, "bar", clientConfig, new StandardRetry(), retryConnectorAllocator);
-        QdsClient client = new QdsClientImpl(configuration);
+        @SuppressWarnings("resource")
+		QdsClient client = new QdsClientImpl(configuration);
         String value = client.command().logs("100").invoke().get();  // logs is set to retry
         Assert.assertTrue(hadRetry.get());
         Assert.assertEquals(value, TEST_VALUE);
@@ -161,7 +165,8 @@ public class TestRetries
             }
         };
         DefaultQdsConfiguration configuration = new DefaultQdsConfiguration("http://localhost:" + TEST_PORT, "bar", new ClientConfig(), new StandardRetry(), retryConnectorAllocator);
-        QdsClient client = new QdsClientImpl(configuration);
+        @SuppressWarnings("resource")
+		QdsClient client = new QdsClientImpl(configuration);
         String value = client.command().logs("100").invoke().get();  // logs is set to retry
         Assert.assertTrue(hadRetry.get());
         Assert.assertEquals(value, TEST_VALUE);

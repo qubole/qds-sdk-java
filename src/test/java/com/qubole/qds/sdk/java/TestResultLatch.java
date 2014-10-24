@@ -8,8 +8,10 @@ import com.qubole.qds.sdk.java.details.ForPage;
 import com.qubole.qds.sdk.java.details.MockClient;
 import com.qubole.qds.sdk.java.entities.Command;
 import com.qubole.qds.sdk.java.entities.ResultValue;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -24,7 +26,8 @@ public class TestResultLatch
     {
         QdsClient mockClient = new MockClient()
         {
-            @Override
+            @SuppressWarnings("rawtypes")
+			@Override
             public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, Class<T> responseType, String... additionalPaths)
             {
                 Command command = new Command();
@@ -42,7 +45,8 @@ public class TestResultLatch
         final AtomicInteger count = new AtomicInteger(4);
         QdsClient mockClient = new MockClient()
         {
-            @Override
+            @SuppressWarnings("rawtypes")
+			@Override
             public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, Class<T> responseType, String... additionalPaths)
             {
                 Command command = new Command();
@@ -60,7 +64,8 @@ public class TestResultLatch
     {
         QdsClient mockClient = new MockClient()
         {
-            @Override
+            @SuppressWarnings("rawtypes")
+			@Override
             public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, Class<T> responseType, String... additionalPaths)
             {
                 if ( responseType.equals(Command.class) )
@@ -84,7 +89,8 @@ public class TestResultLatch
     {
         QdsClient mockClient = new MockClient()
         {
-            @Override
+            @SuppressWarnings("rawtypes")
+			@Override
             public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, Class<T> responseType, String... additionalPaths)
             {
                 if ( responseType.equals(Command.class) )
@@ -128,7 +134,8 @@ public class TestResultLatch
     {
         QdsClient mockClient = new MockClient()
         {
-            @Override
+            @SuppressWarnings("rawtypes")
+			@Override
             public <T> Future<T> invokeRequest(ForPage forPage, RequestDetails requestDetails, Class<T> responseType, String... additionalPaths)
             {
                 Command command = new Command();

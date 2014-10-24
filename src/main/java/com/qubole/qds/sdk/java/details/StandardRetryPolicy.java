@@ -26,7 +26,6 @@ public class StandardRetryPolicy implements RetryPolicy
         this.maxRetries = maxRetries;
     }
 
-    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean shouldBeRetried(URI uri, int retryCount, ClientResponse response, Throwable exception, Mode mode)
     {
@@ -47,7 +46,6 @@ public class StandardRetryPolicy implements RetryPolicy
         return shouldBeRetried(uri, exception, mode);
     }
 
-    @SuppressWarnings("SimplifiableIfStatement")
     private boolean shouldBeRetried(URI uri, Throwable exception, Mode mode)
     {
         if ( exception == null )

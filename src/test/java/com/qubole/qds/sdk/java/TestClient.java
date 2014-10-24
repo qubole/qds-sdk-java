@@ -5,11 +5,14 @@ import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.details.RequestDetails;
 import com.qubole.qds.sdk.java.details.ForPage;
 import com.qubole.qds.sdk.java.details.QdsClientImpl;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import javax.ws.rs.client.AsyncInvoker;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.concurrent.Future;
@@ -56,7 +59,8 @@ public class TestClient
     {
         QdsConfiguration configuration = new DefaultQdsConfiguration("foo");
         final AtomicReference<WebTarget> webTargetReference = new AtomicReference<WebTarget>(null);
-        QdsClientImpl client = new QdsClientImpl(configuration)
+        @SuppressWarnings("resource")
+		QdsClientImpl client = new QdsClientImpl(configuration)
         {
             @Override
             protected <T> Future<T> invokePreparedRequest(RequestDetails entity, Class<T> responseType, AsyncInvoker invoker)

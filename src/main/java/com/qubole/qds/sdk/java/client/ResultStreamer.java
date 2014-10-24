@@ -128,7 +128,6 @@ public class ResultStreamer implements Closeable
         return new PathReader(paths);
     }
 
-    @SuppressWarnings("NullableProblems")
     private class PathReader extends Reader
     {
         private final Iterator<String> pathIterator;
