@@ -15,4 +15,5 @@ public interface DbAdvancedImportCommandBuilder extends InvokableBuilder<Command
     public DbAdvancedImportCommandBuilder db_split_column(String db_split_column);
 
     public DbAdvancedImportCommandBuilder db_parallelism(String db_parallelism);
+    public DbAdvancedImportCommandBuilder tags(String[] queryTags);
 }

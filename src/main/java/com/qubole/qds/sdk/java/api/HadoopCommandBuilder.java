@@ -17,4 +17,7 @@ public interface HadoopCommandBuilder extends InvokableBuilder<CommandResponse>
     public HadoopCommandBuilder clusterLabel(String clusterLabel);
 
     public HadoopCommandBuilder name(String commandName);
+
+    public HadoopCommandBuilder tags(String[] queryTags);
+
 }

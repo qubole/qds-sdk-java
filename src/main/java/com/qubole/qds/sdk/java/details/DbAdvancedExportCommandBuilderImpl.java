@@ -1,6 +1,7 @@
 package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.DbAdvancedExportCommandBuilder;
+import com.qubole.qds.sdk.java.api.HiveCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import org.codehaus.jackson.node.ObjectNode;
 
@@ -47,6 +48,12 @@ class DbAdvancedExportCommandBuilderImpl extends CommandBuilderImplBase implemen
     public DbAdvancedExportCommandBuilder fields_terminated_by(String fields_terminated_by)
     {
         node.put("fields_terminated_by", fields_terminated_by);
+        return this;
+    }
+
+    @Override
+    public DbAdvancedExportCommandBuilder tags(String[] queryTags) {
+        node.putPOJO("tags", queryTags);
         return this;
     }
 

@@ -1,5 +1,6 @@
 package com.qubole.qds.sdk.java.details;
 
+import com.qubole.qds.sdk.java.api.PigCommandBuilder;
 import com.qubole.qds.sdk.java.api.PrestoCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import org.codehaus.jackson.node.ObjectNode;
@@ -32,6 +33,12 @@ class PrestoCommandBuilderImpl extends CommandBuilderImplBase implements PrestoC
     @Override
     public PrestoCommandBuilder name(String queryName) {
         node.put("name", queryName);
+        return this;
+    }
+
+    @Override
+    public PrestoCommandBuilder tags(String[] queryTags) {
+        node.putPOJO("tags", queryTags);
         return this;
     }
 

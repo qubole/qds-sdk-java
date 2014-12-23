@@ -1,5 +1,6 @@
 package com.qubole.qds.sdk.java.details;
 
+import com.qubole.qds.sdk.java.api.HadoopCommandBuilder;
 import com.qubole.qds.sdk.java.api.PigCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import org.codehaus.jackson.node.ObjectNode;
@@ -40,6 +41,12 @@ class PigCommandBuilderImpl extends CommandBuilderImplBase implements PigCommand
     @Override
     public PigCommandBuilder name(String commmandName) {
         node.put("name", commmandName);
+        return this;
+    }
+
+    @Override
+    public PigCommandBuilder tags(String[] queryTags) {
+        node.putPOJO("tags", queryTags);
         return this;
     }
 

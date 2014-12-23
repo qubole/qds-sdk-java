@@ -1,5 +1,6 @@
 package com.qubole.qds.sdk.java.details;
 
+import com.qubole.qds.sdk.java.api.DbAdvancedImportCommandBuilder;
 import com.qubole.qds.sdk.java.api.DbSimpleExportCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import org.codehaus.jackson.node.ObjectNode;
@@ -47,6 +48,12 @@ class DbSimpleExportCommandBuilderImpl extends CommandBuilderImplBase implements
     public DbSimpleExportCommandBuilder db_update_keys(String db_update_keys)
     {
         node.put("db_update_keys", db_update_keys);
+        return this;
+    }
+
+    @Override
+    public DbSimpleExportCommandBuilder tags(String[] queryTags) {
+        node.putPOJO("tags", queryTags);
         return this;
     }
 

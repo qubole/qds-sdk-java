@@ -14,4 +14,6 @@ public interface PigCommandBuilder extends InvokableBuilder<CommandResponse>
     public PigCommandBuilder clusterLabel(String clusterLabel);
 
     public PigCommandBuilder name(String commmandName);
+
+    public PigCommandBuilder tags(String[] tags);
 }

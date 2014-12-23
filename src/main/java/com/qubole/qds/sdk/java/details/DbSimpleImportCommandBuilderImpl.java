@@ -1,5 +1,6 @@
 package com.qubole.qds.sdk.java.details;
 
+import com.qubole.qds.sdk.java.api.DbSimpleExportCommandBuilder;
 import com.qubole.qds.sdk.java.api.DbSimpleImportCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import org.codehaus.jackson.node.ObjectNode;
@@ -40,6 +41,12 @@ class DbSimpleImportCommandBuilderImpl extends CommandBuilderImplBase implements
     public DbSimpleImportCommandBuilder db_parallelism(String db_parallelism)
     {
         node.put("db_parallelism", db_parallelism);
+        return this;
+    }
+
+    @Override
+    public DbSimpleImportCommandBuilder tags(String[] queryTags) {
+        node.putPOJO("tags", queryTags);
         return this;
     }
 

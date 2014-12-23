@@ -1,5 +1,6 @@
 package com.qubole.qds.sdk.java.details;
 
+import com.qubole.qds.sdk.java.api.DbSimpleImportCommandBuilder;
 import com.qubole.qds.sdk.java.api.HadoopCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import org.codehaus.jackson.node.ObjectNode;
@@ -32,6 +33,12 @@ class HadoopCommandBuilderImpl extends CommandBuilderImplBase implements HadoopC
     @Override
     public HadoopCommandBuilder name(String commandName) {
         node.put("name", commandName);
+        return this;
+    }
+
+    @Override
+    public HadoopCommandBuilder tags(String[] queryTags) {
+        node.putPOJO("tags", queryTags);
         return this;
     }
 

@@ -89,6 +89,12 @@ public class HiveCommandBuilderImpl extends CommandBuilderImplBase implements Hi
     }
 
     @Override
+    public HiveCommandBuilder tags(String[] queryTags) {
+        node.putPOJO("tags", queryTags);
+        return this;
+    }
+
+    @Override
     protected ObjectNode getEntity()
     {
         return node;

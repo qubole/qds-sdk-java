@@ -1,5 +1,6 @@
 package com.qubole.qds.sdk.java.details;
 
+import com.qubole.qds.sdk.java.api.DbAdvancedExportCommandBuilder;
 import com.qubole.qds.sdk.java.api.DbAdvancedImportCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import org.codehaus.jackson.node.ObjectNode;
@@ -47,6 +48,12 @@ class DbAdvancedImportCommandBuilderImpl extends CommandBuilderImplBase implemen
     public DbAdvancedImportCommandBuilder db_parallelism(String db_parallelism)
     {
         node.put("db_parallelism", db_parallelism);
+        return this;
+    }
+
+    @Override
+    public DbAdvancedImportCommandBuilder tags(String[] queryTags) {
+        node.putPOJO("tags", queryTags);
         return this;
     }
 
