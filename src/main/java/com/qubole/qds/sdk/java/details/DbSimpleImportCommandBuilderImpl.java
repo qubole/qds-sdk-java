@@ -1,6 +1,5 @@
 package com.qubole.qds.sdk.java.details;
 
-import com.qubole.qds.sdk.java.api.DbSimpleExportCommandBuilder;
 import com.qubole.qds.sdk.java.api.DbSimpleImportCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import org.codehaus.jackson.node.ObjectNode;

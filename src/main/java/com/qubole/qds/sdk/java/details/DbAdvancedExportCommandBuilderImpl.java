@@ -1,7 +1,6 @@
 package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.DbAdvancedExportCommandBuilder;
-import com.qubole.qds.sdk.java.api.HiveCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import org.codehaus.jackson.node.ObjectNode;
 
