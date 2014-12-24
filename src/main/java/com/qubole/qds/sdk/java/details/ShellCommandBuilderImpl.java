@@ -1,7 +1,6 @@
 package com.qubole.qds.sdk.java.details;
 
 import com.google.common.base.Joiner;
-import com.qubole.qds.sdk.java.api.PrestoCommandBuilder;
 import com.qubole.qds.sdk.java.api.ShellCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import org.codehaus.jackson.node.ObjectNode;
