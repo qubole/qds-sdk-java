@@ -18,5 +18,5 @@ public interface ShellCommandBuilder extends InvokableBuilder<CommandResponse>
 
     public ShellCommandBuilder name(String commandName);
 
-    public ShellCommandBuilder tags(String[] tags);
+    public ShellCommandBuilder tags(String[] queryTags);
 }

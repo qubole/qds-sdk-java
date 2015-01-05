@@ -5,9 +5,6 @@ import com.qubole.qds.sdk.java.client.*;
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.entities.ResultValue;
 
-/**
- * Created by Dinesh on 24-12-2014.
- */
 public class TestHadoopCommand
 {
     public static void main(String[] args) throws Exception {

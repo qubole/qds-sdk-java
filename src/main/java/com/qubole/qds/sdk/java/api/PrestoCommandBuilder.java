@@ -12,5 +12,5 @@ public interface PrestoCommandBuilder extends InvokableBuilder<CommandResponse>
 
     public PrestoCommandBuilder name(String queryName);
 
-    public PrestoCommandBuilder tags(String[] tags);
+    public PrestoCommandBuilder tags(String[] queryTags);
 }
