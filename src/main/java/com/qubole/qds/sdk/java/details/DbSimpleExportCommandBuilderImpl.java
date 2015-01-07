@@ -51,6 +51,12 @@ class DbSimpleExportCommandBuilderImpl extends CommandBuilderImplBase implements
     }
 
     @Override
+    public DbSimpleExportCommandBuilder tags(String[] queryTags) {
+        node.putPOJO("tags", queryTags);
+        return this;
+    }
+
+    @Override
     protected ObjectNode getEntity()
     {
         return node;

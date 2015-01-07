@@ -44,6 +44,12 @@ class PigCommandBuilderImpl extends CommandBuilderImplBase implements PigCommand
     }
 
     @Override
+    public PigCommandBuilder tags(String[] queryTags) {
+        node.putPOJO("tags", queryTags);
+        return this;
+    }
+
+    @Override
     protected ObjectNode getEntity()
     {
         return node;

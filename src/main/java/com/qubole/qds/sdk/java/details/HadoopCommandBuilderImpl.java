@@ -36,6 +36,12 @@ class HadoopCommandBuilderImpl extends CommandBuilderImplBase implements HadoopC
     }
 
     @Override
+    public HadoopCommandBuilder tags(String[] queryTags) {
+        node.putPOJO("tags", queryTags);
+        return this;
+    }
+
+    @Override
     protected ObjectNode getEntity()
     {
         return node;

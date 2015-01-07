@@ -51,6 +51,12 @@ class DbAdvancedExportCommandBuilderImpl extends CommandBuilderImplBase implemen
     }
 
     @Override
+    public DbAdvancedExportCommandBuilder tags(String[] queryTags) {
+        node.putPOJO("tags", queryTags);
+        return this;
+    }
+
+    @Override
     protected ObjectNode getEntity()
     {
         return node;

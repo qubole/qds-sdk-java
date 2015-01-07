@@ -25,4 +25,6 @@ public interface HiveCommandBuilder extends InvokableBuilder<CommandResponse>
     public HiveCommandBuilder clusterLabel(String clusterLabel);
 
     public HiveCommandBuilder name(String queryName);
+
+    public HiveCommandBuilder tags(String[] queryTags);
 }

@@ -15,4 +15,6 @@ public interface DbSimpleExportCommandBuilder extends InvokableBuilder<CommandRe
     public DbSimpleExportCommandBuilder db_update_mode(String db_update_mode);
 
     public DbSimpleExportCommandBuilder db_update_keys(String db_update_keys);
+
+    public DbSimpleExportCommandBuilder tags(String[] queryTags);
 }

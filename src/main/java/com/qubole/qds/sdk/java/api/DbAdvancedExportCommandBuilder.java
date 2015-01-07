@@ -15,4 +15,6 @@ public interface DbAdvancedExportCommandBuilder extends InvokableBuilder<Command
     public DbAdvancedExportCommandBuilder db_update_keys(String db_update_keys);
 
     public DbAdvancedExportCommandBuilder fields_terminated_by(String fields_terminated_by);
+
+    public DbAdvancedExportCommandBuilder tags(String[] queryTags);
 }

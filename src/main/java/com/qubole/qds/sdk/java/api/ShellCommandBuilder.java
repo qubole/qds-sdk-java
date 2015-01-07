@@ -17,4 +17,6 @@ public interface ShellCommandBuilder extends InvokableBuilder<CommandResponse>
     public ShellCommandBuilder clusterLabel(String clusterLabel);
 
     public ShellCommandBuilder name(String commandName);
+
+    public ShellCommandBuilder tags(String[] queryTags);
 }

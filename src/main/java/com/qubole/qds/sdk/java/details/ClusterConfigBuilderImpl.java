@@ -283,6 +283,21 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
                 ec2_settings.put("aws_preferred_availability_zone", aws_preferred_availability_zone);
                 return ClusterConfigBuilderImpl.this;
             }
+
+            @Override
+            public ClusterConfigBuilder subnet_id(String subnet_id)
+            {
+                ec2_settings.put("subnet_id", subnet_id);
+                return ClusterConfigBuilderImpl.this;
+            }
+
+            @Override
+            public ClusterConfigBuilder vpc_id(String vpc_id)
+            {
+                ec2_settings.put("vpc_id", vpc_id);
+                return ClusterConfigBuilderImpl.this;
+            }
+
         };
     }
 }
