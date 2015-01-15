@@ -23,7 +23,7 @@ class HiveMetadataApiImpl implements HiveMetadataApi
 
         if (tableName.contains("."))
         {
-            schemaElems = tableName.split(".");
+            schemaElems = tableName.split("\\.");
         }
         return schemaElems;
     }
