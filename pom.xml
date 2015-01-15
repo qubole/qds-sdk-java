@@ -24,6 +24,17 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <id>qubole</id>
+            <organization>Qubole Inc.</organization>
+            <organizationUrl>http://www.qubole.com</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
