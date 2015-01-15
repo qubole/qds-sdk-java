@@ -15,29 +15,49 @@ class HiveMetadataApiImpl implements HiveMetadataApi
 {
     private final QdsClient client;
 
+    private String [] getSchemaElems(String tableName)
+    {
+        String [] schemaElems = new String[2];
+        schemaElems[0] = "default";
+        schemaElems[1] = tableName;
+
+        if (tableName.contains("."))
+        {
+            schemaElems = tableName.split(".");
+        }
+        return schemaElems;
+    }
+
     @Override
     public InvokableBuilder<List<NameAndType>> table(String tableName)
     {
         GenericType<List<NameAndType>> genericType = new GenericType<List<NameAndType>>(){};
-        return new GenericInvokableBuilderImpl<List<NameAndType>>(client, null, genericType, "hive", "default", tableName);
+        String [] schemaElems = getSchemaElems(tableName);
+        return new GenericInvokableBuilderImpl<List<NameAndType>>(client, null, genericType,
+                "hive", schemaElems[0], schemaElems[1]);
     }
 
     @Override
     public StoreTablePropertiesBuilder storeTableProperties(String tableName)
     {
-        return new StoreTablePropertiesBuilderImpl(client, tableName);
+        String [] schemaElems = getSchemaElems(tableName);
+        return new StoreTablePropertiesBuilderImpl(client, schemaElems[0], schemaElems[1]);
     }
 
     @Override
     public InvokableBuilder<TableProperties> getTableProperties(String tableName)
     {
-        return new GenericInvokableBuilderImpl<TableProperties>(client, RequestDetails.retry(), TableProperties.class, "hive", "default", tableName, "properties");
+        String [] schemaElems = getSchemaElems(tableName);
+        return new GenericInvokableBuilderImpl<TableProperties>(client, RequestDetails.retry(),
+                TableProperties.class, "hive", schemaElems[0], schemaElems[1], "properties");
     }
 
     @Override
     public InvokableBuilder<Status> deleteTableProperties(String tableName)
     {
-        return new GenericInvokableBuilderImpl<Status>(client, new RequestDetails(null, RequestDetails.Method.DELETE), Status.class, "hive", "default", tableName, "properties");
+        String [] schemaElems = getSchemaElems(tableName);
+        return new GenericInvokableBuilderImpl<Status>(client, new RequestDetails(null, RequestDetails.Method.DELETE),
+                Status.class, "hive", schemaElems[0], schemaElems[1], "properties");
     }
 
     @Override

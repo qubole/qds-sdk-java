@@ -13,6 +13,7 @@ class SchemaCommandBuilderImpl extends InvocationCallbackBase<List<Schema>> impl
     private final QdsClient client;
     private String filter;
     private boolean describe;
+    private String schemaName = "default";
 
     @Override
     public SchemaCommandBuilder filter(String filter)
@@ -29,6 +30,12 @@ class SchemaCommandBuilderImpl extends InvocationCallbackBase<List<Schema>> impl
     }
 
     @Override
+    public SchemaCommandBuilder schema(String schemaName)
+    {
+        this.schemaName = schemaName;
+        return this;
+    }
+    @Override
     protected InvokeArguments<List<Schema>> getInvokeArguments()
     {
         Map<String, String> params = Maps.newHashMap();
@@ -42,7 +49,7 @@ class SchemaCommandBuilderImpl extends InvocationCallbackBase<List<Schema>> impl
         }
 
         GenericType<List<Schema>> responseType = new GenericType<List<Schema>>(){};
-        return new InvokeArguments<List<Schema>>(client, null, new RequestDetails(null, RequestDetails.Method.GET, params), responseType, "hive", "default");
+        return new InvokeArguments<List<Schema>>(client, null, new RequestDetails(null, RequestDetails.Method.GET, params), responseType, "hive", schemaName);
     }
 
     SchemaCommandBuilderImpl(QdsClient client)
