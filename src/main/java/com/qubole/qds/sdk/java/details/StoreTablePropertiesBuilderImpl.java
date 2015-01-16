@@ -27,6 +27,8 @@ class StoreTablePropertiesBuilderImpl extends InvocationCallbackBase<Status> imp
     private final QdsClient client;
     private final String tableName;
 
+    private String schemaName = null;
+
     @Override
     public StoreTablePropertiesBuilder interval(String interval)
     {
@@ -52,12 +54,13 @@ class StoreTablePropertiesBuilderImpl extends InvocationCallbackBase<Status> imp
     protected InvokeArguments<Status> getInvokeArguments()
     {
         RequestDetails entity = CommandBuilderImplBase.makeJsonEntity(node, RequestDetails.Method.POST);
-        return new InvokeArguments<Status>(client, null, entity, Status.class, "hive", "default", tableName, "properties");
+        return new InvokeArguments<Status>(client, null, entity, Status.class, "hive", schemaName, tableName, "properties");
     }
 
-    StoreTablePropertiesBuilderImpl(QdsClient client, String tableName)
+    StoreTablePropertiesBuilderImpl(QdsClient client, String schemaName, String tableName)
     {
         this.client = client;
+        this.schemaName = schemaName;
         this.tableName = tableName;
     }
 }

@@ -23,4 +23,6 @@ public interface SchemaCommandBuilder extends InvokableBuilder<List<Schema>>
     public SchemaCommandBuilder filter(String filter);
 
     public SchemaCommandBuilder described();
+
+    public SchemaCommandBuilder schema(String schemaName);
 }
