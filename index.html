@@ -39,23 +39,7 @@
 <h2>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<p>Currently, you will need to download and build from source:</p>
-
-<ul>
-<li>Either:
-
-<ul>
-<li>Clone the project: git clone <a href="mailto:git@github.com">git@github.com</a>:qubole/qds-sdk-java.git </li>
-<li>Or download one of the releases from <a href="https://github.com/qubole/qds-sdk-java/releases">https://github.com/qubole/qds-sdk-java/releases</a>
-</li>
-</ul>
-</li>
-<li>cd to the directory</li>
-<li>mvn install</li>
-<li>NOTE: see the bullet below regarding Jersery 2.0</li>
-</ul>
-
-<p>Then, in your Java application, using Maven, add a dependency:</p>
+<p>The SDK is available in The Central Repository. To use the SDK, add the following dependency to your Java application.</p>
 
 <pre><code>&lt;dependency&gt;
     &lt;groupId&gt;com.qubole.qds-sdk-java&lt;/groupId&gt;
@@ -63,6 +47,8 @@
     &lt;version&gt;THE-VERSION&lt;/version&gt;
 &lt;/dependency&gt;
 </code></pre>
+
+<p>NOTE: see the bullet below regarding Jersery 2.0</p>
 
 <h2>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
@@ -219,15 +205,26 @@ client.command().history().forPage(2, 3).invoke();
 
 <p>The SDK uses Jersey 2.0. Some widely used open source libraries such as Dropwizard are incompatible with Jersey 2.0.
 To workaround this incompatiblity, you can build the SDK using the Maven shade plugin which will hide the SDK's usage
-of Jersey 2.0. To build a shaded version of the SDK, execute:</p>
+of Jersey 2.0. To build a shaded version of the SDK, follow these steps:</p>
 
-<pre><code>mvn -P shaded install
-</code></pre>
+<ul>
+<li>Download the SDK. Either:
+
+<ul>
+<li>Clone the project: <code>git clone git@github.com:qubole/qds-sdk-java.git</code>
+</li>
+<li>Or download one of the releases from <a href="https://github.com/qubole/qds-sdk-java/releases">https://github.com/qubole/qds-sdk-java/releases</a>
+</li>
+</ul>
+</li>
+<li>cd to the directory</li>
+<li><code>mvn -P shaded install</code></li>
+</ul>
 
 <h2>
 <a id="javadoc" class="anchor" href="#javadoc" aria-hidden="true"><span class="octicon octicon-link"></span></a>Javadoc</h2>
 
-<p><a href="http://qubole.github.io/qds-sdk-java/apidocs/">http://qubole.github.io/qds-sdk-java/apidocs/</a></p>
+<p><a href="https://qubole.github.io/qds-sdk-java/apidocs/latest/">https://qubole.github.io/qds-sdk-java/apidocs/latest/</a></p>
       </section>
     </div>
 
