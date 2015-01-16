@@ -154,4 +154,4 @@ of Jersey 2.0. To build a shaded version of the SDK, follow these steps:
 
 ## Javadoc
 
-http://qubole.github.io/qds-sdk-java/apidocs/
+https://qubole.github.io/qds-sdk-java/apidocs/latest/
