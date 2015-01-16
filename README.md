@@ -2,16 +2,7 @@
 A Java library that provides the tools you need to authenticate with, and use the Qubole Data Service API.
 
 ## Installation
-Currently, you will need to download and build from source:
-
-* Either:
- * Clone the project: git clone git@github.com:qubole/qds-sdk-java.git 
- * Or download one of the releases from https://github.com/qubole/qds-sdk-java/releases
-* cd to the directory
-* mvn install
-* NOTE: see the bullet below regarding Jersery 2.0
-
-Then, in your Java application, using Maven, add a dependency:
+The SDK is available in The Central Repository. To use the SDK, add the following dependency to your Java application.
 
 ```
 <dependency>
@@ -20,6 +11,8 @@ Then, in your Java application, using Maven, add a dependency:
     <version>THE-VERSION</version>
 </dependency>
 ```
+
+NOTE: see the bullet below regarding Jersery 2.0
 
 ## Usage
 
@@ -151,11 +144,13 @@ Using the QdsClient, you can access any of the Qubole APIs:
 
 The SDK uses Jersey 2.0. Some widely used open source libraries such as Dropwizard are incompatible with Jersey 2.0.
 To workaround this incompatiblity, you can build the SDK using the Maven shade plugin which will hide the SDK's usage
-of Jersey 2.0. To build a shaded version of the SDK, execute:
+of Jersey 2.0. To build a shaded version of the SDK, follow these steps:
 
-```
-mvn -P shaded install
-```
+* Download the SDK. Either:
+ * Clone the project: `git clone git@github.com:qubole/qds-sdk-java.git`
+ * Or download one of the releases from https://github.com/qubole/qds-sdk-java/releases
+* cd to the directory
+* `mvn -P shaded install`
 
 ## Javadoc
 
