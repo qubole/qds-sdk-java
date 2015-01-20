@@ -28,6 +28,7 @@ class SchemaCommandBuilderImpl extends InvocationCallbackBase<List<Schema>> impl
     private final QdsClient client;
     private String filter;
     private boolean describe;
+    private String schemaName = "default";
 
     @Override
     public SchemaCommandBuilder filter(String filter)
@@ -40,6 +41,13 @@ class SchemaCommandBuilderImpl extends InvocationCallbackBase<List<Schema>> impl
     public SchemaCommandBuilder described()
     {
         describe = true;
+        return this;
+    }
+
+    @Override
+    public SchemaCommandBuilder schemaName(String schemaName)
+    {
+        this.schemaName = schemaName;
         return this;
     }
 
