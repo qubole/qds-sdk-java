@@ -8,7 +8,7 @@ The SDK is available in The Central Repository. To use the SDK, add the followin
 <dependency>
     <groupId>com.qubole.qds-sdk-java</groupId>
     <artifactId>qds-sdk-java</artifactId>
-    <version>THE-VERSION</version>
+    <version>0.5.1</version>
 </dependency>
 ```
 
