@@ -15,7 +15,7 @@
  */
 package com.qubole.qds.sdk.java.examples;
 
-import com.qubole.qds.sdk.java.api.HadoopCommandBuilder;
+import com.qubole.qds.sdk.java.api.PigCommandBuilder;
 import com.qubole.qds.sdk.java.client.ResultLatch;
 import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
@@ -24,33 +24,26 @@ import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.entities.ResultValue;
 
-public class HadoopCommandExample {
+public class PigCommandExample {
     public static void main(String[] args) throws Exception {
         String endpoint = System.getProperty("API_ENDPOINT", DefaultQdsConfiguration.API_ENDPOINT);
         QdsConfiguration configuration = new DefaultQdsConfiguration(endpoint, System.getProperty("API_KEY"));
 
         QdsClient client = QdsClientFactory.newClient(configuration);
         try {
-            HadoopCommandBuilder hcBuilder = client.command().hadoop();
+            PigCommandBuilder pigBuilder = client.command().pig();
 
             // Give a name to the command. (Optional)
-            hcBuilder.name("hadoop-test");
+            pigBuilder.name("pig-test");
 
-            // Specify tags for this command. (Optional)
-            String tags[] = new String[2];
-            tags[0] = "tag1";
-            tags[1] = "tag2";
-            hcBuilder.tags(tags);
+            // Run this command on a non-default cluster.
+            // This cluster label must exist otherwise the API call will fail.
+            pigBuilder.clusterLabel("custom_label");
 
-            hcBuilder.sub_command(HadoopCommandBuilder.SubCommandType.JAR);
-            hcBuilder.sub_command_args("s3n://paid-qubole/HadoopAPIExamples/jars/hadoop-0.20.1-dev-streaming.jar " +
-                    "-files s3n://paid-qubole/HadoopAPIExamples/WordCountPython/mapper.py," +
-                    "s3n://paid-qubole/HadoopAPIExamples/WordCountPython/reducer.py " +
-                    "-mapper mapper.py -reducer reducer.py -numReduceTasks 1 " +
-                    "-input s3n://paid-qubole/default-datasets/gutenberg " +
-                    "-output output.txt");
+            //Using script location. You can give pig latin statements as well.
+            pigBuilder.script_location("s3://paid-qubole/PigAPIDemo/scripts/script1-hadoop-s3-small.pig");
 
-            CommandResponse commandResponse = hcBuilder.invoke().get();
+            CommandResponse commandResponse = pigBuilder.invoke().get();
             ResultLatch resultLatch = new ResultLatch(client, commandResponse.getId());
             ResultValue resultValue = resultLatch.awaitResult();
             System.out.println(resultValue.getResults());
