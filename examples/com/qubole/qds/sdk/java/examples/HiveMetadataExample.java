@@ -50,6 +50,14 @@ public class HiveMetadataExample {
                 System.out.println();
             }
 
+            // Get the list of tables available in non-default schema
+            List<Schema> listOfTablesCustom = client.hiveMetadata().schema().schemaName("tpcds_orc_500").invoke().get();
+            System.out.println("Following tables are available in tpcds_orc_500:");
+            for (Schema s : listOfTablesCustom) {
+                System.out.println(s.getTable_name());
+            }
+            System.out.println();
+
             // Get information about a particular table.
             List<NameAndType> tableDefinition = client.hiveMetadata().table("default_qubole_memetracker").invoke().get();
             System.out.println("Table default_qubole_memetracker:");
