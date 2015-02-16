@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubole.qds.sdk.java;
+package com.qubole.qds.sdk.java.examples;
 
 import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
@@ -23,7 +23,7 @@ import com.qubole.qds.sdk.java.client.ResultLatch;
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.entities.ResultValue;
 
-public class Tester
+public class HiveCommandExample
 {
     public static void main(String[] args) throws Exception
     {
@@ -35,10 +35,10 @@ public class Tester
             CommandResponse commandResponse = client.command().hive().query("show tables;").invoke().get();
             ResultLatch resultLatch = new ResultLatch(client, commandResponse.getId());
             ResultValue resultValue = resultLatch.awaitResult();
-            System.out.println(resultValue);
+            System.out.println(resultValue.getResults());
 
             String s = client.command().logs("" + commandResponse.getId()).invoke().get();
-            System.out.println(s);
+            System.err.println(s);
         }
         finally
         {

@@ -13,47 +13,57 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubole.qds.sdk.java;
+package com.qubole.qds.sdk.java.examples;
 
 import com.qubole.qds.sdk.java.api.HadoopCommandBuilder;
-import com.qubole.qds.sdk.java.client.*;
+import com.qubole.qds.sdk.java.client.ResultLatch;
+import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
+import com.qubole.qds.sdk.java.client.QdsClient;
+import com.qubole.qds.sdk.java.client.QdsClientFactory;
+import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.entities.ResultValue;
 
-public class TestHadoopCommand
+public class HadoopCommandExample
 {
     public static void main(String[] args) throws Exception {
         String endpoint = System.getProperty("API_ENDPOINT", DefaultQdsConfiguration.API_ENDPOINT);
-        QdsConfiguration configuration = new DefaultQdsConfiguration(endpoint,
-                System.getProperty("API_KEY"));
+        QdsConfiguration configuration = new DefaultQdsConfiguration(endpoint, System.getProperty("API_KEY"));
 
         QdsClient client = QdsClientFactory.newClient(configuration);
         try {
             HadoopCommandBuilder hcBuilder = client.command().hadoop();
+
+            // Give a name to the command. (Optional)
             hcBuilder.name("hadoop-test");
 
+            // Specify tags for this command. (Optional)
             String tags[] = new String[2];
-            tags[0] = "test";
-            tags[1] = "tags-test";
+            tags[0] = "tag1";
+            tags[1] = "tag2";
             hcBuilder.tags(tags);
 
+            // Run this command on a non-default cluster.
+            // This cluster label must exist otherwise the API call will fail.
+            hcBuilder.clusterLabel("custom_label");
+
             hcBuilder.sub_command(HadoopCommandBuilder.SubCommandType.JAR);
-            hcBuilder.sub_command_args("s3://paid-qubole/HadoopAPIExamples/jars/hadoop-0.20.1-dev-streaming.jar -files " +
-                    "s3n://paid-qubole/HadoopAPIExamples/WordCountPython/mapper.py," +
+            hcBuilder.sub_command_args("s3n://paid-qubole/HadoopAPIExamples/jars/hadoop-0.20.1-dev-streaming.jar " +
+                    "-files s3n://paid-qubole/HadoopAPIExamples/WordCountPython/mapper.py," +
                     "s3n://paid-qubole/HadoopAPIExamples/WordCountPython/reducer.py " +
-                    "-mapper mapper.py -reducer reducer.py -numReduceTasks 1 -input s3n://paid-qubole/default-datasets/gutenberg " +
+                    "-mapper mapper.py -reducer reducer.py -numReduceTasks 1 " +
+                    "-input s3n://paid-qubole/default-datasets/gutenberg " +
                     "-output output.txt");
 
             CommandResponse commandResponse = hcBuilder.invoke().get();
             ResultLatch resultLatch = new ResultLatch(client, commandResponse.getId());
             ResultValue resultValue = resultLatch.awaitResult();
-            System.out.println(resultValue);
+            System.out.println(resultValue.getResults());
 
             String s = client.command().logs("" + commandResponse.getId()).invoke().get();
-            System.out.println(s);
+            System.err.println(s);
         } finally {
             client.close();
         }
     }
-
 }
