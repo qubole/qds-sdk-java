@@ -65,7 +65,7 @@ class SchemaCommandBuilderImpl extends InvocationCallbackBase<List<Schema>> impl
         }
 
         GenericType<List<Schema>> responseType = new GenericType<List<Schema>>(){};
-        return new InvokeArguments<List<Schema>>(client, null, new RequestDetails(null, RequestDetails.Method.GET, params), responseType, "hive", "default");
+        return new InvokeArguments<List<Schema>>(client, null, new RequestDetails(null, RequestDetails.Method.GET, params), responseType, "hive", schemaName);
     }
 
     SchemaCommandBuilderImpl(QdsClient client)
