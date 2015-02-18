@@ -36,7 +36,7 @@ public class ResultLatch
 
     private static final ExecutorService executorService = Executors.newCachedThreadPool(new ThreadFactoryBuilder().setNameFormat("ResultLatch-%d").setDaemon(true).build());
 
-    private static final int DEFAULT_POLL_MS = 250;
+    private static final int DEFAULT_POLL_MS = 2500;
 
     private static final String STATUS_DONE = "done";
     private static final String STATUS_WAITING = "waiting";
