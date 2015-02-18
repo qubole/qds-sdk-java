@@ -4,6 +4,7 @@
 
 1. Update the version number in `pom.xml` (example: from `0.5.2-SNAPSHOT` to `0.5.2`).
    Update the version number in `README.md` (example: from `0.5.1` to `0.5.2`.)
+   Update the version number in `examples/pom.xml` (example: from `0.5.1` to `0.5.2`.)
 
 2. Commit and push to GitHub.
 
@@ -52,7 +53,7 @@
 
     # Commit and push the changes.
     git add 0.5.2 latest
-    git commmit -m "Update docs for 0.5.2"
+    git commit -m "Update docs for 0.5.2"
     git push origin gh-pages
 
     # Checkout the master branch again
