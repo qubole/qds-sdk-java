@@ -26,7 +26,12 @@ import com.qubole.qds.sdk.java.api.SchedulerApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.client.retry.RetryConnector;
+import com.qubole.qds.sdk.java.entities.SubCommands;
+import com.qubole.qds.sdk.java.entities.SubCommandsDeserializer;
+import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.module.SimpleModule;
+
 import javax.ws.rs.client.AsyncInvoker;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
@@ -70,6 +75,14 @@ public class QdsClientImpl implements QdsClient
         dbTapsApi = new DbTapApiImpl(this);
         reportApi = new ReportApiImpl(this);
         schedulerApi = new SchedulerApiImpl(this);
+
+        // register the deserialization handler for composite command
+        SimpleModule module =
+                new SimpleModule("PolymorphicCommandResponseDeserializerModule",
+                        new Version(1, 0, 0, null));
+        SubCommandsDeserializer ccDeserializer = new SubCommandsDeserializer();
+        module.addDeserializer(SubCommands.class, ccDeserializer);
+        mapper.registerModule(module);
     }
 
     @Override

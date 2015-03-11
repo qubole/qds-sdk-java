@@ -35,4 +35,5 @@ public interface HadoopCommandBuilder extends InvokableBuilder<CommandResponse>
 
     public HadoopCommandBuilder tags(String[] queryTags);
 
+    public BaseCommand build();
 }

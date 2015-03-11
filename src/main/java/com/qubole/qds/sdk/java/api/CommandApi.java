@@ -18,6 +18,7 @@ package com.qubole.qds.sdk.java.api;
 import com.qubole.qds.sdk.java.entities.Command;
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.entities.Commands;
+
 import javax.ws.rs.core.Response;
 
 /**
@@ -99,6 +100,13 @@ public interface CommandApi
      * @return new builder
      */
     public DbAdvancedExportCommandBuilder dbExportAdvanced();
+
+    /**
+     * Corresponds to http://docs.qubole.com/en/latest/rest-api/command_api/submit-a-composite-command.html
+     *
+     * @return new builder
+     */
+    public CompositeCommandBuilder composite();
 
     /**
      * Corresponds to http://www.qubole.com/docs/view-command-status/
