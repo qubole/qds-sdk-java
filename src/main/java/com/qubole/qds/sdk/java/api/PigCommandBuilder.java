@@ -31,4 +31,6 @@ public interface PigCommandBuilder extends InvokableBuilder<CommandResponse>
     public PigCommandBuilder name(String commmandName);
 
     public PigCommandBuilder tags(String[] queryTags);
+
+    public BaseCommand build();
 }

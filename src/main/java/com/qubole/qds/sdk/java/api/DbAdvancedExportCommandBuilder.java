@@ -32,4 +32,6 @@ public interface DbAdvancedExportCommandBuilder extends InvokableBuilder<Command
     public DbAdvancedExportCommandBuilder fields_terminated_by(String fields_terminated_by);
 
     public DbAdvancedExportCommandBuilder tags(String[] queryTags);
+
+    public BaseCommand build();
 }

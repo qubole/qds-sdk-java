@@ -78,7 +78,7 @@ public class QdsClientImpl implements QdsClient
 
         // register the deserialization handler for composite command
         SimpleModule module =
-                new SimpleModule("PolymorphicCommandResponseDeserializerModule",
+                new SimpleModule("CommandResponseDeserializerModule",
                         new Version(1, 0, 0, null));
         SubCommandsDeserializer ccDeserializer = new SubCommandsDeserializer();
         module.addDeserializer(SubCommands.class, ccDeserializer);

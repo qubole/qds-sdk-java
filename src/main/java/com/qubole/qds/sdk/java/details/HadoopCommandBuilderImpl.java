@@ -58,13 +58,9 @@ class HadoopCommandBuilderImpl extends CommandBuilderImplBase implements HadoopC
     }
 
     @Override
-    public BaseCommand build()
+    protected BaseCommand.COMMAND_TYPE getCommandType()
     {
-        ObjectNode cmdNode = QdsClientImpl.getMapper().createObjectNode();
-        cmdNode.putAll(node);
-
-        BaseCommandImpl command = new BaseCommandImpl(BaseCommand.COMMAND_TYPE.HADOOP, cmdNode);
-        return command;
+        return BaseCommand.COMMAND_TYPE.HADOOP;
     }
 
     @Override

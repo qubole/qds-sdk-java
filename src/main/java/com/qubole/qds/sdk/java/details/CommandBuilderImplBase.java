@@ -15,6 +15,7 @@
  */
 package com.qubole.qds.sdk.java.details;
 
+import com.qubole.qds.sdk.java.api.BaseCommand;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.CommandResponse;
@@ -48,6 +49,17 @@ abstract class CommandBuilderImplBase extends InvocationCallbackBase<CommandResp
     }
 
     protected abstract ObjectNode getEntity();
+
+    protected abstract BaseCommand.COMMAND_TYPE getCommandType();
+
+    public BaseCommand build()
+    {
+        ObjectNode cmdNode = QdsClientImpl.getMapper().createObjectNode();
+        cmdNode.putAll(getEntity());
+
+        BaseCommandImpl command = new BaseCommandImpl(getCommandType(), cmdNode);
+        return command;
+    }
 
     protected CommandBuilderImplBase(QdsClient client)
     {
