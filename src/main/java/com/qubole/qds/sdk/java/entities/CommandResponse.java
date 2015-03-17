@@ -84,7 +84,10 @@ public class CommandResponse
         this.qlog = qlog;
     }
 
-    public SubCommands getCommand() { return command; }
+    public SubCommands getCommand()
+    {
+        return command;
+    }
 
     public void setCommand(SubCommands command)
     {

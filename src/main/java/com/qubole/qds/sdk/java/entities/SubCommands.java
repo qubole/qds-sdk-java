@@ -40,7 +40,13 @@ public class SubCommands extends HashMap<String, String>
         this.sub_commands = commands;
     }
 
-    public Command[] getsub_commands() { return this.sub_commands; }
-    public void setsub_commands(Command[] commands) { this.sub_commands = commands; }
+    public Command[] getsub_commands()
+    {
+        return this.sub_commands;
+    }
+    public void setsub_commands(Command[] commands)
+    {
+        this.sub_commands = commands;
+    }
 
 }
