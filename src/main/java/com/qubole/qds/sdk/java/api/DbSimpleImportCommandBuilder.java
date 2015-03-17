@@ -31,4 +31,6 @@ public interface DbSimpleImportCommandBuilder extends InvokableBuilder<CommandRe
     public DbSimpleImportCommandBuilder db_parallelism(String db_parallelism);
 
     public DbSimpleImportCommandBuilder tags(String[] queryTags);
+
+    public BaseCommand build();
 }

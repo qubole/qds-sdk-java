@@ -16,6 +16,7 @@
 package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.HadoopCommandBuilder;
+import com.qubole.qds.sdk.java.api.BaseCommand;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import org.codehaus.jackson.node.ObjectNode;
 
@@ -54,6 +55,12 @@ class HadoopCommandBuilderImpl extends CommandBuilderImplBase implements HadoopC
     public HadoopCommandBuilder tags(String[] queryTags) {
         node.putPOJO("tags", queryTags);
         return this;
+    }
+
+    @Override
+    protected BaseCommand.COMMAND_TYPE getCommandType()
+    {
+        return BaseCommand.COMMAND_TYPE.HADOOP;
     }
 
     @Override

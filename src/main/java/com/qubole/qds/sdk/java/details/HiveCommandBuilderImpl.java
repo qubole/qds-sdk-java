@@ -17,6 +17,7 @@ package com.qubole.qds.sdk.java.details;
 
 import com.google.common.collect.Maps;
 import com.qubole.qds.sdk.java.api.HiveCommandBuilder;
+import com.qubole.qds.sdk.java.api.BaseCommand;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import org.codehaus.jackson.node.ObjectNode;
 import java.util.Map;
@@ -107,6 +108,12 @@ public class HiveCommandBuilderImpl extends CommandBuilderImplBase implements Hi
     public HiveCommandBuilder tags(String[] queryTags) {
         node.putPOJO("tags", queryTags);
         return this;
+    }
+
+    @Override
+    protected BaseCommand.COMMAND_TYPE getCommandType()
+    {
+        return BaseCommand.COMMAND_TYPE.HIVE;
     }
 
     @Override

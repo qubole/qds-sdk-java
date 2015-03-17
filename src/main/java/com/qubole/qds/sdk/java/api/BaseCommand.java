@@ -13,21 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.qubole.qds.sdk.java.api;
 
-import com.qubole.qds.sdk.java.entities.CommandResponse;
-
-public interface PrestoCommandBuilder extends InvokableBuilder<CommandResponse>
+/**
+ * This class is base command for various commands, it has basic information only and primary purpose
+ * is to use it in composite command
+ */
+public interface BaseCommand
 {
-    public PrestoCommandBuilder script_location(String script_location);
+    public enum COMMAND_TYPE
+    {
+        NONE,
+        HIVE,
+        HADOOP,
+        PRESTO,
+        DB_QUERY,
+        DB_EXPORT,
+        DB_IMPORT,
+        PIG,
+        SHELL,
+        COMPOSITE
+    };
 
-    public PrestoCommandBuilder query(String query);
+    public COMMAND_TYPE getCommandType();
 
-    public PrestoCommandBuilder clusterLabel(String clusterLabel);
-
-    public PrestoCommandBuilder name(String queryName);
-
-    public PrestoCommandBuilder tags(String[] queryTags);
-
-    public BaseCommand build();
+    public String getJSONString();
 }

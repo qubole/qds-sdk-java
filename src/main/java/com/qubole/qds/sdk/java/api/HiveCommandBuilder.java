@@ -42,4 +42,6 @@ public interface HiveCommandBuilder extends InvokableBuilder<CommandResponse>
     public HiveCommandBuilder name(String queryName);
 
     public HiveCommandBuilder tags(String[] queryTags);
+
+    public BaseCommand build();
 }

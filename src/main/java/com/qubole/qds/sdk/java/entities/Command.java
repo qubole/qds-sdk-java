@@ -16,7 +16,6 @@
 package com.qubole.qds.sdk.java.entities;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Command
@@ -31,7 +30,7 @@ public class Command
     private String nominal_time;
     private String command_type;
     private CommandMetaData meta_data;
-    private Map<String, String> command;
+    private SubCommands command;
     private String sequence_id;
     private int pid;
     private String label;
@@ -50,7 +49,11 @@ public class Command
     {
     }
 
-    public Command(String status, String pool, String template, String resolved_macros, int qbol_session_id, String created_at, int user_id, String nominal_time, String command_type, CommandMetaData meta_data, Map<String, String> command, String sequence_id, int pid, String label, int num_result_dir, boolean can_notify, int progress, long start_time, long end_time, String path, int id, String timeout, long submit_time, String qlog)
+    public Command(String status, String pool, String template, String resolved_macros, int qbol_session_id,
+                   String created_at, int user_id, String nominal_time, String command_type, CommandMetaData meta_data,
+                   SubCommands command, String sequence_id, int pid, String label, int num_result_dir,
+                   boolean can_notify, int progress, long start_time, long end_time, String path, int id,
+                   String timeout, long submit_time, String qlog)
     {
         this.status = status;
         this.pool = pool;
@@ -178,12 +181,12 @@ public class Command
         this.meta_data = meta_data;
     }
 
-    public Map<String, String> getCommand()
+    public SubCommands getCommand()
     {
         return command;
     }
 
-    public void setCommand(Map<String, String> command)
+    public void setCommand(SubCommands command)
     {
         this.command = command;
     }

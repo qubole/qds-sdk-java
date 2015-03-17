@@ -121,6 +121,12 @@ class CommandApiImpl implements CommandApi
     }
 
     @Override
+    public CompositeCommandBuilder composite()
+    {
+        return new CompositeCommandBuilderImpl(client);
+    }
+
+    @Override
     public InvokableBuilder<CommandResponse> dbTapQuery(String query, int dbTapId) {
         ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
         node.put("command_type", "DbTapQueryCommand");

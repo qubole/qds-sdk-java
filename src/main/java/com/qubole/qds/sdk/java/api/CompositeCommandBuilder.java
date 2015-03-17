@@ -13,25 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 
-public interface DbAdvancedExportCommandBuilder extends InvokableBuilder<CommandResponse>
+public interface CompositeCommandBuilder extends InvokableBuilder<CommandResponse>
 {
-    public DbAdvancedExportCommandBuilder db_table(String db_table);
+    public CompositeCommandBuilder name(String commandName);
 
-    public DbAdvancedExportCommandBuilder dbtap_id(String dbtap_id);
+    public CompositeCommandBuilder tags(String[] queryTags);
 
-    public DbAdvancedExportCommandBuilder export_dir(String export_dir);
+    public CompositeCommandBuilder clusterLabel(String clusterLabel);
 
-    public DbAdvancedExportCommandBuilder db_update_mode(String db_update_mode);
-
-    public DbAdvancedExportCommandBuilder db_update_keys(String db_update_keys);
-
-    public DbAdvancedExportCommandBuilder fields_terminated_by(String fields_terminated_by);
-
-    public DbAdvancedExportCommandBuilder tags(String[] queryTags);
-
-    public BaseCommand build();
+    public CompositeCommandBuilder addSubCommand(BaseCommand command);
 }

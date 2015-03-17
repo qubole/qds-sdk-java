@@ -15,6 +15,7 @@
  */
 package com.qubole.qds.sdk.java.details;
 
+import com.qubole.qds.sdk.java.api.BaseCommand;
 import com.qubole.qds.sdk.java.api.DbAdvancedExportCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import org.codehaus.jackson.node.ObjectNode;
@@ -69,6 +70,12 @@ class DbAdvancedExportCommandBuilderImpl extends CommandBuilderImplBase implemen
     public DbAdvancedExportCommandBuilder tags(String[] queryTags) {
         node.putPOJO("tags", queryTags);
         return this;
+    }
+
+    @Override
+    protected BaseCommand.COMMAND_TYPE getCommandType()
+    {
+        return BaseCommand.COMMAND_TYPE.DB_EXPORT;
     }
 
     @Override

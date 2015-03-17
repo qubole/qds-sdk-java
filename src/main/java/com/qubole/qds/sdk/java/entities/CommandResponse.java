@@ -21,7 +21,7 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CommandResponse
 {
-    private Map<String, String> command;
+    SubCommands command;
     private int qbol_session_id;
     private String created_at;
     private int user_id;
@@ -50,7 +50,13 @@ public class CommandResponse
     {
     }
 
-    public CommandResponse(Map<String, String> command, int qbol_session_id, String created_at, String pool, int user_id, String status, String command_type, int id, int progress, Map<String, String> meta_data, String template, Map<String, String> resolved_macros, String nominal_time, String sequence_id, int pid, String label, int num_result_dir, boolean can_notify, String start_time, String end_time, String path, int timeout, String submit_time, String qlog)
+    public CommandResponse(SubCommands command, int qbol_session_id, String created_at,
+                           String pool, int user_id, String status, String command_type,
+                           int id, int progress, Map<String, String> meta_data, String template,
+                           Map<String, String> resolved_macros, String nominal_time, String sequence_id,
+                           int pid, String label, int num_result_dir, boolean can_notify,
+                           String start_time, String end_time, String path, int timeout,
+                           String submit_time, String qlog)
     {
         this.command = command;
         this.qbol_session_id = qbol_session_id;
@@ -76,6 +82,16 @@ public class CommandResponse
         this.timeout = timeout;
         this.submit_time = submit_time;
         this.qlog = qlog;
+    }
+
+    public SubCommands getCommand()
+    {
+        return command;
+    }
+
+    public void setCommand(SubCommands command)
+    {
+        this.command = command;
     }
 
     public String getQlog()
@@ -228,16 +244,6 @@ public class CommandResponse
         this.pool = pool;
     }
 
-    public Map<String, String> getCommand()
-    {
-        return command;
-    }
-
-    public void setCommand(Map<String, String> command)
-    {
-        this.command = command;
-    }
-
     public int getQbol_session_id()
     {
         return qbol_session_id;
@@ -317,4 +323,5 @@ public class CommandResponse
     {
         this.meta_data = meta_data;
     }
+
 }
