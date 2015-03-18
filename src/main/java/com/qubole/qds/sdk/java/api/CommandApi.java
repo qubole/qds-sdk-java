@@ -60,6 +60,13 @@ public interface CommandApi
      * @return new builder
      */
     public PrestoCommandBuilder presto();
+    
+    /**
+     * Corresponds to http://www.qubole.com/docs/submit-a-spark-command/
+     *
+     * @return new builder
+     */
+    public SparkCommandBuilder spark();
 
     /**
      * @return new builder
@@ -139,4 +146,5 @@ public interface CommandApi
      * @return new builder
      */
     public InvokableBuilder<Response> cancel(String queryId);
+
 }
