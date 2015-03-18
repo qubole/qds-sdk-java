@@ -38,8 +38,8 @@ public class CompositeCommandExample {
 
             // build a hive and hadoop command
             HiveCommandBuilder hiveBuilder = client.command().hive().query("show tables;");
-            HadoopCommandBuilder hcBuilder = client.command().hadoop();
 
+            HadoopCommandBuilder hcBuilder = client.command().hadoop();
             hcBuilder.sub_command(HadoopCommandBuilder.SubCommandType.JAR);
             hcBuilder.sub_command_args("s3://paid-qubole/HadoopAPIExamples/jars/hadoop-0.20.1-dev-streaming.jar -files " +
                     "s3n://paid-qubole/HadoopAPIExamples/WordCountPython/mapper.py," +
@@ -57,7 +57,7 @@ public class CompositeCommandExample {
             // add the two sub commands to this composite command
             // and invoke it
             CommandResponse commandResponse =
-                        wfBuilder.addSubCommand(subCommand1).addSubCommand(subCommand2).invoke().get();
+                    wfBuilder.addSubCommand(subCommand1).addSubCommand(subCommand2).invoke().get();
 
             // for individual commands we can get the array of sub command objects
             Command[] subCommands = commandResponse.getCommand().getsub_commands();
@@ -65,8 +65,10 @@ public class CompositeCommandExample {
             // wait for composite command to finish
             ResultLatch resultLatch = new ResultLatch(client, commandResponse.getId());
             ResultValue resultValue = resultLatch.awaitResult();
+            System.out.println(resultValue.getResults());
+
             String s = client.command().logs("" + commandResponse.getId()).invoke().get();
-            System.out.println(s);
+            System.err.println(s);
         } finally {
             client.close();
         }

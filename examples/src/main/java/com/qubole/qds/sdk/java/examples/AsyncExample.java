@@ -23,6 +23,8 @@ import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.entities.ResultValue;
 
+// When the SDK is compiled with the shaded profile,
+// change this to hidden.javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.client.InvocationCallback;
 import java.util.concurrent.CountDownLatch;
 
