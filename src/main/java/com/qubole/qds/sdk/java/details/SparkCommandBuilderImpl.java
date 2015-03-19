@@ -15,48 +15,44 @@
  */
 package com.qubole.qds.sdk.java.details;
 
-import com.google.common.base.Joiner;
-import com.qubole.qds.sdk.java.api.ShellCommandBuilder;
+import org.codehaus.jackson.node.ObjectNode;
+
 import com.qubole.qds.sdk.java.api.SparkCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 
-import org.codehaus.jackson.node.ObjectNode;
-
-import java.util.List;
-
 public class SparkCommandBuilderImpl extends CommandBuilderImplBase implements SparkCommandBuilder
 {
-    private final ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
+	private final ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
 
-    @Override
-    public SparkCommandBuilder program(String program)
-    {
-        node.put("program", program);
-        return this;
-    }
-    
-    @Override
-    public SparkCommandBuilder cmdLine(String cmdLine)
-    {
-        node.put("cmdline", cmdLine);
-        return this;
-    }
-
-    @Override
-    public SparkCommandBuilder scriptLocation(String scriptLocation)
-    {
-        node.put("script_location", scriptLocation);
-        return this;
-    }
-    
-    @Override
-	public SparkCommandBuilder language(String language) 
-    {
-		node.put("language", language);
-        return this;
+	@Override
+	public SparkCommandBuilder program(String program)
+	{
+		node.put("program", program);
+		return this;
 	}
-    
-    @Override
+
+	@Override
+	public SparkCommandBuilder cmdLine(String cmdLine)
+	{
+		node.put("cmdline", cmdLine);
+		return this;
+	}
+
+	@Override
+	public SparkCommandBuilder scriptLocation(String scriptLocation)
+	{
+		node.put("script_location", scriptLocation);
+		return this;
+	}
+
+	@Override
+	public SparkCommandBuilder language(String language) 
+	{
+		node.put("language", language);
+		return this;
+	}
+
+	@Override
 	public SparkCommandBuilder userProgramArguments(String userProgramArguments) {
 		node.put("user_program_arguments", userProgramArguments);
 		return this;
@@ -68,36 +64,36 @@ public class SparkCommandBuilderImpl extends CommandBuilderImplBase implements S
 		return this;
 	}
 
-    @Override
-    public SparkCommandBuilder clusterLabel(String clusterLabel)
-    {
-        node.put("label", clusterLabel);
-        return this;
-    }
+	@Override
+	public SparkCommandBuilder clusterLabel(String clusterLabel)
+	{
+		node.put("label", clusterLabel);
+		return this;
+	}
 
-    @Override
-    public SparkCommandBuilder name(String commandName) {
-        node.put("name", commandName);
-        return this;
-    }
+	@Override
+	public SparkCommandBuilder name(String commandName) {
+		node.put("name", commandName);
+		return this;
+	}
 
-    @Override
-    public SparkCommandBuilder tags(String[] queryTags) {
-        node.putPOJO("tags", queryTags);
-        return this;
-    }
+	@Override
+	public SparkCommandBuilder tags(String[] queryTags) {
+		node.putPOJO("tags", queryTags);
+		return this;
+	}
 
-    @Override
-    protected ObjectNode getEntity()
-    {
-        return node;
-    }
+	@Override
+	protected ObjectNode getEntity()
+	{
+		return node;
+	}
 
-    SparkCommandBuilderImpl(QdsClient client)
-    {
-        super(client);
-        node.put("command_type", "SparkCommand");
-    }
+	SparkCommandBuilderImpl(QdsClient client)
+	{
+		super(client);
+		node.put("command_type", "SparkCommand");
+	}
 
 }
 

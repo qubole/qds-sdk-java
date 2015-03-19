@@ -62,7 +62,7 @@ public interface CommandApi
     public PrestoCommandBuilder presto();
     
     /**
-     * Corresponds to http://www.qubole.com/docs/submit-a-spark-command/
+     * Corresponds to http://docs.qubole.com/en/latest/quick-start-guide/running-spark-app.html
      *
      * @return new builder
      */
