@@ -60,7 +60,7 @@ public interface CommandApi
      * @return new builder
      */
     public PrestoCommandBuilder presto();
-    
+
     /**
      * Corresponds to http://docs.qubole.com/en/latest/quick-start-guide/running-spark-app.html
      *

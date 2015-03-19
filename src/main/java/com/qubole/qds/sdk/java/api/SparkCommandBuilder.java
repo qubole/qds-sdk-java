@@ -19,23 +19,21 @@ import com.qubole.qds.sdk.java.entities.CommandResponse;
 
 public interface SparkCommandBuilder extends InvokableBuilder<CommandResponse>
 {
-
-	public SparkCommandBuilder program(String program);
-
-	public SparkCommandBuilder cmdLine(String cmdLine);
-
-	public SparkCommandBuilder language(String language);
-
-	public SparkCommandBuilder scriptLocation(String scriptLocation);
-
-	public SparkCommandBuilder clusterLabel(String clusterLabel);
-
-	public SparkCommandBuilder name(String commandName);
-
-	public SparkCommandBuilder userProgramArguments(String userProgramArguments);
-
-	public SparkCommandBuilder arguments(String arguments);
-
-	public SparkCommandBuilder tags(String[] queryTags);
-
+    
+    public SparkCommandBuilder program(String program);
+    
+    public SparkCommandBuilder cmdLine(String cmdLine);
+    
+    public SparkCommandBuilder language(String language);
+    
+    public SparkCommandBuilder clusterLabel(String clusterLabel);
+    
+    public SparkCommandBuilder name(String commandName);
+    
+    public SparkCommandBuilder userProgramArguments(String userProgramArguments);
+    
+    public SparkCommandBuilder arguments(String arguments);
+    
+    public SparkCommandBuilder tags(String[] queryTags);
+    
 }
