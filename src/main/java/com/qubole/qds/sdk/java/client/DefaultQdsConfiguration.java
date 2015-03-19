@@ -129,6 +129,7 @@ public class DefaultQdsConfiguration implements QdsConfiguration
         return ClientBuilder
             .newClient(jerseyConfiguration)
             .register(JacksonFeature.class)
+            .register(UserAgentFilter.class)
             .register(ErrorResponseFilter.class);
     }
 

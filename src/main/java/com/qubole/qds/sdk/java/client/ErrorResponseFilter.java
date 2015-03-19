@@ -23,7 +23,7 @@ public class ErrorResponseFilter implements ClientResponseFilter {
                 }
             }
         } catch (Exception e) {
-            // Silently pass. We don't want anything to to fail because of this filter.
+            // Silently pass. We don't want anything to fail because of this filter.
         }
     }
 
