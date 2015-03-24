@@ -33,7 +33,8 @@ public interface BaseCommand
         DB_IMPORT,
         PIG,
         SHELL,
-        COMPOSITE
+        COMPOSITE,
+        SPARK
     };
 
     public COMMAND_TYPE getCommandType();
