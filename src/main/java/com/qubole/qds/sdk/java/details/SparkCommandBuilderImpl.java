@@ -17,6 +17,8 @@ package com.qubole.qds.sdk.java.details;
 
 import org.codehaus.jackson.node.ObjectNode;
 
+import com.qubole.qds.sdk.java.api.BaseCommand.COMMAND_TYPE;
+import com.qubole.qds.sdk.java.api.BaseCommand;
 import com.qubole.qds.sdk.java.api.SparkCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 
@@ -86,6 +88,11 @@ public class SparkCommandBuilderImpl extends CommandBuilderImplBase implements S
     {
         super(client);
         node.put("command_type", "SparkCommand");
+    }
+
+    @Override
+    protected COMMAND_TYPE getCommandType() {
+        return BaseCommand.COMMAND_TYPE.SPARK;
     }
     
 }
