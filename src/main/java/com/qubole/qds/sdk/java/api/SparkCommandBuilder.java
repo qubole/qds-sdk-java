@@ -13,31 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.qubole.qds.sdk.java.api;
 
-/**
- * This class is base command for various commands, it has basic information only and primary purpose
- * is to use it in composite command
- */
-public interface BaseCommand
+import com.qubole.qds.sdk.java.entities.CommandResponse;
+
+public interface SparkCommandBuilder extends InvokableBuilder<CommandResponse>
 {
-    public enum COMMAND_TYPE
-    {
-        NONE,
-        HIVE,
-        HADOOP,
-        PRESTO,
-        DB_QUERY,
-        DB_EXPORT,
-        DB_IMPORT,
-        PIG,
-        SHELL,
-        COMPOSITE,
-        SPARK
-    };
+    public SparkCommandBuilder program(String program);
 
-    public COMMAND_TYPE getCommandType();
+    public SparkCommandBuilder cmdLine(String cmdLine);
 
-    public String getJSONString();
+    public SparkCommandBuilder language(String language);
+
+    public SparkCommandBuilder clusterLabel(String clusterLabel);
+
+    public SparkCommandBuilder name(String commandName);
+
+    public SparkCommandBuilder userProgramArguments(String userProgramArguments);
+
+    public SparkCommandBuilder arguments(String arguments);
+
+    public SparkCommandBuilder tags(String[] queryTags);
 }

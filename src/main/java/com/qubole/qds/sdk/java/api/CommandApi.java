@@ -62,6 +62,13 @@ public interface CommandApi
     public PrestoCommandBuilder presto();
 
     /**
+     * Corresponds to http://docs.qubole.com/en/latest/quick-start-guide/running-spark-app.html
+     *
+     * @return new builder
+     */
+    public SparkCommandBuilder spark();
+
+    /**
      * @return new builder
      */
     public ShellCommandBuilder shell();

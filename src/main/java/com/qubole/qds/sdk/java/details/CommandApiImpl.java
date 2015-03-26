@@ -121,6 +121,12 @@ class CommandApiImpl implements CommandApi
     }
 
     @Override
+    public SparkCommandBuilder spark()
+    {
+        return new SparkCommandBuilderImpl(client);
+    }
+
+    @Override
     public CompositeCommandBuilder composite()
     {
         return new CompositeCommandBuilderImpl(client);
