@@ -4,7 +4,7 @@
 
 1. Update the version number in `pom.xml` (example: from `0.5.2-SNAPSHOT` to `0.5.2`).
    Update the version number in `README.md` (example: from `0.5.1` to `0.5.2`.)
-   Update the version number in `examples/pom.xml` (example: from `0.5.1` to `0.5.2`.)
+   Update the version number in `examples/pom.xml` (example: from `0.5.2-SNAPSHOT` to `0.5.2`.)
 
 2. Commit and push to GitHub.
 
@@ -36,6 +36,9 @@
 
 8. Update the [`apidocs`](https://github.com/qubole/qds-sdk-java/tree/gh-pages/apidocs) directory in the `gh-pages` branch with the latest docs.
     ```
+    # Switch back to Java 8
+    export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+
     # Generate the javadocs while on the master branch
     mvn clean javadoc:javadoc
 
@@ -60,4 +63,4 @@
     git checkout master
     ```
 
-9. Update the version number in `pom.xml` back to SNAPSHOT (example: from `0.5.2` to `0.5.3-SNAPSHOT`). Commit and push to Github.
+9. Update the version number in `pom.xml` and `examples/pom.xml` back to SNAPSHOT (example: from `0.5.2` to `0.5.3-SNAPSHOT`). Commit and push to Github.
