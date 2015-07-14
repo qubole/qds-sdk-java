@@ -7,7 +7,7 @@ import com.qubole.qds.sdk.java.client.QdsConfiguration;
 
 public class DeleteClusterExample
 {
-    public static void main(String[] arg) throws Exception
+    public static void main(String[] args) throws Exception
     {
         String endpoint = System.getProperty("API_ENDPOINT", DefaultQdsConfiguration.API_ENDPOINT);
         QdsConfiguration configuration = new DefaultQdsConfiguration(endpoint, System.getProperty("API_KEY"));
