@@ -5,21 +5,22 @@ import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
 
-public class DeleteClusterExample {
-	public static void main(String[] arg) throws Exception {
-		String endpoint = System.getProperty("API_ENDPOINT", DefaultQdsConfiguration.API_ENDPOINT);
-		QdsConfiguration configuration = new DefaultQdsConfiguration(endpoint, System.getProperty("API_KEY"));
-		QdsClient client = QdsClientFactory.newClient(configuration);
-		
-		String cluster_label = "hadoop3";
-		
-		try {
-			System.out.println("Deleting Cluster");
-			client.cluster().delete(cluster_label).invoke();
-		}
-		
-		finally {
-			client.close();
-		}
-	}
+public class DeleteClusterExample
+{
+    public static void main(String[] arg) throws Exception
+    {
+        String endpoint = System.getProperty("API_ENDPOINT", DefaultQdsConfiguration.API_ENDPOINT);
+        QdsConfiguration configuration = new DefaultQdsConfiguration(endpoint, System.getProperty("API_KEY"));
+        QdsClient client = QdsClientFactory.newClient(configuration);
+        String cluster_label = "hadoop3";
+        try
+        {
+            System.out.println("Deleting Cluster");
+            client.cluster().delete(cluster_label).invoke();
+        }
+        finally
+        {
+            client.close();
+        }
+    }
 }

@@ -80,7 +80,7 @@ public interface ClusterApi
      * @return new builder
      */
     public InvokableBuilder<ClusterItem> create(ClusterConfigBuilder configBuilder);
-    
+
     /**
      * Corresponds to http://www.qubole.com/docs/delete-cluster/
      *
