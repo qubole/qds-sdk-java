@@ -17,7 +17,6 @@ package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.*;
 import com.qubole.qds.sdk.java.client.QdsClient;
-import com.qubole.qds.sdk.java.details.RequestDetails.Method;
 import com.qubole.qds.sdk.java.entities.ClusterItem;
 import com.qubole.qds.sdk.java.entities.ClusterState;
 import com.qubole.qds.sdk.java.entities.Message;
@@ -79,7 +78,7 @@ class ClusterApiImpl implements ClusterApi
     @Override
     public InvokableBuilder<ClusterItem> delete(String labelOrId)
     {
-        RequestDetails entity = new RequestDetails(null,RequestDetails.Method.DELETE);
+        RequestDetails entity = new RequestDetails(null, RequestDetails.Method.DELETE);
         return new GenericInvokableBuilderImpl<ClusterItem>(client, entity, ClusterItem.class, "clusters", labelOrId);
     }
 
