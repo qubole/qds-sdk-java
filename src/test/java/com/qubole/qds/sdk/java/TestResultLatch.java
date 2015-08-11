@@ -66,7 +66,7 @@ public class TestResultLatch
             }
         };
         ResultLatch resultLatch = new ResultLatch(mockClient, 1);
-        Assert.assertTrue(resultLatch.await(10, TimeUnit.SECONDS));
+        Assert.assertTrue(resultLatch.await(20, TimeUnit.SECONDS));
         Assert.assertTrue(count.get() <= 0);
     }
 
