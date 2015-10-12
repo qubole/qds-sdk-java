@@ -16,9 +16,8 @@
 package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.CommandResponse;
-import java.util.Map;
 
-public interface DbSimpleImportCommandBuilder extends InvokableBuilder<CommandResponse>
+public interface DbSimpleImportCommandBuilder extends InvokableCommandBuilder<CommandResponse>
 {
     public DbSimpleImportCommandBuilder hive_table(String hive_table);
 

@@ -17,7 +17,7 @@ package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 
-public interface DbAdvancedExportCommandBuilder extends InvokableBuilder<CommandResponse>
+public interface DbAdvancedExportCommandBuilder extends InvokableCommandBuilder<CommandResponse>
 {
     public DbAdvancedExportCommandBuilder db_table(String db_table);
 
