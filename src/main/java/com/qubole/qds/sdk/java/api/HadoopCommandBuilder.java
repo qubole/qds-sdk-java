@@ -17,7 +17,7 @@ package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 
-public interface HadoopCommandBuilder extends InvokableBuilder<CommandResponse>
+public interface HadoopCommandBuilder extends InvokableCommandBuilder<CommandResponse>
 {
     public enum SubCommandType
     {

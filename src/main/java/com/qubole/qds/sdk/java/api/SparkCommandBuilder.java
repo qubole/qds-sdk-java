@@ -17,7 +17,7 @@ package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 
-public interface SparkCommandBuilder extends InvokableBuilder<CommandResponse>
+public interface SparkCommandBuilder extends InvokableCommandBuilder<CommandResponse>
 {
     public SparkCommandBuilder program(String program);
 

@@ -18,7 +18,7 @@ package com.qubole.qds.sdk.java.api;
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 import java.util.Map;
 
-public interface PigCommandBuilder extends InvokableBuilder<CommandResponse>
+public interface PigCommandBuilder extends InvokableCommandBuilder<CommandResponse>
 {
     public PigCommandBuilder script_location(String script_location);
 
