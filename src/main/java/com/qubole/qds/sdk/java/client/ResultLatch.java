@@ -37,6 +37,7 @@ public class ResultLatch
     private static final ExecutorService executorService = Executors.newCachedThreadPool(new ThreadFactoryBuilder().setNameFormat("ResultLatch-%d").setDaemon(true).build());
 
     private static final int DEFAULT_POLL_MS = 5000;
+    private static final int MIN_POLL_INTERVAL_MS = 1000;
 
     private static final String STATUS_DONE = "done";
     private static final String STATUS_WAITING = "waiting";
@@ -70,7 +71,12 @@ public class ResultLatch
      */
     public void setPollSleep(long time, TimeUnit unit)
     {
-        pollMs.set(unit.toMillis(time));
+    	if(unit.toMillis(time)<MIN_POLL_INTERVAL_MS){
+    		pollMs.set(MIN_POLL_INTERVAL_MS);
+    	}
+    	else{
+    		pollMs.set(unit.toMillis(time));
+    	}
     }
 
     /**
