@@ -18,7 +18,6 @@ package com.qubole.qds.sdk.java.client;
 import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.qubole.qds.sdk.java.entities.ResultValue;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -78,7 +77,7 @@ public class ResultLatch
         if ( unit.toMillis(time) < MIN_POLL_INTERVAL_MS )
         {
             log.warning(String.format("Poll interval cannot be less than %d seconds. Setting it to %d seconds.", TimeUnit.MILLISECONDS.toSeconds(MIN_POLL_INTERVAL_MS), TimeUnit.MILLISECONDS.toSeconds(MIN_POLL_INTERVAL_MS)));
-    	    pollMs.set(MIN_POLL_INTERVAL_MS);
+            pollMs.set(MIN_POLL_INTERVAL_MS);
         }
         else
         {
