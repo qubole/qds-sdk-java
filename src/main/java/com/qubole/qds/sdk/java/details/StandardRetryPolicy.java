@@ -29,7 +29,7 @@ public class StandardRetryPolicy implements RetryPolicy
 
     private final int maxRetries;
 
-    private static final int DEFAULT_MAX_RETRIES = 11;
+    private static final int DEFAULT_MAX_RETRIES = 5;
 
     public StandardRetryPolicy()
     {

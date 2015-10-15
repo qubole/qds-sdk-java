@@ -21,11 +21,10 @@ import java.util.concurrent.TimeUnit;
 public class ExponentialBackoffRetry implements RetrySleeper
 {
     private final long baseSleepTimeMs;
-    private final long MAX_DELAY=32000;
 
     public ExponentialBackoffRetry()
     {
-        this(1000);
+        this(30000);
     }
 
     public ExponentialBackoffRetry(long baseSleepTimeMs)
@@ -36,10 +35,7 @@ public class ExponentialBackoffRetry implements RetrySleeper
     @Override
     public void sleep(int retryCount) throws InterruptedException
     {
-    	long sleepMs = (long) (baseSleepTimeMs * Math.pow(2, retryCount));
-    	if(sleepMs > MAX_DELAY){
-    		sleepMs = MAX_DELAY;
-    	}
+        long sleepMs = (long) (baseSleepTimeMs * Math.pow(2, retryCount));
         TimeUnit.MILLISECONDS.sleep(sleepMs);
     }
 }
