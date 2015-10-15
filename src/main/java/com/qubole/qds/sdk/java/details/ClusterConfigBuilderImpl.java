@@ -21,8 +21,11 @@ import com.qubole.qds.sdk.java.api.ClusterFairSchedulerConfigBuilder;
 import com.qubole.qds.sdk.java.api.ClusterHadoopConfigBuilder;
 import com.qubole.qds.sdk.java.api.ClusterPrestoConfigBuilder;
 import com.qubole.qds.sdk.java.api.ClusterSecurityConfigBuilder;
+import com.qubole.qds.sdk.java.api.ClusterSparkConfigBuilder;
 import com.qubole.qds.sdk.java.api.ClusterSpotInstanceConfigBuilder;
+
 import org.codehaus.jackson.node.ObjectNode;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -30,6 +33,7 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
 {
     private final ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
     private final ObjectNode presto_settings = QdsClientImpl.getMapper().createObjectNode();
+    private final ObjectNode spark_settings = QdsClientImpl.getMapper().createObjectNode();
     private final ObjectNode security_settings = QdsClientImpl.getMapper().createObjectNode();
     private final ObjectNode hadoop_settings = QdsClientImpl.getMapper().createObjectNode();
     private final ObjectNode fairscheduler_settings = QdsClientImpl.getMapper().createObjectNode();
@@ -84,6 +88,32 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
             public ClusterConfigBuilder custom_config(String custom_config)
             {
                 presto_settings.put("custom_config", custom_config);
+                return ClusterConfigBuilderImpl.this;
+            }
+        };
+    }
+    
+    @Override
+    public ClusterConfigBuilder spark_version(String spark_version) 
+    {
+        node.put("spark_version", spark_version);
+        return this;
+    }
+    
+    @Override
+    public ClusterSparkConfigBuilder spark_settings()
+    {
+        if ( !node.has("spark_settings") )
+        {
+            node.put("spark_settings", spark_settings);
+        }
+
+        return new ClusterSparkConfigBuilder()
+        {
+            @Override
+            public ClusterConfigBuilder custom_config(String custom_config)
+            {
+                spark_settings.put("custom_config", custom_config);
                 return ClusterConfigBuilderImpl.this;
             }
         };
@@ -196,6 +226,13 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
             public ClusterConfigBuilder custom_config(String custom_config)
             {
                 hadoop_settings.put("custom_config", custom_config);
+                return ClusterConfigBuilderImpl.this;
+            }
+            
+            @Override
+            public ClusterConfigBuilder use_spark(boolean use_spark) 
+            {
+                hadoop_settings.put("use_spark", use_spark);
                 return ClusterConfigBuilderImpl.this;
             }
 
