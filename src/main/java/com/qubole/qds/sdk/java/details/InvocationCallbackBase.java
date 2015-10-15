@@ -24,7 +24,7 @@ import java.util.concurrent.Future;
 
 abstract class InvocationCallbackBase<T> implements InvokableBuilder<T>
 {
-    private InvocationCallback<T> callback;
+    protected InvocationCallback<T> callback;
 
     public InvokableBuilder<T> withCallback(InvocationCallback<T> callback)
     {

@@ -8,17 +8,31 @@ import com.qubole.qds.sdk.java.entities.CommandResponse;
 
 public abstract class InvocationCommandCallbackBase<T> extends InvocationCallbackBase<T> implements InvokableCommandBuilder<T> {
 	
-	public Command run() throws Exception{
+    public Command run() throws Exception{
 	    	
-	    	InvokeArguments<T> invokeArguments = getInvokeArguments();
+        InvokeArguments<T> invokeArguments = getInvokeArguments();
+	    
+        Future<T> futureResponse;
+        
+        if ( callback != null )
+        {
+            futureResponse = invokeArguments.getClient().invokeRequest(invokeArguments.getForPage(), invokeArguments.getEntity(), callback, invokeArguments.getAdditionalPaths());
+        }
+
+        if ( invokeArguments.getGenericResponseType() != null )
+        {
+            futureResponse = invokeArguments.getClient().invokeRequest(invokeArguments.getForPage(), invokeArguments.getEntity(), invokeArguments.getGenericResponseType(), invokeArguments.getAdditionalPaths());
+        }
+        else
+        {
+            futureResponse = invokeArguments.getClient().invokeRequest(invokeArguments.getForPage(), invokeArguments.getEntity(), invokeArguments.getResponseType(), invokeArguments.getAdditionalPaths());
+        }
+        
+        CommandResponse cr = (CommandResponse) futureResponse.get();
 	    	
-	    	Future<T> futureResponse=invokeArguments.getClient().invokeRequest(invokeArguments.getForPage(), invokeArguments.getEntity(), invokeArguments.getResponseType(), invokeArguments.getAdditionalPaths());
+        new ResultLatch(invokeArguments.getClient(), cr.getId()).awaitResult();
 	    	
-	    	CommandResponse cr=(CommandResponse)futureResponse.get();
-	    	
-	    	new ResultLatch(invokeArguments.getClient(), cr.getId()).awaitResult();
-	    	
-	        return invokeArguments.getClient().command().status(String.valueOf(cr.getId())).invoke().get();
-	}
+        return invokeArguments.getClient().command().status(String.valueOf(cr.getId())).invoke().get();
+    }
 	
 }
