@@ -21,9 +21,19 @@ import com.qubole.qds.sdk.java.client.retry.RetrySleeper;
 
 public class StandardRetry implements Retry
 {
-    private final RetrySleeper retrySleeper = new ExponentialBackoffRetry();
-    private final RetryPolicy retryPolicy = new StandardRetryPolicy();
-
+    private RetrySleeper retrySleeper = new ExponentialBackoffRetry();
+    private RetryPolicy retryPolicy = new StandardRetryPolicy();
+    
+    public StandardRetry(){
+        this.retrySleeper = new ExponentialBackoffRetry();
+        this.retryPolicy = new StandardRetryPolicy();
+    }
+    
+    public StandardRetry(long exponentialBackOffBasetime, int maxRetriesPolicy){
+        this.retrySleeper = new ExponentialBackoffRetry(exponentialBackOffBasetime);
+        this.retryPolicy = new StandardRetryPolicy(maxRetriesPolicy);
+    }
+    
     @Override
     public RetrySleeper getRetrySleeper()
     {
