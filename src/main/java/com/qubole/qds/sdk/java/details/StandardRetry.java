@@ -15,14 +15,26 @@
  */
 package com.qubole.qds.sdk.java.details;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.qubole.qds.sdk.java.client.retry.Retry;
 import com.qubole.qds.sdk.java.client.retry.RetryPolicy;
 import com.qubole.qds.sdk.java.client.retry.RetrySleeper;
 
 public class StandardRetry implements Retry
 {
-    private final RetrySleeper retrySleeper = new ExponentialBackoffRetry();
-    private final RetryPolicy retryPolicy = new StandardRetryPolicy();
+    private RetrySleeper retrySleeper;
+    private RetryPolicy retryPolicy;
+
+    public StandardRetry() {
+        this.retrySleeper = new ExponentialBackoffRetry();
+        this.retryPolicy = new StandardRetryPolicy();
+    }
+
+    @VisibleForTesting
+    public StandardRetry(long baseSleepTimeMs, int maxRetries) {
+        this.retrySleeper = new ExponentialBackoffRetry(baseSleepTimeMs);
+        this.retryPolicy = new StandardRetryPolicy(maxRetries);
+    }
 
     @Override
     public RetrySleeper getRetrySleeper()
