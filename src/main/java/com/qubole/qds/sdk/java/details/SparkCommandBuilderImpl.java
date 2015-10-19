@@ -46,6 +46,13 @@ public class SparkCommandBuilderImpl extends CommandBuilderImplBase implements S
         node.put("language", language);
         return this;
     }
+    
+    @Override
+    public SparkCommandBuilder sql(String sql)
+    {
+        node.put("sql", sql);
+        return this;
+    }
 
     @Override
     public SparkCommandBuilder sql(String sql)
