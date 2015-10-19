@@ -21,10 +21,13 @@ import com.qubole.qds.sdk.java.api.SchemaCommandBuilder;
 import com.qubole.qds.sdk.java.api.StoreTablePropertiesBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.NameAndType;
+import com.qubole.qds.sdk.java.entities.Schema;
 import com.qubole.qds.sdk.java.entities.Status;
 import com.qubole.qds.sdk.java.entities.TableProperties;
 import javax.ws.rs.core.GenericType;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class HiveMetadataApiImpl implements HiveMetadataApi
 {
@@ -79,6 +82,20 @@ class HiveMetadataApiImpl implements HiveMetadataApi
     public SchemaCommandBuilder schema()
     {
         return new SchemaCommandBuilderImpl(client);
+    }
+
+    public InvokableBuilder<List<List<Schema>>> getSchemas(boolean described)
+    {
+        GenericType<List<List<Schema>>> responseType = new GenericType<List<List<Schema>>>(){};
+        Map<String, String> queryParams = new HashMap<String, String>();
+
+        if(described) {
+            queryParams.put("describe", "true");
+        }
+        else
+            queryParams.put("describe", "false");
+
+        return new GenericInvokableBuilderImpl<List<List<Schema>>>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), responseType, "hive");
     }
 
     HiveMetadataApiImpl(QdsClient client)

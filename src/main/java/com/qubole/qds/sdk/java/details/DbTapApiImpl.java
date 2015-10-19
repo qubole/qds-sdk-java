@@ -22,9 +22,12 @@ import com.qubole.qds.sdk.java.api.PageableInvokableBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.DbTap;
 import com.qubole.qds.sdk.java.entities.DbTapList;
+import com.qubole.qds.sdk.java.entities.Schema;
 import com.qubole.qds.sdk.java.entities.Status;
 import javax.ws.rs.core.GenericType;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class DbTapApiImpl implements DbTapApi
 {
@@ -79,5 +82,20 @@ class DbTapApiImpl implements DbTapApi
     DbTapApiImpl(QdsClient client)
     {
         this.client = client;
+    }
+
+    public InvokableBuilder<List<List<Schema>>> getSchemas(int dbTapId, boolean described)
+    {
+        GenericType<List<List<Schema>>> responseType = new GenericType<List<List<Schema>>>(){};
+        Map<String, String> queryParams = new HashMap<String, String>();
+
+        if(described) {
+            queryParams.put("describe", "true");
+        }
+        else {
+            queryParams.put("describe", "false");
+        }
+
+        return new GenericInvokableBuilderImpl<List<List<Schema>>>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), responseType, "db_taps", String.valueOf(dbTapId), "schema");
     }
 }
