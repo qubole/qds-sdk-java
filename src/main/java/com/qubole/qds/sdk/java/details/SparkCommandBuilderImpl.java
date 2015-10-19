@@ -48,6 +48,13 @@ public class SparkCommandBuilderImpl extends CommandBuilderImplBase implements S
     }
 
     @Override
+    public SparkCommandBuilder sql(String sql)
+    {
+        node.put("sql", sql);
+        return this;
+    }
+
+    @Override
     public SparkCommandBuilder userProgramArguments(String userProgramArguments) {
         node.put("user_program_arguments", userProgramArguments);
         return this;
