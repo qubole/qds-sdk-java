@@ -24,6 +24,8 @@ public interface SparkCommandBuilder extends InvokableBuilder<CommandResponse>
     public SparkCommandBuilder cmdLine(String cmdLine);
 
     public SparkCommandBuilder language(String language);
+    
+    public SparkCommandBuilder sql(String sql);
 
     public SparkCommandBuilder clusterLabel(String clusterLabel);
 
