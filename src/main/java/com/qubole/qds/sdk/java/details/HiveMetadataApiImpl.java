@@ -84,9 +84,10 @@ class HiveMetadataApiImpl implements HiveMetadataApi
         return new SchemaCommandBuilderImpl(client);
     }
 
-    public InvokableBuilder<List<List<Schema>>> getSchemas(boolean described)
+    public InvokableBuilder< Map<String, Map<String, List<Schema>>> > getSchemas(boolean described)
     {
-        GenericType<List<List<Schema>>> responseType = new GenericType<List<List<Schema>>>(){};
+        //GenericType<List<List<Schema>>> responseType = new GenericType<List<List<Schema>>>(){};
+        GenericType< Map<String, Map<String, List<Schema>>> > responseType = new GenericType< Map<String, Map<String, List<Schema>>> > () {};
         Map<String, String> queryParams = new HashMap<String, String>();
 
         if(described) {
@@ -95,7 +96,7 @@ class HiveMetadataApiImpl implements HiveMetadataApi
         else
             queryParams.put("describe", "false");
 
-        return new GenericInvokableBuilderImpl<List<List<Schema>>>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), responseType, "hive");
+        return new GenericInvokableBuilderImpl< Map<String, Map<String, List<Schema>>> >(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), responseType, "hive");
     }
 
     HiveMetadataApiImpl(QdsClient client)

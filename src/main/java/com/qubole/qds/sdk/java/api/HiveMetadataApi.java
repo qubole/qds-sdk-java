@@ -20,6 +20,7 @@ import com.qubole.qds.sdk.java.entities.Schema;
 import com.qubole.qds.sdk.java.entities.Status;
 import com.qubole.qds.sdk.java.entities.TableProperties;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Corresponds to http://www.qubole.com/docs/documentation/hive-metadata-api/
@@ -64,7 +65,7 @@ public interface HiveMetadataApi
      * @return builder
      */
 
-    public InvokableBuilder<List<List<Schema>>> getSchemas(boolean described);
+    public InvokableBuilder<Map<String, Map<String, List<Schema>>>> getSchemas(boolean described);
 
     public SchemaCommandBuilder schema();
 }
