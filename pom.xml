@@ -147,6 +147,10 @@
                                     <shadedPattern>hidden.org.glassfish</shadedPattern>
                                 </relocation>
                                 <relocation>
+                                    <pattern>org.jvnet</pattern>
+                                    <shadedPattern>hidden.org.jvnet</shadedPattern>
+                                </relocation>
+                                <relocation>
                                     <pattern>javax.annotation</pattern>
                                     <shadedPattern>hidden.javax.annotation</shadedPattern>
                                 </relocation>
