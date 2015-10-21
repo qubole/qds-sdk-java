@@ -83,5 +83,5 @@ public interface DbTapApi
      */
     public DbTapBuilder dbTap();
 
-    public InvokableBuilder<Map<String, Map<String, List<Schema>>>> getSchemas(int dbTapId, boolean described);
+    public InvokableBuilder<Map<String, Map<String, Object>>> getSchemas(int dbTapId, boolean described);
 }

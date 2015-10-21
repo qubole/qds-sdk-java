@@ -65,7 +65,7 @@ public interface HiveMetadataApi
      * @return builder
      */
 
-    public InvokableBuilder<Map<String, Map<String, List<Schema>>>> getSchemas(boolean described);
+    public InvokableBuilder<Map<String, Map<String, Object>>> getSchemas(boolean described);
 
     public SchemaCommandBuilder schema();
 }

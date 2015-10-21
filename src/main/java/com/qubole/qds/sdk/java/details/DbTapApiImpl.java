@@ -84,18 +84,17 @@ class DbTapApiImpl implements DbTapApi
         this.client = client;
     }
 
-    public InvokableBuilder<Map<String, Map<String, List<Schema>>>> getSchemas(int dbTapId, boolean described)
+    public InvokableBuilder<Map<String, Map<String, Object>>> getSchemas(int dbTapId, boolean described)
     {
-        GenericType<Map<String, Map<String, List<Schema>>>> responseType = new GenericType<Map<String, Map<String, List<Schema>>>>(){};
+        GenericType<Map<String, Map<String, Object>>> responseType = new GenericType<Map<String, Map<String, Object>>>(){};
         Map<String, String> queryParams = new HashMap<String, String>();
 
         if(described) {
             queryParams.put("describe", "true");
-        }
-        else {
+        } else {
             queryParams.put("describe", "false");
         }
 
-        return new GenericInvokableBuilderImpl<Map<String, Map<String, List<Schema>>>>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), responseType, "db_taps", String.valueOf(dbTapId), "schema");
+        return new GenericInvokableBuilderImpl<Map<String, Map<String, Object>>>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), responseType, "db_taps", String.valueOf(dbTapId), "schemas");
     }
 }

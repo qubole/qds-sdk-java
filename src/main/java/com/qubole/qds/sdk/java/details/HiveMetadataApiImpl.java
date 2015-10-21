@@ -84,19 +84,18 @@ class HiveMetadataApiImpl implements HiveMetadataApi
         return new SchemaCommandBuilderImpl(client);
     }
 
-    public InvokableBuilder< Map<String, Map<String, List<Schema>>> > getSchemas(boolean described)
+    public InvokableBuilder<Map<String, Map<String, Object>>> getSchemas(boolean described)
     {
-        //GenericType<List<List<Schema>>> responseType = new GenericType<List<List<Schema>>>(){};
-        GenericType< Map<String, Map<String, List<Schema>>> > responseType = new GenericType< Map<String, Map<String, List<Schema>>> > () {};
+        GenericType<Map<String, Map<String, Object>>> responseType = new GenericType<Map<String, Map<String, Object>>> () {};
         Map<String, String> queryParams = new HashMap<String, String>();
 
         if(described) {
             queryParams.put("describe", "true");
+        } else {
+          queryParams.put("describe", "false");
         }
-        else
-            queryParams.put("describe", "false");
 
-        return new GenericInvokableBuilderImpl< Map<String, Map<String, List<Schema>>> >(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), responseType, "hive");
+        return new GenericInvokableBuilderImpl<Map<String, Map<String, Object>>>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), responseType, "hive");
     }
 
     HiveMetadataApiImpl(QdsClient client)
