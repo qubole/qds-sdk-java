@@ -17,10 +17,9 @@ package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.DbTap;
 import com.qubole.qds.sdk.java.entities.DbTapList;
-import com.qubole.qds.sdk.java.entities.Schema;
+import com.qubole.qds.sdk.java.entities.SchemaList;
 import com.qubole.qds.sdk.java.entities.Status;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Corresponds to http://www.qubole.com/docs/documentation/dbtaps-api-qds-api-reference/
@@ -83,5 +82,5 @@ public interface DbTapApi
      */
     public DbTapBuilder dbTap();
 
-    public InvokableBuilder<Map<String, Map<String, Object>>> getSchemas(int dbTapId, boolean described);
+    public PageableInvokableBuilder<SchemaList> getSchemas(int dbTapId, boolean described);
 }

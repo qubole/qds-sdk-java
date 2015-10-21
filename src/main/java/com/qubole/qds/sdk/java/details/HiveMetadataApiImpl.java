@@ -17,13 +17,16 @@ package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
+import com.qubole.qds.sdk.java.api.PageableInvokableBuilder;
 import com.qubole.qds.sdk.java.api.SchemaCommandBuilder;
 import com.qubole.qds.sdk.java.api.StoreTablePropertiesBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
+
 import com.qubole.qds.sdk.java.entities.NameAndType;
-import com.qubole.qds.sdk.java.entities.Schema;
+import com.qubole.qds.sdk.java.entities.SchemaList;
 import com.qubole.qds.sdk.java.entities.Status;
 import com.qubole.qds.sdk.java.entities.TableProperties;
+
 import javax.ws.rs.core.GenericType;
 import java.util.HashMap;
 import java.util.List;
@@ -84,9 +87,8 @@ class HiveMetadataApiImpl implements HiveMetadataApi
         return new SchemaCommandBuilderImpl(client);
     }
 
-    public InvokableBuilder<Map<String, Map<String, Object>>> getSchemas(boolean described)
+    public PageableInvokableBuilder<SchemaList> getSchemas(boolean described)
     {
-        GenericType<Map<String, Map<String, Object>>> responseType = new GenericType<Map<String, Map<String, Object>>> () {};
         Map<String, String> queryParams = new HashMap<String, String>();
 
         if(described) {
@@ -95,7 +97,7 @@ class HiveMetadataApiImpl implements HiveMetadataApi
           queryParams.put("describe", "false");
         }
 
-        return new GenericInvokableBuilderImpl<Map<String, Map<String, Object>>>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), responseType, "hive");
+        return new GenericPageableInvokableBuilderImpl<SchemaList>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), SchemaList.class, "hive");
     }
 
     HiveMetadataApiImpl(QdsClient client)
