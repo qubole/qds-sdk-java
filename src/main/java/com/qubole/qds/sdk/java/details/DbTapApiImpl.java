@@ -24,7 +24,6 @@ import com.qubole.qds.sdk.java.entities.DbTap;
 import com.qubole.qds.sdk.java.entities.DbTapList;
 import com.qubole.qds.sdk.java.entities.SchemaList;
 import com.qubole.qds.sdk.java.entities.Status;
-
 import javax.ws.rs.core.GenericType;
 import java.util.HashMap;
 import java.util.List;

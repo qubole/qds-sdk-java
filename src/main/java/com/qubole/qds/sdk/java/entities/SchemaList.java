@@ -1,27 +1,28 @@
 package com.qubole.qds.sdk.java.entities;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by dev on 10/21/15.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
+
 public class SchemaList {
   private PagingInfo paging_info;
-  private LinkedHashMap<String, ArrayList<Schema>> schemas;
+  private Map<String, List<Schema>> schemas;
 
   public SchemaList()
   {
   }
 
-  public SchemaList(LinkedHashMap<String, ArrayList<Schema>> schemas)
+  public SchemaList(Map<String, List<Schema>> schemas)
   {
     this.schemas = schemas;
   }
 
-  public SchemaList(PagingInfo paging_info, LinkedHashMap<String, ArrayList<Schema>> schemas)
+  public SchemaList(PagingInfo paging_info, Map<String, List<Schema>> schemas)
   {
     this.paging_info = paging_info;
     this.schemas = schemas;
@@ -37,13 +38,14 @@ public class SchemaList {
     this.paging_info = paging_info;
   }
 
-  public LinkedHashMap<String, ArrayList<Schema>> getSchemaList()
+  public Map<String, List<Schema>> getSchemas()
   {
     return schemas;
   }
 
-  public void setSchemaList(LinkedHashMap<String, ArrayList<Schema>> schemas)
+  public void setSchemas(Map<String, List<Schema>> schemas)
   {
     this.schemas = schemas;
   }
+
 }
