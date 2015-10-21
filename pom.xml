@@ -142,6 +142,54 @@
                                     <pattern>javax.ws.rs</pattern>
                                     <shadedPattern>hidden.javax.ws.rs</shadedPattern>
                                 </relocation>
+                                <relocation>
+                                    <pattern>org.glassfish</pattern>
+                                    <shadedPattern>hidden.org.glassfish</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>javax.annotation</pattern>
+                                    <shadedPattern>hidden.javax.annotation</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.codehaus.jackson</pattern>
+                                    <shadedPattern>hidden.org.codehaus.jackson</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.google.guava</pattern>
+                                    <shadedPattern>hidden.com.google.guava</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.amazonaws</pattern>
+                                    <shadedPattern>hidden.com.amazonaws</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>commons-logging</pattern>
+                                    <shadedPattern>hidden.commons-logging</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.httpcomponents</pattern>
+                                    <shadedPattern>hidden.org.apache.httpcomponents</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>commons-codec</pattern>
+                                    <shadedPattern>hidden.commons-codec</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.fasterxml.jackson.core</pattern>
+                                    <shadedPattern>hidden.com.fasterxml.jackson.core</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>joda-time</pattern>
+                                    <shadedPattern>hidden.joda-time</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.beust</pattern>
+                                    <shadedPattern>hidden.com.beust</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.beanshell</pattern>
+                                    <shadedPattern>hidden.org.beanshell</shadedPattern>
+                                </relocation>
                             </relocations>
                         </configuration>
                         <executions>
