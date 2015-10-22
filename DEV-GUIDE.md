@@ -26,12 +26,12 @@
 
     ```
     export JAVA_HOME=`/usr/libexec/java_home -v 1.6`  # or equivalent for your platform.
-    mvn -Prelease clean deploy
+    mvn -Pshaded,release clean deploy
     ```
 
 7. Check that the release is okay by checking the [staging site](https://oss.sonatype.org/content/groups/staging/com/qubole/qds-sdk-java/qds-sdk-java/) and then promote it to [Central](http://repo.maven.apache.org/maven2/com/qubole/qds-sdk-java/qds-sdk-java/).
     ```
-    mvn -Prelease nexus-staging:release
+    mvn -Pshaded,release nexus-staging:release
     ```
 
 8. Update the [`apidocs`](https://github.com/qubole/qds-sdk-java/tree/gh-pages/apidocs) directory in the `gh-pages` branch with the latest docs.
