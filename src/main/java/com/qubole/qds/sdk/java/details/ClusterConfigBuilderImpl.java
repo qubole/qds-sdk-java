@@ -119,6 +119,13 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
                 security_settings.put("customer_ssh_key", customer_ssh_key);
                 return ClusterConfigBuilderImpl.this;
             }
+            
+            @Override
+            public ClusterConfigBuilder persistent_security_group(String persistent_security_group)
+            {
+                security_settings.put("persistent_security_group", persistent_security_group);
+                return ClusterConfigBuilderImpl.this;
+            }
         };
     }
 
