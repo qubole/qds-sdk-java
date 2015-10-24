@@ -17,7 +17,7 @@ package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 
-public interface HiveCommandBuilder extends InvokableBuilder<CommandResponse>
+public interface HiveCommandBuilder extends InvokableCommandBuilder<CommandResponse>
 {
     public HiveCommandBuilder query(String query);
 

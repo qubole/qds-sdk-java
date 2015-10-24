@@ -19,7 +19,7 @@ import com.qubole.qds.sdk.java.entities.CommandResponse;
 
 import java.util.List;
 
-public interface ShellCommandBuilder extends InvokableBuilder<CommandResponse>
+public interface ShellCommandBuilder extends InvokableCommandBuilder<CommandResponse>
 {
     public ShellCommandBuilder inline(String inline);
 

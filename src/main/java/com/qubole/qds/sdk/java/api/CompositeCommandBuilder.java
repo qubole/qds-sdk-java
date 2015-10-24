@@ -18,7 +18,7 @@ package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 
-public interface CompositeCommandBuilder extends InvokableBuilder<CommandResponse>
+public interface CompositeCommandBuilder extends InvokableCommandBuilder<CommandResponse>
 {
     public CompositeCommandBuilder name(String commandName);
 
