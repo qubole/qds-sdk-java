@@ -205,6 +205,12 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
                 hadoop_settings.put("custom_config", custom_config);
                 return ClusterConfigBuilderImpl.this;
             }
+            
+            @Override
+            public ClusterConfigBuilder use_hadoop2(boolean use_hadoop2) {
+                hadoop_settings.put("use_hadoop2", use_hadoop2);
+                return ClusterConfigBuilderImpl.this;
+            }
 
             @Override
             public ClusterConfigBuilder use_hadoop2(boolean use_hadoop2)
