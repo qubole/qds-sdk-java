@@ -18,7 +18,6 @@ package com.qubole.qds.sdk.java.api;
 import com.qubole.qds.sdk.java.entities.ClusterItem;
 import com.qubole.qds.sdk.java.entities.ClusterState;
 import com.qubole.qds.sdk.java.entities.Message;
-
 import java.util.List;
 
 /**
@@ -94,6 +93,7 @@ public interface ClusterApi
      * Corresponds to cloning cluster under http://docs.qubole.com/en/latest/user-guide/clusters/cluster-operations.html
      *
      * @param labelOrId the Cluster label/id
+     * @param configBuilder config values - use {@link #clusterConfig()}
      * @return new builder
      */
     public InvokableBuilder<ClusterItem> clone(String labelOrId, ClusterConfigBuilder configBuilder);
