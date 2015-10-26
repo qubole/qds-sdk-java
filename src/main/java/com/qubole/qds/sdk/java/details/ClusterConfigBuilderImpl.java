@@ -207,6 +207,13 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
             }
 
             @Override
+            public ClusterConfigBuilder use_hadoop2(boolean use_hadoop2)
+            {
+                hadoop_settings.put("use_hadoop2", use_hadoop2);
+                return ClusterConfigBuilderImpl.this;
+            }
+
+            @Override
             public ClusterSpotInstanceConfigBuilder spot_instance_settings()
             {
                 if ( !hadoop_settings.has("spot_instance_settings") )
