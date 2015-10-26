@@ -198,6 +198,12 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
                 hadoop_settings.put("custom_config", custom_config);
                 return ClusterConfigBuilderImpl.this;
             }
+            
+            @Override
+            public ClusterConfigBuilder use_hbase(boolean use_hbase) {
+                hadoop_settings.put("use_hbase", use_hbase);
+                return ClusterConfigBuilderImpl.this;
+            }
 
             @Override
             public ClusterSpotInstanceConfigBuilder spot_instance_settings()
