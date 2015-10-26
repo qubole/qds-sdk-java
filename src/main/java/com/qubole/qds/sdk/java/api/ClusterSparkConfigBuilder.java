@@ -1,5 +1,3 @@
-package com.qubole.qds.sdk.java.api;
-
 /**
  * Copyright 2014- Qubole Inc.
  *
@@ -15,6 +13,7 @@ package com.qubole.qds.sdk.java.api;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.qubole.qds.sdk.java.api;
 
 public interface ClusterSparkConfigBuilder
 {
