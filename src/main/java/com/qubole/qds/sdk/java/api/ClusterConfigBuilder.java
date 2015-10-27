@@ -23,8 +23,6 @@ public interface ClusterConfigBuilder
 
     public ClusterPrestoConfigBuilder presto_settings();
     
-    public ClusterSparkConfigBuilder spark_settings();
-    
     public ClusterConfigBuilder spark_version(String version);
 
     public ClusterConfigBuilder disallow_cluster_termination(boolean disallow_cluster_termination);
