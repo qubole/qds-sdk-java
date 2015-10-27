@@ -28,12 +28,13 @@ public class HadoopSettings
     private int initial_nodes;
     private String custom_config;
     private SpotInstanceSettings spot_instance_settings;
+    private boolean use_hadoop2;
 
     public HadoopSettings()
     {
     }
 
-    public HadoopSettings(String master_instance_type, FairSchedulerSettings fairscheduler_settings, int max_nodes, String slave_instance_type, String slave_request_type, int initial_nodes, String custom_config, SpotInstanceSettings spot_instance_settings)
+    public HadoopSettings(String master_instance_type, FairSchedulerSettings fairscheduler_settings, int max_nodes, String slave_instance_type, String slave_request_type, int initial_nodes, String custom_config, SpotInstanceSettings spot_instance_settings,boolean use_hadoop2)
     {
         this.master_instance_type = master_instance_type;
         this.fairscheduler_settings = fairscheduler_settings;
@@ -43,6 +44,7 @@ public class HadoopSettings
         this.initial_nodes = initial_nodes;
         this.custom_config = custom_config;
         this.spot_instance_settings = spot_instance_settings;
+        this.use_hadoop2 = use_hadoop2;
     }
 
     public String getMaster_instance_type()
@@ -123,5 +125,15 @@ public class HadoopSettings
     public void setSpot_instance_settings(SpotInstanceSettings spot_instance_settings)
     {
         this.spot_instance_settings = spot_instance_settings;
+    }
+    
+    public boolean getUse_hadoop2()
+    {
+        return use_hadoop2;
+    }
+
+    public void setUse_hadoop2(boolean use_hadoop2)
+    {
+        this.use_hadoop2 = use_hadoop2;
     }
 }
