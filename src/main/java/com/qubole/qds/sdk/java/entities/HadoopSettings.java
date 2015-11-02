@@ -28,6 +28,7 @@ public class HadoopSettings
     private int initial_nodes;
     private String custom_config;
     private SpotInstanceSettings spot_instance_settings;
+    private boolean use_hbase;
 
     public HadoopSettings()
     {
@@ -123,5 +124,15 @@ public class HadoopSettings
     public void setSpot_instance_settings(SpotInstanceSettings spot_instance_settings)
     {
         this.spot_instance_settings = spot_instance_settings;
+    }
+    
+    public boolean getUse_hbase()
+    {
+        return use_hbase;
+    }
+
+    public void setUse_hbase(boolean use_hbase)
+    {
+        this.use_hbase = use_hbase;
     }
 }
