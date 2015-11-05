@@ -63,7 +63,7 @@ public interface HiveMetadataApi
      * @return builder
      */
 
-    public InvokableBuilder<?> getSchemas(boolean described);
+    public PageableInvokableBuilder<?> getSchemas(boolean described);
 
     public SchemaCommandBuilder schema();
 }

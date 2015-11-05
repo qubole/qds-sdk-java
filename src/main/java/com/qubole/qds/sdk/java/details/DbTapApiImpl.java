@@ -86,7 +86,7 @@ class DbTapApiImpl implements DbTapApi
         this.client = client;
     }
 
-    public InvokableBuilder<?> getSchemas(int dbTapId, boolean described)
+    public PageableInvokableBuilder<?> getSchemas(int dbTapId, boolean described)
     {
         Map<String, String> queryParams = new HashMap<String, String>();
 
@@ -95,8 +95,7 @@ class DbTapApiImpl implements DbTapApi
             return new GenericPageableInvokableBuilderImpl<SchemaList>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), SchemaList.class, "db_taps", String.valueOf(dbTapId), "schemas");
         } else {
             queryParams.put("describe", "false");
-            GenericType<SchemaNamesResponse> responseType = new GenericType<SchemaNamesResponse>(){};
-            return new GenericInvokableBuilderImpl<SchemaNamesResponse>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), responseType, "db_taps", String.valueOf(dbTapId), "schemas");
+            return new GenericPageableInvokableBuilderImpl<SchemaNamesResponse>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), SchemaNamesResponse.class, "db_taps", String.valueOf(dbTapId), "schemas");
         }
     }
 }

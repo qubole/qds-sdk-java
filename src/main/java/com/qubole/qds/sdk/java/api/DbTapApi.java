@@ -79,7 +79,8 @@ public interface DbTapApi
      *
      * @return builder
      */
-    public DbTapBuilder dbTap();
 
-    public InvokableBuilder<?> getSchemas(int dbTapId, boolean described);
+    public PageableInvokableBuilder<?> getSchemas(int dbTapId, boolean described);
+
+    public DbTapBuilder dbTap();
 }
