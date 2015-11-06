@@ -89,10 +89,13 @@ class DbTapApiImpl implements DbTapApi
     {
         Map<String, String> queryParams = new HashMap<String, String>();
 
-        if (described) {
+        if (described)
+        {
             queryParams.put("describe", "true");
             return new GenericPageableInvokableBuilderImpl<SchemaList>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), SchemaList.class, "db_taps", String.valueOf(dbTapId), "schemas");
-        } else {
+        }
+        else
+        {
             queryParams.put("describe", "false");
             return new GenericPageableInvokableBuilderImpl<SchemaNamesResponse>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), SchemaNamesResponse.class, "db_taps", String.valueOf(dbTapId), "schemas");
         }

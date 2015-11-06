@@ -89,10 +89,13 @@ class HiveMetadataApiImpl implements HiveMetadataApi
     {
         Map<String, String> queryParams = new HashMap<String, String>();
 
-        if (described) {
+        if (described)
+        {
             queryParams.put("describe", "true");
             return new GenericPageableInvokableBuilderImpl<SchemaList>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), SchemaList.class, "hive");
-        } else {
+        }
+        else
+        {
             queryParams.put("describe", "false");
             GenericType<List<String>> responseType = new GenericType<List<String>>(){};
             return new GenericPageableInvokableBuilderImpl<List<String>>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), (Class<List<String>>)(responseType.getRawType()), "hive");
