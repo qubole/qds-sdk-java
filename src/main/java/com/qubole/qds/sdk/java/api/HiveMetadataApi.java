@@ -58,12 +58,15 @@ public interface HiveMetadataApi
     public InvokableBuilder<Status> deleteTableProperties(String tableName);
 
     /**
+     * @param described, if true, gets the details of all the schemas, if false, gets the names of all the schemas
+     * @return builder
+     */
+    public PageableInvokableBuilder<?> getSchemas(boolean described);
+
+    /**
      * Corresponds to http://www.qubole.com/docs/schema-or-database/
      *
      * @return builder
      */
-
-    public PageableInvokableBuilder<?> getSchemas(boolean described);
-
     public SchemaCommandBuilder schema();
 }

@@ -74,13 +74,17 @@ public interface DbTapApi
     public InvokableBuilder<Status> delete(int dbTapId);
 
     /**
+     * @param dbTapId id to list the schemas
+     * @param described - if true, gets the details of all the schemas, if false, gets the names of all the schemas
+     * @return new builder
+     */
+    public PageableInvokableBuilder<?> getSchemas(int dbTapId, boolean described);
+
+    /**
      * Return a new db tap builder. Can be used with
      * apis such as {@link #create(DbTapBuilder)}
      *
      * @return builder
      */
-
-    public PageableInvokableBuilder<?> getSchemas(int dbTapId, boolean described);
-
     public DbTapBuilder dbTap();
 }

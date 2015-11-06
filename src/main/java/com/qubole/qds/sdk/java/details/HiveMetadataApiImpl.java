@@ -26,7 +26,6 @@ import com.qubole.qds.sdk.java.entities.SchemaList;
 import com.qubole.qds.sdk.java.entities.Status;
 import com.qubole.qds.sdk.java.entities.TableProperties;
 import javax.ws.rs.core.GenericType;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,7 +89,7 @@ class HiveMetadataApiImpl implements HiveMetadataApi
     {
         Map<String, String> queryParams = new HashMap<String, String>();
 
-        if(described) {
+        if (described) {
             queryParams.put("describe", "true");
             return new GenericPageableInvokableBuilderImpl<SchemaList>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), SchemaList.class, "hive");
         } else {
