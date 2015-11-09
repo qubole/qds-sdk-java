@@ -15,6 +15,8 @@
  */
 package com.qubole.qds.sdk.java.details;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.api.PageableInvokableBuilder;
@@ -26,9 +28,7 @@ import com.qubole.qds.sdk.java.entities.SchemaList;
 import com.qubole.qds.sdk.java.entities.Status;
 import com.qubole.qds.sdk.java.entities.TableProperties;
 import javax.ws.rs.core.GenericType;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 class HiveMetadataApiImpl implements HiveMetadataApi
 {
@@ -85,21 +85,17 @@ class HiveMetadataApiImpl implements HiveMetadataApi
         return new SchemaCommandBuilderImpl(client);
     }
 
-    public PageableInvokableBuilder<?> getSchemas(boolean described)
+    public InvokableBuilder<List<String>> getSchemaNames()
     {
-        Map<String, String> queryParams = new HashMap<String, String>();
+        RequestDetails requestDetails = new RequestDetails(null, RequestDetails.Method.GET, Maps.newHashMap(ImmutableMap.of("describe", "false")));
+        GenericType<List<String>> responseType = new GenericType<List<String>>(){};
+        return new GenericInvokableBuilderImpl<List<String>>(client, requestDetails, responseType, "hive");
+    }
 
-        if (described)
-        {
-            queryParams.put("describe", "true");
-            return new GenericPageableInvokableBuilderImpl<SchemaList>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), SchemaList.class, "hive");
-        }
-        else
-        {
-            queryParams.put("describe", "false");
-            GenericType<List<String>> responseType = new GenericType<List<String>>(){};
-            return new GenericPageableInvokableBuilderImpl<List<String>>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), (Class<List<String>>)(responseType.getRawType()), "hive");
-        }
+    public PageableInvokableBuilder<SchemaList> getSchemaList()
+    {
+        RequestDetails requestDetails = new RequestDetails(null, RequestDetails.Method.GET, Maps.newHashMap(ImmutableMap.of("describe", "true")));
+        return new GenericPageableInvokableBuilderImpl<SchemaList>(client, requestDetails, SchemaList.class, "hive");
     }
 
     HiveMetadataApiImpl(QdsClient client)

@@ -34,7 +34,7 @@ public class HiveMetadataExample {
         QdsClient client = QdsClientFactory.newClient(configuration);
         try {
             //Get the list of schemas available.
-            List<String> schema_names = (List<String>) client.hiveMetadata().getSchemas(false).invoke().get();
+            List<String> schema_names =  client.hiveMetadata().getSchemaNames().invoke().get();
             System.out.println("Following schemas are available:");
             for (String schema_name : schema_names) {
                 System.out.println(schema_name);
@@ -77,14 +77,14 @@ public class HiveMetadataExample {
             System.out.println();
 
             //Get information about all the schemas.
-            SchemaList schemaList = (SchemaList) client.hiveMetadata().getSchemas(true).invoke().get();
+            SchemaList schemaList = client.hiveMetadata().getSchemaList().invoke().get();
             Map<String, List<Schema>> schemas = schemaList.getSchemas();
 
             int current_page = 2;
             int per_page = schemaList.getPaging_info().getPer_page();
 
             while (schemaList.getPaging_info().getNext_page() != null) {
-                schemaList = (SchemaList) client.hiveMetadata().getSchemas(true).forPage(current_page++, per_page).invoke().get();
+                schemaList = client.hiveMetadata().getSchemaList().forPage(current_page++, per_page).invoke().get();
                 schemas.putAll(schemaList.getSchemas());
             }
 

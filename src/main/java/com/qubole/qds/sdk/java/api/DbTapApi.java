@@ -17,6 +17,8 @@ package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.DbTap;
 import com.qubole.qds.sdk.java.entities.DbTapList;
+import com.qubole.qds.sdk.java.entities.SchemaList;
+import com.qubole.qds.sdk.java.entities.SchemaNamesResponse;
 import com.qubole.qds.sdk.java.entities.Status;
 import java.util.List;
 
@@ -74,11 +76,16 @@ public interface DbTapApi
     public InvokableBuilder<Status> delete(int dbTapId);
 
     /**
-     * @param dbTapId id to list the schemas
-     * @param described - if true, gets the details of all the schemas, if false, gets the names of all the schemas
+     * @param dbTapId id to list schema names
      * @return new builder
      */
-    public PageableInvokableBuilder<?> getSchemas(int dbTapId, boolean described);
+    public InvokableBuilder<SchemaNamesResponse> getSchemaNames(int dbTapId);
+
+    /**
+     * @param dbTapId id to list detailed schemas
+     * @return new builder
+     */
+    public PageableInvokableBuilder<SchemaList> getSchemaList(int dbTapId);
 
     /**
      * Return a new db tap builder. Can be used with

@@ -15,6 +15,8 @@
  */
 package com.qubole.qds.sdk.java.details;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.qubole.qds.sdk.java.api.DbTapApi;
 import com.qubole.qds.sdk.java.api.DbTapBuilder;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
@@ -26,9 +28,7 @@ import com.qubole.qds.sdk.java.entities.SchemaList;
 import com.qubole.qds.sdk.java.entities.SchemaNamesResponse;
 import com.qubole.qds.sdk.java.entities.Status;
 import javax.ws.rs.core.GenericType;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 class DbTapApiImpl implements DbTapApi
 {
@@ -85,19 +85,15 @@ class DbTapApiImpl implements DbTapApi
         this.client = client;
     }
 
-    public PageableInvokableBuilder<?> getSchemas(int dbTapId, boolean described)
+    public InvokableBuilder<SchemaNamesResponse> getSchemaNames(int dbTapId)
     {
-        Map<String, String> queryParams = new HashMap<String, String>();
+        RequestDetails requestDetails = new RequestDetails(null, RequestDetails.Method.GET, Maps.newHashMap(ImmutableMap.of("describe", "false")));
+        return new GenericInvokableBuilderImpl<SchemaNamesResponse>(client, requestDetails, SchemaNamesResponse.class, "db_taps", Integer.toString(dbTapId), "schemas");
+    }
 
-        if (described)
-        {
-            queryParams.put("describe", "true");
-            return new GenericPageableInvokableBuilderImpl<SchemaList>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), SchemaList.class, "db_taps", Integer.toString(dbTapId), "schemas");
-        }
-        else
-        {
-            queryParams.put("describe", "false");
-            return new GenericPageableInvokableBuilderImpl<SchemaNamesResponse>(client, new RequestDetails(null, RequestDetails.Method.GET, queryParams), SchemaNamesResponse.class, "db_taps", Integer.toString(dbTapId), "schemas");
-        }
+    public PageableInvokableBuilder<SchemaList> getSchemaList(int dbTapId)
+    {
+        RequestDetails requestDetails = new RequestDetails(null, RequestDetails.Method.GET, Maps.newHashMap(ImmutableMap.of("describe", "true")));
+        return new GenericPageableInvokableBuilderImpl<SchemaList>(client, requestDetails, SchemaList.class, "db_taps", Integer.toString(dbTapId), "schemas");
     }
 }
