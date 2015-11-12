@@ -15,6 +15,7 @@
  */
 package com.qubole.qds.sdk.java.client;
 
+import com.qubole.qds.sdk.java.api.AppApi;
 import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapApi;
@@ -23,8 +24,10 @@ import com.qubole.qds.sdk.java.api.ReportApi;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
 import com.qubole.qds.sdk.java.details.RequestDetails;
 import com.qubole.qds.sdk.java.details.ForPage;
+
 import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.core.GenericType;
+
 import java.io.Closeable;
 import java.util.concurrent.Future;
 
@@ -74,6 +77,13 @@ public interface QdsClient extends Closeable
      * @return scheduler factory
      */
     public SchedulerApi scheduler();
+    
+    /**
+     * Return apps api factory
+     *
+     * @return apps api factory
+     */
+    public AppApi app();
 
     /**
      * Low-level request invoker. Not normally used directly. Use the api factories instead.

@@ -17,6 +17,7 @@ package com.qubole.qds.sdk.java.details;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
+import com.qubole.qds.sdk.java.api.AppApi;
 import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapApi;
@@ -28,6 +29,7 @@ import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.client.retry.RetryConnector;
 import com.qubole.qds.sdk.java.entities.SubCommands;
 import com.qubole.qds.sdk.java.entities.SubCommandsDeserializer;
+
 import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.module.SimpleModule;
@@ -40,6 +42,7 @@ import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
+
 import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -56,6 +59,7 @@ public class QdsClientImpl implements QdsClient
     private final DbTapApiImpl dbTapsApi;
     private final ReportApiImpl reportApi;
     private final SchedulerApiImpl schedulerApi;
+    private final AppApiImpl appApi;
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -75,7 +79,8 @@ public class QdsClientImpl implements QdsClient
         dbTapsApi = new DbTapApiImpl(this);
         reportApi = new ReportApiImpl(this);
         schedulerApi = new SchedulerApiImpl(this);
-
+        appApi = new AppApiImpl(this);
+        
         // register the deserialization handler for composite command
         SimpleModule module =
                 new SimpleModule("CommandResponseDeserializerModule",
@@ -119,6 +124,12 @@ public class QdsClientImpl implements QdsClient
     public SchedulerApi scheduler()
     {
         return schedulerApi;
+    }
+    
+    @Override
+    public AppApi app()
+    {
+        return appApi;
     }
 
     @Override
@@ -167,6 +178,7 @@ public class QdsClientImpl implements QdsClient
             }
             return invoker.method(entity.getMethod().name(), responseType);
         }
+
         return invoker.get(responseType);
     }
 
@@ -235,7 +247,6 @@ public class QdsClientImpl implements QdsClient
         {
             builder = builder.property(RetryConnector.PROPERTY_ENABLE, true);
         }
-
         return builder.async();
     }
 }

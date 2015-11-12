@@ -18,8 +18,11 @@ package com.qubole.qds.sdk.java.details;
 import com.google.common.base.Preconditions;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.api.RawInvokableBuilder;
+
 import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.core.Response;
+
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 abstract class InvocationCallbackBase<T> implements InvokableBuilder<T>
@@ -62,7 +65,6 @@ abstract class InvocationCallbackBase<T> implements InvokableBuilder<T>
         {
             return invokeArguments.getClient().invokeRequest(invokeArguments.getForPage(), invokeArguments.getEntity(), invokeArguments.getGenericResponseType(), invokeArguments.getAdditionalPaths());
         }
-
         return invokeArguments.getClient().invokeRequest(invokeArguments.getForPage(), invokeArguments.getEntity(), invokeArguments.getResponseType(), invokeArguments.getAdditionalPaths());
     }
 
