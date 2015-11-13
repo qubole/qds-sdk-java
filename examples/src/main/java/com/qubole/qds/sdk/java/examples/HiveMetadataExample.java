@@ -21,7 +21,7 @@ import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.entities.NameAndType;
 import com.qubole.qds.sdk.java.entities.Schema;
-import com.qubole.qds.sdk.java.entities.SchemaList;
+import com.qubole.qds.sdk.java.entities.SchemaListDescribed;
 
 import java.util.List;
 import java.util.Map;
@@ -77,20 +77,20 @@ public class HiveMetadataExample {
             System.out.println();
 
             //Get information about all the schemas.
-            SchemaList schemaList = client.hiveMetadata().getSchemaList().invoke().get();
+            SchemaListDescribed schemaList = client.hiveMetadata().getSchemaListDescribed().invoke().get();
             Map<String, List<Schema>> schemas = schemaList.getSchemas();
 
             int current_page = 2;
             int per_page = schemaList.getPaging_info().getPer_page();
 
             while (schemaList.getPaging_info().getNext_page() != null) {
-                schemaList = client.hiveMetadata().getSchemaList().forPage(current_page++, per_page).invoke().get();
+                schemaList = client.hiveMetadata().getSchemaListDescribed().forPage(current_page++, per_page).invoke().get();
                 schemas.putAll(schemaList.getSchemas());
             }
 
             System.out.println("Detailed list of all the schemas available:");
             for (String schemaName : schemas.keySet()) {
-                System.out.println("Description of schema" + schemaName + ":");
+                System.out.println("Description of schema " + schemaName + ":");
                 List<Schema> listofTables = schemas.get(schemaName);
                 for(Schema table : listofTables) {
                     System.out.println("\t\tDescription of table " + table.getTable_name() + ":");

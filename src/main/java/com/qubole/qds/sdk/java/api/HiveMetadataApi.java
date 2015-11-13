@@ -16,7 +16,7 @@
 package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.NameAndType;
-import com.qubole.qds.sdk.java.entities.SchemaList;
+import com.qubole.qds.sdk.java.entities.SchemaListDescribed;
 import com.qubole.qds.sdk.java.entities.Status;
 import com.qubole.qds.sdk.java.entities.TableProperties;
 import java.util.List;
@@ -66,7 +66,7 @@ public interface HiveMetadataApi
     /**
      * @return new builder
      */
-    public PageableInvokableBuilder<SchemaList> getSchemaList();
+    public PageableInvokableBuilder<SchemaListDescribed> getSchemaListDescribed();
 
     /**
      * Corresponds to http://www.qubole.com/docs/schema-or-database/

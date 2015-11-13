@@ -24,7 +24,7 @@ import com.qubole.qds.sdk.java.api.SchemaCommandBuilder;
 import com.qubole.qds.sdk.java.api.StoreTablePropertiesBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.NameAndType;
-import com.qubole.qds.sdk.java.entities.SchemaList;
+import com.qubole.qds.sdk.java.entities.SchemaListDescribed;
 import com.qubole.qds.sdk.java.entities.Status;
 import com.qubole.qds.sdk.java.entities.TableProperties;
 import javax.ws.rs.core.GenericType;
@@ -92,10 +92,10 @@ class HiveMetadataApiImpl implements HiveMetadataApi
         return new GenericInvokableBuilderImpl<List<String>>(client, requestDetails, responseType, "hive");
     }
 
-    public PageableInvokableBuilder<SchemaList> getSchemaList()
+    public PageableInvokableBuilder<SchemaListDescribed> getSchemaListDescribed()
     {
         RequestDetails requestDetails = new RequestDetails(null, RequestDetails.Method.GET, Maps.newHashMap(ImmutableMap.of("describe", "true")));
-        return new GenericPageableInvokableBuilderImpl<SchemaList>(client, requestDetails, SchemaList.class, "hive");
+        return new GenericPageableInvokableBuilderImpl<SchemaListDescribed>(client, requestDetails, SchemaListDescribed.class, "hive");
     }
 
     HiveMetadataApiImpl(QdsClient client)

@@ -17,8 +17,8 @@ package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.DbTap;
 import com.qubole.qds.sdk.java.entities.DbTapList;
+import com.qubole.qds.sdk.java.entities.SchemaListDescribed;
 import com.qubole.qds.sdk.java.entities.SchemaList;
-import com.qubole.qds.sdk.java.entities.SchemaNamesResponse;
 import com.qubole.qds.sdk.java.entities.Status;
 import java.util.List;
 
@@ -79,13 +79,13 @@ public interface DbTapApi
      * @param dbTapId id to list schema names
      * @return new builder
      */
-    public InvokableBuilder<SchemaNamesResponse> getSchemaNames(int dbTapId);
+    public InvokableBuilder<SchemaList> getSchemaNames(int dbTapId);
 
     /**
      * @param dbTapId id to list detailed schemas
      * @return new builder
      */
-    public PageableInvokableBuilder<SchemaList> getSchemaList(int dbTapId);
+    public PageableInvokableBuilder<SchemaListDescribed> getSchemaListDescribed(int dbTapId);
 
     /**
      * Return a new db tap builder. Can be used with

@@ -62,7 +62,7 @@ public class TestDetailedGetSchema {
         return webTarget;
       }
     };
-    client.hiveMetadata().getSchemaList().invoke();
+    client.hiveMetadata().getSchemaListDescribed().invoke();
 
     WebTarget webTarget = webTargetReference.get();
     Assert.assertNotNull(webTarget);
@@ -99,7 +99,7 @@ public class TestDetailedGetSchema {
       }
     };
 
-    client.dbTaps().getSchemaList(Integer.parseInt(dbTapId)).invoke();
+    client.dbTaps().getSchemaListDescribed(Integer.parseInt(dbTapId)).invoke();
     WebTarget webTarget = webTargetReference.get();
     Assert.assertNotNull(webTarget);
     Assert.assertEquals(webTarget.getUri(), new URI(configuration.getApiEndpoint() + "/" + configuration.getApiVersion() + "/db_taps/" + dbTapId + "/schemas?describe=true"));

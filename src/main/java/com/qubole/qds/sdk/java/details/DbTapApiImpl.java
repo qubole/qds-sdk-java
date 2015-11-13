@@ -24,8 +24,8 @@ import com.qubole.qds.sdk.java.api.PageableInvokableBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.DbTap;
 import com.qubole.qds.sdk.java.entities.DbTapList;
+import com.qubole.qds.sdk.java.entities.SchemaListDescribed;
 import com.qubole.qds.sdk.java.entities.SchemaList;
-import com.qubole.qds.sdk.java.entities.SchemaNamesResponse;
 import com.qubole.qds.sdk.java.entities.Status;
 import javax.ws.rs.core.GenericType;
 import java.util.List;
@@ -85,15 +85,15 @@ class DbTapApiImpl implements DbTapApi
         this.client = client;
     }
 
-    public InvokableBuilder<SchemaNamesResponse> getSchemaNames(int dbTapId)
+    public InvokableBuilder<SchemaList> getSchemaNames(int dbTapId)
     {
         RequestDetails requestDetails = new RequestDetails(null, RequestDetails.Method.GET, Maps.newHashMap(ImmutableMap.of("describe", "false")));
-        return new GenericInvokableBuilderImpl<SchemaNamesResponse>(client, requestDetails, SchemaNamesResponse.class, "db_taps", Integer.toString(dbTapId), "schemas");
+        return new GenericInvokableBuilderImpl<SchemaList>(client, requestDetails, SchemaList.class, "db_taps", Integer.toString(dbTapId), "schemas");
     }
 
-    public PageableInvokableBuilder<SchemaList> getSchemaList(int dbTapId)
+    public PageableInvokableBuilder<SchemaListDescribed> getSchemaListDescribed(int dbTapId)
     {
         RequestDetails requestDetails = new RequestDetails(null, RequestDetails.Method.GET, Maps.newHashMap(ImmutableMap.of("describe", "true")));
-        return new GenericPageableInvokableBuilderImpl<SchemaList>(client, requestDetails, SchemaList.class, "db_taps", Integer.toString(dbTapId), "schemas");
+        return new GenericPageableInvokableBuilderImpl<SchemaListDescribed>(client, requestDetails, SchemaListDescribed.class, "db_taps", Integer.toString(dbTapId), "schemas");
     }
 }
