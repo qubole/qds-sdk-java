@@ -101,7 +101,7 @@ public interface ClusterApi
     public InvokableBuilder<SnapshotCluster> snapshot(String labelOrId, ClusterSnapshotBuilder snapshot);
     
     /**
-     * Corresponds to http://docs.qubole.com/en/latest/rest-api/cluster_api/hbase-snapshot.html
+     * Corresponds to http://docs.qubole.com/en/latest/rest-api/cluster_api/restore-point.html
      *
      * @param labelOrId the Cluster label/id
      * @param ClusterRestoreBuilder the restore parameters
