@@ -18,6 +18,8 @@ package com.qubole.qds.sdk.java.api;
 import com.qubole.qds.sdk.java.entities.ClusterItem;
 import com.qubole.qds.sdk.java.entities.ClusterState;
 import com.qubole.qds.sdk.java.entities.Message;
+import com.qubole.qds.sdk.java.entities.RestoreCluster;
+import com.qubole.qds.sdk.java.entities.SnapshotCluster;
 import java.util.List;
 
 /**
@@ -88,6 +90,24 @@ public interface ClusterApi
      * @return new builder
      */
     public InvokableBuilder<ClusterItem> delete(String labelOrId);
+    
+    /**
+     * Corresponds to http://docs.qubole.com/en/latest/rest-api/cluster_api/hbase-snapshot.html
+     *
+     * @param labelOrId the Cluster label/id
+     * @param ClusterSnapshotBuilder the snapshot parameters
+     * @return new builder
+     */
+    public InvokableBuilder<SnapshotCluster> snapshot(String labelOrId, ClusterSnapshotBuilder snapshot);
+    
+    /**
+     * Corresponds to http://docs.qubole.com/en/latest/rest-api/cluster_api/hbase-snapshot.html
+     *
+     * @param labelOrId the Cluster label/id
+     * @param ClusterRestoreBuilder the restore parameters
+     * @return new builder
+     */
+    public InvokableBuilder<RestoreCluster> restore(String labelOrId, ClusterRestoreBuilder restore);
 
     /**
      * Return a new cluster config builder. Can be used with
@@ -96,4 +116,20 @@ public interface ClusterApi
      * @return builder
      */
     public ClusterConfigBuilder clusterConfig();
+    
+    /**
+     * Return a new cluster snapshot config builder. Can be used with
+     * apis such as {@link ClusterApi#snapshot(String, ClusterSnapshotBuilder)}
+     *
+     * @return builder
+     */
+    public ClusterSnapshotBuilder clusterSnapshotConfig();
+    
+    /**
+     * Return a new cluster restore config builder. Can be used with
+     * apis such as {@link ClusterApi#restore(String, ClusterRestoreBuilder)}
+     *
+     * @return builder
+     */
+    public ClusterRestoreBuilder clusterRestoreConfig();
 }
