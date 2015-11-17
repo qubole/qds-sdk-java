@@ -17,9 +17,8 @@ package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.ClusterItem;
 import com.qubole.qds.sdk.java.entities.ClusterState;
+import com.qubole.qds.sdk.java.entities.Command;
 import com.qubole.qds.sdk.java.entities.Message;
-import com.qubole.qds.sdk.java.entities.RestoreCluster;
-import com.qubole.qds.sdk.java.entities.SnapshotCluster;
 import java.util.List;
 
 /**
@@ -98,7 +97,7 @@ public interface ClusterApi
      * @param ClusterSnapshotBuilder the snapshot parameters
      * @return new builder
      */
-    public InvokableBuilder<SnapshotCluster> snapshot(String labelOrId, ClusterSnapshotBuilder snapshot);
+    public InvokableBuilder<Command> snapshot(String labelOrId, ClusterSnapshotBuilder snapshot);
     
     /**
      * Corresponds to http://docs.qubole.com/en/latest/rest-api/cluster_api/restore-point.html
@@ -107,7 +106,7 @@ public interface ClusterApi
      * @param ClusterRestoreBuilder the restore parameters
      * @return new builder
      */
-    public InvokableBuilder<RestoreCluster> restore(String labelOrId, ClusterRestoreBuilder restore);
+    public InvokableBuilder<Command> restore(String labelOrId, ClusterRestoreBuilder restore);
 
     /**
      * Return a new cluster config builder. Can be used with

@@ -19,9 +19,8 @@ import com.qubole.qds.sdk.java.api.*;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.ClusterItem;
 import com.qubole.qds.sdk.java.entities.ClusterState;
+import com.qubole.qds.sdk.java.entities.Command;
 import com.qubole.qds.sdk.java.entities.Message;
-import com.qubole.qds.sdk.java.entities.RestoreCluster;
-import com.qubole.qds.sdk.java.entities.SnapshotCluster;
 import com.qubole.qds.sdk.java.entities.State;
 
 import javax.ws.rs.core.GenericType;
@@ -87,17 +86,17 @@ class ClusterApiImpl implements ClusterApi
     }
     
     @Override
-    public InvokableBuilder<SnapshotCluster> snapshot(String labelOrId, ClusterSnapshotBuilder snapshot) 
+    public InvokableBuilder<Command> snapshot(String labelOrId, ClusterSnapshotBuilder snapshot) 
     {
         RequestDetails entity = new RequestDetails(snapshot.toString(), RequestDetails.Method.POST);
-        return new GenericInvokableBuilderImpl<SnapshotCluster>(client, entity, SnapshotCluster.class, "clusters", labelOrId, "snapshots");
+        return new GenericInvokableBuilderImpl<Command>(client, entity, Command.class, "clusters", labelOrId, "snapshots");
     }
 
     @Override
-    public InvokableBuilder<RestoreCluster> restore(String labelOrId, ClusterRestoreBuilder restore) 
+    public InvokableBuilder<Command> restore(String labelOrId, ClusterRestoreBuilder restore) 
     {
         RequestDetails entity = new RequestDetails(restore.toString(), RequestDetails.Method.POST);
-        return new GenericInvokableBuilderImpl<RestoreCluster>(client, entity, RestoreCluster.class, "clusters", labelOrId, "restore_point");
+        return new GenericInvokableBuilderImpl<Command>(client, entity, Command.class, "clusters", labelOrId, "restore_point");
     }
 
     @Override
