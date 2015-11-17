@@ -16,6 +16,7 @@
 package com.qubole.qds.sdk.java.details;
 
 import com.google.common.collect.Queues;
+import com.qubole.qds.sdk.java.api.AccountApi;
 import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapApi;
@@ -23,8 +24,10 @@ import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.api.ReportApi;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
+
 import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.core.GenericType;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Future;
 
@@ -146,6 +149,12 @@ public class MockClient implements QdsClient
     public SchedulerApi scheduler()
     {
         return new SchedulerApiImpl(this);
+    }
+    
+    @Override
+    public AccountApi account() 
+    {
+        return new AccountApiImpl(this);
     }
 
     @Override

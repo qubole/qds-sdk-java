@@ -15,6 +15,7 @@
  */
 package com.qubole.qds.sdk.java.client;
 
+import com.qubole.qds.sdk.java.api.AccountApi;
 import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapApi;
@@ -74,6 +75,13 @@ public interface QdsClient extends Closeable
      * @return scheduler factory
      */
     public SchedulerApi scheduler();
+    
+    /**
+     * Return account api factory
+     *
+     * @return account factory
+     */
+    public AccountApi account();
 
     /**
      * Low-level request invoker. Not normally used directly. Use the api factories instead.
