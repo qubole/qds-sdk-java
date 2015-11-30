@@ -92,13 +92,6 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
     }
     
     @Override
-    public ClusterConfigBuilder spark_version(String spark_version) 
-    {
-        node.put("spark_version", spark_version);
-        return this;
-    }
-
-    @Override
     public ClusterConfigBuilder disallow_cluster_termination(boolean disallow_cluster_termination)
     {
         node.put("disallow_cluster_termination", disallow_cluster_termination);
