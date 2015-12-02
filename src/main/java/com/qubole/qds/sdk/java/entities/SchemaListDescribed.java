@@ -22,18 +22,18 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SchemaListDescribed {
   private PagingInfo paging_info;
-  private Map<String, List<Schema>> schemas;
+  private Map<String, List<SchemaOrdinal>> schemas;
 
   public SchemaListDescribed()
   {
   }
 
-  public SchemaListDescribed(Map<String, List<Schema>> schemas)
+  public SchemaListDescribed(Map<String, List<SchemaOrdinal>> schemas)
   {
     this.schemas = schemas;
   }
 
-  public SchemaListDescribed(PagingInfo paging_info, Map<String, List<Schema>> schemas)
+  public SchemaListDescribed(PagingInfo paging_info, Map<String, List<SchemaOrdinal>> schemas)
   {
     this.paging_info = paging_info;
     this.schemas = schemas;
@@ -49,12 +49,12 @@ public class SchemaListDescribed {
     this.paging_info = paging_info;
   }
 
-  public Map<String, List<Schema>> getSchemas()
+  public Map<String, List<SchemaOrdinal>> getSchemas()
   {
     return schemas;
   }
 
-  public void setSchemas(Map<String, List<Schema>> schemas)
+  public void setSchemas(Map<String, List<SchemaOrdinal>> schemas)
   {
     this.schemas = schemas;
   }

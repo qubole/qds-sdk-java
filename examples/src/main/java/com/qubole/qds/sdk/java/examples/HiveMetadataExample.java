@@ -22,6 +22,7 @@ import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.entities.NameAndType;
 import com.qubole.qds.sdk.java.entities.Schema;
 import com.qubole.qds.sdk.java.entities.SchemaListDescribed;
+import com.qubole.qds.sdk.java.entities.SchemaOrdinal;
 
 import java.util.List;
 import java.util.Map;
@@ -78,7 +79,7 @@ public class HiveMetadataExample {
 
             //Get information about all the schemas.
             SchemaListDescribed schemaList = client.hiveMetadata().getSchemaListDescribed().invoke().get();
-            Map<String, List<Schema>> schemas = schemaList.getSchemas();
+            Map<String, List<SchemaOrdinal>> schemas = schemaList.getSchemas();
 
             int current_page = 2;
             int per_page = schemaList.getPaging_info().getPer_page();
@@ -91,8 +92,8 @@ public class HiveMetadataExample {
             System.out.println("Detailed list of all the schemas available:");
             for (String schemaName : schemas.keySet()) {
                 System.out.println("Description of schema " + schemaName + ":");
-                List<Schema> listofTables = schemas.get(schemaName);
-                for(Schema table : listofTables) {
+                List<SchemaOrdinal> listofTables = schemas.get(schemaName);
+                for(SchemaOrdinal table : listofTables) {
                     System.out.println("\t\tDescription of table " + table.getTable_name() + ":");
                     for (NameAndType column : table.getColumns()) {
                         System.out.format("\t\t\t\t%-40s %s%n", column.getName(), column.getType());
