@@ -119,6 +119,13 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
                 security_settings.put("customer_ssh_key", customer_ssh_key);
                 return ClusterConfigBuilderImpl.this;
             }
+
+            @Override
+            public ClusterConfigBuilder persistent_security_group(String persistent_security_group)
+            {
+                security_settings.put("persistent_security_group", persistent_security_group);
+                return ClusterConfigBuilderImpl.this;
+            }
         };
     }
 
@@ -196,6 +203,13 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
             public ClusterConfigBuilder custom_config(String custom_config)
             {
                 hadoop_settings.put("custom_config", custom_config);
+                return ClusterConfigBuilderImpl.this;
+            }
+
+            @Override
+            public ClusterConfigBuilder use_hadoop2(boolean use_hadoop2)
+            {
+                hadoop_settings.put("use_hadoop2", use_hadoop2);
                 return ClusterConfigBuilderImpl.this;
             }
 
