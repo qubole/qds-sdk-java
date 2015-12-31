@@ -19,28 +19,27 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Cluster
+public class ClusterV13
 {
-    private String state;
-    private String spark_version;
-    private PrestoSettings presto_settings;
-    private boolean disallow_cluster_termination;
-    private SecuritySettings security_settings;
-    private boolean enable_ganglia_monitoring;
-    private HadoopSettings hadoop_settings;
-    private String node_bootstrap_file;
     private List<String> label;
     private int id;
-    private Ec2Settings ec2_settings;
-
-    public Cluster()
+    private String state;
+    private boolean disallow_cluster_termination;
+    private boolean enable_ganglia_monitoring;
+    private String node_bootstrap_file;
+    private PrestoSettingsV13 presto_settings;
+    private SecuritySettingsV13 security_settings;
+    private HadoopSettingsV13 hadoop_settings;
+    private Ec2SettingsV13 ec2_settings;
+    private NodeConfigurationV13 node_configuration;
+    
+    public ClusterV13()
     {
     }
 
-    public Cluster(String state, PrestoSettings presto_settings, String spark_version, boolean disallow_cluster_termination, SecuritySettings security_settings, boolean enable_ganglia_monitoring, HadoopSettings hadoop_settings, String node_bootstrap_file, List<String> label, int id, Ec2Settings ec2_settings)
+    public ClusterV13(String state, NodeConfigurationV13 node_configuration, PrestoSettingsV13 presto_settings, boolean disallow_cluster_termination, SecuritySettingsV13 security_settings, boolean enable_ganglia_monitoring, HadoopSettingsV13 hadoop_settings, String node_bootstrap_file, List<String> label, int id, Ec2SettingsV13 ec2_settings)
     {
         this.state = state;
-        this.spark_version = spark_version;
         this.presto_settings = presto_settings;
         this.disallow_cluster_termination = disallow_cluster_termination;
         this.security_settings = security_settings;
@@ -50,6 +49,7 @@ public class Cluster
         this.label = label;
         this.id = id;
         this.ec2_settings = ec2_settings;
+        this.node_configuration = node_configuration;
     }
 
     public String getState()
@@ -61,23 +61,13 @@ public class Cluster
     {
         this.state = state;
     }
-    
-    public String getSpark_version()
-    {
-        return spark_version;
-    }
 
-    public void setSpark_version(String spark_version)
-    {
-        this.spark_version = spark_version;
-    }
-
-    public PrestoSettings getPresto_settings()
+    public PrestoSettingsV13 getPresto_settings()
     {
         return presto_settings;
     }
 
-    public void setPresto_settings(PrestoSettings presto_settings)
+    public void setPresto_settings(PrestoSettingsV13 presto_settings)
     {
         this.presto_settings = presto_settings;
     }
@@ -92,12 +82,12 @@ public class Cluster
         this.disallow_cluster_termination = disallow_cluster_termination;
     }
 
-    public SecuritySettings getSecurity_settings()
+    public SecuritySettingsV13 getSecurity_settings()
     {
         return security_settings;
     }
 
-    public void setSecurity_settings(SecuritySettings security_settings)
+    public void setSecurity_settings(SecuritySettingsV13 security_settings)
     {
         this.security_settings = security_settings;
     }
@@ -112,12 +102,12 @@ public class Cluster
         this.enable_ganglia_monitoring = enable_ganglia_monitoring;
     }
 
-    public HadoopSettings getHadoop_settings()
+    public HadoopSettingsV13 getHadoop_settings()
     {
         return hadoop_settings;
     }
 
-    public void setHadoop_settings(HadoopSettings hadoop_settings)
+    public void setHadoop_settings(HadoopSettingsV13 hadoop_settings)
     {
         this.hadoop_settings = hadoop_settings;
     }
@@ -152,13 +142,23 @@ public class Cluster
         this.id = id;
     }
 
-    public Ec2Settings getEc2_settings()
+    public Ec2SettingsV13 getEc2_settings()
     {
         return ec2_settings;
     }
 
-    public void setEc2_settings(Ec2Settings ec2_settings)
+    public void setEc2_settings(Ec2SettingsV13 ec2_settings)
     {
         this.ec2_settings = ec2_settings;
+    }
+    
+    public NodeConfigurationV13 getNode_configuration()
+    {
+        return node_configuration;
+    }
+
+    public void setNode_configuration(NodeConfigurationV13 node_configuration)
+    {
+        this.node_configuration = node_configuration;
     }
 }

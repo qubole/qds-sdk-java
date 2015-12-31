@@ -15,11 +15,11 @@
  */
 package com.qubole.qds.sdk.java.api;
 
-public interface ClusterSpotInstanceConfigBuilder
+public interface ClusterPrestoConfigBuilderV13
 {
-    public ClusterConfigBuilder maximum_bid_price_percentage(String maximum_bid_price_percentage);
+    public ClusterConfigBuilderV13 enable_presto(boolean enable_presto);
+
+    public ClusterConfigBuilderV13 custom_config(String custom_config);
     
-    public ClusterConfigBuilder timeout_for_request(int timeout_for_request);
-    
-    public ClusterConfigBuilder maximum_spot_instance_percentage(int maximum_spot_instance_percentage);
+    public ClusterConfigBuilderV13 jvm_config(String jvm_config);
 }

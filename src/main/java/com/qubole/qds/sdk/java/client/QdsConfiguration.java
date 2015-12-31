@@ -49,4 +49,11 @@ public interface QdsConfiguration
      * @return version
      */
     public String getApiVersion();
+    
+    /**
+     * Return the API version v1.3
+     *
+     * @return version
+     */
+    public String getApiVersionV13();
 }

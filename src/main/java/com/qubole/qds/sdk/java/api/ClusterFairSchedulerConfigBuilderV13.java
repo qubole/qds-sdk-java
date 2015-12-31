@@ -15,11 +15,9 @@
  */
 package com.qubole.qds.sdk.java.api;
 
-public interface ClusterSpotInstanceConfigBuilder
+public interface ClusterFairSchedulerConfigBuilderV13
 {
-    public ClusterConfigBuilder maximum_bid_price_percentage(String maximum_bid_price_percentage);
+    public ClusterConfigBuilderV13 default_pool(String default_pool);
     
-    public ClusterConfigBuilder timeout_for_request(int timeout_for_request);
-    
-    public ClusterConfigBuilder maximum_spot_instance_percentage(int maximum_spot_instance_percentage);
+    public ClusterConfigBuilderV13 fairscheduler_config_xml(String fairscheduler_config_xml);
 }

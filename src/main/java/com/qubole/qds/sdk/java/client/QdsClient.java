@@ -16,6 +16,7 @@
 package com.qubole.qds.sdk.java.client;
 
 import com.qubole.qds.sdk.java.api.ClusterApi;
+import com.qubole.qds.sdk.java.api.ClusterApiV13;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
@@ -39,6 +40,13 @@ public interface QdsClient extends Closeable
      * @return cluster api factory
      */
     public ClusterApi cluster();
+    
+    /**
+     * Return cluster api factory
+     *
+     * @return cluster api factory
+     */
+    public ClusterApiV13 clusterV13();
 
     /**
      * Return command api factory

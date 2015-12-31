@@ -15,11 +15,11 @@
  */
 package com.qubole.qds.sdk.java.api;
 
-public interface ClusterSpotInstanceConfigBuilder
+public interface ClusterSecurityConfigBuilderV13
 {
-    public ClusterConfigBuilder maximum_bid_price_percentage(String maximum_bid_price_percentage);
-    
-    public ClusterConfigBuilder timeout_for_request(int timeout_for_request);
-    
-    public ClusterConfigBuilder maximum_spot_instance_percentage(int maximum_spot_instance_percentage);
+    public ClusterConfigBuilderV13 encrypted_ephemerals(boolean encrypted_ephemerals);
+
+    public ClusterConfigBuilderV13 ssh_public_key(String ssh_public_key);
+
+    public ClusterConfigBuilderV13 persistent_security_group(String persistent_security_group);
 }

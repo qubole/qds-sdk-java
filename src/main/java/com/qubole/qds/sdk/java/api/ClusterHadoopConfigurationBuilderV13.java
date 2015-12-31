@@ -15,11 +15,17 @@
  */
 package com.qubole.qds.sdk.java.api;
 
-public interface ClusterSpotInstanceConfigBuilder
+public interface ClusterHadoopConfigurationBuilderV13
 {
-    public ClusterConfigBuilder maximum_bid_price_percentage(String maximum_bid_price_percentage);
+    public ClusterConfigBuilderV13 use_hadoop2(boolean use_hadoop2);
     
-    public ClusterConfigBuilder timeout_for_request(int timeout_for_request);
+    public ClusterConfigBuilderV13 use_spark(boolean use_spark);
     
-    public ClusterConfigBuilder maximum_spot_instance_percentage(int maximum_spot_instance_percentage);
+    public ClusterConfigBuilderV13 use_hbase(boolean use_hbase);
+    
+    public ClusterConfigBuilderV13 use_qubole_placement_policy(boolean use_qubole_placement_policy);
+    
+    public ClusterConfigBuilderV13 custom_config(String custom_config);
+    
+    public ClusterFairSchedulerConfigBuilderV13 fairscheduler_settings();
 }

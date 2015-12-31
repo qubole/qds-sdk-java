@@ -13,13 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubole.qds.sdk.java.api;
+package com.qubole.qds.sdk.java.entities;
 
-public interface ClusterSpotInstanceConfigBuilder
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ClusterItemV13
 {
-    public ClusterConfigBuilder maximum_bid_price_percentage(String maximum_bid_price_percentage);
-    
-    public ClusterConfigBuilder timeout_for_request(int timeout_for_request);
-    
-    public ClusterConfigBuilder maximum_spot_instance_percentage(int maximum_spot_instance_percentage);
+    private ClusterV13 cluster;
+
+    public ClusterItemV13()
+    {
+    }
+
+    public ClusterItemV13(ClusterV13 cluster)
+    {
+        this.cluster = cluster;
+    }
+
+    public ClusterV13 getCluster()
+    {
+        return cluster;
+    }
+
+    public void setCluster(ClusterV13 cluster)
+    {
+        this.cluster = cluster;
+    }
 }

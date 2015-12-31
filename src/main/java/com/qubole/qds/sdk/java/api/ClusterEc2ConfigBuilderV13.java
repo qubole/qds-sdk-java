@@ -15,11 +15,19 @@
  */
 package com.qubole.qds.sdk.java.api;
 
-public interface ClusterSpotInstanceConfigBuilder
+public interface ClusterEc2ConfigBuilderV13
 {
-    public ClusterConfigBuilder maximum_bid_price_percentage(String maximum_bid_price_percentage);
+    public ClusterConfigBuilderV13 compute_secret_key(String compute_secret_key);
     
-    public ClusterConfigBuilder timeout_for_request(int timeout_for_request);
+    public ClusterConfigBuilderV13 compute_validated(boolean compute_validated);
     
-    public ClusterConfigBuilder maximum_spot_instance_percentage(int maximum_spot_instance_percentage);
+    public ClusterConfigBuilderV13 compute_access_key(String compute_access_key);
+    
+    public ClusterConfigBuilderV13 aws_region(String aws_region);
+    
+    public ClusterConfigBuilderV13 aws_preferred_availability_zone(String aws_preferred_availability_zone);
+    
+    public ClusterConfigBuilderV13 subnet_id(String subnet_id);
+    
+    public ClusterConfigBuilderV13 vpc_id(String vpc_id);
 }

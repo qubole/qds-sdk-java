@@ -18,6 +18,7 @@ package com.qubole.qds.sdk.java.details;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 import com.qubole.qds.sdk.java.api.ClusterApi;
+import com.qubole.qds.sdk.java.api.ClusterApiV13;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
@@ -49,13 +50,15 @@ public class QdsClientImpl implements QdsClient
     private final QdsConfiguration configuration;
     private final Client client;
     private final AtomicBoolean isClosed = new AtomicBoolean(false);
-    private final WebTarget target;
     private final CommandApiImpl commandApi;
     private final ClusterApiImpl clusterApi;
+    private final ClusterApiV13Impl clusterApiV13;
     private final HiveMetadataApiImpl hiveMetadataApi;
     private final DbTapApiImpl dbTapsApi;
     private final ReportApiImpl reportApi;
     private final SchedulerApiImpl schedulerApi;
+    private final WebTarget target, targetv13;
+    private boolean versionIsV13=false;
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -69,8 +72,10 @@ public class QdsClientImpl implements QdsClient
         this.configuration = Preconditions.checkNotNull(configuration, "configuration cannot be null");
         client = configuration.newClient();
         target = client.target(configuration.getApiEndpoint()).path(configuration.getApiVersion());
+        targetv13 = client.target(configuration.getApiEndpoint()).path(configuration.getApiVersionV13());
         commandApi = new CommandApiImpl(this);
         clusterApi = new ClusterApiImpl(this);
+        clusterApiV13 = new ClusterApiV13Impl(this);
         hiveMetadataApi = new HiveMetadataApiImpl(this);
         dbTapsApi = new DbTapApiImpl(this);
         reportApi = new ReportApiImpl(this);
@@ -89,6 +94,13 @@ public class QdsClientImpl implements QdsClient
     public ClusterApi cluster()
     {
         return clusterApi;
+    }
+    
+    @Override
+    public ClusterApiV13 clusterV13()
+    {
+        versionIsV13 = true;
+        return clusterApiV13;
     }
 
     @Override
@@ -188,6 +200,10 @@ public class QdsClientImpl implements QdsClient
     protected WebTarget prepareTarget(ForPage forPage, RequestDetails entity, String[] additionalPaths)
     {
         WebTarget localTarget = target;
+        
+        if (versionIsV13)
+            localTarget = targetv13;
+        
         if ( additionalPaths != null )
         {
             for ( String path : additionalPaths )
