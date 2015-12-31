@@ -61,9 +61,17 @@
         <guava-version>16.0.1</guava-version>
         <testng-version>6.8.8</testng-version>
         <aws-java-sdk-version>1.7.9</aws-java-sdk-version>
+        <mockito-version>1.6.4</mockito-version>
     </properties>
 
     <dependencies>
+        <dependency>
+		    <groupId>org.powermock</groupId>
+		    <artifactId>powermock-api-mockito</artifactId>
+		    <version>${mockito-version}</version>
+		    <scope>test</scope>
+		</dependency>
+		
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
