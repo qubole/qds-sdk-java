@@ -4,52 +4,84 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 import com.google.common.collect.ImmutableMap;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.HadoopCommandBuilder;
 import com.qubole.qds.sdk.java.api.HiveCommandBuilder;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.api.PigCommandBuilder;
+import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
+import com.qubole.qds.sdk.java.client.QdsClientFactory;
+import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.client.ResultLatch;
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.entities.ResultValue;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import junit.framework.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.BDDMockito;
+import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({ResultLatch.class, QdsClientFactory.class})
 public class TestCommands
 {
-    QdsClient qdsClient = mock(QdsClient.class);
-    CommandApi commandApi = mock(CommandApi.class);
-    Future future = mock(Future.class);
-    ResultLatch resultLatch = mock(ResultLatch.class);
-    ResultValue resultValue = mock(ResultValue.class);
-    InvokableBuilder invokableBuilder = mock(InvokableBuilder.class);
-    HiveCommandBuilder hiveCommandBuilder = mock(HiveCommandBuilder.class, new SelfReturningAnswer());
-    HadoopCommandBuilder hadoopCommandBuilder = mock(HadoopCommandBuilder.class, new SelfReturningAnswer());
-    PigCommandBuilder pigCommandBuilder = mock(PigCommandBuilder.class, new SelfReturningAnswer());
+    // Define all mock classes
+    static DefaultQdsConfiguration configurationMocked = mock(DefaultQdsConfiguration.class);
+    static QdsClient qdsClientMocked = mock(QdsClient.class);
+    static CommandApi commandApi = mock(CommandApi.class);
+    static Future future = mock(Future.class);
+    static ResultLatch resultLatch = mock(ResultLatch.class);
+    static ResultValue resultValue = mock(ResultValue.class);
+    static InvokableBuilder invokableBuilder = mock(InvokableBuilder.class);
+    static HiveCommandBuilder hiveCommandBuilder = mock(HiveCommandBuilder.class, new SelfReturningAnswer());
+    static HadoopCommandBuilder hadoopCommandBuilder = mock(HadoopCommandBuilder.class, new SelfReturningAnswer());
+    static PigCommandBuilder pigCommandBuilder = mock(PigCommandBuilder.class, new SelfReturningAnswer());
     
-    String LOGS = "Sample logs of the command run";
+    static DefaultQdsConfiguration configuration;
+    static QdsClient qdsClient;
+    
+    // These sample Logs are returned for any command run 
+    String LOGS = "Command completed successfully";
     
     @BeforeClass
-    public void setup() throws Exception
+    public static void setup() throws Exception
     {   
+        // Setting up the QdsClient class with mocked classes which will be used across the test suite.
+        PowerMockito.whenNew(DefaultQdsConfiguration.class).withArguments(Mockito.any(String.class), Mockito.any(String.class)).thenReturn(configurationMocked);
+        PowerMockito.mockStatic(QdsClientFactory.class);
+        BDDMockito.given(QdsClientFactory.newClient(Mockito.any(QdsConfiguration.class))).willReturn(qdsClientMocked);
+        
+        configuration = new DefaultQdsConfiguration("http://api.qubole.net/api","xxYYzz@pwqxxYYzz@pwqxxYYzz@pwqxxYYzz@pwq");
+        qdsClient = QdsClientFactory.newClient(configuration);
+        
+        // Setting up mocked responses for function calls with different mocked classes
         when(qdsClient.command()).thenReturn(commandApi);
         when(commandApi.hive()).thenReturn(hiveCommandBuilder);
         when(commandApi.hadoop()).thenReturn(hadoopCommandBuilder);
         when(commandApi.pig()).thenReturn(pigCommandBuilder);
-        when(commandApi.logs(anyString())).thenReturn(invokableBuilder);
+        when(commandApi.logs(Mockito.anyString())).thenReturn(invokableBuilder);
         when(invokableBuilder.invoke()).thenReturn(future);
         when(hiveCommandBuilder.invoke()).thenReturn(future);
         when(hadoopCommandBuilder.invoke()).thenReturn(future);
         when(pigCommandBuilder.invoke()).thenReturn(future);
     }
     
+    /* testHiveCommandQuery()
+     * Create a mocked response that will be returned on running a query.
+     * Then compare the actual and expected responses.
+     * Finally the mocked results and logs are verified.
+     */
     @Test
     public void testHiveCommandQuery() throws Exception
     {
@@ -57,7 +89,6 @@ public class TestCommands
         when(future.get()).thenReturn(expectedResponse);
         CommandResponse actualResponse = qdsClient.command().hive().query("show tables;").clusterLabel("default").invoke().get();
         compareCommandResponse(expectedResponse, actualResponse);
-        
         ResultValue expectedResult = new ResultValue(true, "table1\ntable2", null);
         checkResults(String.valueOf(actualResponse.getId()), expectedResult);
         checkLogs(String.valueOf(actualResponse.getId()));
@@ -141,25 +172,40 @@ public class TestCommands
         checkLogs(String.valueOf(actualResponse.getId()));
     }
     
+    /**
+     * @param sample command id for which results are to be verified
+     * @param expected result value to compare against
+     */
     public void checkResults(String commandID, ResultValue expectedResult) throws Exception
-    {
-        when(resultLatch.awaitResult(anyLong(), any(TimeUnit.class))).thenReturn(expectedResult);
-        ResultValue actualResult = resultLatch.awaitResult(10, TimeUnit.SECONDS);
+    {   
+        // Creates a new result latch and mocks the awaitResult function to return the expectedResult
+        when(resultLatch.awaitResult(Mockito.anyLong(), Mockito.any(TimeUnit.class))).thenReturn(expectedResult);
+        PowerMockito.whenNew(ResultLatch.class).withArguments(Mockito.any(QdsClient.class), Mockito.any(String.class)).thenReturn(resultLatch);
+        ResultLatch latch=new ResultLatch(qdsClient, commandID);
+        ResultValue actualResult = latch.awaitResult(10, TimeUnit.SECONDS);
         if (expectedResult.getResults()!=null)
             Assert.assertTrue(expectedResult.getResults().equals(actualResult.getResults()));
         if (expectedResult.getResult_location()!=null)
             Assert.assertTrue(expectedResult.getResult_location().equals(actualResult.getResult_location()));
     }
     
+    /**
+     * @param commandID command id for which logs are to be verified
+     */
     public void checkLogs(String commandID) throws Exception
     {
+        // Mocks the return logs function from qdsclient and returns the sample LOGS defined at class level
         when(future.get()).thenReturn(LOGS);
         String logsFetched = qdsClient.command().logs(commandID).invoke().get();
         Assert.assertTrue(logsFetched.equalsIgnoreCase(LOGS));
     }
     
+    /**
+     * @param type type of command eg PigCommand, HiveCommand
+     */
     public CommandResponse createResponse(String type)
     {
+        // Creates a sample response with specific fields for a command type
         CommandResponse expectedResponse=new CommandResponse();
         expectedResponse.setCommand_type(type);
         expectedResponse.setId(12345);
@@ -171,6 +217,10 @@ public class TestCommands
         return expectedResponse;
     }
     
+    /**
+     * @param expectedResponse expected reponse object
+     * @param actualResponse actual reponse against which will be validated against expectedResponse
+     */
     public void compareCommandResponse(CommandResponse expectedResponse, CommandResponse actualResponse)
     {
         if (actualResponse.getCommand_type()!=null) 
@@ -213,7 +263,10 @@ public class TestCommands
         Assert.assertTrue(actualResponse.getCommand()==expectedResponse.getCommand());
     }
     
-    public class SelfReturningAnswer implements Answer<Object>
+    /* SelfReturningAnswer
+     * This is used for builder objects to return the calling mocked class to construct an object
+     */
+    public static class SelfReturningAnswer implements Answer<Object>
     {
         public Object answer(InvocationOnMock invocation) throws Throwable 
         {
@@ -224,7 +277,7 @@ public class TestCommands
             }
             else
             {
-                return RETURNS_DEFAULTS.answer(invocation);
+                return Mockito.RETURNS_DEFAULTS.answer(invocation);
             }
         }
     }
