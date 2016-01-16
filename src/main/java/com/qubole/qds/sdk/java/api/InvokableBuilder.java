@@ -16,6 +16,7 @@
 package com.qubole.qds.sdk.java.api;
 
 import javax.ws.rs.client.InvocationCallback;
+import com.qubole.qds.sdk.java.details.InvokeArguments;
 import java.util.concurrent.Future;
 
 /**
@@ -29,6 +30,13 @@ public interface InvokableBuilder<T>
      * @return result
      */
     public Future<T> invoke();
+    
+    /**
+     * Get the invoke arguments for the API call
+     *
+     * @return result
+     */
+    public InvokeArguments<T> getArgumentsInvocation();
 
     /**
      * Cause invoke() to return the result as a raw client response
