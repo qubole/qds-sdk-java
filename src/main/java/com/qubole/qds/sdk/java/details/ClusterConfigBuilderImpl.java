@@ -88,7 +88,7 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
             }
         };
     }
-
+    
     @Override
     public ClusterConfigBuilder disallow_cluster_termination(boolean disallow_cluster_termination)
     {
@@ -203,6 +203,13 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
             public ClusterConfigBuilder custom_config(String custom_config)
             {
                 hadoop_settings.put("custom_config", custom_config);
+                return ClusterConfigBuilderImpl.this;
+            }
+            
+            @Override
+            public ClusterConfigBuilder use_spark(boolean use_spark) 
+            {
+                hadoop_settings.put("use_spark", use_spark);
                 return ClusterConfigBuilderImpl.this;
             }
 
