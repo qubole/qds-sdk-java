@@ -22,9 +22,7 @@ import com.qubole.qds.sdk.java.entities.ClusterState;
 import com.qubole.qds.sdk.java.entities.Command;
 import com.qubole.qds.sdk.java.entities.Message;
 import com.qubole.qds.sdk.java.entities.State;
-
 import javax.ws.rs.core.GenericType;
-
 import java.util.List;
 
 class ClusterApiImpl implements ClusterApi

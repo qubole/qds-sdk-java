@@ -17,9 +17,7 @@ package com.qubole.qds.sdk.java.details;
 
 import java.io.IOException;
 import java.util.List;
-
 import org.codehaus.jackson.node.ObjectNode;
-
 import com.qubole.qds.sdk.java.api.ClusterRestoreBuilder;
 
 public class ClusterRestoreBuilderImpl implements ClusterRestoreBuilder
