@@ -24,10 +24,8 @@ import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.api.ReportApi;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
-
 import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.core.GenericType;
-
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Future;
 

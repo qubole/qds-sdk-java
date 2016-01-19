@@ -16,9 +16,7 @@
 package com.qubole.qds.sdk.java.details;
 
 import java.io.IOException;
-
 import org.codehaus.jackson.node.ObjectNode;
-
 import com.qubole.qds.sdk.java.api.AccountConfigBuilder;
 
 public class AccountConfigBuilderImpl implements AccountConfigBuilder
@@ -128,5 +126,5 @@ public class AccountConfigBuilderImpl implements AccountConfigBuilder
             throw new RuntimeException("Could not serialize: " + node, e);
         }
     }
-
 }
+
