@@ -24,10 +24,8 @@ import com.qubole.qds.sdk.java.api.ReportApi;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
 import com.qubole.qds.sdk.java.details.RequestDetails;
 import com.qubole.qds.sdk.java.details.ForPage;
-
 import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.core.GenericType;
-
 import java.io.Closeable;
 import java.util.concurrent.Future;
 

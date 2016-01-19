@@ -29,11 +29,9 @@ import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.client.retry.RetryConnector;
 import com.qubole.qds.sdk.java.entities.SubCommands;
 import com.qubole.qds.sdk.java.entities.SubCommandsDeserializer;
-
 import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.module.SimpleModule;
-
 import javax.ws.rs.client.AsyncInvoker;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
@@ -42,7 +40,6 @@ import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
-
 import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -178,7 +175,6 @@ public class QdsClientImpl implements QdsClient
             }
             return invoker.method(entity.getMethod().name(), responseType);
         }
-
         return invoker.get(responseType);
     }
 
@@ -247,6 +243,7 @@ public class QdsClientImpl implements QdsClient
         {
             builder = builder.property(RetryConnector.PROPERTY_ENABLE, true);
         }
+        
         return builder.async();
     }
 }
