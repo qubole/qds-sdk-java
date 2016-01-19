@@ -22,9 +22,7 @@ import com.qubole.qds.sdk.java.api.ClusterHadoopConfigBuilder;
 import com.qubole.qds.sdk.java.api.ClusterPrestoConfigBuilder;
 import com.qubole.qds.sdk.java.api.ClusterSecurityConfigBuilder;
 import com.qubole.qds.sdk.java.api.ClusterSpotInstanceConfigBuilder;
-
 import org.codehaus.jackson.node.ObjectNode;
-
 import java.io.IOException;
 import java.util.List;
 
