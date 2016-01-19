@@ -30,10 +30,8 @@ import com.qubole.qds.sdk.java.details.MockClient;
 import com.qubole.qds.sdk.java.entities.Account;
 import com.qubole.qds.sdk.java.entities.AccountCredentials;
 import com.qubole.qds.sdk.java.entities.ResultValue;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.Reader;
 import java.util.Arrays;
