@@ -20,6 +20,7 @@ public interface ClusterHadoopConfigBuilder
     public ClusterConfigBuilder master_instance_type(String master_instance_type);
     public ClusterFairSchedulerConfigBuilder fairscheduler_settings();
     public ClusterConfigBuilder max_nodes(int max_nodes);
+    public ClusterConfigBuilder use_spark(boolean use_spark);
     public ClusterConfigBuilder slave_instance_type(String slave_instance_type);
     public ClusterConfigBuilder slave_request_type(String slave_request_type);
     public ClusterConfigBuilder use_hadoop2(boolean use_hadoop2);

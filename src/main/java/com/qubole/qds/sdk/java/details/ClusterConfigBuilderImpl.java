@@ -207,6 +207,13 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
             }
 
             @Override
+            public ClusterConfigBuilder use_spark(boolean use_spark)
+            {
+                hadoop_settings.put("use_spark", use_spark);
+                return ClusterConfigBuilderImpl.this;
+            }
+
+            @Override
             public ClusterConfigBuilder use_hadoop2(boolean use_hadoop2)
             {
                 hadoop_settings.put("use_hadoop2", use_hadoop2);
