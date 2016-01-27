@@ -63,11 +63,18 @@ class CreateScheduleCommandBuilderImpl extends InvocationCallbackBase<Schedule> 
         node.put("end_time", end_time);
         return this;
     }
-
+    
     @Override
-    public CreateScheduleCommandBuilder frequency(Map<String, String> frequency)
+    public CreateScheduleCommandBuilder frequency(int frequency)
     {
         node.putPOJO("frequency", frequency);
+        return this;
+    }
+    
+    @Override
+    public CreateScheduleCommandBuilder time_unit(String time_unit)
+    {
+        node.put("time_unit", time_unit);
         return this;
     }
 

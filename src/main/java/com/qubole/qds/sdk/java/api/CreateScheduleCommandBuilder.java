@@ -33,7 +33,9 @@ public interface CreateScheduleCommandBuilder extends InvokableBuilder<Schedule>
 
     public CreateScheduleCommandBuilder end_time(String end_time);
 
-    public CreateScheduleCommandBuilder frequency(Map<String, String> frequency);
+    public CreateScheduleCommandBuilder frequency(int frequency);
+    
+    public CreateScheduleCommandBuilder time_unit(String time_unit);
 
     public CreateScheduleCommandBuilder time_zone(String time_zone);
 
