@@ -61,16 +61,9 @@
         <guava-version>16.0.1</guava-version>
         <testng-version>6.8.8</testng-version>
         <aws-java-sdk-version>1.7.9</aws-java-sdk-version>
-        <gson-version>2.5</gson-version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>${gson-version}</version>
-        </dependency>
-
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>

@@ -1,13 +1,12 @@
 package com.qubole.qds.sdk.java.unittests;
 
 import java.util.Map;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import com.amazonaws.util.json.JSONObject;
 import com.google.common.base.Joiner;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
@@ -18,14 +17,14 @@ import com.qubole.qds.sdk.java.api.HadoopCommandBuilder;
 
 public class TestCommands
 {
-    JsonParser parser;
     QdsConfiguration configuration;
     QdsClient qdsClient;
+    ObjectMapper mapper;
     
     @BeforeClass
     public void setup()
     {
-        parser = new JsonParser();
+        mapper = new ObjectMapper();
         configuration = new DefaultQdsConfiguration("https://api.qubole.com/api","apiToken");
         qdsClient = QdsClientFactory.newClient(configuration);
     }
@@ -38,7 +37,7 @@ public class TestCommands
         expectedRequestData.put("command_type", "HiveCommand");
         expectedRequestData.put("label", "default");
         expectedRequestData.put("query", "show tables;");
-        assertRequestDetails(invokeargs, "POST", "commands", parser.parse(expectedRequestData.toString()), null, CommandResponse.class);
+        assertRequestDetails(invokeargs, "POST", "commands", expectedRequestData, null, CommandResponse.class);
     }
     
     @Test
@@ -49,7 +48,7 @@ public class TestCommands
         expectedRequestData.put("command_type", "HiveCommand");
         expectedRequestData.put("label", "nondefault");
         expectedRequestData.put("script_location", "s3://testhive/hivecommand");
-        assertRequestDetails(invokeargs, "POST", "commands", parser.parse(expectedRequestData.toString()), null, CommandResponse.class);
+        assertRequestDetails(invokeargs, "POST", "commands", expectedRequestData,  null, CommandResponse.class);
     }
     
     @Test
@@ -61,7 +60,7 @@ public class TestCommands
         expectedRequestData.put("label", "default");
         expectedRequestData.put("sub_command", "jar");
         expectedRequestData.put("sub_command_args", "s3n://testfiles/input.jar -mapper wc -numReduceTasks 0 -input s3n://testfiles/input -output s3://testhadoop/results");
-        assertRequestDetails(invokeargs, "POST", "commands", parser.parse(expectedRequestData.toString()), null, CommandResponse.class);
+        assertRequestDetails(invokeargs, "POST", "commands", expectedRequestData,  null, CommandResponse.class);
     }
     
     @Test
@@ -73,7 +72,7 @@ public class TestCommands
         expectedRequestData.put("label", "default");
         expectedRequestData.put("sub_command", "s3distcp");
         expectedRequestData.put("sub_command_args", "--src s3://testhadoop/source --dest /testhadoop/destination");
-        assertRequestDetails(invokeargs, "POST", "commands", parser.parse(expectedRequestData.toString()), null, CommandResponse.class);
+        assertRequestDetails(invokeargs, "POST", "commands", expectedRequestData, null, CommandResponse.class);
     }
     
     @Test
@@ -85,7 +84,7 @@ public class TestCommands
         expectedRequestData.put("label", "default");
         expectedRequestData.put("sub_command", "streaming");
         expectedRequestData.put("sub_command_args", "-files s3n://testhadoop/mapper.py,s3n://testhadoop/reducer.py -mapper mapper.py -reducer reducer.py numReduceTasks 1 -input s3n://testfiles/input -output /testhadoop/results");
-        assertRequestDetails(invokeargs, "POST", "commands", parser.parse(expectedRequestData.toString()), null, CommandResponse.class);
+        assertRequestDetails(invokeargs, "POST", "commands", expectedRequestData, null, CommandResponse.class);
     }
     
     @Test
@@ -96,7 +95,7 @@ public class TestCommands
         expectedRequestData.put("command_type", "PigCommand");
         expectedRequestData.put("label", "default");
         expectedRequestData.put("latin_statements", "A=LOAD \"s3://testpig/pig.log\";dump A");
-        assertRequestDetails(invokeargs, "POST", "commands", parser.parse(expectedRequestData.toString()), null, CommandResponse.class);
+        assertRequestDetails(invokeargs, "POST", "commands", expectedRequestData, null, CommandResponse.class);
     }
     
     @Test
@@ -107,10 +106,10 @@ public class TestCommands
         expectedRequestData.put("command_type", "PigCommand");
         expectedRequestData.put("label", "default");
         expectedRequestData.put("script_location", "s3://testpig/script");
-        assertRequestDetails(invokeargs, "POST", "commands", parser.parse(expectedRequestData.toString()), null, CommandResponse.class);
+        assertRequestDetails(invokeargs, "POST", "commands", expectedRequestData, null, CommandResponse.class);
     }
     
-    public void assertRequestDetails(InvokeArguments<?> invokeargs, String expectedRequestType, String expectedEndpoint, JsonElement expectedRequestData, Map<Object, Object> expectedQueryParams, Class<?> expectedResponseClassType) throws Exception
+    public void assertRequestDetails(InvokeArguments<?> invokeargs, String expectedRequestType, String expectedEndpoint, JSONObject expectedRequestData, Map<Object, Object> expectedQueryParams, Class<?> expectedResponseClassType) throws Exception
     {
         Assert.assertEquals(invokeargs.getEntity().getMethod().name(), expectedRequestType, "Incorrect request type. Expected : "+expectedRequestType+" , got from request : "+invokeargs.getEntity().getMethod().name());
         Assert.assertEquals(Joiner.on("/").join(invokeargs.getAdditionalPaths()), expectedEndpoint, "Incorrect endpoint. Expected : "+expectedEndpoint+" , got from request : "+Joiner.on("/").join(invokeargs.getAdditionalPaths()));
@@ -119,7 +118,7 @@ public class TestCommands
         if (expectedRequestData != null)
         {
             Assert.assertNotNull(invokeargs.getEntity().getEntity(), "Request data is null. Expected was : " + expectedRequestData);
-            Assert.assertEquals(parser.parse(invokeargs.getEntity().getEntity().toString()),expectedRequestData, "Incorrect request data. Expected was : " + expectedRequestData + " , got from request : " + invokeargs.getEntity().getEntity().toString());
+            Assert.assertTrue(mapper.readTree(invokeargs.getEntity().getEntity().toString()).equals(mapper.readTree(expectedRequestData.toString())), "Incorrect request data. Expected was : " + expectedRequestData + " , got from request : " + invokeargs.getEntity().getEntity().toString());
         }
         else
         {
