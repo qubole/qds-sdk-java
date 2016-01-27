@@ -203,6 +203,7 @@ public class QdsClientImpl implements QdsClient
         
         if (versionIsV13)
             localTarget = targetv13;
+            versionIsV13 = false;
         
         if ( additionalPaths != null )
         {
