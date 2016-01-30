@@ -84,21 +84,35 @@ class SchedulerApiImpl implements SchedulerApi
     {
         return new GenericInvokableBuilderImpl<String>(client, RequestDetails.retry(), String.class, "scheduler", Integer.toString(scheduleId), "instances", Integer.toString(instanceId), "results");
     }
-
+    
     @Override
-    public CreateScheduleCommandBuilder create()
+    public InvokableBuilder<Schedule> edit(String scheduleId, CreateScheduleCommandBuilder configBuilder)
     {
-        return new CreateScheduleCommandBuilderImpl(client);
+        RequestDetails entity = new RequestDetails(configBuilder.toString(), RequestDetails.Method.PUT);
+        return new GenericInvokableBuilderImpl<Schedule>(client, entity, Schedule.class, "scheduler", scheduleId);
     }
-
-    SchedulerApiImpl(QdsClient client)
+    
+    @Override
+    public InvokableBuilder<Schedule> create(CreateScheduleCommandBuilder configBuilder)
     {
-        this.client = client;
+        RequestDetails entity = new RequestDetails(configBuilder.toString(), RequestDetails.Method.POST);
+        return new GenericInvokableBuilderImpl<Schedule>(client, entity, Schedule.class, "scheduler");
     }
-
+    
     private InvokableBuilder<SuccessAndStatus> suspendKillResume(int scheduleId, String status)
     {
         RequestDetails entity = new RequestDetails(new Status(status), RequestDetails.Method.PUT);
         return new GenericInvokableBuilderImpl<SuccessAndStatus>(client, entity, SuccessAndStatus.class, "scheduler", Integer.toString(scheduleId));
+    }
+    
+    @Override
+    public CreateScheduleCommandBuilder scheduleBuilder()
+    {
+        return new CreateScheduleCommandBuilderImpl();
+    }
+    
+    SchedulerApiImpl(QdsClient client)
+    {
+        this.client = client;
     }
 }

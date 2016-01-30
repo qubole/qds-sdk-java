@@ -16,18 +16,16 @@
 package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.CreateScheduleCommandBuilder;
-import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.DependencyInfo;
-import com.qubole.qds.sdk.java.entities.Schedule;
 import com.qubole.qds.sdk.java.entities.ScheduleCommand;
 import org.codehaus.jackson.node.ObjectNode;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-class CreateScheduleCommandBuilderImpl extends InvocationCallbackBase<Schedule> implements CreateScheduleCommandBuilder
+class CreateScheduleCommandBuilderImpl implements CreateScheduleCommandBuilder
 {
     private final ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
-    private final QdsClient client;
 
     @Override
     public CreateScheduleCommandBuilder command_type(String command_type)
@@ -77,6 +75,13 @@ class CreateScheduleCommandBuilderImpl extends InvocationCallbackBase<Schedule> 
         node.put("time_unit", time_unit);
         return this;
     }
+    
+    @Override
+    public CreateScheduleCommandBuilder name(String name)
+    {
+        node.put("name", name);
+        return this;
+    }
 
     @Override
     public CreateScheduleCommandBuilder time_zone(String time_zone)
@@ -112,16 +117,17 @@ class CreateScheduleCommandBuilderImpl extends InvocationCallbackBase<Schedule> 
         node.putPOJO("dependency_info", dependency_info);
         return this;
     }
-
+    
     @Override
-    protected InvokeArguments<Schedule> getInvokeArguments()
+    public String toString()
     {
-        RequestDetails entity = CommandBuilderImplBase.makeJsonEntity(node, RequestDetails.Method.POST);
-        return new InvokeArguments<Schedule>(client, null, entity, Schedule.class, "scheduler");
-    }
-
-    CreateScheduleCommandBuilderImpl(QdsClient client)
-    {
-        this.client = client;
+        try
+        {
+            return QdsClientImpl.getMapper().writer().writeValueAsString(node);
+        }
+        catch ( IOException e )
+        {
+            throw new RuntimeException("Could not serialize: " + node, e);
+        }
     }
 }
