@@ -118,9 +118,17 @@ public class DefaultQdsConfiguration implements QdsConfiguration
     public DefaultQdsConfiguration(String apiEndpoint, String apiVersion, String apiToken, ClientConfig jerseyConfiguration, final Retry retry, final RetryConnectorAllocator retryConnectorAllocator)
     {
         this.apiEndpoint = Preconditions.checkNotNull(apiEndpoint, "apiEndpoint cannot be null");
-        this.apiVersion = Preconditions.checkNotNull(apiVersion, "apiVersion cannot be null");
         this.apiToken = Preconditions.checkNotNull(apiToken, "apiToken cannot be null");
-
+        
+        if (apiVersion == null)
+        {
+            this.apiVersion = API_VERSION;
+        }
+        else
+        {
+            this.apiVersion = apiVersion;
+        }
+        
         if ( jerseyConfiguration == null )
         {
             jerseyConfiguration = new ClientConfig();
