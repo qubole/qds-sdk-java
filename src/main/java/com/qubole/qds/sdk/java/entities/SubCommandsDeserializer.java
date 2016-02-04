@@ -18,7 +18,6 @@ package com.qubole.qds.sdk.java.entities;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.JsonDeserializer;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -39,7 +38,7 @@ public class SubCommandsDeserializer extends JsonDeserializer<SubCommands>
 
     @Override
     public SubCommands deserialize(JsonParser jp, DeserializationContext ctxt)
-            throws IOException, JsonProcessingException
+            throws IOException
     {
         ObjectMapper mapper = (ObjectMapper) jp.getCodec();
         JsonNode node = jp.getCodec().readTree(jp);
