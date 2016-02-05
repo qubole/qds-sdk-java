@@ -52,7 +52,7 @@ abstract class InvocationCallbackBase<T> implements InvokableBuilder<T>
     public final Future<T> invoke()
     {
         InvokeArguments<T> invokeArguments = getInvokeArguments();
-        
+
         if ( callback != null )
         {
             return invokeArguments.getClient().invokeRequest(invokeArguments.getForPage(), invokeArguments.getEntity(), callback, invokeArguments.getAdditionalPaths());

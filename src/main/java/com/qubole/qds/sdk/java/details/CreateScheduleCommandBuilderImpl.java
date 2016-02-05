@@ -61,21 +61,21 @@ class CreateScheduleCommandBuilderImpl implements CreateScheduleCommandBuilder
         node.put("end_time", end_time);
         return this;
     }
-    
+
     @Override
     public CreateScheduleCommandBuilder frequency(int frequency)
     {
         node.putPOJO("frequency", frequency);
         return this;
     }
-    
+
     @Override
     public CreateScheduleCommandBuilder time_unit(String time_unit)
     {
         node.put("time_unit", time_unit);
         return this;
     }
-    
+
     @Override
     public CreateScheduleCommandBuilder name(String name)
     {
@@ -117,7 +117,7 @@ class CreateScheduleCommandBuilderImpl implements CreateScheduleCommandBuilder
         node.putPOJO("dependency_info", dependency_info);
         return this;
     }
-    
+
     @Override
     public String toString()
     {

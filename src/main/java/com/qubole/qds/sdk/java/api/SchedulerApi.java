@@ -99,7 +99,7 @@ public interface SchedulerApi
      * @return builder
      */
     public InvokableBuilder<String> instanceResults(int scheduleId, int instanceId);
-    
+
     /**
      * Corresponds to http://docs.qubole.com/en/latest/rest-api/scheduler_api/edit-a-schedule.html
      *
@@ -108,7 +108,7 @@ public interface SchedulerApi
      * @return new builder
      */
     public InvokableBuilder<Schedule> edit(String scheduleId, CreateScheduleCommandBuilder configBuilder);
-    
+
     /**
      * Corresponds to http://docs.qubole.com/en/latest/rest-api/scheduler_api/create-a-schedule.html
      *
