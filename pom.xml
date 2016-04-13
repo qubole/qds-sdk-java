@@ -60,7 +60,7 @@
         <jersey-version>2.5</jersey-version>
         <guava-version>16.0.1</guava-version>
         <testng-version>6.8.8</testng-version>
-        <aws-java-sdk-version>1.7.9</aws-java-sdk-version>
+        <aws-java-sdk-version>1.10.69</aws-java-sdk-version>
     </properties>
 
     <dependencies>
@@ -83,9 +83,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk</artifactId>
-            <version>${aws-java-sdk-version}</version>
+	    <groupId>com.amazonaws</groupId>
+	    <artifactId>aws-java-sdk-s3</artifactId>	
+	    <version>${aws-java-sdk-version}</version>
         </dependency>
 
         <dependency>
@@ -198,10 +198,42 @@
                                 <relocation>
                                     <pattern>com.fasterxml.jackson.core</pattern>
                                     <shadedPattern>hidden.com.fasterxml.jackson.core</shadedPattern>
+			        </relocation>
+				<relocation>
+				    <pattern>com.fasterxml.jackson.databind</pattern>
+				    <shadedPattern>hidden.com.fasterxml.jackson.databind</shadedPattern>
+				</relocation>
+				<relocation>
+				    <pattern>com.fasterxml.jackson.annotation</pattern>
+				    <shadedPattern>hidden.com.fasterxml.jackson.annotation</shadedPattern>
+				</relocation>
+				<relocation>
+				    <pattern>com.fasterxml.jackson.dataformat.cbor</pattern>
+				    <shadedPattern>hidden.com.fasterxml.jackson.dataformat.cbor</shadedPattern>
+				</relocation>
+				<relocation>
+				    <pattern>com.google</pattern>
+				    <shadedPattern>hidden.com.google</shadedPattern>
+				</relocation>
+				<relocation>
+				    <pattern>javax.inject</pattern>
+				    <shadedPattern>hidden.javax.inject</shadedPattern>
+				</relocation>
+                                <relocation>
+                                    <pattern>net.sf.cglib</pattern>
+                                    <shadedPattern>hidden.net.sf.cglib</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>joda-time</pattern>
-                                    <shadedPattern>hidden.joda-time</shadedPattern>
+                                    <pattern>org.apache</pattern>
+                                    <shadedPattern>hidden.org.apache</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.joda.time</pattern>
+                                    <shadedPattern>hidden.org.joda.time</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.objectweb.asm</pattern>
+                                    <shadedPattern>hidden.org.objectweb.asm</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>com.beust</pattern>
