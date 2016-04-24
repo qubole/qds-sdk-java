@@ -41,7 +41,7 @@ abstract class CommandBuilderImplBase extends InvocationCallbackBase<CommandResp
         {
             json = QdsClientImpl.getMapper().writeValueAsString(node);
         }
-        catch ( IOException e )
+        catch (IOException e)
         {
             throw new RuntimeException("Could not serialize " + node, e);
         }

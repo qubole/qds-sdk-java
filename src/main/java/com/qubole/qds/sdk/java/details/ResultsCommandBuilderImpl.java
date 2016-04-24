@@ -39,7 +39,7 @@ class ResultsCommandBuilderImpl extends InvocationCallbackBase<ResultValue> impl
     protected InvokeArguments<ResultValue> getInvokeArguments()
     {
         RequestDetails entity;
-        if ( inline != null )
+        if (inline != null)
         {
             Map<String, String> queryParams = Maps.newHashMap();
             queryParams.put("inline", inline.toString());

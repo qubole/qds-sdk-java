@@ -17,7 +17,6 @@
 package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.BaseCommand;
-import com.qubole.qds.sdk.java.client.QdsClient;
 import org.codehaus.jackson.node.ObjectNode;
 
 import java.io.IOException;
@@ -51,7 +50,7 @@ public class BaseCommandImpl implements BaseCommand
         {
             json = QdsClientImpl.getMapper().writeValueAsString(node);
         }
-        catch ( IOException e )
+        catch (IOException e)
         {
             throw new RuntimeException("Could not serialize " + node, e);
         }
