@@ -22,7 +22,7 @@
     <groupId>com.tubemogul</groupId>
     <artifactId>qds-sdk-java</artifactId>
     <name>Qubole Data Service Java SDK</name>
-    <version>0.7.1</version>
+    <version>0.7.2-SNAPSHOT</version>
     <description>
         A Java library that provides the tools you need to
         authenticate with, and use the Qubole Data Service API.
