@@ -15,8 +15,7 @@
  */
 package com.qubole.qds.sdk.java.client;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.BasicSessionCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ListObjectsRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
@@ -25,6 +24,7 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 import com.qubole.qds.sdk.java.entities.Account;
+import com.qubole.qds.sdk.java.entities.AccountCredentials;
 import com.qubole.qds.sdk.java.entities.ResultValue;
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -110,11 +110,18 @@ public class ResultStreamer implements Closeable
     }
 
     @VisibleForTesting
+    protected AccountCredentials getAccountCredentials() throws Exception
+    {
+        Future<AccountCredentials> accountFuture = client.invokeRequest(null, null, AccountCredentials.class, "accounts/get_creds");
+        return accountFuture.get();
+    }
+
+    @VisibleForTesting
     protected S3Client newS3Client() throws Exception
     {
-        Account account = getAccount();
-        AWSCredentials awsCredentials = new BasicAWSCredentials(account.getStorage_access_key(), account.getStorage_secret_key());
-        final AmazonS3Client client = new AmazonS3Client(awsCredentials);
+        AccountCredentials account = getAccountCredentials();
+        BasicSessionCredentials basicSessionCredentials = new BasicSessionCredentials(account.getStorage_access_key(), account.getStorage_secret_key(), account.getSession_token());
+        final AmazonS3Client client = new AmazonS3Client(basicSessionCredentials);
         return new S3Client()
         {
             @Override
