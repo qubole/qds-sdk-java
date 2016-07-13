@@ -15,10 +15,10 @@
  */
 package com.qubole.qds.sdk.java.api;
 
-public interface ClusterSnapshotBuilder 
+public interface ClusterSnapshotBuilder
 {
     public enum SnapshotType
-    {   
+    {
         INCREMENTAL,
         FULL
     }

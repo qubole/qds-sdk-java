@@ -89,7 +89,7 @@ public interface ClusterApi
      * @return new builder
      */
     public InvokableBuilder<ClusterItem> delete(String labelOrId);
-    
+
     /**
      * Corresponds to http://docs.qubole.com/en/latest/rest-api/cluster_api/hbase-snapshot.html
      *
@@ -98,7 +98,7 @@ public interface ClusterApi
      * @return new builder
      */
     public InvokableBuilder<Command> snapshot(String labelOrId, ClusterSnapshotBuilder snapshot);
-    
+
     /**
      * Corresponds to http://docs.qubole.com/en/latest/rest-api/cluster_api/restore-point.html
      *
@@ -115,7 +115,7 @@ public interface ClusterApi
      * @return builder
      */
     public ClusterConfigBuilder clusterConfig();
-    
+
     /**
      * Return a new cluster snapshot config builder. Can be used with
      * apis such as {@link ClusterApi#snapshot(String, ClusterSnapshotBuilder)}
@@ -123,7 +123,7 @@ public interface ClusterApi
      * @return builder
      */
     public ClusterSnapshotBuilder clusterSnapshotConfig();
-    
+
     /**
      * Return a new cluster restore config builder. Can be used with
      * apis such as {@link ClusterApi#restore(String, ClusterRestoreBuilder)}

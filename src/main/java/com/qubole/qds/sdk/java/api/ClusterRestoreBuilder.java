@@ -17,15 +17,15 @@ package com.qubole.qds.sdk.java.api;
 
 import java.util.List;
 
-public interface ClusterRestoreBuilder 
+public interface ClusterRestoreBuilder
 {
     public ClusterRestoreBuilder automatic(boolean automatic);
 
     public ClusterRestoreBuilder backup_id(String backup_id);
-    
+
     public ClusterRestoreBuilder overwrite(boolean overwrite);
-    
+
     public ClusterRestoreBuilder s3_location(String s3_location);
-    
+
     public ClusterRestoreBuilder table_name(List<String> table_names);
 }

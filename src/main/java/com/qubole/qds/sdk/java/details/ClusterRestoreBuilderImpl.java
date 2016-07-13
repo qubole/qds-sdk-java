@@ -23,42 +23,42 @@ import com.qubole.qds.sdk.java.api.ClusterRestoreBuilder;
 public class ClusterRestoreBuilderImpl implements ClusterRestoreBuilder
 {
     private final ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
-    
+
     @Override
-    public ClusterRestoreBuilder automatic(boolean automatic) 
+    public ClusterRestoreBuilder automatic(boolean automatic)
     {
         node.put("automatic", automatic);
         return this;
     }
 
     @Override
-    public ClusterRestoreBuilder backup_id(String backup_id) 
+    public ClusterRestoreBuilder backup_id(String backup_id)
     {
         node.put("backup_id", backup_id);
         return this;
     }
 
     @Override
-    public ClusterRestoreBuilder overwrite(boolean overwrite) 
+    public ClusterRestoreBuilder overwrite(boolean overwrite)
     {
         node.put("overwrite", overwrite);
         return this;
     }
 
     @Override
-    public ClusterRestoreBuilder s3_location(String s3_location) 
+    public ClusterRestoreBuilder s3_location(String s3_location)
     {
         node.put("s3_location", s3_location);
         return this;
     }
 
     @Override
-    public ClusterRestoreBuilder table_name(List<String> table_names) 
+    public ClusterRestoreBuilder table_name(List<String> table_names)
     {
         node.putPOJO("table_names", table_names);
         return this;
     }
-    
+
     @Override
     public String toString()
     {
@@ -66,7 +66,7 @@ public class ClusterRestoreBuilderImpl implements ClusterRestoreBuilder
         {
             return QdsClientImpl.getMapper().writer().writeValueAsString(node);
         }
-        catch ( IOException e )
+        catch (IOException e)
         {
             throw new RuntimeException("Could not serialize: " + node, e);
         }

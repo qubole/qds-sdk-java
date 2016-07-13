@@ -82,16 +82,16 @@ class ClusterApiImpl implements ClusterApi
         RequestDetails entity = new RequestDetails(null, RequestDetails.Method.DELETE);
         return new GenericInvokableBuilderImpl<ClusterItem>(client, entity, ClusterItem.class, "clusters", labelOrId);
     }
-    
+
     @Override
-    public InvokableBuilder<Command> snapshot(String labelOrId, ClusterSnapshotBuilder snapshot) 
+    public InvokableBuilder<Command> snapshot(String labelOrId, ClusterSnapshotBuilder snapshot)
     {
         RequestDetails entity = new RequestDetails(snapshot.toString(), RequestDetails.Method.POST);
         return new GenericInvokableBuilderImpl<Command>(client, entity, Command.class, "clusters", labelOrId, "snapshots");
     }
 
     @Override
-    public InvokableBuilder<Command> restore(String labelOrId, ClusterRestoreBuilder restore) 
+    public InvokableBuilder<Command> restore(String labelOrId, ClusterRestoreBuilder restore)
     {
         RequestDetails entity = new RequestDetails(restore.toString(), RequestDetails.Method.POST);
         return new GenericInvokableBuilderImpl<Command>(client, entity, Command.class, "clusters", labelOrId, "restore_point");
@@ -102,15 +102,15 @@ class ClusterApiImpl implements ClusterApi
     {
         return new ClusterConfigBuilderImpl();
     }
-    
+
     @Override
-    public ClusterSnapshotBuilder clusterSnapshotConfig() 
+    public ClusterSnapshotBuilder clusterSnapshotConfig()
     {
         return new ClusterSnapshotBuilderImpl();
     }
 
     @Override
-    public ClusterRestoreBuilder clusterRestoreConfig() 
+    public ClusterRestoreBuilder clusterRestoreConfig()
     {
         return new ClusterRestoreBuilderImpl();
     }

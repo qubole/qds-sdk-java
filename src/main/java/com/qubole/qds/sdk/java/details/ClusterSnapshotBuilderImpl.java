@@ -24,19 +24,19 @@ public class ClusterSnapshotBuilderImpl implements ClusterSnapshotBuilder
     private final ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
 
     @Override
-    public ClusterSnapshotBuilder s3_location(String s3_location) 
+    public ClusterSnapshotBuilder s3_location(String s3_location)
     {
         node.put("s3_location", s3_location);
         return this;
     }
 
     @Override
-    public ClusterSnapshotBuilder type(SnapshotType type) 
+    public ClusterSnapshotBuilder type(SnapshotType type)
     {
         node.put("type", type.name().toLowerCase());
         return this;
     }
-    
+
     @Override
     public String toString()
     {
@@ -44,7 +44,7 @@ public class ClusterSnapshotBuilderImpl implements ClusterSnapshotBuilder
         {
             return QdsClientImpl.getMapper().writer().writeValueAsString(node);
         }
-        catch ( IOException e )
+        catch (IOException e)
         {
             throw new RuntimeException("Could not serialize: " + node, e);
         }
