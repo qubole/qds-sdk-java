@@ -18,7 +18,7 @@ package com.qubole.qds.sdk.java.entities;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class App 
+public class App
 {
     private int id;
     private String name;
@@ -30,11 +30,11 @@ public class App
     private String note_id;
     private String interpreter_id;
     private String cluster_label;
-    
+
     public App()
     {
     }
-    
+
     public App(int id, String name, String config, String kind, long qbol_user_id, String created_at, String status, String note_id, String interpreter_id, String cluster_label)
     {
         this.id = id;
@@ -48,7 +48,7 @@ public class App
         this.interpreter_id = interpreter_id;
         this.cluster_label = cluster_label;
     }
-    
+
     public int getId()
     {
         return id;
@@ -58,7 +58,7 @@ public class App
     {
         this.id = id;
     }
-    
+
     public String getName()
     {
         return name;
@@ -68,7 +68,7 @@ public class App
     {
         this.name = name;
     }
-    
+
     public String getConfig()
     {
         return config;
@@ -78,7 +78,7 @@ public class App
     {
         this.config = config;
     }
-    
+
     public String getKind()
     {
         return kind;
@@ -88,7 +88,7 @@ public class App
     {
         this.kind = kind;
     }
-    
+
     public long getQbol_user_id()
     {
         return qbol_user_id;
@@ -98,7 +98,7 @@ public class App
     {
         this.qbol_user_id = qbol_user_id;
     }
-    
+
     public String getCreated_at()
     {
         return created_at;
@@ -108,7 +108,7 @@ public class App
     {
         this.created_at = created_at;
     }
-    
+
     public String getStatus()
     {
         return status;
@@ -118,7 +118,7 @@ public class App
     {
         this.status = status;
     }
-    
+
     public String getNote_id()
     {
         return note_id;
@@ -128,7 +128,7 @@ public class App
     {
         this.note_id = note_id;
     }
-    
+
     public String getInterpreter_id()
     {
         return interpreter_id;
@@ -138,7 +138,7 @@ public class App
     {
         this.interpreter_id = interpreter_id;
     }
-    
+
     public String getCluster_label()
     {
         return cluster_label;

@@ -77,7 +77,7 @@ public class QdsClientImpl implements QdsClient
         reportApi = new ReportApiImpl(this);
         schedulerApi = new SchedulerApiImpl(this);
         appApi = new AppApiImpl(this);
-        
+
         // register the deserialization handler for composite command
         SimpleModule module =
                 new SimpleModule("CommandResponseDeserializerModule",
@@ -122,7 +122,7 @@ public class QdsClientImpl implements QdsClient
     {
         return schedulerApi;
     }
-    
+
     @Override
     public AppApi app()
     {
@@ -243,7 +243,7 @@ public class QdsClientImpl implements QdsClient
         {
             builder = builder.property(RetryConnector.PROPERTY_ENABLE, true);
         }
-        
+
         return builder.async();
     }
 }

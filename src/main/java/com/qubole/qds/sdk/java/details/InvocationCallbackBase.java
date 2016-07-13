@@ -20,7 +20,6 @@ import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.api.RawInvokableBuilder;
 import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.core.Response;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 abstract class InvocationCallbackBase<T> implements InvokableBuilder<T>

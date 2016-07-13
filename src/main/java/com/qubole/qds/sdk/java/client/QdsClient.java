@@ -75,7 +75,7 @@ public interface QdsClient extends Closeable
      * @return scheduler factory
      */
     public SchedulerApi scheduler();
-    
+
     /**
      * Return apps api factory
      *
