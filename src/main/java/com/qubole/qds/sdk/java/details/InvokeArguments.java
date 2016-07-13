@@ -71,7 +71,7 @@ public class InvokeArguments<T>
     {
         return responseType;
     }
-    
+
     public String[] getAdditionalPaths()
     {
         return additionalPaths;

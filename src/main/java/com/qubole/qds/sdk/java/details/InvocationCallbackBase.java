@@ -47,7 +47,7 @@ public abstract class InvocationCallbackBase<T> implements InvokableBuilder<T>
             }
         };
     }
-    
+
     @Override
     public final Future<T> invoke()
     {
@@ -65,12 +65,12 @@ public abstract class InvocationCallbackBase<T> implements InvokableBuilder<T>
 
         return invokeArguments.getClient().invokeRequest(invokeArguments.getForPage(), invokeArguments.getEntity(), invokeArguments.getResponseType(), invokeArguments.getAdditionalPaths());
     }
-    
+
     @Override
     public final InvokeArguments<T> getArgumentsInvocation()
     {
         return getInvokeArguments();
     }
-    
+
     protected abstract InvokeArguments<T> getInvokeArguments();
 }
