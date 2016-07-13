@@ -18,7 +18,7 @@ package com.qubole.qds.sdk.java.details;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import javax.ws.rs.core.GenericType;
 
-class InvokeArguments<T>
+public class InvokeArguments<T>
 {
     private final QdsClient client;
     private final ForPage forPage;
@@ -47,32 +47,32 @@ class InvokeArguments<T>
         this.additionalPaths = additionalPaths;
     }
 
-    QdsClient getClient()
+    public QdsClient getClient()
     {
         return client;
     }
 
-    ForPage getForPage()
+    public ForPage getForPage()
     {
         return forPage;
     }
 
-    RequestDetails getEntity()
+    public RequestDetails getEntity()
     {
         return entity;
     }
 
-    GenericType<T> getGenericResponseType()
+    public GenericType<T> getGenericResponseType()
     {
         return genericResponseType;
     }
 
-    Class<T> getResponseType()
+    public Class<T> getResponseType()
     {
         return responseType;
     }
 
-    String[] getAdditionalPaths()
+    public String[] getAdditionalPaths()
     {
         return additionalPaths;
     }
