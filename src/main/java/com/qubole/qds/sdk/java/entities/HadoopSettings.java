@@ -29,12 +29,13 @@ public class HadoopSettings
     private String custom_config;
     private SpotInstanceSettings spot_instance_settings;
     private boolean use_hbase;
+    private boolean use_spark;
 
     public HadoopSettings()
     {
     }
 
-    public HadoopSettings(String master_instance_type, FairSchedulerSettings fairscheduler_settings, int max_nodes, String slave_instance_type, String slave_request_type, int initial_nodes, String custom_config, SpotInstanceSettings spot_instance_settings, boolean use_hbase)
+    public HadoopSettings(String master_instance_type, FairSchedulerSettings fairscheduler_settings, int max_nodes, String slave_instance_type, String slave_request_type, int initial_nodes, String custom_config, SpotInstanceSettings spot_instance_settings, boolean use_spark, boolean use_hbase)
     {
         this.master_instance_type = master_instance_type;
         this.fairscheduler_settings = fairscheduler_settings;
@@ -45,6 +46,7 @@ public class HadoopSettings
         this.custom_config = custom_config;
         this.spot_instance_settings = spot_instance_settings;
         this.use_hbase = use_hbase;
+        this.use_spark = use_spark;
     }
 
     public String getMaster_instance_type()
@@ -126,7 +128,7 @@ public class HadoopSettings
     {
         this.spot_instance_settings = spot_instance_settings;
     }
-    
+
     public boolean getUse_hbase()
     {
         return use_hbase;
@@ -135,5 +137,15 @@ public class HadoopSettings
     public void setUse_hbase(boolean use_hbase)
     {
         this.use_hbase = use_hbase;
+    }
+
+    public boolean getUse_spark()
+    {
+        return use_spark;
+    }
+
+    public void setUse_spark(boolean use_spark)
+    {
+        this.use_spark = use_spark;
     }
 }

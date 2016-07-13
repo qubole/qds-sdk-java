@@ -16,12 +16,11 @@
 package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.DependencyInfo;
-import com.qubole.qds.sdk.java.entities.Schedule;
 import com.qubole.qds.sdk.java.entities.ScheduleCommand;
 import java.util.List;
 import java.util.Map;
 
-public interface CreateScheduleCommandBuilder extends InvokableBuilder<Schedule>
+public interface CreateScheduleCommandBuilder
 {
     public CreateScheduleCommandBuilder command_type(String command_type);
 
@@ -33,7 +32,11 @@ public interface CreateScheduleCommandBuilder extends InvokableBuilder<Schedule>
 
     public CreateScheduleCommandBuilder end_time(String end_time);
 
-    public CreateScheduleCommandBuilder frequency(Map<String, String> frequency);
+    public CreateScheduleCommandBuilder frequency(int frequency);
+
+    public CreateScheduleCommandBuilder name(String name);
+
+    public CreateScheduleCommandBuilder time_unit(String time_unit);
 
     public CreateScheduleCommandBuilder time_zone(String time_zone);
 
