@@ -80,18 +80,18 @@ public class RetryConnector implements Connector
         {
             clientResponse = connector.apply(request);
         }
-        catch ( ProcessingException e )
+        catch (ProcessingException e)
         {
-            if ( tryRetry(request, tryCount, null, e) )
+            if (tryRetry(request, tryCount, null, e))
             {
                 return internalApply(request, tryCount + 1);
             }
             throw e;
         }
 
-        if ( retry.getRetryPolicy().shouldBeRetried(request.getUri(), tryCount, clientResponse, null, getRetryMode(request)) )
+        if (retry.getRetryPolicy().shouldBeRetried(request.getUri(), tryCount, clientResponse, null, getRetryMode(request)))
         {
-            if ( tryRetry(request, tryCount, clientResponse, null) )
+            if (tryRetry(request, tryCount, clientResponse, null))
             {
                 return internalApply(request, tryCount + 1);
             }
@@ -102,13 +102,13 @@ public class RetryConnector implements Connector
 
     private boolean tryRetry(ClientRequest request, int tryCount, ClientResponse clientResponse, ProcessingException e)
     {
-        if ( retry.getRetryPolicy().shouldBeRetried(request.getUri(), tryCount, clientResponse, e, getRetryMode(request)) )
+        if (retry.getRetryPolicy().shouldBeRetried(request.getUri(), tryCount, clientResponse, e, getRetryMode(request)))
         {
             try
             {
                 retry.getRetrySleeper().sleep(tryCount);
             }
-            catch ( InterruptedException e1 )
+            catch (InterruptedException e1)
             {
                 Thread.currentThread().interrupt();
                 throw new ProcessingException(e1);
@@ -127,7 +127,7 @@ public class RetryConnector implements Connector
             @Override
             public void response(ClientResponse response)
             {
-                if ( !isRetry(request, response, null, callback, tryCount) )
+                if (!isRetry(request, response, null, callback, tryCount))
                 {
                     callback.response(response);
                 }
@@ -136,7 +136,7 @@ public class RetryConnector implements Connector
             @Override
             public void failure(Throwable failure)
             {
-                if ( !isRetry(request, null, failure, callback, tryCount) )
+                if (!isRetry(request, null, failure, callback, tryCount))
                 {
                     callback.failure(failure);
                 }
@@ -148,7 +148,7 @@ public class RetryConnector implements Connector
 
     private boolean isRetry(final ClientRequest request, ClientResponse response, Throwable failure, final AsyncConnectorCallback callback, final int tryCount)
     {
-        if ( retry.getRetryPolicy().shouldBeRetried(request.getUri(), tryCount, response, failure, getRetryMode(request)) )
+        if (retry.getRetryPolicy().shouldBeRetried(request.getUri(), tryCount, response, failure, getRetryMode(request)))
         {
             Runnable runnable = new Runnable()
             {
@@ -160,7 +160,7 @@ public class RetryConnector implements Connector
                         retry.getRetrySleeper().sleep(tryCount);
                         internalApply(request, callback, tryCount + 1);
                     }
-                    catch ( InterruptedException e )
+                    catch (InterruptedException e)
                     {
                         Thread.currentThread().interrupt();
                         callback.failure(e);
