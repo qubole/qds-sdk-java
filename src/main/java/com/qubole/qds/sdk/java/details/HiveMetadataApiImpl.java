@@ -15,12 +15,16 @@
  */
 package com.qubole.qds.sdk.java.details;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
+import com.qubole.qds.sdk.java.api.PageableInvokableBuilder;
 import com.qubole.qds.sdk.java.api.SchemaCommandBuilder;
 import com.qubole.qds.sdk.java.api.StoreTablePropertiesBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.NameAndType;
+import com.qubole.qds.sdk.java.entities.SchemaListDescribed;
 import com.qubole.qds.sdk.java.entities.Status;
 import com.qubole.qds.sdk.java.entities.TableProperties;
 import javax.ws.rs.core.GenericType;
@@ -30,9 +34,9 @@ class HiveMetadataApiImpl implements HiveMetadataApi
 {
     private final QdsClient client;
 
-    private String [] getSchemaElems(String tableName)
+    private String[] getSchemaElems(String tableName)
     {
-        String [] schemaElems = new String[2];
+        String[] schemaElems = new String[2];
         schemaElems[0] = "default";
         schemaElems[1] = tableName;
 
@@ -47,7 +51,7 @@ class HiveMetadataApiImpl implements HiveMetadataApi
     public InvokableBuilder<List<NameAndType>> table(String tableName)
     {
         GenericType<List<NameAndType>> genericType = new GenericType<List<NameAndType>>(){};
-        String [] schemaElems = getSchemaElems(tableName);
+        String[] schemaElems = getSchemaElems(tableName);
         return new GenericInvokableBuilderImpl<List<NameAndType>>(client, null, genericType,
                 "hive", schemaElems[0], schemaElems[1]);
     }
@@ -55,14 +59,14 @@ class HiveMetadataApiImpl implements HiveMetadataApi
     @Override
     public StoreTablePropertiesBuilder storeTableProperties(String tableName)
     {
-        String [] schemaElems = getSchemaElems(tableName);
+        String[] schemaElems = getSchemaElems(tableName);
         return new StoreTablePropertiesBuilderImpl(client, schemaElems[0], schemaElems[1]);
     }
 
     @Override
     public InvokableBuilder<TableProperties> getTableProperties(String tableName)
     {
-        String [] schemaElems = getSchemaElems(tableName);
+        String[] schemaElems = getSchemaElems(tableName);
         return new GenericInvokableBuilderImpl<TableProperties>(client, RequestDetails.retry(),
                 TableProperties.class, "hive", schemaElems[0], schemaElems[1], "properties");
     }
@@ -70,7 +74,7 @@ class HiveMetadataApiImpl implements HiveMetadataApi
     @Override
     public InvokableBuilder<Status> deleteTableProperties(String tableName)
     {
-        String [] schemaElems = getSchemaElems(tableName);
+        String[] schemaElems = getSchemaElems(tableName);
         return new GenericInvokableBuilderImpl<Status>(client, new RequestDetails(null, RequestDetails.Method.DELETE),
                 Status.class, "hive", schemaElems[0], schemaElems[1], "properties");
     }
@@ -79,6 +83,19 @@ class HiveMetadataApiImpl implements HiveMetadataApi
     public SchemaCommandBuilder schema()
     {
         return new SchemaCommandBuilderImpl(client);
+    }
+
+    public InvokableBuilder<List<String>> getSchemaNames()
+    {
+        RequestDetails requestDetails = new RequestDetails(null, RequestDetails.Method.GET, Maps.newHashMap(ImmutableMap.of("describe", "false")));
+        GenericType<List<String>> responseType = new GenericType<List<String>>(){};
+        return new GenericInvokableBuilderImpl<List<String>>(client, requestDetails, responseType, "hive");
+    }
+
+    public PageableInvokableBuilder<SchemaListDescribed> getSchemaListDescribed()
+    {
+        RequestDetails requestDetails = new RequestDetails(null, RequestDetails.Method.GET, Maps.newHashMap(ImmutableMap.of("describe", "true")));
+        return new GenericPageableInvokableBuilderImpl<SchemaListDescribed>(client, requestDetails, SchemaListDescribed.class, "hive");
     }
 
     HiveMetadataApiImpl(QdsClient client)

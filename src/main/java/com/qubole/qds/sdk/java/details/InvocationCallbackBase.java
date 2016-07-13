@@ -54,12 +54,12 @@ abstract class InvocationCallbackBase<T> implements InvokableBuilder<T>
     {
         InvokeArguments<T> invokeArguments = getInvokeArguments();
 
-        if ( callback != null )
+        if (callback != null)
         {
             return invokeArguments.getClient().invokeRequest(invokeArguments.getForPage(), invokeArguments.getEntity(), callback, invokeArguments.getAdditionalPaths());
         }
 
-        if ( invokeArguments.getGenericResponseType() != null )
+        if (invokeArguments.getGenericResponseType() != null)
         {
             return invokeArguments.getClient().invokeRequest(invokeArguments.getForPage(), invokeArguments.getEntity(), invokeArguments.getGenericResponseType(), invokeArguments.getAdditionalPaths());
         }
