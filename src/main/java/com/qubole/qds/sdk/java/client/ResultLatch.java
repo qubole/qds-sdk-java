@@ -23,6 +23,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.logging.Logger;
 
 /**
  * A utility for polling for a command result. Allows for blocking or
@@ -34,9 +35,12 @@ public class ResultLatch
     private final String queryId;
     private final AtomicLong pollMs = new AtomicLong(DEFAULT_POLL_MS);
 
-    private static final ExecutorService executorService = Executors.newCachedThreadPool(new ThreadFactoryBuilder().setNameFormat("ResultLatch-%d").setDaemon(true).build());
+    private static final ExecutorService EXECUTOR_SERVICE = Executors.newCachedThreadPool(new ThreadFactoryBuilder().setNameFormat("ResultLatch-%d").setDaemon(true).build());
+
+    private static final Logger LOG = Logger.getLogger(ResultLatch.class.getName());
 
     private static final int DEFAULT_POLL_MS = 5000;
+    private static final int MIN_POLL_MS = 1000;
 
     private static final String STATUS_DONE = "done";
     private static final String STATUS_WAITING = "waiting";
@@ -70,7 +74,15 @@ public class ResultLatch
      */
     public void setPollSleep(long time, TimeUnit unit)
     {
-        pollMs.set(unit.toMillis(time));
+        if (unit.toMillis(time) < MIN_POLL_MS)
+        {
+            LOG.warning(String.format("Poll interval cannot be less than %d seconds. Setting it to %d seconds.", TimeUnit.MILLISECONDS.toSeconds(MIN_POLL_MS), TimeUnit.MILLISECONDS.toSeconds(MIN_POLL_MS)));
+            pollMs.set(MIN_POLL_MS);
+        }
+        else
+        {
+            pollMs.set(unit.toMillis(time));
+        }
     }
 
     /**
@@ -114,13 +126,13 @@ public class ResultLatch
                 {
                     callback.result(queryId, awaitResult());
                 }
-                catch ( Exception e )
+                catch (Exception e)
                 {
                     callback.error(queryId, e);
                 }
             }
         };
-        executorService.submit(runnable);
+        EXECUTOR_SERVICE.submit(runnable);
     }
 
     /**
@@ -145,22 +157,22 @@ public class ResultLatch
     {
         boolean hasWait = (timeUnit != null);
         long startMs = System.currentTimeMillis();
-        for(;;)
+        for (;;)
         {
             String status = client.command().status(queryId).invoke().get().getStatus();
-            if ( status.equalsIgnoreCase(STATUS_DONE) )
+            if (status.equalsIgnoreCase(STATUS_DONE))
             {
                 break;
             }
-            if ( !status.equalsIgnoreCase(STATUS_RUNNING) && !status.equalsIgnoreCase(STATUS_WAITING) )
+            if (!status.equalsIgnoreCase(STATUS_RUNNING) && !status.equalsIgnoreCase(STATUS_WAITING))
             {
                 throw new Exception(String.format("Bad status for query %s: %s", queryId, status));
             }
 
-            if ( hasWait )
+            if (hasWait)
             {
                 long elapsedMs = System.currentTimeMillis() - startMs;
-                if ( elapsedMs >= timeUnit.toMillis(maxWait) )
+                if (elapsedMs >= timeUnit.toMillis(maxWait))
                 {
                     return false;
                 }
@@ -192,7 +204,7 @@ public class ResultLatch
      */
     public ResultValue awaitResult(long maxWait, TimeUnit timeUnit) throws Exception
     {
-        if ( !await(maxWait, timeUnit) )
+        if (!await(maxWait, timeUnit))
         {
             throw new TimeoutException();
         }

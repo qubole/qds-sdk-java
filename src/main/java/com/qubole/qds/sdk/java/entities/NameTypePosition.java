@@ -13,29 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubole.qds.sdk.java.details;
+package com.qubole.qds.sdk.java.entities;
 
-import com.qubole.qds.sdk.java.client.retry.RetrySleeper;
-import java.util.concurrent.TimeUnit;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
-public class ExponentialBackoffRetry implements RetrySleeper
-{
-    private final long baseSleepTimeMs;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class NameTypePosition extends NameAndType {
 
-    public ExponentialBackoffRetry()
+    private String ordinal_position;
+
+    public NameTypePosition()
     {
-        this(30000);
+
     }
 
-    public ExponentialBackoffRetry(long baseSleepTimeMs)
+    public NameTypePosition(String name, String type, String ordinal_position)
     {
-        this.baseSleepTimeMs = baseSleepTimeMs;
+      super(name, type);
+      this.ordinal_position = ordinal_position;
     }
 
-    @Override
-    public void sleep(int retryCount) throws InterruptedException
+    public String getOrdinal_position()
     {
-        long sleepMs = (long) (baseSleepTimeMs * Math.pow(2, retryCount));
-        TimeUnit.MILLISECONDS.sleep(sleepMs);
+      return ordinal_position;
     }
+
+    public void setOrdinal_postition(String ordinal_position)
+    {
+      this.ordinal_position = ordinal_position;
+    }
+
 }

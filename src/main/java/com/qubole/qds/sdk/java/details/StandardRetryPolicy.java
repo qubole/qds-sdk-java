@@ -25,11 +25,11 @@ import java.util.logging.Logger;
 
 public class StandardRetryPolicy implements RetryPolicy
 {
-    private static final Logger log = Logger.getLogger(StandardRetryPolicy.class.getName());
+    private static final Logger LOG = Logger.getLogger(StandardRetryPolicy.class.getName());
 
     private final int maxRetries;
 
-    private static final int DEFAULT_MAX_RETRIES = 3;
+    private static final int DEFAULT_MAX_RETRIES = 5;
 
     public StandardRetryPolicy()
     {
@@ -45,17 +45,17 @@ public class StandardRetryPolicy implements RetryPolicy
     @Override
     public boolean shouldBeRetried(URI uri, int retryCount, ClientResponse response, Throwable exception, Mode mode)
     {
-        if ( retryCount >= maxRetries )
+        if (retryCount >= maxRetries)
         {
-            log.warning(String.format("Retries exceeded. retryCount: %d - maxRetries: %d", retryCount, maxRetries));
+            LOG.warning(String.format("Retries exceeded. retryCount: %d - maxRetries: %d", retryCount, maxRetries));
             return false;
         }
 
-        if ( (response != null) && (mode == Mode.RETRY_ALL) )
+        if ((response != null) && (mode == Mode.RETRY_ALL))
         {
-            if ( response.getStatusInfo().getFamily() == Response.Status.Family.SERVER_ERROR )
+            if (response.getStatusInfo().getFamily() == Response.Status.Family.SERVER_ERROR)
             {
-                log.info(String.format("Retrying request due to Status %d. retryCount: %d - request: %s", response.getStatus(), retryCount, uri));
+                LOG.info(String.format("Retrying request due to Status %d. retryCount: %d - request: %s", response.getStatus(), retryCount, uri));
                 return true;
             }
         }
@@ -65,24 +65,24 @@ public class StandardRetryPolicy implements RetryPolicy
     @SuppressWarnings("SimplifiableIfStatement")
     private boolean shouldBeRetried(URI uri, Throwable exception, Mode mode)
     {
-        if ( exception == null )
+        if (exception == null)
         {
             return false;
         }
 
-        if ( mode == Mode.RETRY_ALL )
+        if (mode == Mode.RETRY_ALL)
         {
-            if ( exception instanceof IOException )
+            if (exception instanceof IOException)
             {
-                log.info(String.format("Retrying request due to exception %s. request: %s", exception.getClass().getSimpleName(), uri));
+                LOG.info(String.format("Retrying request due to exception %s. request: %s", exception.getClass().getSimpleName(), uri));
                 return true;
             }
         }
         else
         {
-            if ( exception instanceof ConnectException )
+            if (exception instanceof ConnectException)
             {
-                log.info(String.format("Retrying request due to exception %s. request: %s", exception.getClass().getSimpleName(), uri));
+                LOG.info(String.format("Retrying request due to exception %s. request: %s", exception.getClass().getSimpleName(), uri));
                 return true;
             }
         }
