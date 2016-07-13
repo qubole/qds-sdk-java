@@ -108,7 +108,7 @@ public class ResultStreamer implements Closeable
         Future<Account> accountFuture = client.invokeRequest(null, null, Account.class, "account");
         return accountFuture.get();
     }
-    
+
     @VisibleForTesting
     protected AccountCredentials getAccountCredentials() throws Exception
     {

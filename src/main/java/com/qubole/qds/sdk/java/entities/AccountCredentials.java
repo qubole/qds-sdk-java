@@ -23,7 +23,7 @@ public class AccountCredentials
     private String storage_access_key;
     private String storage_secret_key;
     private String session_token;
-    
+
     public AccountCredentials()
     {
     }
