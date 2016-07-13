@@ -23,6 +23,7 @@ public interface ClusterHadoopConfigBuilder
     public ClusterConfigBuilder use_spark(boolean use_spark);
     public ClusterConfigBuilder slave_instance_type(String slave_instance_type);
     public ClusterConfigBuilder slave_request_type(String slave_request_type);
+    public ClusterConfigBuilder use_hbase(boolean use_hbase);
     public ClusterConfigBuilder use_hadoop2(boolean use_hadoop2);
     public ClusterConfigBuilder initial_nodes(int initial_nodes);
     public ClusterConfigBuilder custom_config(String custom_config);
