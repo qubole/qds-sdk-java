@@ -18,7 +18,7 @@ package com.qubole.qds.sdk.java.entities;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NewAccount 
+public class NewAccount
 {
     private long account_id;
     private String authentication_token;
@@ -32,11 +32,11 @@ public class NewAccount
     private String setting_type;
     private String updated_at;
     private long user_id;
-    
+
     NewAccount()
     {
     }
-    
+
     NewAccount(long account_id, String authentication_token, long capabilities, String created_at, boolean disabled, long id, boolean is_admin, boolean is_default, String setting_id, String setting_type, String updated_at, long user_id)
     {
         this.account_id = account_id;
@@ -52,7 +52,7 @@ public class NewAccount
         this.updated_at = updated_at;
         this.user_id = user_id;
     }
-    
+
     public long getAccount_id()
     {
         return account_id;
@@ -62,7 +62,7 @@ public class NewAccount
     {
         this.account_id = account_id;
     }
-    
+
     public String getAuthentication_token()
     {
         return authentication_token;
@@ -72,7 +72,7 @@ public class NewAccount
     {
         this.authentication_token = authentication_token;
     }
-    
+
     public long getCapabilities()
     {
         return capabilities;
@@ -82,7 +82,7 @@ public class NewAccount
     {
         this.capabilities = capabilities;
     }
-    
+
     public String getCreated_at()
     {
         return created_at;
@@ -92,7 +92,7 @@ public class NewAccount
     {
         this.created_at = created_at;
     }
-    
+
     public boolean getDisabled()
     {
         return disabled;
@@ -102,7 +102,7 @@ public class NewAccount
     {
         this.disabled = disabled;
     }
-    
+
     public long getId()
     {
         return id;
@@ -112,7 +112,7 @@ public class NewAccount
     {
         this.id = id;
     }
-    
+
     public boolean getIs_admin()
     {
         return is_admin;
@@ -122,7 +122,7 @@ public class NewAccount
     {
         this.is_admin = is_admin;
     }
-    
+
     public boolean getIs_default()
     {
         return is_default;
@@ -132,7 +132,7 @@ public class NewAccount
     {
         this.is_default = is_default;
     }
-    
+
     public String getSetting_id()
     {
         return setting_id;
@@ -142,7 +142,7 @@ public class NewAccount
     {
         this.setting_id = setting_id;
     }
-    
+
     public String getSetting_type()
     {
         return setting_type;
@@ -152,7 +152,7 @@ public class NewAccount
     {
         this.setting_type = setting_type;
     }
-    
+
     public String getUpdated_at()
     {
         return updated_at;
@@ -162,7 +162,7 @@ public class NewAccount
     {
         this.updated_at = updated_at;
     }
-    
+
     public long getUser_id()
     {
         return user_id;
@@ -173,4 +173,3 @@ public class NewAccount
         this.user_id = user_id;
     }
 }
-

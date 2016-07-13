@@ -24,89 +24,89 @@ public class AccountConfigBuilderImpl implements AccountConfigBuilder
     private final ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
 
     @Override
-    public AccountConfigBuilder name(String name) 
+    public AccountConfigBuilder name(String name)
     {
         node.put("name", name);
         return this;
     }
 
     @Override
-    public AccountConfigBuilder acc_key(String acc_key) 
+    public AccountConfigBuilder acc_key(String acc_key)
     {
         node.put("acc_key", acc_key);
         return this;
     }
 
     @Override
-    public AccountConfigBuilder secret(String secret) 
+    public AccountConfigBuilder secret(String secret)
     {
         node.put("secret", secret);
         return this;
     }
 
     @Override
-    public AccountConfigBuilder level(String level) 
+    public AccountConfigBuilder level(String level)
     {
         node.put("level", level);
         return this;
     }
 
     @Override
-    public AccountConfigBuilder compute_type(String compute_type) 
+    public AccountConfigBuilder compute_type(String compute_type)
     {
         node.put("compute_type", compute_type);
         return this;
     }
 
     @Override
-    public AccountConfigBuilder storage_type(String storage_type) 
+    public AccountConfigBuilder storage_type(String storage_type)
     {
         node.put("storage_type", storage_type);
         return this;
     }
 
     @Override
-    public AccountConfigBuilder aws_region(String aws_region) 
+    public AccountConfigBuilder aws_region(String aws_region)
     {
         node.put("aws_region", aws_region);
         return this;
     }
 
     @Override
-    public AccountConfigBuilder CacheQuotaSizeInGB(String CacheQuotaSizeInGB) 
+    public AccountConfigBuilder CacheQuotaSizeInGB(String CacheQuotaSizeInGB)
     {
         node.put("CacheQuotaSizeInGB", CacheQuotaSizeInGB);
         return this;
     }
 
     @Override
-    public AccountConfigBuilder use_previous_account_plan(boolean use_previous_account_plan) 
+    public AccountConfigBuilder use_previous_account_plan(boolean use_previous_account_plan)
     {
         node.put("use_previous_account_plan", use_previous_account_plan);
         return this;
     }
 
     @Override
-    public AccountConfigBuilder compute_access_key(String compute_access_key) 
+    public AccountConfigBuilder compute_access_key(String compute_access_key)
     {
         node.put("compute_access_key", compute_access_key);
         return this;
     }
 
     @Override
-    public AccountConfigBuilder compute_secret_key(String compute_secret_key) 
+    public AccountConfigBuilder compute_secret_key(String compute_secret_key)
     {
         node.put("compute_secret_key", compute_secret_key);
         return this;
     }
 
     @Override
-    public AccountConfigBuilder defloc(String defloc) 
+    public AccountConfigBuilder defloc(String defloc)
     {
         node.put("defloc", defloc);
         return this;
     }
-    
+
     public ObjectNode getNode()
     {
         ObjectNode clusterNode = QdsClientImpl.getMapper().createObjectNode();
@@ -121,10 +121,9 @@ public class AccountConfigBuilderImpl implements AccountConfigBuilder
         {
             return QdsClientImpl.getMapper().writer().writeValueAsString(getNode());
         }
-        catch ( IOException e )
+        catch (IOException e)
         {
             throw new RuntimeException("Could not serialize: " + node, e);
         }
     }
 }
-

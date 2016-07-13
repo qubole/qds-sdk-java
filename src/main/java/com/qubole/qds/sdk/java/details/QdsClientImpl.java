@@ -58,11 +58,11 @@ public class QdsClientImpl implements QdsClient
     private final SchedulerApiImpl schedulerApi;
     private final AccountApiImpl accountApi;
 
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     static ObjectMapper getMapper()
     {
-        return mapper;
+        return MAPPER;
     }
 
     public QdsClientImpl(QdsConfiguration configuration)
@@ -77,14 +77,14 @@ public class QdsClientImpl implements QdsClient
         reportApi = new ReportApiImpl(this);
         schedulerApi = new SchedulerApiImpl(this);
         accountApi = new AccountApiImpl(this);
-        
+
         // register the deserialization handler for composite command
         SimpleModule module =
                 new SimpleModule("CommandResponseDeserializerModule",
                         new Version(1, 0, 0, null));
         SubCommandsDeserializer ccDeserializer = new SubCommandsDeserializer();
         module.addDeserializer(SubCommands.class, ccDeserializer);
-        mapper.registerModule(module);
+        MAPPER.registerModule(module);
     }
 
     @Override
@@ -122,7 +122,7 @@ public class QdsClientImpl implements QdsClient
     {
         return schedulerApi;
     }
-    
+
     @Override
     public AccountApi account() {
         return accountApi;
@@ -152,9 +152,9 @@ public class QdsClientImpl implements QdsClient
     @VisibleForTesting
     protected <T> Future<T> invokePreparedRequest(RequestDetails entity, InvocationCallback<T> callback, AsyncInvoker invoker)
     {
-        if ( entity != null )
+        if (entity != null)
         {
-            if ( entity.getEntity() != null )
+            if (entity.getEntity() != null)
             {
                 return invoker.method(entity.getMethod().name(), Entity.entity(entity.getEntity(), MediaType.APPLICATION_JSON_TYPE), callback);
             }
@@ -166,9 +166,9 @@ public class QdsClientImpl implements QdsClient
     @VisibleForTesting
     protected <T> Future<T> invokePreparedRequest(RequestDetails entity, Class<T> responseType, AsyncInvoker invoker)
     {
-        if ( entity != null )
+        if (entity != null)
         {
-            if ( entity.getEntity() != null )
+            if (entity.getEntity() != null)
             {
                 return invoker.method(entity.getMethod().name(), Entity.entity(entity.getEntity(), MediaType.APPLICATION_JSON_TYPE), responseType);
             }
@@ -180,9 +180,9 @@ public class QdsClientImpl implements QdsClient
     @VisibleForTesting
     protected <T> Future<T> invokePreparedRequest(RequestDetails entity, GenericType<T> responseType, AsyncInvoker invoker)
     {
-        if ( entity != null )
+        if (entity != null)
         {
-            if ( entity.getEntity() != null )
+            if (entity.getEntity() != null)
             {
                 return invoker.method(entity.getMethod().name(), Entity.entity(entity.getEntity(), MediaType.APPLICATION_JSON_TYPE), responseType);
             }
@@ -195,22 +195,22 @@ public class QdsClientImpl implements QdsClient
     protected WebTarget prepareTarget(ForPage forPage, RequestDetails entity, String[] additionalPaths)
     {
         WebTarget localTarget = target;
-        if ( additionalPaths != null )
+        if (additionalPaths != null)
         {
-            for ( String path : additionalPaths )
+            for (String path : additionalPaths)
             {
                 localTarget = localTarget.path(path);
             }
         }
 
-        if ( forPage != null )
+        if (forPage != null)
         {
             localTarget = localTarget.queryParam("page", forPage.getPage()).queryParam("per_page", forPage.getPerPage());
         }
 
-        if ( (entity != null) && (entity.getQueryParams() != null) )
+        if ((entity != null) && (entity.getQueryParams() != null))
         {
-            for ( Map.Entry<String, String> entry : entity.getQueryParams().entrySet() )
+            for (Map.Entry<String, String> entry : entity.getQueryParams().entrySet())
             {
                 localTarget = localTarget.queryParam(entry.getKey(), entry.getValue());
             }
@@ -222,7 +222,7 @@ public class QdsClientImpl implements QdsClient
     @Override
     public void close()
     {
-        if ( isClosed.compareAndSet(false, true) )
+        if (isClosed.compareAndSet(false, true))
         {
             client.close();
         }
@@ -233,12 +233,12 @@ public class QdsClientImpl implements QdsClient
         WebTarget localTarget = prepareTarget(forPage, entity, additionalPaths);
 
         Invocation.Builder builder = localTarget.request().accept(MediaType.APPLICATION_JSON_TYPE);
-        if ( configuration.getApiToken() != null )
+        if (configuration.getApiToken() != null)
         {
             builder = builder.header("X-AUTH-TOKEN", configuration.getApiToken());
         }
 
-        if ( (entity != null) && entity.canBeRetried() )
+        if ((entity != null) && entity.canBeRetried())
         {
             builder = builder.property(RetryConnector.PROPERTY_ENABLE, true);
         }

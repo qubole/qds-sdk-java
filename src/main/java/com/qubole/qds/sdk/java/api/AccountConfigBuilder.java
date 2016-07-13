@@ -15,29 +15,29 @@
  */
 package com.qubole.qds.sdk.java.api;
 
-public interface AccountConfigBuilder 
+public interface AccountConfigBuilder
 {
     public AccountConfigBuilder name(String name);
 
     public AccountConfigBuilder acc_key(String acc_key);
-    
+
     public AccountConfigBuilder secret(String secret);
-    
+
     public AccountConfigBuilder level(String level);
-    
+
     public AccountConfigBuilder compute_type(String compute_type);
-    
+
     public AccountConfigBuilder storage_type(String storage_type);
-    
+
     public AccountConfigBuilder aws_region(String aws_region);
-    
+
     public AccountConfigBuilder CacheQuotaSizeInGB(String CacheQuotaSizeInGB);
-    
+
     public AccountConfigBuilder use_previous_account_plan(boolean use_previous_account_plan);
-    
+
     public AccountConfigBuilder compute_access_key(String compute_access_key);
-    
+
     public AccountConfigBuilder compute_secret_key(String compute_secret_key);
-    
+
     public AccountConfigBuilder defloc(String defloc);
 }

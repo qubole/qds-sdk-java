@@ -17,7 +17,7 @@ package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.NewAccount;
 
-public interface AccountApi 
+public interface AccountApi
 {
     /**
      * Account creation API
@@ -26,7 +26,7 @@ public interface AccountApi
      * @return new builder
      */
     public InvokableBuilder<NewAccount> create(AccountConfigBuilder configBuilder);
-    
+
     /**
      * Return a new account config builder. Can be used with
      * apis such as {@link AccountApi#create(String, AccountConfigBuilder)}

@@ -24,21 +24,21 @@ import com.qubole.qds.sdk.java.entities.NewAccount;
 class AccountApiImpl implements AccountApi
 {
     private final QdsClient client;
-    
+
     AccountApiImpl(QdsClient client)
     {
         this.client = client;
     }
-    
+
     @Override
-    public InvokableBuilder<NewAccount> create(AccountConfigBuilder configBuilder) 
+    public InvokableBuilder<NewAccount> create(AccountConfigBuilder configBuilder)
     {
         RequestDetails entity = new RequestDetails(configBuilder.toString(), RequestDetails.Method.POST);
         return new GenericInvokableBuilderImpl<NewAccount>(client, entity, NewAccount.class, "account");
     }
 
     @Override
-    public AccountConfigBuilder accountConfig() 
+    public AccountConfigBuilder accountConfig()
     {
         return new AccountConfigBuilderImpl();
     }

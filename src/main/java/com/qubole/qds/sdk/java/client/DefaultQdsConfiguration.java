@@ -43,8 +43,8 @@ public class DefaultQdsConfiguration implements QdsConfiguration
     public static final String API_ENDPOINT = "https://api.qubole.com/api";
     public static final String API_VERSION = "v1.2";
 
-    private static final int DEFAULT_CONNECTION_TIMEOUT = (int)TimeUnit.SECONDS.toMillis(10);
-    private static final int DEFAULT_READ_TIMEOUT = (int)TimeUnit.SECONDS.toMillis(60);
+    private static final int DEFAULT_CONNECTION_TIMEOUT = (int) TimeUnit.SECONDS.toMillis(10);
+    private static final int DEFAULT_READ_TIMEOUT = (int) TimeUnit.SECONDS.toMillis(60);
 
     /**
      * @param apiToken your API token
@@ -103,7 +103,7 @@ public class DefaultQdsConfiguration implements QdsConfiguration
         this.apiEndpoint = Preconditions.checkNotNull(apiEndpoint, "apiEndpoint cannot be null");
         this.apiToken = Preconditions.checkNotNull(apiToken, "apiToken cannot be null");
 
-        if ( jerseyConfiguration == null )
+        if (jerseyConfiguration == null)
         {
             jerseyConfiguration = new ClientConfig();
             jerseyConfiguration.property(ClientProperties.CONNECT_TIMEOUT, DEFAULT_CONNECTION_TIMEOUT);
