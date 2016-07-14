@@ -30,7 +30,7 @@ class GenericInvokableBuilderImpl<T> extends InvocationCallbackBase<T> implement
     @Override
     protected InvokeArguments<T> getInvokeArguments()
     {
-        if ( genericResponseType != null )
+        if (genericResponseType != null)
         {
             return new InvokeArguments<T>(client, null, entity, genericResponseType, additionalPaths);
         }

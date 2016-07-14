@@ -55,11 +55,11 @@ class SchemaCommandBuilderImpl extends InvocationCallbackBase<List<Schema>> impl
     protected InvokeArguments<List<Schema>> getInvokeArguments()
     {
         Map<String, String> params = Maps.newHashMap();
-        if ( filter != null )
+        if (filter != null)
         {
             params.put("filter", filter);
         }
-        if ( describe )
+        if (describe)
         {
             params.put("describe", "true");
         }
