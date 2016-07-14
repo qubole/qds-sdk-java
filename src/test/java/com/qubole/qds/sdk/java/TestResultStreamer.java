@@ -28,6 +28,7 @@ import com.google.common.io.CharStreams;
 import com.qubole.qds.sdk.java.client.ResultStreamer;
 import com.qubole.qds.sdk.java.details.MockClient;
 import com.qubole.qds.sdk.java.entities.Account;
+import com.qubole.qds.sdk.java.entities.AccountCredentials;
 import com.qubole.qds.sdk.java.entities.ResultValue;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -150,6 +151,12 @@ public class TestResultStreamer
             protected Account getAccount() throws Exception
             {
                 return new Account();
+            }
+            
+            @Override
+            protected AccountCredentials getAccountCredentials() throws Exception
+            {
+                return new AccountCredentials();
             }
 
             @Override

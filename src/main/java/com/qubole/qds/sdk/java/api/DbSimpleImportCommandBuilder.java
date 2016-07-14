@@ -16,7 +16,6 @@
 package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.CommandResponse;
-import java.util.Map;
 
 public interface DbSimpleImportCommandBuilder extends InvokableBuilder<CommandResponse>
 {

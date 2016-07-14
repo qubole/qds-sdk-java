@@ -39,23 +39,23 @@ public class ForPage
     @Override
     public boolean equals(Object o)
     {
-        if ( this == o )
+        if (this == o)
         {
             return true;
         }
-        if ( o == null || getClass() != o.getClass() )
+        if (o == null || getClass() != o.getClass())
         {
             return false;
         }
 
-        ForPage forPage = (ForPage)o;
+        ForPage forPage = (ForPage) o;
 
-        if ( page != forPage.page )
+        if (page != forPage.page)
         {
             return false;
         }
         //noinspection RedundantIfStatement
-        if ( perPage != forPage.perPage )
+        if (perPage != forPage.perPage)
         {
             return false;
         }

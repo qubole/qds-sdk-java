@@ -20,8 +20,8 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Query
 {
-    private int id;
-    private int cpu;
+    private long id;
+    private long cpu;
     private String created_at;
     private long fs_bytes_written;
     private long fs_bytes_read;
@@ -34,7 +34,7 @@ public class Query
     {
     }
 
-    public Query(int id, int cpu, String created_at, long fs_bytes_written, long fs_bytes_read, String command_type, String submitted_by, String status, String command_summary)
+    public Query(long id, long cpu, String created_at, long fs_bytes_written, long fs_bytes_read, String command_type, String submitted_by, String status, String command_summary)
     {
         this.id = id;
         this.cpu = cpu;
@@ -47,22 +47,22 @@ public class Query
         this.command_summary = command_summary;
     }
 
-    public int getId()
+    public long getId()
     {
         return id;
     }
 
-    public void setId(int id)
+    public void setId(long id)
     {
         this.id = id;
     }
 
-    public int getCpu()
+    public long getCpu()
     {
         return cpu;
     }
 
-    public void setCpu(int cpu)
+    public void setCpu(long cpu)
     {
         this.cpu = cpu;
     }
