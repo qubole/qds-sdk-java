@@ -22,7 +22,7 @@ import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.core.Response;
 import java.util.concurrent.Future;
 
-abstract class InvocationCallbackBase<T> implements InvokableBuilder<T>
+public abstract class InvocationCallbackBase<T> implements InvokableBuilder<T>
 {
     private InvocationCallback<T> callback;
 
@@ -64,6 +64,12 @@ abstract class InvocationCallbackBase<T> implements InvokableBuilder<T>
         }
 
         return invokeArguments.getClient().invokeRequest(invokeArguments.getForPage(), invokeArguments.getEntity(), invokeArguments.getResponseType(), invokeArguments.getAdditionalPaths());
+    }
+
+    @Override
+    public final InvokeArguments<T> getArgumentsInvocation()
+    {
+        return getInvokeArguments();
     }
 
     protected abstract InvokeArguments<T> getInvokeArguments();
