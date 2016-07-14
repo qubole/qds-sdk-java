@@ -88,7 +88,7 @@ public interface ClusterApi
      * @return new builder
      */
     public InvokableBuilder<ClusterItem> delete(String labelOrId);
-    
+
     /**
      * Corresponds to cloning cluster under http://docs.qubole.com/en/latest/user-guide/clusters/cluster-operations.html
      *

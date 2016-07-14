@@ -35,6 +35,10 @@ public class ClusterExample
         String cluster_label = "example";
         List<String> cluster_list = new ArrayList<String>();
         cluster_list.add(cluster_label);
+        
+        String cluster_label_clone = "example_clone";
+        List<String> cluster_list_clone = new ArrayList<String>();
+        cluster_list_clone.add(cluster_label_clone);
 
         try {
             System.out.println("Creating new cluster...");
@@ -53,6 +57,14 @@ public class ClusterExample
                     client.cluster().clusterConfig().hadoop_settings().max_nodes(5)).invoke().get();
             System.out.println("The maximum nodes now are: " +
                     clusterItem.getCluster().getHadoop_settings().getMax_nodes());
+            System.out.println();
+
+            System.out.println("Cloning cluster...");
+            ClusterItem clonedClusterItem = client.cluster().clone(cluster_label, client.cluster().clusterConfig()
+                    .label(cluster_list_clone)
+                    .enable_ganglia_monitoring(true)).invoke().get();
+            System.out.println("Cloned cluster id is: " +
+                    clonedClusterItem.getCluster().getId());
             System.out.println();
 
             System.out.println("Deleting cluster...");

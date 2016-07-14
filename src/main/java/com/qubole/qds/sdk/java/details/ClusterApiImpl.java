@@ -81,7 +81,7 @@ class ClusterApiImpl implements ClusterApi
         RequestDetails entity = new RequestDetails(null, RequestDetails.Method.DELETE);
         return new GenericInvokableBuilderImpl<ClusterItem>(client, entity, ClusterItem.class, "clusters", labelOrId);
     }
-    
+
     @Override
     public InvokableBuilder<ClusterItem> clone(String labelOrId, ClusterConfigBuilder configBuilder)
     {
