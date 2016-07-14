@@ -35,7 +35,7 @@ public class ClusterExample
         String cluster_label = "example";
         List<String> cluster_list = new ArrayList<String>();
         cluster_list.add(cluster_label);
-        
+
         String cluster_label_clone = "example_clone";
         List<String> cluster_list_clone = new ArrayList<String>();
         cluster_list_clone.add(cluster_label_clone);
