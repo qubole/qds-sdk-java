@@ -86,21 +86,22 @@ class ClusterApiImpl implements ClusterApi
         RequestDetails entity = new RequestDetails(null, RequestDetails.Method.DELETE);
         return new GenericInvokableBuilderImpl<ClusterItem>(client, entity, ClusterItem.class, "clusters", labelOrId);
     }
-    
+
     @Override
     public InvokableBuilder<Command> add_nodes(String labelOrId, int node_count)
     {
         RequestDetails entity = new RequestDetails(new AddNode(node_count), RequestDetails.Method.POST);
+        System.out.println(entity.getEntity());
         return new GenericInvokableBuilderImpl<Command>(client, entity, Command.class, "clusters", labelOrId, "nodes");
     }
-    
+
     @Override
     public InvokableBuilder<Command> replace_node(String labelOrId, String private_dns)
     {
         RequestDetails entity = new RequestDetails(new NodeOperation(private_dns, "replace"), RequestDetails.Method.PUT);
         return new GenericInvokableBuilderImpl<Command>(client, entity, Command.class, "clusters", labelOrId, "nodes");
     }
-    
+
     @Override
     public InvokableBuilder<Command> remove_node(String labelOrId, String private_dns)
     {

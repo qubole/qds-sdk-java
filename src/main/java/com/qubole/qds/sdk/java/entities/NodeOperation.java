@@ -31,8 +31,8 @@ public class NodeOperation
     {
         this.private_dns = private_dns;
     }
-    
-    public NodeOperation(String private_dns,String command)
+
+    public NodeOperation(String private_dns, String command)
     {
         this.private_dns = private_dns;
         this.command = command;
@@ -47,7 +47,7 @@ public class NodeOperation
     {
         this.private_dns = private_dns;
     }
-    
+
     public String getCommand()
     {
         return command;

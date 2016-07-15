@@ -89,7 +89,7 @@ public interface ClusterApi
      * @return new builder
      */
     public InvokableBuilder<ClusterItem> delete(String labelOrId);
-    
+
     /**
      * Corresponds to http://docs.qubole.com/en/latest/rest-api/cluster_api/add-node.html
      *
@@ -98,7 +98,7 @@ public interface ClusterApi
      * @return new builder
      */
     public InvokableBuilder<Command> add_nodes(String labelOrId, int node_count);
-    
+
     /**
      * Corresponds to http://docs.qubole.com/en/latest/rest-api/cluster_api/replace-node.html
      *
@@ -107,7 +107,7 @@ public interface ClusterApi
      * @return new builder
      */
     public InvokableBuilder<Command> replace_node(String labelOrId, String private_dns);
-    
+
     /**
      * Corresponds to http://docs.qubole.com/en/latest/rest-api/cluster_api/remove-node.html
      *

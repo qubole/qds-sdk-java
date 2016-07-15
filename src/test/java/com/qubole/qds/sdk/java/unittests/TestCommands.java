@@ -118,7 +118,7 @@ public class TestCommands
         if (expectedRequestData != null)
         {
             Assert.assertNotNull(invokeargs.getEntity().getEntity(), "Request data is null. Expected was : " + expectedRequestData);
-            Assert.assertTrue(mapper.readTree(invokeargs.getEntity().getEntity().toString()).equals(mapper.readTree(expectedRequestData.toString())), "Incorrect request data. Expected was : " + expectedRequestData + " , got from request : " + invokeargs.getEntity().getEntity().toString());
+            Assert.assertTrue(mapper.readTree(mapper.writeValueAsString(invokeargs.getEntity().getEntity())).equals(mapper.readTree(expectedRequestData.toString())), "Incorrect request data. Expected was : " + expectedRequestData + " , got from request : " + mapper.writeValueAsString(invokeargs.getEntity().getEntity()));
         }
         else
         {

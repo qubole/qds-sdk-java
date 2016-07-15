@@ -20,24 +20,24 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AddNode
 {
-    private int num_nodes;
+    private int node_count;
 
     public AddNode()
     {
     }
 
-    public AddNode(int num_nodes)
+    public AddNode(int node_count)
     {
-        this.num_nodes = num_nodes;
+        this.node_count = node_count;
     }
 
-    public int getNum_nodes()
+    public int getNode_count()
     {
-        return num_nodes;
+        return node_count;
     }
 
-    public void setNum_nodes(int num_nodes)
+    public void setNode_count(int node_count)
     {
-        this.num_nodes = num_nodes;
+        this.node_count = node_count;
     }
 }
