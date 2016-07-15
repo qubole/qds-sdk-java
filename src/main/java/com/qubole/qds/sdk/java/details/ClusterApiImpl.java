@@ -83,6 +83,13 @@ class ClusterApiImpl implements ClusterApi
     }
 
     @Override
+    public InvokableBuilder<ClusterItem> clone(String labelOrId, ClusterConfigBuilder configBuilder)
+    {
+        RequestDetails entity = new RequestDetails(configBuilder.toString(), RequestDetails.Method.POST);
+        return new GenericInvokableBuilderImpl<ClusterItem>(client, entity, ClusterItem.class, "clusters", labelOrId, "clone");
+    }
+
+    @Override
     public ClusterConfigBuilder clusterConfig()
     {
         return new ClusterConfigBuilderImpl();

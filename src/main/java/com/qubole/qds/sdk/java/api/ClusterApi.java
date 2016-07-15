@@ -90,6 +90,15 @@ public interface ClusterApi
     public InvokableBuilder<ClusterItem> delete(String labelOrId);
 
     /**
+     * Corresponds to cloning cluster under http://docs.qubole.com/en/latest/user-guide/clusters/cluster-operations.html
+     *
+     * @param labelOrId the Cluster label/id
+     * @param configBuilder config values - use {@link #clusterConfig()}
+     * @return new builder
+     */
+    public InvokableBuilder<ClusterItem> clone(String labelOrId, ClusterConfigBuilder configBuilder);
+
+    /**
      * Return a new cluster config builder. Can be used with
      * apis such as {@link ClusterApi#edit(String, ClusterConfigBuilder)}
      *
