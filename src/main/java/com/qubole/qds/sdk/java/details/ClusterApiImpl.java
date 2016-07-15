@@ -91,7 +91,6 @@ class ClusterApiImpl implements ClusterApi
     public InvokableBuilder<Command> add_nodes(String labelOrId, int node_count)
     {
         RequestDetails entity = new RequestDetails(new AddNode(node_count), RequestDetails.Method.POST);
-        System.out.println(entity.getEntity());
         return new GenericInvokableBuilderImpl<Command>(client, entity, Command.class, "clusters", labelOrId, "nodes");
     }
 
