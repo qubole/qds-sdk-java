@@ -63,6 +63,7 @@ public class ClusterExample
             ClusterItem clonedClusterItem = client.cluster().clone(cluster_label, client.cluster().clusterConfig()
                     .label(cluster_list_clone)
                     .enable_ganglia_monitoring(true)).invoke().get();
+            client.cluster().delete(String.valueOf(clonedClusterItem.getCluster().getId())).invoke().get();
             System.out.println("Cloned cluster id is: " +
                     clonedClusterItem.getCluster().getId());
             System.out.println();
