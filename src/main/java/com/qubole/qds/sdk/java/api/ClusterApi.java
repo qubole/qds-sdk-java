@@ -118,6 +118,15 @@ public interface ClusterApi
     public InvokableBuilder<Command> remove_node(String labelOrId, String private_dns);
 
     /**
+     * Corresponds to cloning cluster under http://docs.qubole.com/en/latest/rest-api/cluster_api/clone-cluster.html
+     *
+     * @param labelOrId the Cluster label/id
+     * @param configBuilder config values - use {@link #clusterConfig()}
+     * @return new builder
+     */
+    public InvokableBuilder<ClusterItem> clone(String labelOrId, ClusterConfigBuilder configBuilder);
+
+    /**
      * Return a new cluster config builder. Can be used with
      * apis such as {@link ClusterApi#edit(String, ClusterConfigBuilder)}
      *

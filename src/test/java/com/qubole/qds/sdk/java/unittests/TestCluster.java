@@ -1,34 +1,47 @@
+/**
+ * Copyright 2014- Qubole Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.qubole.qds.sdk.java.unittests;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import com.amazonaws.util.json.JSONObject;
-import com.google.common.base.Joiner;
-import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
-import com.qubole.qds.sdk.java.client.QdsClient;
-import com.qubole.qds.sdk.java.client.QdsClientFactory;
-import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.details.InvokeArguments;
+import com.qubole.qds.sdk.java.entities.ClusterItem;
 import com.qubole.qds.sdk.java.entities.Command;
 
-public class TestCluster
+public class TestCluster extends AbstractTest
 {
-    QdsConfiguration configuration;
-    QdsClient qdsClient;
-    ObjectMapper mapper;
-
-    @BeforeClass
-    public void setup()
+    @Test
+    public void testClusterClone() throws Exception
     {
-        mapper = new ObjectMapper();
-        configuration = new DefaultQdsConfiguration("https://api.qubole.com/api","apiToken");
-        qdsClient = QdsClientFactory.newClient(configuration);
+        String randomclusterId = "123";
+        List<String> label = Arrays.asList("newLabel");
+        InvokeArguments<ClusterItem> invokeargs = qdsClient.cluster().clone(randomclusterId, qdsClient.cluster().clusterConfig().label(label).disallow_cluster_termination(true).enable_ganglia_monitoring(true)).getArgumentsInvocation();
+        JSONObject clusterParams = new JSONObject();
+        clusterParams.put("label", label);
+        clusterParams.put("disallow_cluster_termination", true);
+        clusterParams.put("enable_ganglia_monitoring", true);
+        JSONObject expectedRequestData = new JSONObject();
+        expectedRequestData.put("cluster", clusterParams);
+        assertRequestDetails(invokeargs, "POST", "clusters/"+randomclusterId+"/clone", expectedRequestData, null, ClusterItem.class);
     }
-
+    
     @Test
     public void testClusterAddNode() throws Exception
     {
@@ -60,32 +73,5 @@ public class TestCluster
         params.put("private_dns", dnsOfNode);
         params.put("command", "replace");
         assertRequestDetails(invokeargs, "PUT", "clusters/"+randomclusterId+"/nodes", params, null, Command.class);
-    }
-
-    public void assertRequestDetails(InvokeArguments<?> invokeargs, String expectedRequestType, String expectedEndpoint, JSONObject expectedRequestData, Map<Object, Object> expectedQueryParams, Class<?> expectedResponseClassType) throws Exception
-    {
-        Assert.assertEquals(invokeargs.getEntity().getMethod().name(), expectedRequestType, "Incorrect request type. Expected : "+expectedRequestType+" , got from request : "+invokeargs.getEntity().getMethod().name());
-        Assert.assertEquals(Joiner.on("/").join(invokeargs.getAdditionalPaths()), expectedEndpoint, "Incorrect endpoint. Expected : "+expectedEndpoint+" , got from request : "+Joiner.on("/").join(invokeargs.getAdditionalPaths()));
-        Assert.assertTrue(expectedResponseClassType.isInstance(invokeargs.getResponseType().newInstance()), "Expected rsponse type was : " + expectedResponseClassType.getSimpleName() + " , but it is of type : " + invokeargs.getResponseType().getSimpleName());
-
-        if (expectedRequestData != null)
-        {
-            Assert.assertNotNull(invokeargs.getEntity().getEntity(), "Request data is null. Expected was : " + expectedRequestData);
-            Assert.assertTrue(mapper.readTree(mapper.writeValueAsString(invokeargs.getEntity().getEntity())).equals(mapper.readTree(expectedRequestData.toString())), "Incorrect request data. Expected was : " + expectedRequestData + " , got from request : " + mapper.writeValueAsString(invokeargs.getEntity().getEntity()));
-        }
-        else
-        {
-            Assert.assertNull(invokeargs.getEntity().getEntity(), "Request data expected was null. But it is not null.");
-        }
-        
-        if (expectedQueryParams != null)
-        {
-            Assert.assertNotNull(invokeargs.getEntity().getQueryParams(), "Query params expected was not null. But it is null");
-            Assert.assertTrue(invokeargs.getEntity().getQueryParams().equals(expectedQueryParams));
-        }
-        else
-        {
-            Assert.assertNull(invokeargs.getEntity().getQueryParams(), "Query params expected was null. But it is not null");
-        }
     }
 }
