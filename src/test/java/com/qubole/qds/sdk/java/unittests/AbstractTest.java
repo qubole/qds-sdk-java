@@ -64,11 +64,12 @@ public abstract class AbstractTest
         {
             Assert.assertNotNull(invokeargs.getEntity().getEntity(),
                 "Request data is null. Expected was : " + expectedRequestData);
+            String entity=mapper.writeValueAsString(invokeargs.getEntity().getEntity()).replaceAll("^\"|\"$", "").replace("\\", "");
             Assert.assertTrue(
-                mapper.readTree(mapper.writeValueAsString(invokeargs.getEntity().getEntity()))
+                mapper.readTree(entity)
                     .equals(mapper.readTree(expectedRequestData.toString())),
                 "Incorrect request data. Expected was : " + expectedRequestData
-                    + " , got from request : " + mapper.writeValueAsString(invokeargs.getEntity().getEntity()));
+                    + " , got from request : " + entity);
         }
         else
         {

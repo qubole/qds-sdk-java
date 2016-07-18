@@ -84,11 +84,11 @@ public class TestCommands extends AbstractTest
     @Test
     public void testPigCommandLatinStatement() throws Exception
     {
-        InvokeArguments<CommandResponse> invokeargs = qdsClient.command().pig().latin_statements("A=LOAD \"s3://testpig/pig.log\";dump A").clusterLabel("default").getArgumentsInvocation(); 
+        InvokeArguments<CommandResponse> invokeargs = qdsClient.command().pig().latin_statements("A=LOAD 's3://testpig/pig.log';dump A").clusterLabel("default").getArgumentsInvocation(); 
         JSONObject expectedRequestData=new JSONObject();
         expectedRequestData.put("command_type", "PigCommand");
         expectedRequestData.put("label", "default");
-        expectedRequestData.put("latin_statements", "A=LOAD \"s3://testpig/pig.log\";dump A");
+        expectedRequestData.put("latin_statements", "A=LOAD 's3://testpig/pig.log';dump A");
         assertRequestDetails(invokeargs, "POST", "commands", expectedRequestData, null, CommandResponse.class);
     }
     
