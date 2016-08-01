@@ -59,19 +59,33 @@ public class ClusterExample
                     clusterItem.getCluster().getHadoop_settings().getMax_nodes());
             System.out.println();
 
+            System.out.println("Adding nodes to cluster...");
+            client.cluster().add_nodes(cluster_label, 1).invoke().get();
+            System.out.println("Sent request to add nodes to cluster");
+
+            System.out.println("Removing node from cluster...");
+            client.cluster().remove_node(cluster_label, "dns.cluster.qubole.com").invoke().get();
+            System.out.println("Sent request to delete node with given dns from cluster");
+
+            System.out.println("Replace node from cluster...");
+            client.cluster().replace_node(cluster_label, "dns.cluster.qubole.com").invoke().get();
+            System.out.println("Sent request to replace node with given dns from cluster");
+
             System.out.println("Cloning cluster...");
             ClusterItem clonedClusterItem = client.cluster().clone(cluster_label, client.cluster().clusterConfig()
                     .label(cluster_list_clone)
                     .enable_ganglia_monitoring(true)).invoke().get();
             System.out.println("Cloned cluster id is: " +
                     clonedClusterItem.getCluster().getId());
+            client.cluster().delete(String.valueOf(clonedClusterItem
+                    .getCluster().getId())).invoke().get();
+            System.out.println("Clusters Deleted");
             System.out.println();
 
             System.out.println("Deleting clusters...");
             client.cluster().delete(cluster_label).invoke().get();
-            client.cluster().delete(String.valueOf(clonedClusterItem
-                .getCluster().getId())).invoke().get();
             System.out.println("Clusters Deleted");
+            System.out.println();
         }
         finally
         {

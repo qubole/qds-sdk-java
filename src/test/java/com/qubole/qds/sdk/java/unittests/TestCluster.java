@@ -16,11 +16,14 @@
 package com.qubole.qds.sdk.java.unittests;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.testng.annotations.Test;
 import com.amazonaws.util.json.JSONObject;
 import com.qubole.qds.sdk.java.details.InvokeArguments;
 import com.qubole.qds.sdk.java.entities.ClusterItem;
+import com.qubole.qds.sdk.java.entities.Command;
 
 public class TestCluster extends AbstractTest
 {
@@ -37,5 +40,38 @@ public class TestCluster extends AbstractTest
         JSONObject expectedRequestData = new JSONObject();
         expectedRequestData.put("cluster", clusterParams);
         assertRequestDetails(invokeargs, "POST", "clusters/"+randomclusterId+"/clone", expectedRequestData, null, ClusterItem.class);
+    }
+    
+    @Test
+    public void testClusterAddNode() throws Exception
+    {
+        String randomclusterId="123";
+        InvokeArguments<Command> invokeargs = qdsClient.cluster().add_nodes(randomclusterId, 4).getArgumentsInvocation();
+        JSONObject params=new JSONObject();
+        params.put("node_count", 4);
+        assertRequestDetails(invokeargs, "POST", "clusters/"+randomclusterId+"/nodes", params, null, Command.class);
+    }
+    
+    @Test
+    public void testClusterRemoveNode() throws Exception
+    {
+        String randomclusterId="123";
+        String dnsOfNode="ec2-123-123-123-123.qubole.com";
+        InvokeArguments<Command> invokeargs = qdsClient.cluster().remove_node(randomclusterId, dnsOfNode).getArgumentsInvocation();
+        Map<Object, Object> params=new HashMap<Object, Object>();
+        params.put("private_dns", dnsOfNode);
+        assertRequestDetails(invokeargs, "DELETE", "clusters/"+randomclusterId+"/nodes", null, params, Command.class);
+    }
+    
+    @Test
+    public void testClusterReplaceNode() throws Exception
+    {
+        String randomclusterId="123";
+        String dnsOfNode="ec2-123-123-123-123.qubole.com";
+        InvokeArguments<Command> invokeargs = qdsClient.cluster().replace_node(randomclusterId, dnsOfNode).getArgumentsInvocation();
+        JSONObject params=new JSONObject();
+        params.put("private_dns", dnsOfNode);
+        params.put("command", "replace");
+        assertRequestDetails(invokeargs, "PUT", "clusters/"+randomclusterId+"/nodes", params, null, Command.class);
     }
 }

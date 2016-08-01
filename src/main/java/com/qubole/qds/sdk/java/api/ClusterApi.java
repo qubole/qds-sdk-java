@@ -17,6 +17,7 @@ package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.ClusterItem;
 import com.qubole.qds.sdk.java.entities.ClusterState;
+import com.qubole.qds.sdk.java.entities.Command;
 import com.qubole.qds.sdk.java.entities.Message;
 import java.util.List;
 
@@ -90,7 +91,34 @@ public interface ClusterApi
     public InvokableBuilder<ClusterItem> delete(String labelOrId);
 
     /**
-     * Corresponds to cloning cluster under http://docs.qubole.com/en/latest/user-guide/clusters/cluster-operations.html
+     * Corresponds to http://docs.qubole.com/en/latest/rest-api/cluster_api/add-node.html
+     *
+     * @param labelOrId the Cluster label/id
+     * @param node_count the number of nodes to add
+     * @return new builder
+     */
+    public InvokableBuilder<Command> add_nodes(String labelOrId, int node_count);
+
+    /**
+     * Corresponds to http://docs.qubole.com/en/latest/rest-api/cluster_api/replace-node.html
+     *
+     * @param labelOrId the Cluster label/id
+     * @param private_dns the dns of slave to replace
+     * @return new builder
+     */
+    public InvokableBuilder<Command> replace_node(String labelOrId, String private_dns);
+
+    /**
+     * Corresponds to http://docs.qubole.com/en/latest/rest-api/cluster_api/remove-node.html
+     *
+     * @param labelOrId the Cluster label/id
+     * @param private_dns the dns of slave to remove
+     * @return new builder
+     */
+    public InvokableBuilder<Command> remove_node(String labelOrId, String private_dns);
+
+    /**
+     * Corresponds to cloning cluster under http://docs.qubole.com/en/latest/rest-api/cluster_api/clone-cluster.html
      *
      * @param labelOrId the Cluster label/id
      * @param configBuilder config values - use {@link #clusterConfig()}
