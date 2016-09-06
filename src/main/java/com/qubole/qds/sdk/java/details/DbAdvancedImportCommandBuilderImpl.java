@@ -31,6 +31,12 @@ class DbAdvancedImportCommandBuilderImpl extends CommandBuilderImplBase implemen
         return this;
     }
 
+    public DbAdvancedImportCommandBuilder hive_serde(String hive_serde)
+    {
+        node.put("hive_serde", hive_serde);
+        return this;
+    }
+
     @Override
     public DbAdvancedImportCommandBuilder dbtap_id(String dbtap_id)
     {

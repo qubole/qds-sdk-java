@@ -21,6 +21,8 @@ public interface DbAdvancedImportCommandBuilder extends InvokableBuilder<Command
 {
     public DbAdvancedImportCommandBuilder hive_table(String hive_table);
 
+    public DbAdvancedImportCommandBuilder hive_serde(String hive_serde);
+
     public DbAdvancedImportCommandBuilder dbtap_id(String dbtap_id);
 
     public DbAdvancedImportCommandBuilder db_extract_query(String db_extract_query);
