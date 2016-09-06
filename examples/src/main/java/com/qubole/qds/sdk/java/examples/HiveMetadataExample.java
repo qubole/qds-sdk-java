@@ -20,6 +20,7 @@ import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.entities.NameAndType;
+import com.qubole.qds.sdk.java.entities.NameTypePosition;
 import com.qubole.qds.sdk.java.entities.Schema;
 import com.qubole.qds.sdk.java.entities.SchemaListDescribed;
 import com.qubole.qds.sdk.java.entities.SchemaOrdinal;
