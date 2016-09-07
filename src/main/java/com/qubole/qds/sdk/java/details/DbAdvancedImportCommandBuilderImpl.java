@@ -31,6 +31,7 @@ class DbAdvancedImportCommandBuilderImpl extends CommandBuilderImplBase implemen
         return this;
     }
 
+    @Override
     public DbAdvancedImportCommandBuilder hive_serde(String hive_serde)
     {
         node.put("hive_serde", hive_serde);
