@@ -21,6 +21,8 @@ public interface DbSimpleImportCommandBuilder extends InvokableBuilder<CommandRe
 {
     public DbSimpleImportCommandBuilder hive_table(String hive_table);
 
+    public DbSimpleImportCommandBuilder hive_serde(String hive_serde);
+
     public DbSimpleImportCommandBuilder dbtap_id(String dbtap_id);
 
     public DbSimpleImportCommandBuilder db_table(String db_table);

@@ -102,4 +102,19 @@ public class TestCommands extends AbstractTest
         expectedRequestData.put("script_location", "s3://testpig/script");
         assertRequestDetails(invokeargs, "POST", "commands", expectedRequestData, null, CommandResponse.class);
     }
+
+    @Test
+    public void testDbSimpleImportCommand() throws Exception
+    {
+        InvokeArguments<CommandResponse> invokeargs = qdsClient.command().dbImportSimple().hive_table("test").hive_serde("orc").dbtap_id("1").db_table("test").db_parallelism("1").getArgumentsInvocation();
+        JSONObject expectedRequestData=new JSONObject();
+        expectedRequestData.put("command_type", "DbImportCommand");
+        expectedRequestData.put("mode", 1);
+        expectedRequestData.put("hive_table", "test");
+        expectedRequestData.put("hive_serde", "orc");
+        expectedRequestData.put("dbtap_id", "1");
+        expectedRequestData.put("db_table", "test");
+        expectedRequestData.put("db_parallelism", "1");
+        assertRequestDetails(invokeargs, "POST", "commands", expectedRequestData, null, CommandResponse.class);
+    }
 }
