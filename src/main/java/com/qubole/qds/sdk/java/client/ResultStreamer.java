@@ -49,7 +49,7 @@ public class ResultStreamer implements Closeable
 
     private static final String S3_PREFIX = "s3://";
 
-    private static final Logger LOG = Logger.getLogger(ResultLatch.class.getName());
+    private static final Logger LOG = Logger.getLogger(ResultStreamer.class.getName());
 
     public interface S3Client
     {
@@ -96,21 +96,14 @@ public class ResultStreamer implements Closeable
         }
     }
 
-    private synchronized void ensureClient(boolean createNew)
+    private synchronized void ensureClient(boolean createNew) throws Exception
     {
-        try
+        if (s3Client != null && !createNew)
         {
-            if (s3Client != null && !createNew)
-            {
-                return;
-            }
+            return;
+        }
 
-            s3Client = newS3Client();
-        }
-        catch (Exception e)
-        {
-            LOG.warning(String.format("Exception while getting new s3 client. Error: %s. Continuing with old client.", e.getMessage()));
-        }
+        s3Client = newS3Client();
     }
 
     @VisibleForTesting
@@ -196,7 +189,7 @@ public class ResultStreamer implements Closeable
             return (count < 0) ? read(cbuf, off, len) : count;
         }
 
-        private void loadNextReader()
+        private void loadNextReader() throws IOException
         {
             if (pathIterator.hasNext())
             {
@@ -240,16 +233,23 @@ public class ResultStreamer implements Closeable
                             S3Object object = s3Client.getObject(bucket, key);
                             currentReader = new BufferedReader(new InputStreamReader(object.getObjectContent()));
                         }
+                        return;
                     }
                     catch (AmazonS3Exception e)
                     {
-                        LOG.warning(String.format("Exception while trying to read bucket:%s, key:%s. Retrying.", bucket, key));
-                        ensureClient(true);
+                        LOG.warning(String.format("Exception while trying to read bucket:%s, key:%s. Exception code:%s, message:%s. Retrying.", bucket, key, e.getErrorCode(), e.getMessage()));
+                        try
+                        {
+                            ensureClient(true);
+                        }
+                        catch (Exception e1)
+                        {
+                            LOG.warning(String.format("Exception while reinitializing client. Exception code:%s, message:%s.", e.getErrorCode(), e.getMessage()));
+                        }
                         retry--;
-                        continue;
                     }
-                    break;
                 }
+                throw new IOException(String.format("Exception while trying to read bucket:%s, key:%s", bucket, key));
             }
         }
 
