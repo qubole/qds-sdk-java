@@ -17,6 +17,7 @@ package com.qubole.qds.sdk.java.client;
 
 import com.amazonaws.auth.BasicSessionCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.ListObjectsRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3Object;
@@ -35,6 +36,7 @@ import java.io.StringReader;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Future;
+import java.util.logging.Logger;
 
 /**
  * Streamer for large results
@@ -46,6 +48,8 @@ public class ResultStreamer implements Closeable
     private final QdsClient client;
 
     private static final String S3_PREFIX = "s3://";
+
+    private static final Logger LOG = Logger.getLogger(ResultLatch.class.getName());
 
     public interface S3Client
     {
@@ -92,14 +96,21 @@ public class ResultStreamer implements Closeable
         }
     }
 
-    private synchronized void ensureClient() throws Exception
+    private synchronized void ensureClient(boolean createNew)
     {
-        if (s3Client != null)
+        try
         {
-            return;
-        }
+            if (s3Client != null && !createNew)
+            {
+                return;
+            }
 
-        s3Client = newS3Client();
+            s3Client = newS3Client();
+        }
+        catch (Exception e)
+        {
+            LOG.warning(String.format("Exception while getting new s3 client. Error: %s. Continuing with old client.", e.getMessage()));
+        }
     }
 
     @VisibleForTesting
@@ -146,7 +157,7 @@ public class ResultStreamer implements Closeable
 
     private Reader readFromS3(final List<String> paths) throws Exception
     {
-        ensureClient();
+        ensureClient(false);
         return new PathReader(paths);
     }
 
@@ -206,23 +217,38 @@ public class ResultStreamer implements Closeable
                 String bucket = path.substring(0, slashIndex);
                 String key = path.substring(slashIndex + 1);
 
-                if (key.endsWith("/"))
+                int retry = 2;
+                while (retry > 0)
                 {
-                    ObjectListing objectListing = s3Client.listObjects(new ListObjectsRequest().withBucketName(bucket).withPrefix(key));
-                    List<String> paths = Lists.newArrayList();
-                    for (S3ObjectSummary summary : objectListing.getObjectSummaries())
+                    try
                     {
-                        if (!summary.getKey().equals(key) && (summary.getSize() > 0))
+                        if (key.endsWith("/"))
                         {
-                            paths.add(summary.getBucketName() + "/" + summary.getKey());
+                            ObjectListing objectListing = s3Client.listObjects(new ListObjectsRequest().withBucketName(bucket).withPrefix(key));
+                            List<String> paths = Lists.newArrayList();
+                            for (S3ObjectSummary summary : objectListing.getObjectSummaries())
+                            {
+                                if (!summary.getKey().equals(key) && (summary.getSize() > 0))
+                                {
+                                    paths.add(summary.getBucketName() + "/" + summary.getKey());
+                                }
+                            }
+                            currentReader = new PathReader(paths);
+                        }
+                        else
+                        {
+                            S3Object object = s3Client.getObject(bucket, key);
+                            currentReader = new BufferedReader(new InputStreamReader(object.getObjectContent()));
                         }
                     }
-                    currentReader = new PathReader(paths);
-                }
-                else
-                {
-                    S3Object object = s3Client.getObject(bucket, key);
-                    currentReader = new BufferedReader(new InputStreamReader(object.getObjectContent()));
+                    catch (AmazonS3Exception e)
+                    {
+                        LOG.warning(String.format("Exception while trying to read bucket:%s, key:%s. Retrying.", bucket, key));
+                        ensureClient(true);
+                        retry--;
+                        continue;
+                    }
+                    break;
                 }
             }
         }
