@@ -49,6 +49,8 @@ public class ResultStreamer implements Closeable
 
     private static final String S3_PREFIX = "s3://";
 
+    private static final int DEFAULT_RETRY = 2;
+
     private static final Logger LOG = Logger.getLogger(ResultStreamer.class.getName());
 
     public interface S3Client
@@ -210,7 +212,7 @@ public class ResultStreamer implements Closeable
                 String bucket = path.substring(0, slashIndex);
                 String key = path.substring(slashIndex + 1);
 
-                int retry = 2;
+                int retry = DEFAULT_RETRY;
                 while (retry > 0)
                 {
                     try
@@ -245,7 +247,7 @@ public class ResultStreamer implements Closeable
                 throw new IOException(String.format("Exception while trying to read bucket:%s, key:%s", bucket, key));
             }
         }
-        
+
         private void resetS3Client() throws IOException
         {
             try
