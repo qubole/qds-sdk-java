@@ -238,18 +238,23 @@ public class ResultStreamer implements Closeable
                     catch (AmazonS3Exception e)
                     {
                         LOG.warning(String.format("Exception while trying to read bucket:%s, key:%s. Exception code:%s, message:%s. Retrying.", bucket, key, e.getErrorCode(), e.getMessage()));
-                        try
-                        {
-                            ensureClient(true);
-                        }
-                        catch (Exception e1)
-                        {
-                            LOG.warning(String.format("Exception while reinitializing client. Exception code:%s, message:%s.", e.getErrorCode(), e.getMessage()));
-                        }
+                        resetS3Client();
                         retry--;
                     }
                 }
                 throw new IOException(String.format("Exception while trying to read bucket:%s, key:%s", bucket, key));
+            }
+        }
+        
+        private void resetS3Client() throws IOException
+        {
+            try
+            {
+                ensureClient(true);
+            }
+            catch (Exception e)
+            {
+                throw new IOException(String.format("Exception while trying to reset s3 client"), e);
             }
         }
 
