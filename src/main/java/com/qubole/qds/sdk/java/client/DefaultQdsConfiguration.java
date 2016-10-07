@@ -44,7 +44,7 @@ public class DefaultQdsConfiguration implements QdsConfiguration
     public static final String API_VERSION = "v1.2";
 
     private static final int DEFAULT_CONNECTION_TIMEOUT = (int) TimeUnit.SECONDS.toMillis(10);
-    private static final int DEFAULT_READ_TIMEOUT = (int) TimeUnit.SECONDS.toMillis(30);
+    private static final int DEFAULT_READ_TIMEOUT = (int) TimeUnit.SECONDS.toMillis(60);
 
     /**
      * @param apiToken your API token
