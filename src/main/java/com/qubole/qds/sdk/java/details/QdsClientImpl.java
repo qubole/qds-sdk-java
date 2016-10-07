@@ -23,6 +23,7 @@ import com.qubole.qds.sdk.java.api.DbTapApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.api.ReportApi;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
+import com.qubole.qds.sdk.java.api.sparkjobserver.AppApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.client.retry.RetryConnector;
@@ -31,7 +32,6 @@ import com.qubole.qds.sdk.java.entities.SubCommandsDeserializer;
 import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.module.SimpleModule;
-
 import javax.ws.rs.client.AsyncInvoker;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
@@ -56,6 +56,7 @@ public class QdsClientImpl implements QdsClient
     private final DbTapApiImpl dbTapsApi;
     private final ReportApiImpl reportApi;
     private final SchedulerApiImpl schedulerApi;
+    private final AppApiImpl appApi;
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
@@ -75,6 +76,7 @@ public class QdsClientImpl implements QdsClient
         dbTapsApi = new DbTapApiImpl(this);
         reportApi = new ReportApiImpl(this);
         schedulerApi = new SchedulerApiImpl(this);
+        appApi = new AppApiImpl(this);
 
         // register the deserialization handler for composite command
         SimpleModule module =
@@ -119,6 +121,12 @@ public class QdsClientImpl implements QdsClient
     public SchedulerApi scheduler()
     {
         return schedulerApi;
+    }
+
+    @Override
+    public AppApi sparkJobServerApp()
+    {
+        return appApi;
     }
 
     @Override
