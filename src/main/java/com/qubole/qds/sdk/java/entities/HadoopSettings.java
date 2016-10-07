@@ -30,6 +30,7 @@ public class HadoopSettings
     private String custom_config;
     private SpotInstanceSettings spot_instance_settings;
     private Map<String, String> custom_ec2_tags;
+    private boolean use_hadoop2;
     private boolean use_hbase;
     private boolean use_spark;
 
@@ -37,7 +38,7 @@ public class HadoopSettings
     {
     }
 
-    public HadoopSettings(String master_instance_type, FairSchedulerSettings fairscheduler_settings, int max_nodes, String slave_instance_type, String slave_request_type, int initial_nodes, String custom_config, SpotInstanceSettings spot_instance_settings, boolean use_spark, boolean use_hbase)
+    public HadoopSettings(String master_instance_type, FairSchedulerSettings fairscheduler_settings, int max_nodes, String slave_instance_type, String slave_request_type, int initial_nodes, String custom_config, SpotInstanceSettings spot_instance_settings, boolean use_spark, boolean use_hbase, boolean use_hadoop2)
     {
         this.master_instance_type = master_instance_type;
         this.fairscheduler_settings = fairscheduler_settings;
@@ -47,6 +48,7 @@ public class HadoopSettings
         this.initial_nodes = initial_nodes;
         this.custom_config = custom_config;
         this.spot_instance_settings = spot_instance_settings;
+        this.use_hadoop2 = use_hadoop2;
         this.use_hbase = use_hbase;
         this.use_spark = use_spark;
     }
@@ -159,5 +161,15 @@ public class HadoopSettings
     public void setCustom_ec2_tags(Map<String, String> custom_ec2_tags)
     {
         this.custom_ec2_tags = custom_ec2_tags;
+    }
+
+    public boolean getUse_hadoop2()
+    {
+        return use_hadoop2;
+    }
+
+    public void setUse_hadoop2(boolean use_hadoop2)
+    {
+        this.use_hadoop2 = use_hadoop2;
     }
 }

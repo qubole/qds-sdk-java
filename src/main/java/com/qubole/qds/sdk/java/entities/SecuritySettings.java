@@ -22,15 +22,17 @@ public class SecuritySettings
 {
     private boolean encrypted_ephemerals;
     private String customer_ssh_key;
+    private String persistent_security_group;
 
     public SecuritySettings()
     {
     }
 
-    public SecuritySettings(boolean encrypted_ephemerals, String customer_ssh_key)
+    public SecuritySettings(boolean encrypted_ephemerals, String customer_ssh_key, String persistent_security_group)
     {
         this.encrypted_ephemerals = encrypted_ephemerals;
         this.customer_ssh_key = customer_ssh_key;
+        this.persistent_security_group = persistent_security_group;
     }
 
     public boolean isEncrypted_ephemerals()
@@ -51,5 +53,15 @@ public class SecuritySettings
     public void setCustomer_ssh_key(String customer_ssh_key)
     {
         this.customer_ssh_key = customer_ssh_key;
+    }
+
+    public String getPersistent_security_group()
+    {
+        return persistent_security_group;
+    }
+
+    public void setPersistent_security_group(String persistent_security_group)
+    {
+        this.persistent_security_group = persistent_security_group;
     }
 }
