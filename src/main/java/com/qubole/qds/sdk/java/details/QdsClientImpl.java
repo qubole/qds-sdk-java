@@ -17,16 +17,17 @@ package com.qubole.qds.sdk.java.details;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
-import com.qubole.qds.sdk.java.api.AppApi;
 import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
 import com.qubole.qds.sdk.java.api.ReportApi;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
+import com.qubole.qds.sdk.java.api.sparkjobserver.AppApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.client.retry.RetryConnector;
+import com.qubole.qds.sdk.java.details.sparkjobserver.AppApiImpl;
 import com.qubole.qds.sdk.java.entities.SubCommands;
 import com.qubole.qds.sdk.java.entities.SubCommandsDeserializer;
 import org.codehaus.jackson.Version;
@@ -60,7 +61,7 @@ public class QdsClientImpl implements QdsClient
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    static ObjectMapper getMapper()
+    public static ObjectMapper getMapper()
     {
         return MAPPER;
     }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubole.qds.sdk.java.entities;
+package com.qubole.qds.sdk.java.entities.sparkjobserver;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 

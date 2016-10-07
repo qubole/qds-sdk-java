@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubole.qds.sdk.java.api;
+package com.qubole.qds.sdk.java.api.sparkjobserver;
 
 import java.util.Map;
 

@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubole.qds.sdk.java.api;
+package com.qubole.qds.sdk.java.api.sparkjobserver;
 
 import java.util.List;
-import com.qubole.qds.sdk.java.entities.App;
-import com.qubole.qds.sdk.java.entities.AppItem;
+import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.entities.Message;
+import com.qubole.qds.sdk.java.entities.sparkjobserver.App;
+import com.qubole.qds.sdk.java.entities.sparkjobserver.AppItem;
 
 public interface AppApi
 {

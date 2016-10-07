@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubole.qds.sdk.java.details;
+package com.qubole.qds.sdk.java.details.sparkjobserver;
 
 import java.io.IOException;
 import java.util.Map;
 import org.codehaus.jackson.node.ObjectNode;
-import com.qubole.qds.sdk.java.api.AppBuilder;
+import com.qubole.qds.sdk.java.api.sparkjobserver.AppBuilder;
+import com.qubole.qds.sdk.java.details.QdsClientImpl;
 
 public class AppBuilderImpl implements AppBuilder
 {

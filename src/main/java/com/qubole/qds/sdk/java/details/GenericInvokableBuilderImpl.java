@@ -19,7 +19,7 @@ import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import javax.ws.rs.core.GenericType;
 
-class GenericInvokableBuilderImpl<T> extends InvocationCallbackBase<T> implements InvokableBuilder<T>
+public class GenericInvokableBuilderImpl<T> extends InvocationCallbackBase<T> implements InvokableBuilder<T>
 {
     private final QdsClient client;
     private final RequestDetails entity;
@@ -37,7 +37,7 @@ class GenericInvokableBuilderImpl<T> extends InvocationCallbackBase<T> implement
         return new InvokeArguments<T>(client, null, entity, responseType, additionalPaths);
     }
 
-    GenericInvokableBuilderImpl(QdsClient client, RequestDetails entity, Class<T> responseType, String... additionalPaths)
+    public GenericInvokableBuilderImpl(QdsClient client, RequestDetails entity, Class<T> responseType, String... additionalPaths)
     {
         this.client = client;
         this.entity = entity;
@@ -46,7 +46,7 @@ class GenericInvokableBuilderImpl<T> extends InvocationCallbackBase<T> implement
         this.additionalPaths = additionalPaths;
     }
 
-    GenericInvokableBuilderImpl(QdsClient client, RequestDetails entity, GenericType<T> responseType, String... additionalPaths)
+    public GenericInvokableBuilderImpl(QdsClient client, RequestDetails entity, GenericType<T> responseType, String... additionalPaths)
     {
         this.client = client;
         this.entity = entity;
