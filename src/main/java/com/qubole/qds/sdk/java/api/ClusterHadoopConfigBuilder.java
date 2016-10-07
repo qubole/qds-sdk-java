@@ -15,6 +15,8 @@
  */
 package com.qubole.qds.sdk.java.api;
 
+import java.util.Map;
+
 public interface ClusterHadoopConfigBuilder
 {
     public ClusterConfigBuilder master_instance_type(String master_instance_type);
@@ -27,5 +29,6 @@ public interface ClusterHadoopConfigBuilder
     public ClusterConfigBuilder use_hadoop2(boolean use_hadoop2);
     public ClusterConfigBuilder initial_nodes(int initial_nodes);
     public ClusterConfigBuilder custom_config(String custom_config);
+    public ClusterConfigBuilder custom_ec2_tags(Map<String, String> custom_ec2_tags);
     public ClusterSpotInstanceConfigBuilder spot_instance_settings();
 }

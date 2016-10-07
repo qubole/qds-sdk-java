@@ -15,6 +15,7 @@
  */
 package com.qubole.qds.sdk.java.entities;
 
+import java.util.Map;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -28,6 +29,7 @@ public class HadoopSettings
     private int initial_nodes;
     private String custom_config;
     private SpotInstanceSettings spot_instance_settings;
+    private Map<String, String> custom_ec2_tags;
     private boolean use_hadoop2;
     private boolean use_hbase;
     private boolean use_spark;
@@ -149,6 +151,16 @@ public class HadoopSettings
     public void setUse_spark(boolean use_spark)
     {
         this.use_spark = use_spark;
+    }
+
+    public Map<String, String> getCustom_ec2_tags()
+    {
+        return custom_ec2_tags;
+    }
+
+    public void setCustom_ec2_tags(Map<String, String> custom_ec2_tags)
+    {
+        this.custom_ec2_tags = custom_ec2_tags;
     }
 
     public boolean getUse_hadoop2()
