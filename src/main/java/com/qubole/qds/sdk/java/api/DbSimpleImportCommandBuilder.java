@@ -16,11 +16,12 @@
 package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.CommandResponse;
-import java.util.Map;
 
 public interface DbSimpleImportCommandBuilder extends InvokableBuilder<CommandResponse>
 {
     public DbSimpleImportCommandBuilder hive_table(String hive_table);
+
+    public DbSimpleImportCommandBuilder hive_serde(String hive_serde);
 
     public DbSimpleImportCommandBuilder dbtap_id(String dbtap_id);
 

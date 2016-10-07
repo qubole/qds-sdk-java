@@ -20,9 +20,13 @@ import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.entities.NameAndType;
+import com.qubole.qds.sdk.java.entities.NameTypePosition;
 import com.qubole.qds.sdk.java.entities.Schema;
+import com.qubole.qds.sdk.java.entities.SchemaListDescribed;
+import com.qubole.qds.sdk.java.entities.SchemaOrdinal;
 
 import java.util.List;
+import java.util.Map;
 
 public class HiveMetadataExample {
     public static void main(String[] args) throws Exception {
@@ -31,6 +35,14 @@ public class HiveMetadataExample {
 
         QdsClient client = QdsClientFactory.newClient(configuration);
         try {
+            //Get the list of schemas available.
+            List<String> schema_names =  client.hiveMetadata().getSchemaNames().invoke().get();
+            System.out.println("Following schemas are available:");
+            for (String schema_name : schema_names) {
+                System.out.println(schema_name);
+            }
+            System.out.println();
+
             // Get the list of tables available.
             List<Schema> listOfTables = client.hiveMetadata().schema().invoke().get();
             System.out.println("Following tables are available:");
@@ -64,6 +76,32 @@ public class HiveMetadataExample {
             for (NameAndType nt : tableDefinition) {
                 System.out.format("%-40s %s%n", nt.getName(), nt.getType());
             }
+            System.out.println();
+
+            //Get information about all the schemas.
+            SchemaListDescribed schemaList = client.hiveMetadata().getSchemaListDescribed().invoke().get();
+            Map<String, List<SchemaOrdinal>> schemas = schemaList.getSchemas();
+
+            int current_page = 2;
+            int per_page = schemaList.getPaging_info().getPer_page();
+
+            while (schemaList.getPaging_info().getNext_page() != null) {
+                schemaList = client.hiveMetadata().getSchemaListDescribed().forPage(current_page++, per_page).invoke().get();
+                schemas.putAll(schemaList.getSchemas());
+            }
+
+            System.out.println("Detailed list of all the schemas available:");
+            for (String schemaName : schemas.keySet()) {
+                System.out.println("Description of schema " + schemaName + ":");
+                List<SchemaOrdinal> listofTables = schemas.get(schemaName);
+                for(SchemaOrdinal table : listofTables) {
+                    System.out.println("\t\tDescription of table " + table.getTable_name() + ":");
+                    for (NameTypePosition column : table.getColumns()) {
+                        System.out.format("\t\t\t\t%-40s %s%n", column.getName(), column.getType());
+                    }
+                }
+            }
+
         } finally {
             client.close();
         }

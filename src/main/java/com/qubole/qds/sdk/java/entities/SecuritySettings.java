@@ -54,7 +54,7 @@ public class SecuritySettings
     {
         this.customer_ssh_key = customer_ssh_key;
     }
-    
+
     public String getPersistent_security_group()
     {
         return persistent_security_group;

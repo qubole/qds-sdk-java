@@ -22,7 +22,7 @@ import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.core.Response;
 import java.util.concurrent.Future;
 
-abstract class InvocationCallbackBase<T> implements InvokableBuilder<T>
+public abstract class InvocationCallbackBase<T> implements InvokableBuilder<T>
 {
     private InvocationCallback<T> callback;
 
@@ -53,17 +53,23 @@ abstract class InvocationCallbackBase<T> implements InvokableBuilder<T>
     {
         InvokeArguments<T> invokeArguments = getInvokeArguments();
 
-        if ( callback != null )
+        if (callback != null)
         {
             return invokeArguments.getClient().invokeRequest(invokeArguments.getForPage(), invokeArguments.getEntity(), callback, invokeArguments.getAdditionalPaths());
         }
 
-        if ( invokeArguments.getGenericResponseType() != null )
+        if (invokeArguments.getGenericResponseType() != null)
         {
             return invokeArguments.getClient().invokeRequest(invokeArguments.getForPage(), invokeArguments.getEntity(), invokeArguments.getGenericResponseType(), invokeArguments.getAdditionalPaths());
         }
 
         return invokeArguments.getClient().invokeRequest(invokeArguments.getForPage(), invokeArguments.getEntity(), invokeArguments.getResponseType(), invokeArguments.getAdditionalPaths());
+    }
+
+    @Override
+    public final InvokeArguments<T> getArgumentsInvocation()
+    {
+        return getInvokeArguments();
     }
 
     protected abstract InvokeArguments<T> getInvokeArguments();
