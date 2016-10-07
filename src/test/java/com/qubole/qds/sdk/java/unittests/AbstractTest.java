@@ -40,8 +40,13 @@ public abstract class AbstractTest
         configuration = new DefaultQdsConfiguration("https://api.qubole.com/api","apiToken");
         qdsClient = QdsClientFactory.newClient(configuration);
     }
-    
+
     public void assertRequestDetails(InvokeArguments<?> invokeargs, String expectedRequestType, String expectedEndpoint, JSONObject expectedRequestData, Map<Object, Object> expectedQueryParams, Class<?> expectedResponseClassType) throws Exception
+    {
+        assertRequestDetails(invokeargs, expectedRequestType, expectedEndpoint, expectedRequestData, expectedQueryParams, expectedResponseClassType, null);
+    }
+
+    public void assertRequestDetails(InvokeArguments<?> invokeargs, String expectedRequestType, String expectedEndpoint, JSONObject expectedRequestData, Map<Object, Object> expectedQueryParams, Class<?> expectedResponseClassType, Class<?> expectedGenericRawType) throws Exception
     {
         Assert.assertEquals(invokeargs.getEntity().getMethod().name(),
             expectedRequestType,
@@ -55,10 +60,21 @@ public abstract class AbstractTest
                 + expectedEndpoint
                 + " , got from request : "
                 + Joiner.on("/").join(invokeargs.getAdditionalPaths()));
-        Assert.assertTrue(expectedResponseClassType.isInstance(invokeargs.getResponseType().newInstance()),
-            "Expected rsponse type was : " + expectedResponseClassType.getSimpleName()
-                + " , but it is of type : "
-                + invokeargs.getResponseType().getSimpleName());
+
+        if (expectedResponseClassType != null) {
+            Assert.assertTrue(expectedResponseClassType.isInstance(invokeargs.getResponseType().newInstance()),
+                "Expected response type was : " + expectedResponseClassType.getSimpleName()
+                    + " , but it is of type : "
+                    + invokeargs.getResponseType().getSimpleName());
+        }
+
+        if (expectedGenericRawType != null) {
+            Assert.assertTrue(expectedGenericRawType.getClass()
+                    .equals(invokeargs.getGenericResponseType().getRawType().getClass()),
+                "Expected generic response raw type was : " + expectedGenericRawType.getSimpleName()
+                    + " , but it is of type : "
+                    + invokeargs.getGenericResponseType().getRawType().getSimpleName());
+        }
 
         if (expectedRequestData != null)
         {

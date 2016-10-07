@@ -19,6 +19,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.qubole.qds.sdk.java.entities.ClusterMetrics;
 import org.testng.annotations.Test;
 import com.amazonaws.util.json.JSONObject;
 import com.qubole.qds.sdk.java.details.InvokeArguments;
@@ -73,5 +75,17 @@ public class TestCluster extends AbstractTest
         params.put("private_dns", dnsOfNode);
         params.put("command", "replace");
         assertRequestDetails(invokeargs, "PUT", "clusters/"+randomclusterId+"/nodes", params, null, Command.class);
+    }
+
+    @Test
+    public void testClusterMetrics() throws Exception
+    {
+        String randomclusterId="123";
+        InvokeArguments<ClusterMetrics> invokeargs = qdsClient.cluster().metrics(randomclusterId, "cpu_report", "master", "hour").getArgumentsInvocation();
+        Map<Object, Object> params=new HashMap<Object, Object>();
+        params.put("metric", "cpu_report");
+        params.put("hostname", "master");
+        params.put("interval", "hour");
+        assertRequestDetails(invokeargs, "GET", "clusters/"+randomclusterId+"/metrics", null, params, ClusterMetrics.class);
     }
 }

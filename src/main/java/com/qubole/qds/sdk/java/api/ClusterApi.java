@@ -16,9 +16,11 @@
 package com.qubole.qds.sdk.java.api;
 
 import com.qubole.qds.sdk.java.entities.ClusterItem;
+import com.qubole.qds.sdk.java.entities.ClusterMetrics;
 import com.qubole.qds.sdk.java.entities.ClusterState;
 import com.qubole.qds.sdk.java.entities.Command;
 import com.qubole.qds.sdk.java.entities.Message;
+
 import java.util.List;
 
 /**
@@ -40,6 +42,17 @@ public interface ClusterApi
      * @return new builder
      */
     public InvokableBuilder<ClusterState> state(String labelOrId);
+
+    /**
+     * Corresponds to http://docs.qubole.com/en/latest/rest-api/cluster_api/metrics-cluster.html
+     *
+     * @param labelOrId the Cluster label/id
+     * @param metrics metric to monitor.
+     * @param hostname hostname for which metric values are required.
+     * @param interval interval for which the metric values are required.
+     * @return new builder
+     */
+    public InvokableBuilder<ClusterMetrics> metrics(String labelOrId, String metrics, String hostname, String interval);
 
     /**
      * Corresponds to http://www.qubole.com/docs/get-cluster-information/
