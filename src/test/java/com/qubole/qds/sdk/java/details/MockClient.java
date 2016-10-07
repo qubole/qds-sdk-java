@@ -150,7 +150,7 @@ public class MockClient implements QdsClient
     }
     
     @Override
-    public AppApi app() {
+    public AppApi sparkJobServerApp() {
         // TODO Auto-generated method stub
         return new AppApiImpl(this);
     }
