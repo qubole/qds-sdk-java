@@ -77,11 +77,11 @@ public interface QdsClient extends Closeable
     public SchedulerApi scheduler();
 
     /**
-     * Return apps api factory
+     * Return spark job server apps api factory
      *
-     * @return apps api factory
+     * @return spark job server apps api factory
      */
-    public AppApi app();
+    public AppApi sparkJobServerApp();
 
     /**
      * Low-level request invoker. Not normally used directly. Use the api factories instead.
