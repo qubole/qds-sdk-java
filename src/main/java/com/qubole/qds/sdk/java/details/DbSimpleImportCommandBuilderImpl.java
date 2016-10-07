@@ -15,6 +15,7 @@
  */
 package com.qubole.qds.sdk.java.details;
 
+import java.util.Arrays;
 import com.qubole.qds.sdk.java.api.BaseCommand;
 import com.qubole.qds.sdk.java.api.DbSimpleImportCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
@@ -35,6 +36,14 @@ class DbSimpleImportCommandBuilderImpl extends CommandBuilderImplBase implements
     public DbSimpleImportCommandBuilder hive_serde(String hive_serde)
     {
         node.put("hive_serde", hive_serde);
+        return this;
+    }
+
+    @Override
+    public DbSimpleImportCommandBuilder db_columns(String[] db_columns)
+    {
+        String dbCols = Arrays.toString(db_columns);
+        node.put("db_columns", dbCols.substring(1, dbCols.length()-1));
         return this;
     }
 

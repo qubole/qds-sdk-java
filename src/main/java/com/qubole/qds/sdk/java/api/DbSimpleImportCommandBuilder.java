@@ -27,6 +27,8 @@ public interface DbSimpleImportCommandBuilder extends InvokableBuilder<CommandRe
 
     public DbSimpleImportCommandBuilder db_table(String db_table);
 
+    public DbSimpleImportCommandBuilder db_columns(String[] db_columns);
+
     public DbSimpleImportCommandBuilder db_where(String db_where);
 
     public DbSimpleImportCommandBuilder db_parallelism(String db_parallelism);
