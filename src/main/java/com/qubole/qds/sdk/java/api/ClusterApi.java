@@ -15,11 +15,10 @@
  */
 package com.qubole.qds.sdk.java.api;
 
-import com.qubole.qds.sdk.java.entities.ClusterItem;
-import com.qubole.qds.sdk.java.entities.ClusterState;
-import com.qubole.qds.sdk.java.entities.Command;
-import com.qubole.qds.sdk.java.entities.Message;
+import com.qubole.qds.sdk.java.entities.*;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * Corresponds to http://www.qubole.com/docs/documentation/cluster-api/
@@ -40,6 +39,14 @@ public interface ClusterApi
      * @return new builder
      */
     public InvokableBuilder<ClusterState> state(String labelOrId);
+
+    /**
+     * Corresponds to http://www.qubole.com/docs/get-cluster-state/
+     *
+     * @param labelOrId the Cluster label/id
+     * @return new builder
+     */
+    public InvokableBuilder<ClusterMetrics> metrics(String labelOrId,  Map<String, String> params);
 
     /**
      * Corresponds to http://www.qubole.com/docs/get-cluster-information/
