@@ -124,7 +124,7 @@ public class QdsClientImpl implements QdsClient
     }
 
     @Override
-    public AppApi app()
+    public AppApi sparkJobServerApp()
     {
         return appApi;
     }
