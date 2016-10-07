@@ -42,7 +42,8 @@ class DbSimpleImportCommandBuilderImpl extends CommandBuilderImplBase implements
     @Override
     public DbSimpleImportCommandBuilder db_columns(String[] db_columns)
     {
-        node.put("db_columns", Arrays.toString(db_columns).replaceAll("\\[", "").replaceAll("\\]", ""));
+        String dbCols = Arrays.toString(db_columns);
+        node.put("db_columns", dbCols.substring(1, dbCols.length()-1));
         return this;
     }
 
