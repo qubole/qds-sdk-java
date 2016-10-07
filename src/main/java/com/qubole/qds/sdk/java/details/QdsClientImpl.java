@@ -27,7 +27,6 @@ import com.qubole.qds.sdk.java.api.sparkjobserver.AppApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.client.retry.RetryConnector;
-import com.qubole.qds.sdk.java.details.sparkjobserver.AppApiImpl;
 import com.qubole.qds.sdk.java.entities.SubCommands;
 import com.qubole.qds.sdk.java.entities.SubCommandsDeserializer;
 import org.codehaus.jackson.Version;
@@ -61,7 +60,7 @@ public class QdsClientImpl implements QdsClient
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    public static ObjectMapper getMapper()
+    static ObjectMapper getMapper()
     {
         return MAPPER;
     }

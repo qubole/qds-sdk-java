@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubole.qds.sdk.java.details.sparkjobserver;
+package com.qubole.qds.sdk.java.details;
 
 import java.util.List;
 import javax.ws.rs.core.GenericType;
@@ -21,8 +21,6 @@ import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.api.sparkjobserver.AppApi;
 import com.qubole.qds.sdk.java.api.sparkjobserver.AppBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
-import com.qubole.qds.sdk.java.details.GenericInvokableBuilderImpl;
-import com.qubole.qds.sdk.java.details.RequestDetails;
 import com.qubole.qds.sdk.java.entities.Message;
 import com.qubole.qds.sdk.java.entities.sparkjobserver.App;
 import com.qubole.qds.sdk.java.entities.sparkjobserver.AppItem;
