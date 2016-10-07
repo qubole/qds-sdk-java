@@ -22,7 +22,7 @@
     <groupId>com.qubole.qds-sdk-java</groupId>
     <artifactId>qds-sdk-java</artifactId>
     <name>Qubole Data Service Java SDK</name>
-    <version>0.6.2-SNAPSHOT</version>
+    <version>0.8.1-SNAPSHOT</version>
     <description>
         A Java library that provides the tools you need to
         authenticate with, and use the Qubole Data Service API.
@@ -107,6 +107,23 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.15</version>
+                <executions>
+                    <execution>
+                    <id>checkstyle</id>
+                    <phase>validate</phase>
+                    <goals>
+                        <goal>check</goal>
+                    </goals>
+                    <configuration>
+                        <configLocation>checkstyle.xml</configLocation>
+                    </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
         <resources>
             <resource>
@@ -142,6 +159,70 @@
                                     <pattern>javax.ws.rs</pattern>
                                     <shadedPattern>hidden.javax.ws.rs</shadedPattern>
                                 </relocation>
+                                <relocation>
+                                    <pattern>org.glassfish</pattern>
+                                    <shadedPattern>hidden.org.glassfish</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.jvnet</pattern>
+                                    <shadedPattern>hidden.org.jvnet</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>javax.annotation</pattern>
+                                    <shadedPattern>hidden.javax.annotation</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.codehaus.jackson</pattern>
+                                    <shadedPattern>hidden.org.codehaus.jackson</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.google.guava</pattern>
+                                    <shadedPattern>hidden.com.google.guava</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.amazonaws</pattern>
+                                    <shadedPattern>hidden.com.amazonaws</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>commons-logging</pattern>
+                                    <shadedPattern>hidden.commons-logging</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache.httpcomponents</pattern>
+                                    <shadedPattern>hidden.org.apache.httpcomponents</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>commons-codec</pattern>
+                                    <shadedPattern>hidden.commons-codec</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.fasterxml.jackson.databind</pattern>
+                                    <shadedPattern>hidden.com.fasterxml.jackson.databind</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.fasterxml.jackson.annotation</pattern>
+                                    <shadedPattern>hidden.com.fasterxml.jackson.annotation</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.fasterxml.jackson.dataformat.cbor</pattern>
+                                    <shadedPattern>hidden.com.fasterxml.jackson.dataformat.cbor</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.fasterxml.jackson.core</pattern>
+                                    <shadedPattern>hidden.com.fasterxml.jackson.core</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>joda-time</pattern>
+                                    <shadedPattern>hidden.joda-time</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.beust</pattern>
+                                    <shadedPattern>hidden.com.beust</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.beanshell</pattern>
+                                    <shadedPattern>hidden.org.beanshell</shadedPattern>
+                                </relocation>
                             </relocations>
                         </configuration>
                         <executions>
@@ -150,6 +231,10 @@
                                 <goals>
                                     <goal>shade</goal>
                                 </goals>
+                                <configuration>
+                                    <shadedArtifactAttached>true</shadedArtifactAttached>
+                                    <shadedClassifierName>shaded</shadedClassifierName>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>

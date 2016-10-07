@@ -19,7 +19,6 @@ package com.qubole.qds.sdk.java.details;
 import com.qubole.qds.sdk.java.api.CompositeCommandBuilder;
 import com.qubole.qds.sdk.java.api.BaseCommand;
 import com.qubole.qds.sdk.java.client.QdsClient;
-import com.qubole.qds.sdk.java.entities.CommandResponse;
 import org.codehaus.jackson.node.ObjectNode;
 
 import java.util.ArrayList;
@@ -52,8 +51,7 @@ public class CompositeCommandBuilderImpl extends CommandBuilderImplBase implemen
     public CompositeCommandBuilder addSubCommand(BaseCommand command)
     {
         // for now we will work with our impl classes only
-        if (((command instanceof BaseCommandImpl) == false)
-                || (checkCommandTypeSupported(command) == false))
+        if (!(command instanceof BaseCommandImpl) || !checkCommandTypeSupported(command))
         {
             throw new RuntimeException("Command Type not supported: " + command.getCommandType());
         }

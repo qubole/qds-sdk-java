@@ -13,13 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qubole.qds.sdk.java.api;
+package com.qubole.qds.sdk.java.entities;
 
-public interface ClusterSecurityConfigBuilder
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class AddNode
 {
-    public ClusterConfigBuilder encrypted_ephemerals(boolean encrypted_ephemerals);
+    private int node_count;
 
-    public ClusterConfigBuilder customer_ssh_key(String customer_ssh_key);
+    public AddNode()
+    {
+    }
 
-    public ClusterConfigBuilder persistent_security_group(String persistent_security_group);
+    public AddNode(int node_count)
+    {
+        this.node_count = node_count;
+    }
+
+    public int getNode_count()
+    {
+        return node_count;
+    }
+
+    public void setNode_count(int node_count)
+    {
+        this.node_count = node_count;
+    }
 }

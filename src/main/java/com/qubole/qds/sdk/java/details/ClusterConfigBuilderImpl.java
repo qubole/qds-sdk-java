@@ -51,7 +51,7 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
         {
             return QdsClientImpl.getMapper().writer().writeValueAsString(getNode());
         }
-        catch ( IOException e )
+        catch (IOException e)
         {
             throw new RuntimeException("Could not serialize: " + node, e);
         }
@@ -67,7 +67,7 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
     @Override
     public ClusterPrestoConfigBuilder presto_settings()
     {
-        if ( !node.has("presto_settings") )
+        if (!node.has("presto_settings"))
         {
             node.put("presto_settings", presto_settings);
         }
@@ -100,7 +100,7 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
     @Override
     public ClusterSecurityConfigBuilder security_settings()
     {
-        if ( !node.has("security_settings") )
+        if (!node.has("security_settings"))
         {
             node.put("security_settings", security_settings);
         }
@@ -120,6 +120,13 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
                 security_settings.put("customer_ssh_key", customer_ssh_key);
                 return ClusterConfigBuilderImpl.this;
             }
+
+            @Override
+            public ClusterConfigBuilder persistent_security_group(String persistent_security_group)
+            {
+                security_settings.put("persistent_security_group", persistent_security_group);
+                return ClusterConfigBuilderImpl.this;
+            }
         };
     }
 
@@ -133,7 +140,7 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
     @Override
     public ClusterHadoopConfigBuilder hadoop_settings()
     {
-        if ( !node.has("hadoop_settings") )
+        if (!node.has("hadoop_settings"))
         {
             node.put("hadoop_settings", hadoop_settings);
         }
@@ -150,7 +157,7 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
             @Override
             public ClusterFairSchedulerConfigBuilder fairscheduler_settings()
             {
-                if ( !hadoop_settings.has("fairscheduler_settings") )
+                if (!hadoop_settings.has("fairscheduler_settings"))
                 {
                     hadoop_settings.put("fairscheduler_settings", fairscheduler_settings);
                 }
@@ -199,18 +206,38 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
                 hadoop_settings.put("custom_config", custom_config);
                 return ClusterConfigBuilderImpl.this;
             }
-            
+
             @Override
-            public ClusterConfigBuilder custom_ec2_tags(Map<String, String> custom_ec2_tags) 
+            public ClusterConfigBuilder custom_ec2_tags(Map<String, String> custom_ec2_tags)
             {
                 hadoop_settings.put("custom_ec2_tags", QdsClientImpl.getMapper().valueToTree(custom_ec2_tags));
                 return ClusterConfigBuilderImpl.this;
             }
 
             @Override
+            public ClusterConfigBuilder use_hbase(boolean use_hbase) {
+                hadoop_settings.put("use_hbase", use_hbase);
+                return ClusterConfigBuilderImpl.this;
+            }
+
+            @Override
+            public ClusterConfigBuilder use_spark(boolean use_spark)
+            {
+                hadoop_settings.put("use_spark", use_spark);
+                return ClusterConfigBuilderImpl.this;
+            }
+
+            @Override
+            public ClusterConfigBuilder use_hadoop2(boolean use_hadoop2)
+            {
+                hadoop_settings.put("use_hadoop2", use_hadoop2);
+                return ClusterConfigBuilderImpl.this;
+            }
+
+            @Override
             public ClusterSpotInstanceConfigBuilder spot_instance_settings()
             {
-                if ( !hadoop_settings.has("spot_instance_settings") )
+                if (!hadoop_settings.has("spot_instance_settings"))
                 {
                     hadoop_settings.put("spot_instance_settings", spot_instance_settings);
                 }
@@ -265,7 +292,7 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
     @Override
     public ClusterEc2ConfigBuilder ec2_settings()
     {
-        if ( !node.has("ec2_settings") )
+        if (!node.has("ec2_settings"))
         {
             node.put("ec2_settings", ec2_settings);
         }
