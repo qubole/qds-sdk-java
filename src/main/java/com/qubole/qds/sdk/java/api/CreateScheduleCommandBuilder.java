@@ -36,6 +36,8 @@ public interface CreateScheduleCommandBuilder
 
     public CreateScheduleCommandBuilder name(String name);
 
+    public CreateScheduleCommandBuilder label(String label);
+
     public CreateScheduleCommandBuilder time_unit(String time_unit);
 
     public CreateScheduleCommandBuilder time_zone(String time_zone);

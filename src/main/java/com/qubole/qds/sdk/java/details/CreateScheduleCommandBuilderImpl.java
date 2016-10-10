@@ -98,6 +98,13 @@ class CreateScheduleCommandBuilderImpl implements CreateScheduleCommandBuilder
     }
 
     @Override
+    public CreateScheduleCommandBuilder label(String label)
+    {
+        node.put("label", label);
+        return this;
+    }
+
+    @Override
     public CreateScheduleCommandBuilder concurrency(int concurrency)
     {
         node.put("concurrency", concurrency);
