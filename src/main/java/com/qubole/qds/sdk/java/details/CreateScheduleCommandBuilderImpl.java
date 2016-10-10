@@ -98,9 +98,9 @@ class CreateScheduleCommandBuilderImpl implements CreateScheduleCommandBuilder
     }
 
     @Override
-    public CreateScheduleCommandBuilder label(String label)
+    public CreateScheduleCommandBuilder clusterLabel(String clusterLabel)
     {
-        node.put("label", label);
+        node.put("label", clusterLabel);
         return this;
     }
 

@@ -36,7 +36,7 @@ public interface CreateScheduleCommandBuilder
 
     public CreateScheduleCommandBuilder name(String name);
 
-    public CreateScheduleCommandBuilder label(String label);
+    public CreateScheduleCommandBuilder clusterLabel(String clusterLabel);
 
     public CreateScheduleCommandBuilder time_unit(String time_unit);
 
