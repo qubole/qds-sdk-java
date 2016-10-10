@@ -5,8 +5,11 @@ import javax.ws.rs.client.ClientRequestFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 public class UserAgentFilter implements ClientRequestFilter {
+
+    private static final Logger LOG = Logger.getLogger(UserAgentFilter.class.getName());
 
     public String version;
 
@@ -20,12 +23,16 @@ public class UserAgentFilter implements ClientRequestFilter {
             if (inputStream != null) {
                 prop.load(inputStream);
             } else {
-                System.err.println("Version Info file '" + propFileName + "' not found in the classpath");
+                String error = "Version Info file '" + propFileName + "' not found in the classpath";
+                LOG.severe(error);
+                System.err.println(error);
             }
 
             version = prop.getProperty("version");
         } catch (Exception e) {
-            System.err.println("Some error while loading the version info for user-agent string.");
+            String error = "Some error while loading the version info for user-agent string.";
+            LOG.severe(error);
+            System.err.println(error);
         }
     }
 
