@@ -20,6 +20,9 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Command
 {
+    private String name;
+    private String[] tags;
+
     private String status;
     private String pool;
     private String template;
@@ -49,12 +52,15 @@ public class Command
     {
     }
 
-    public Command(String status, String pool, String template, String resolved_macros, int qbol_session_id,
+    public Command(String name, String[] tags, String status, String pool, String template, String resolved_macros, int qbol_session_id,
                    String created_at, int user_id, String nominal_time, String command_type, CommandMetaData meta_data,
                    SubCommands command, String sequence_id, int pid, String label, int num_result_dir,
                    boolean can_notify, int progress, long start_time, long end_time, String path, int id,
                    String timeout, long submit_time, String qlog)
     {
+        this.name =name;
+        this.tags = tags;
+
         this.status = status;
         this.pool = pool;
         this.template = template;
@@ -319,5 +325,21 @@ public class Command
     public void setQlog(String qlog)
     {
         this.qlog = qlog;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String[] getTags() {
+        return tags;
+    }
+
+    public void setTags(String[] tags) {
+        this.tags = tags;
     }
 }

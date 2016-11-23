@@ -15,33 +15,41 @@
  */
 package com.qubole.qds.sdk.java.unittests;
 
+import com.amazonaws.util.json.JSONArray;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.testng.annotations.Test;
 import com.amazonaws.util.json.JSONObject;
 import com.qubole.qds.sdk.java.details.InvokeArguments;
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.api.HadoopCommandBuilder;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 public class TestCommands extends AbstractTest
 {
     @Test
     public void testHiveQueryCommand() throws Exception
     {
-        InvokeArguments<CommandResponse> invokeargs = qdsClient.command().hive().query("show tables;").clusterLabel("default").getArgumentsInvocation();
+        InvokeArguments<CommandResponse> invokeargs = qdsClient.command().hive().query("show tables;").name("myName").clusterLabel("default").getArgumentsInvocation();
         JSONObject expectedRequestData=new JSONObject();
         expectedRequestData.put("command_type", "HiveCommand");
         expectedRequestData.put("label", "default");
         expectedRequestData.put("query", "show tables;");
+        expectedRequestData.put("name", "myName");
         assertRequestDetails(invokeargs, "POST", "commands", expectedRequestData, null, CommandResponse.class);
     }
     
     @Test
     public void testHiveS3Command() throws Exception
     {
-        InvokeArguments<CommandResponse> invokeargs = qdsClient.command().hive().scriptLocation("s3://testhive/hivecommand").clusterLabel("nondefault").getArgumentsInvocation();
+
+        InvokeArguments<CommandResponse> invokeargs = qdsClient.command().hive().tags(new String[]{"tag1","tag2"}).scriptLocation("s3://testhive/hivecommand").clusterLabel("nondefault").getArgumentsInvocation();
         JSONObject expectedRequestData=new JSONObject();
         expectedRequestData.put("command_type", "HiveCommand");
         expectedRequestData.put("label", "nondefault");
         expectedRequestData.put("script_location", "s3://testhive/hivecommand");
+        expectedRequestData.put("tags", Arrays.asList("tag1","tag2") );
         assertRequestDetails(invokeargs, "POST", "commands", expectedRequestData,  null, CommandResponse.class);
     }
     
@@ -72,11 +80,12 @@ public class TestCommands extends AbstractTest
     @Test
     public void testHadoopCommandStreaming() throws Exception
     {
-        InvokeArguments<CommandResponse> invokeargs = qdsClient.command().hadoop().sub_command(HadoopCommandBuilder.SubCommandType.STREAMING).sub_command_args("-files s3n://testhadoop/mapper.py,s3n://testhadoop/reducer.py -mapper mapper.py -reducer reducer.py numReduceTasks 1 -input s3n://testfiles/input -output /testhadoop/results").clusterLabel("default").getArgumentsInvocation();
+        InvokeArguments<CommandResponse> invokeargs = qdsClient.command().hadoop().name("SpecialName").sub_command(HadoopCommandBuilder.SubCommandType.STREAMING).sub_command_args("-files s3n://testhadoop/mapper.py,s3n://testhadoop/reducer.py -mapper mapper.py -reducer reducer.py numReduceTasks 1 -input s3n://testfiles/input -output /testhadoop/results").clusterLabel("default").getArgumentsInvocation();
         JSONObject expectedRequestData=new JSONObject();
         expectedRequestData.put("command_type", "HadoopCommand");
         expectedRequestData.put("label", "default");
         expectedRequestData.put("sub_command", "streaming");
+        expectedRequestData.put("name", "SpecialName");
         expectedRequestData.put("sub_command_args", "-files s3n://testhadoop/mapper.py,s3n://testhadoop/reducer.py -mapper mapper.py -reducer reducer.py numReduceTasks 1 -input s3n://testfiles/input -output /testhadoop/results");
         assertRequestDetails(invokeargs, "POST", "commands", expectedRequestData, null, CommandResponse.class);
     }
