@@ -16,7 +16,9 @@
 package com.qubole.qds.sdk.java.examples;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsClient;
@@ -62,6 +64,15 @@ public class ClusterExample
             System.out.println("Adding nodes to cluster...");
             client.cluster().add_nodes(cluster_label, 1).invoke().get();
             System.out.println("Sent request to add nodes to cluster");
+
+
+            System.out.println("Getting Cluster Metrics...");
+            Map<String,String> metrics = new HashMap();
+            metrics.put("metric","cpu_user");
+            metrics.put("hostname","master");
+            metrics.put("interval","hour");
+            client.cluster().metrics(cluster_label,metrics);
+            System.out.println("Sent request for cluster metrics");
 
             System.out.println("Removing node from cluster...");
             client.cluster().remove_node(cluster_label, "dns.cluster.qubole.com").invoke().get();
