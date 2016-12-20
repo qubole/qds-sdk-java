@@ -23,6 +23,7 @@ import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.client.QdsClientFactory;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.entities.ClusterItem;
+import com.qubole.qds.sdk.java.entities.ClusterMetrics;
 
 public class ClusterExample
 {
@@ -62,6 +63,14 @@ public class ClusterExample
             System.out.println("Adding nodes to cluster...");
             client.cluster().add_nodes(cluster_label, 1).invoke().get();
             System.out.println("Sent request to add nodes to cluster");
+
+
+            System.out.println("Getting Cluster Metrics...");
+            String metric = "cpu_user";
+            String hostname = "master";
+            String interval = "hour";
+            ClusterMetrics metrics = client.cluster().metrics(cluster_label,metric, hostname, interval).invoke().get();
+            System.out.println("Sent request for cluster metrics");
 
             System.out.println("Removing node from cluster...");
             client.cluster().remove_node(cluster_label, "dns.cluster.qubole.com").invoke().get();

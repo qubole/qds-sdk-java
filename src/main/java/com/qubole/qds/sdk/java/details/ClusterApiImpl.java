@@ -21,13 +21,17 @@ import com.qubole.qds.sdk.java.api.*;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.AddNode;
 import com.qubole.qds.sdk.java.entities.ClusterItem;
+import com.qubole.qds.sdk.java.entities.ClusterMetrics;
 import com.qubole.qds.sdk.java.entities.ClusterState;
 import com.qubole.qds.sdk.java.entities.Command;
 import com.qubole.qds.sdk.java.entities.Message;
 import com.qubole.qds.sdk.java.entities.NodeOperation;
 import com.qubole.qds.sdk.java.entities.State;
+
 import javax.ws.rs.core.GenericType;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class ClusterApiImpl implements ClusterApi
 {
@@ -37,6 +41,25 @@ class ClusterApiImpl implements ClusterApi
     public InvokableBuilder<ClusterState> state(String labelOrId)
     {
         return new GenericInvokableBuilderImpl<ClusterState>(client, RequestDetails.retry(), ClusterState.class, "clusters", labelOrId, "state");
+    }
+
+    @Override
+    public InvokableBuilder<ClusterMetrics> metrics(String labelOrId, String metric, String hostname, String interval)
+    {
+        Map<String, String> params = new HashMap();
+        if (metric != null) {
+            params.put("metric", metric);
+        }
+        if (hostname != null) {
+            params.put("hostname", hostname);
+        }
+        if (interval != null) {
+            params.put("interval", interval);
+        }
+        RequestDetails requestDetails = new RequestDetails(null, RequestDetails.Method.GET, params);
+        requestDetails.allowToBeRetried();
+        return new GenericInvokableBuilderImpl<ClusterMetrics>(client, requestDetails,
+            ClusterMetrics.class, "clusters", labelOrId, "metrics");
     }
 
     @Override
