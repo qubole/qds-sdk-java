@@ -80,6 +80,20 @@ class DbAdvancedImportCommandBuilderImpl extends CommandBuilderImplBase implemen
     }
 
     @Override
+    public DbAdvancedImportCommandBuilder use_customer_cluster(boolean use_customer_cluster)
+    {
+        node.put("use_customer_cluster", use_customer_cluster);
+        return this;
+    }
+
+    @Override
+    public DbAdvancedImportCommandBuilder customer_cluster_label(String customer_cluster_label)
+    {
+        node.put("customer_cluster_label", customer_cluster_label);
+        return this;
+    }
+
+    @Override
     protected BaseCommand.COMMAND_TYPE getCommandType()
     {
         return BaseCommand.COMMAND_TYPE.DB_IMPORT;

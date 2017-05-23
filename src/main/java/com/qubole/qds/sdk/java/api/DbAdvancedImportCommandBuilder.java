@@ -35,5 +35,9 @@ public interface DbAdvancedImportCommandBuilder extends InvokableBuilder<Command
 
     public DbAdvancedImportCommandBuilder tags(String[] queryTags);
 
+    public DbAdvancedImportCommandBuilder use_customer_cluster(boolean use_customer_cluster);
+
+    public DbAdvancedImportCommandBuilder customer_cluster_label(String customer_cluster_label);
+
     public BaseCommand build();
 }
