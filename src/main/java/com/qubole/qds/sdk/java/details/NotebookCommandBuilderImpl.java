@@ -19,16 +19,16 @@ public class NotebookCommandBuilderImpl extends CommandBuilderImplBase implement
     }
 
     @Override
-    public NotebookCommandBuilder command_type(String command_type)
+    public NotebookCommandBuilder command_type(String commandType)
     {
-        node.put("command_type", command_type);
+        node.put("command_type", commandType);
         return this;
     }
 
     @Override
-    public NotebookCommandBuilder notebook_id(String notebook_id)
+    public NotebookCommandBuilder notebook_id(String notebookId)
     {
-        node.put("note_id", notebook_id);
+        node.put("note_id", notebookId);
         return this;
     }
 
@@ -76,7 +76,7 @@ public class NotebookCommandBuilderImpl extends CommandBuilderImplBase implement
     @Override
     protected COMMAND_TYPE getCommandType()
     {
-        return BaseCommand.COMMAND_TYPE.NOTEBOOk;
+        return BaseCommand.COMMAND_TYPE.NOTEBOOK;
     }
 
 }

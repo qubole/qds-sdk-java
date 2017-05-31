@@ -6,14 +6,14 @@ import java.util.Map;
 import com.qubole.qds.sdk.java.api.InvokableBuilder;
 import com.qubole.qds.sdk.java.api.NotebookAPI;
 import com.qubole.qds.sdk.java.client.QdsClient;
-import com.qubole.qds.sdk.java.entities.Notebook;
+import com.qubole.qds.sdk.java.entities.NotebookResult;
 
 public class NotebookApiImpl implements NotebookAPI
 {
     private final QdsClient client;
 
     @Override
-    public InvokableBuilder<Notebook> create(String name, String location, String note_type, String cluster_id)
+    public InvokableBuilder<NotebookResult> create(String name, String location, String noteType, String clusterId)
     {
         Map<String, String> params = new HashMap();
         if (name != null) {
@@ -22,19 +22,19 @@ public class NotebookApiImpl implements NotebookAPI
         if (location != null) {
             params.put("location", location);
         }
-        if (note_type != null) {
-            params.put("note_type", note_type);
+        if (noteType != null) {
+            params.put("note_type", noteType);
         }
-        if (cluster_id != null) {
-            params.put("cluster_id", cluster_id);
+        if (clusterId != null) {
+            params.put("cluster_id", clusterId);
         }
         RequestDetails requestDetails = new RequestDetails(params, RequestDetails.Method.POST, null);
         requestDetails.allowToBeRetried();
-        return new GenericInvokableBuilderImpl<Notebook>(client, requestDetails, Notebook.class, "notebooks");
+        return new GenericInvokableBuilderImpl<NotebookResult>(client, requestDetails, NotebookResult.class, "notebooks");
     }
 
     @Override
-    public InvokableBuilder<Notebook> configure(String name, String location, String cluster_id, String notebook_id)
+    public InvokableBuilder<NotebookResult> configure(String name, String location, String clusterId, String notebookId)
     {
         Map<String, String> params = new HashMap();
         if (name != null) {
@@ -43,16 +43,16 @@ public class NotebookApiImpl implements NotebookAPI
         if (location != null) {
             params.put("location", location);
         }
-        if (cluster_id != null) {
-            params.put("cluster_id", cluster_id);
+        if (clusterId != null) {
+            params.put("cluster_id", clusterId);
         }
         RequestDetails requestDetails = new RequestDetails(params, RequestDetails.Method.PUT, null);
         requestDetails.allowToBeRetried();
-        return new GenericInvokableBuilderImpl<Notebook>(client, requestDetails, Notebook.class, "notebooks", notebook_id);
+        return new GenericInvokableBuilderImpl<NotebookResult>(client, requestDetails, NotebookResult.class, "notebooks", notebookId);
     }
 
     @Override
-    public InvokableBuilder<Notebook> clone(String name, String location, String cluster_id, String cloned_from_notebook)
+    public InvokableBuilder<NotebookResult> clone(String name, String location, String clusterId, String clonedFromNotebook)
     {
         Map<String, String> params = new HashMap();
         if (name != null) {
@@ -61,32 +61,32 @@ public class NotebookApiImpl implements NotebookAPI
         if (location != null) {
             params.put("location", location);
         }
-        if (cluster_id != null) {
-            params.put("cluster_id", cluster_id);
+        if (clusterId != null) {
+            params.put("cluster_id", clusterId);
         }
         RequestDetails requestDetails = new RequestDetails(params, RequestDetails.Method.PUT, null);
         requestDetails.allowToBeRetried();
-        return new GenericInvokableBuilderImpl<Notebook>(client, requestDetails, Notebook.class, "notebooks", cloned_from_notebook, "clone");
+        return new GenericInvokableBuilderImpl<NotebookResult>(client, requestDetails, NotebookResult.class, "notebooks", clonedFromNotebook, "clone");
     }
 
     @Override
-    public InvokableBuilder<Notebook> bind_notebook_to_cluster(String cluster_id, String notebook_id)
+    public InvokableBuilder<NotebookResult> bindNotebookToCluster(String clusterId, String notebookId)
     {
         Map<String, String> params = new HashMap();
-        if (cluster_id != null) {
-            params.put("cluster_id", cluster_id);
+        if (clusterId != null) {
+            params.put("cluster_id", clusterId);
         }
         RequestDetails requestDetails = new RequestDetails(params, RequestDetails.Method.PUT, null);
         requestDetails.allowToBeRetried();
-        return new GenericInvokableBuilderImpl<Notebook>(client, requestDetails, Notebook.class, "notebooks", notebook_id);
+        return new GenericInvokableBuilderImpl<NotebookResult>(client, requestDetails, NotebookResult.class, "notebooks", notebookId);
     }
 
     @Override
-    public InvokableBuilder<Notebook> delete(String notebook_id)
+    public InvokableBuilder<NotebookResult> delete(String notebookId)
     {
         RequestDetails requestDetails = new RequestDetails(null, RequestDetails.Method.DELETE, null);
         requestDetails.allowToBeRetried();
-        return new GenericInvokableBuilderImpl<Notebook>(client, requestDetails, Notebook.class, "notebooks", notebook_id);
+        return new GenericInvokableBuilderImpl<NotebookResult>(client, requestDetails, NotebookResult.class, "notebooks", notebookId);
     }
 
     NotebookApiImpl(QdsClient client)

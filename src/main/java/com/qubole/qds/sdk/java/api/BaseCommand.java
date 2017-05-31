@@ -35,7 +35,7 @@ public interface BaseCommand
         SHELL,
         COMPOSITE,
         SPARK,
-        NOTEBOOk
+        NOTEBOOK
     };
 
     public COMMAND_TYPE getCommandType();

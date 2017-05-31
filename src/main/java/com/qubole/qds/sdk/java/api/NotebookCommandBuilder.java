@@ -9,12 +9,12 @@ public interface NotebookCommandBuilder extends InvokableBuilder<CommandResponse
     /**
     * Set to SparkCommand
     */
-    public NotebookCommandBuilder command_type(String command_type);
+    public NotebookCommandBuilder command_type(String commandType);
 
     /**
     * notebook_id id of notebook
     */
-    public NotebookCommandBuilder notebook_id(String notebook_id);
+    public NotebookCommandBuilder notebook_id(String notebookId);
 
     /**
     * language language is always notebook
