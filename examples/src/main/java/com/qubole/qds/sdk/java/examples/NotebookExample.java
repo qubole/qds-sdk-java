@@ -14,52 +14,58 @@ public class NotebookExample
     public static void main(String[] args) throws Exception
     {
         String endpoint = System.getProperty("API_ENDPOINT", DefaultQdsConfiguration.API_ENDPOINT);
+        String clusterId = System.getProperty("CLUSTER_ID");
         QdsConfiguration configuration = new DefaultQdsConfiguration(endpoint, System.getProperty("API_KEY"));
         QdsClient qdsClient = QdsClientFactory.newClient(configuration);
         try
         {
-            testExecuteCreateCloneNotebook(qdsClient);
-            testExecuteBindNotebook(qdsClient);
-            testExecuteNotebookRun(qdsClient);
-            testExecuteDeleteNotebook(qdsClient);
+            
+            String notebookdId = testExecuteCreateCloneNotebook(qdsClient, clusterId);
+            testExecuteBindNotebook(qdsClient, clusterId, notebookdId);
+            String clonedNotebookId = testExecuteCloneNotebook(qdsClient, clusterId, notebookdId);
+            testExecuteNotebookRun(qdsClient, notebookdId);  //The execution of the notebook will fail as it is empty notebook
+            testExecuteDeleteNotebook(qdsClient, notebookdId);
+            testExecuteDeleteNotebook(qdsClient, clonedNotebookId);
         }
         finally {
         qdsClient.close();
         }
     }
-    private static void testExecuteCreateCloneNotebook(QdsClient qdsClient) throws Exception
+
+    private static String testExecuteCreateCloneNotebook(QdsClient qdsClient, String clusterId) throws Exception
     {
-        //Creating a notebook
-        String name = "note32";
+        String name = "note_java_test";
         String location = "Common";
         String noteType = "spark";
-        String clusterId = "1234";
         NotebookResult notebookResult = qdsClient.notebook().create(name, location, noteType, clusterId).invoke().get();
         System.out.println("Notebook created with name: "+notebookResult.getNotebook().getName());
-        //Cloning a notebook
-        name = "clonednote1";
-        String clonedFromNotebook = notebookResult.getNotebook().getNoteId();
-        NotebookResult cloneNotebookResult = qdsClient.notebook().clone(name, location, clusterId, clonedFromNotebook).invoke().get();
-        System.out.println("Notebook created with name: "+cloneNotebookResult.getNotebook().getName());
+        return notebookResult.getId();
     }
 
-    public static void testExecuteBindNotebook(QdsClient qdsClient) throws Exception
+    private static String testExecuteCloneNotebook(QdsClient qdsClient, String clusterId, String notebookId) throws Exception
     {
-        String clusterId = "1234";
-        String notebookId = "2345";
+        String name = "cloned_note_java_test";
+        String location = "Common";
+        NotebookResult clonedNotebookResult = qdsClient.notebook().clone(name, location, clusterId, notebookId).invoke().get();
+        System.out.println("Notebook created with name: "+clonedNotebookResult.getNotebook().getName());
+        return clonedNotebookResult.getId();
+    }
+    
+    public static void testExecuteBindNotebook(QdsClient qdsClient, String clusterId, String notebookId) throws Exception
+    {
+        System.out.println("Cluster Id: "+ clusterId);
+        System.out.println("Notebook Id: "+ notebookId);
         NotebookResult notebookResult = qdsClient.notebook().bindNotebookToCluster(clusterId, notebookId).invoke().get();
         System.out.println("Result of binding notebook to cluster : "+notebookResult.getSuccess());
     }
 
-    public static void testExecuteDeleteNotebook(QdsClient qdsClient) throws Exception
+    public static void testExecuteDeleteNotebook(QdsClient qdsClient, String notebookId) throws Exception
     {
-        System.out.println("Test : 6");
-        String notebookId = "2345";
         NotebookResult notebookResult = qdsClient.notebook().delete(notebookId).invoke().get();
-        System.out.println("Reesult of Deleting notebook: "+notebookResult.getSuccess());
+        System.out.println("Result of Deleting notebook: "+notebookResult.getSuccess());
     }
 
-    public static void testExecuteNotebookRun(QdsClient qdsClient) throws Exception
+    public static void testExecuteNotebookRun(QdsClient qdsClient, String notebookId) throws Exception
     {
         //Executing the notebook
         String commandType = "SparkCommand";
@@ -69,8 +75,7 @@ public class NotebookExample
         String[] tags = {"1"};
         Map<String, String> arguments = new HashMap<String, String>();
         arguments.put("key", "val");
-        String notebookId = "890";
         CommandResponse cmdResponse = qdsClient.command().notebook().command_type(commandType).language(language).notebook_id(notebookId).label(label).name(name).tags(tags).arguments(arguments).invoke().get();
-        System.out.println("Command ID: "+cmdResponse.getId());
+        System.out.println("Command ID  : "+cmdResponse.getId());
     }
 }

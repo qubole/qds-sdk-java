@@ -10,6 +10,7 @@ public class NotebookResult
     public String success;
     public String message;
     public String partialSuccess;
+    public String id;
 
     public NotebookResult()
     {
@@ -21,6 +22,7 @@ public class NotebookResult
         this.success = success;
         this.message = message;
         this.partialSuccess = partialSuccess;
+        this.id = id;
     }
 
     public String getSuccess()
@@ -31,6 +33,16 @@ public class NotebookResult
     public void setSuccess(String success)
     {
         this.success = success;
+    }
+
+    public String getId()
+    {
+        return this.id;
+    }
+
+    public void setId(String id)
+    {
+        this.id = id;
     }
 
     public String getPartialSuccess()
