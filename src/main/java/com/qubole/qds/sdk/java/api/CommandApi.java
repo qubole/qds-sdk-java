@@ -146,4 +146,11 @@ public interface CommandApi
      * @return new builder
      */
     public InvokableBuilder<Response> cancel(String queryId);
+
+    /**
+     * Corresponds to http://docs.qubole.com/en/latest/rest-api/notebook_api/run-notebook.html
+     *
+     * @return new builder
+     */
+    public NotebookCommandBuilder notebook();
 }

@@ -141,4 +141,10 @@ class CommandApiImpl implements CommandApi
         return new GenericInvokableBuilderImpl<CommandResponse>(client, new RequestDetails(node), CommandResponse.class, "commands");
     }
 
+    @Override
+    public NotebookCommandBuilder notebook()
+    {
+        return new NotebookCommandBuilderImpl(client);
+    }
+
 }

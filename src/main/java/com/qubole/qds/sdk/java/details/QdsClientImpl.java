@@ -21,6 +21,7 @@ import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
+import com.qubole.qds.sdk.java.api.NotebookAPI;
 import com.qubole.qds.sdk.java.api.ReportApi;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
 import com.qubole.qds.sdk.java.api.sparkjobserver.AppApi;
@@ -57,6 +58,7 @@ public class QdsClientImpl implements QdsClient
     private final ReportApiImpl reportApi;
     private final SchedulerApiImpl schedulerApi;
     private final AppApiImpl appApi;
+    private final NotebookApiImpl notebookApi;
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
@@ -77,6 +79,7 @@ public class QdsClientImpl implements QdsClient
         reportApi = new ReportApiImpl(this);
         schedulerApi = new SchedulerApiImpl(this);
         appApi = new AppApiImpl(this);
+        notebookApi = new NotebookApiImpl(this);
 
         // register the deserialization handler for composite command
         SimpleModule module =
@@ -245,5 +248,11 @@ public class QdsClientImpl implements QdsClient
         }
 
         return builder.async();
+    }
+
+    @Override
+    public NotebookAPI notebook()
+    {
+        return notebookApi;
     }
 }
