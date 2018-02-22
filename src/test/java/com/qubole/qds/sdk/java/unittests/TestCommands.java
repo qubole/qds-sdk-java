@@ -21,6 +21,10 @@ import com.qubole.qds.sdk.java.details.InvokeArguments;
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.api.HadoopCommandBuilder;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class TestCommands extends AbstractTest
 {
     @Test
@@ -42,6 +46,22 @@ public class TestCommands extends AbstractTest
         expectedRequestData.put("command_type", "HiveCommand");
         expectedRequestData.put("label", "nondefault");
         expectedRequestData.put("script_location", "s3://testhive/hivecommand");
+        assertRequestDetails(invokeargs, "POST", "commands", expectedRequestData,  null, CommandResponse.class);
+    }
+
+    @Test
+    public void testHiveQueryMacroCommand() throws Exception
+    {
+        InvokeArguments<CommandResponse> invokeargs = qdsClient.command().hive().query("show tables;").clusterLabel("default").macro("x","moment(2011-01-11T00:00:00+00:00)").getArgumentsInvocation();
+        JSONObject expectedRequestData=new JSONObject();
+        expectedRequestData.put("command_type", "HiveCommand");
+        expectedRequestData.put("label", "default");
+        expectedRequestData.put("query", "show tables;");
+        ArrayList<Map<String,String>> expectedMacros = new ArrayList<Map<String, String>>();
+        Map tempMap = new HashMap<String, String>();
+        tempMap.put("x","moment(2011-01-11T00:00:00+00:00)");
+        expectedMacros.add(tempMap);
+        expectedRequestData.put("macros",expectedMacros);
         assertRequestDetails(invokeargs, "POST", "commands", expectedRequestData,  null, CommandResponse.class);
     }
     
