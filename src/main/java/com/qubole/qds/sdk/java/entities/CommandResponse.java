@@ -32,7 +32,7 @@ public class CommandResponse
     private Map<String, String> meta_data;
     private String pool;
     private String template;
-    private Map<String, String> resolved_macros;
+    private String resolved_macros;
     private String nominal_time;
     private String sequence_id;
     private int pid;
@@ -53,7 +53,7 @@ public class CommandResponse
     public CommandResponse(SubCommands command, int qbol_session_id, String created_at,
                            String pool, int user_id, String status, String command_type,
                            int id, int progress, Map<String, String> meta_data, String template,
-                           Map<String, String> resolved_macros, String nominal_time, String sequence_id,
+                           String resolved_macros, String nominal_time, String sequence_id,
                            int pid, String label, int num_result_dir, boolean can_notify,
                            String start_time, String end_time, String path, int timeout,
                            String submit_time, String qlog)
@@ -214,12 +214,12 @@ public class CommandResponse
         this.nominal_time = nominal_time;
     }
 
-    public Map<String, String> getResolved_macros()
+    public String getResolved_macros()
     {
         return resolved_macros;
     }
 
-    public void setResolved_macros(Map<String, String> resolved_macros)
+    public void setResolved_macros(String resolved_macros)
     {
         this.resolved_macros = resolved_macros;
     }
