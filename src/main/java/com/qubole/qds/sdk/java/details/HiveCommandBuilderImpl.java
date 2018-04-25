@@ -29,7 +29,7 @@ import java.util.Map;
 public class HiveCommandBuilderImpl extends CommandBuilderImplBase implements HiveCommandBuilder
 {
     private final ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
-    private final List<Map<String,String>> macros =  new ArrayList<Map<String, String>>();
+    private final List<Map<String, String>> macros =  new ArrayList<Map<String, String>>();
 
     @Override
     public HiveCommandBuilder query(String query)
@@ -90,8 +90,8 @@ public class HiveCommandBuilderImpl extends CommandBuilderImplBase implements Hi
     @Override
     public HiveCommandBuilder macro(String name, String value)
     {
-        Map<String,String> macro = new HashMap<String, String>();
-        macro.put(name,value);
+        Map<String, String> macro = new HashMap<String, String>();
+        macro.put(name, value);
         macros.add(macro);
         node.putPOJO("macros", macros);
         return this;
