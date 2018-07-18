@@ -153,4 +153,12 @@ public interface CommandApi
      * @return new builder
      */
     public NotebookCommandBuilder notebook();
+
+    public CommandApi startDate(String startDate);
+
+    public CommandApi allUsers(int allUsers);
+
+    public CommandApi includeQueryProperties(boolean includeQueryProperties);
+
+    public CommandApi endDate(String endDate);
 }
