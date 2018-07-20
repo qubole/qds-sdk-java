@@ -15,6 +15,7 @@
  */
 package com.qubole.qds.sdk.java.details;
 
+import com.google.common.collect.Maps;
 import com.qubole.qds.sdk.java.api.*;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.Command;
@@ -25,9 +26,12 @@ import org.codehaus.jackson.node.ObjectNode;
 
 import javax.ws.rs.core.Response;
 
+import java.util.Map;
+
 class CommandApiImpl implements CommandApi
 {
     private final QdsClient client;
+    private final Map<String, String> parameters = Maps.newHashMap();
 
     CommandApiImpl(QdsClient client)
     {
@@ -43,7 +47,9 @@ class CommandApiImpl implements CommandApi
     @Override
     public PageableInvokableBuilder<Commands> history()
     {
-        return new GenericPageableInvokableBuilderImpl<Commands>(client, RequestDetails.retry(), Commands.class, "commands");
+        RequestDetails entity = new RequestDetails(null, RequestDetails.Method.GET, parameters);
+        entity.allowToBeRetried();
+        return new GenericPageableInvokableBuilderImpl<Commands>(client, entity, Commands.class, "commands");
     }
 
     @Override
@@ -145,6 +151,39 @@ class CommandApiImpl implements CommandApi
     public NotebookCommandBuilder notebook()
     {
         return new NotebookCommandBuilderImpl(client);
+    }
+
+    @Override
+    public CommandApi startDate(String startDate)
+    {
+        parameters.put("start_date", startDate);
+        return this;
+    }
+
+    @Override
+    public CommandApi allUsers(boolean allUsers)
+    {
+        if(allUsers) {
+            parameters.put("all_users",Integer.toString(1));
+        }
+        else {
+            parameters.put("all_users",Integer.toString(0));
+        }
+        return this;
+    }
+
+    @Override
+    public CommandApi includeQueryProperties(boolean includeQueryProperties)
+    {
+        parameters.put("include_query_properties", Boolean.toString(includeQueryProperties));
+        return this;
+    }
+
+    @Override
+    public CommandApi endDate(String endDate)
+    {
+        parameters.put("end_date", endDate);
+        return this;
     }
 
 }
