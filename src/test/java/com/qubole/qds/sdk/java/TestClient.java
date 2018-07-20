@@ -95,13 +95,13 @@ public class TestClient
         };
         String startDate = "2018-07-13T00:00:00Z";
         String endDate = "2018-07-13T23:59:59Z";
-        int allUsers = 0;
+        boolean allUsers = false;
         boolean qProps = false;
         client.command().startDate(startDate).endDate(endDate).allUsers(allUsers).includeQueryProperties(qProps).history().invoke();
         WebTarget webTarget = webTargetReference.get();
         Assert.assertNotNull(webTarget);
         String test = webTarget.getUri().toString();
-        Assert.assertEquals(webTarget.getUri(), new URI(configuration.getApiEndpoint() + "/" + configuration.getApiVersion() + "/commands?end_date="+endDate+"&include_query_properties="+qProps+"&all_users="+allUsers+"&start_date="+startDate));
+        Assert.assertEquals(webTarget.getUri(), new URI(configuration.getApiEndpoint() + "/" + configuration.getApiVersion() + "/commands?end_date="+endDate+"&include_query_properties="+qProps+"&all_users="+0+"&start_date="+startDate));
     }
 
 

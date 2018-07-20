@@ -161,9 +161,14 @@ class CommandApiImpl implements CommandApi
     }
 
     @Override
-    public CommandApi allUsers(int allUsers)
+    public CommandApi allUsers(boolean allUsers)
     {
-        parameters.put("all_users", Integer.toString(allUsers));
+        if(allUsers) {
+            parameters.put("all_users",Integer.toString(1));
+        }
+        else {
+            parameters.put("all_users",Integer.toString(0));
+        }
         return this;
     }
 
@@ -177,7 +182,7 @@ class CommandApiImpl implements CommandApi
     @Override
     public CommandApi endDate(String endDate)
     {
-        parameters.put("end_date", String.valueOf(endDate));
+        parameters.put("end_date", endDate);
         return this;
     }
 

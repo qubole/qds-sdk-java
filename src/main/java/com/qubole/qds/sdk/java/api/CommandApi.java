@@ -156,7 +156,7 @@ public interface CommandApi
 
     public CommandApi startDate(String startDate);
 
-    public CommandApi allUsers(int allUsers);
+    public CommandApi allUsers(boolean allUsers);
 
     public CommandApi includeQueryProperties(boolean includeQueryProperties);
 
