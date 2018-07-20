@@ -100,8 +100,10 @@ public class TestClient
         client.command().startDate(startDate).endDate(endDate).allUsers(allUsers).includeQueryProperties(qProps).history().invoke();
         WebTarget webTarget = webTargetReference.get();
         Assert.assertNotNull(webTarget);
-        String test = webTarget.getUri().toString();
-        Assert.assertEquals(webTarget.getUri(), new URI(configuration.getApiEndpoint() + "/" + configuration.getApiVersion() + "/commands?end_date="+endDate+"&include_query_properties="+qProps+"&all_users="+0+"&start_date="+startDate));
+        Assert.assertTrue(webTarget.getUri().toString().contains("end_date="+endDate));
+        Assert.assertTrue(webTarget.getUri().toString().contains("include_query_properties="+qProps));
+        Assert.assertTrue(webTarget.getUri().toString().contains("all_users="+0));
+        Assert.assertTrue(webTarget.getUri().toString().contains("start_date="+startDate));
     }
 
 

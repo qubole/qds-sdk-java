@@ -164,10 +164,10 @@ class CommandApiImpl implements CommandApi
     public CommandApi allUsers(boolean allUsers)
     {
         if(allUsers) {
-            parameters.put("all_users",Integer.toString(1));
+            parameters.put("all_users", Integer.toString(1));
         }
         else {
-            parameters.put("all_users",Integer.toString(0));
+            parameters.put("all_users", Integer.toString(0));
         }
         return this;
     }
