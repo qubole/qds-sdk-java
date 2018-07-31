@@ -32,6 +32,13 @@ class DbAdvancedImportCommandBuilderImpl extends CommandBuilderImplBase implemen
     }
 
     @Override
+    public DbAdvancedImportCommandBuilder hive_serde(String hive_serde)
+    {
+        node.put("hive_serde", hive_serde);
+        return this;
+    }
+
+    @Override
     public DbAdvancedImportCommandBuilder dbtap_id(String dbtap_id)
     {
         node.put("dbtap_id", dbtap_id);
@@ -69,6 +76,20 @@ class DbAdvancedImportCommandBuilderImpl extends CommandBuilderImplBase implemen
     @Override
     public DbAdvancedImportCommandBuilder tags(String[] queryTags) {
         node.putPOJO("tags", queryTags);
+        return this;
+    }
+
+    @Override
+    public DbAdvancedImportCommandBuilder use_customer_cluster(boolean use_customer_cluster)
+    {
+        node.put("use_customer_cluster", use_customer_cluster);
+        return this;
+    }
+
+    @Override
+    public DbAdvancedImportCommandBuilder customer_cluster_label(String customer_cluster_label)
+    {
+        node.put("customer_cluster_label", customer_cluster_label);
         return this;
     }
 

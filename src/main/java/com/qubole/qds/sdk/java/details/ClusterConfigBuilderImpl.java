@@ -25,6 +25,7 @@ import com.qubole.qds.sdk.java.api.ClusterSpotInstanceConfigBuilder;
 import org.codehaus.jackson.node.ObjectNode;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 class ClusterConfigBuilderImpl implements ClusterConfigBuilder
 {
@@ -203,6 +204,19 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
             public ClusterConfigBuilder custom_config(String custom_config)
             {
                 hadoop_settings.put("custom_config", custom_config);
+                return ClusterConfigBuilderImpl.this;
+            }
+
+            @Override
+            public ClusterConfigBuilder custom_ec2_tags(Map<String, String> custom_ec2_tags)
+            {
+                hadoop_settings.put("custom_ec2_tags", QdsClientImpl.getMapper().valueToTree(custom_ec2_tags));
+                return ClusterConfigBuilderImpl.this;
+            }
+
+            @Override
+            public ClusterConfigBuilder use_hbase(boolean use_hbase) {
+                hadoop_settings.put("use_hbase", use_hbase);
                 return ClusterConfigBuilderImpl.this;
             }
 

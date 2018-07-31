@@ -20,8 +20,10 @@ import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
+import com.qubole.qds.sdk.java.api.NotebookAPI;
 import com.qubole.qds.sdk.java.api.ReportApi;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
+import com.qubole.qds.sdk.java.api.sparkjobserver.AppApi;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import javax.ws.rs.client.InvocationCallback;
 import javax.ws.rs.core.GenericType;
@@ -147,6 +149,12 @@ public class MockClient implements QdsClient
     {
         return new SchedulerApiImpl(this);
     }
+    
+    @Override
+    public AppApi sparkJobServerApp() {
+        // TODO Auto-generated method stub
+        return new AppApiImpl(this);
+    }
 
     @Override
     public void close()
@@ -172,5 +180,11 @@ public class MockClient implements QdsClient
     {
         results.add(new InvokeDetails(forPage, requestDetails, responseType, additionalPaths));
         return null;
+    }
+
+    @Override
+    public NotebookAPI notebook()
+    {
+        return new NotebookApiImpl(this);
     }
 }

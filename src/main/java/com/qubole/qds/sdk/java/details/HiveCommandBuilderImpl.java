@@ -15,17 +15,21 @@
  */
 package com.qubole.qds.sdk.java.details;
 
-import com.google.common.collect.Maps;
 import com.qubole.qds.sdk.java.api.HiveCommandBuilder;
 import com.qubole.qds.sdk.java.api.BaseCommand;
 import com.qubole.qds.sdk.java.client.QdsClient;
 import org.codehaus.jackson.node.ObjectNode;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
 
 public class HiveCommandBuilderImpl extends CommandBuilderImplBase implements HiveCommandBuilder
 {
     private final ObjectNode node = QdsClientImpl.getMapper().createObjectNode();
-    private final Map<String, String> macros = Maps.newHashMap();
+    private final List<Map<String, String>> macros =  new ArrayList<Map<String, String>>();
 
     @Override
     public HiveCommandBuilder query(String query)
@@ -86,7 +90,9 @@ public class HiveCommandBuilderImpl extends CommandBuilderImplBase implements Hi
     @Override
     public HiveCommandBuilder macro(String name, String value)
     {
-        macros.put(name, value);
+        Map<String, String> macro = new HashMap<String, String>();
+        macro.put(name, value);
+        macros.add(macro);
         node.putPOJO("macros", macros);
         return this;
     }

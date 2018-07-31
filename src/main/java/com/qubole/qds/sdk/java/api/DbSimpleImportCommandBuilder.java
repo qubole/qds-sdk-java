@@ -21,15 +21,23 @@ public interface DbSimpleImportCommandBuilder extends InvokableBuilder<CommandRe
 {
     public DbSimpleImportCommandBuilder hive_table(String hive_table);
 
+    public DbSimpleImportCommandBuilder hive_serde(String hive_serde);
+
     public DbSimpleImportCommandBuilder dbtap_id(String dbtap_id);
 
     public DbSimpleImportCommandBuilder db_table(String db_table);
+
+    public DbSimpleImportCommandBuilder db_columns(String[] db_columns);
 
     public DbSimpleImportCommandBuilder db_where(String db_where);
 
     public DbSimpleImportCommandBuilder db_parallelism(String db_parallelism);
 
     public DbSimpleImportCommandBuilder tags(String[] queryTags);
+
+    public DbSimpleImportCommandBuilder use_customer_cluster(boolean use_customer_cluster);
+
+    public DbSimpleImportCommandBuilder customer_cluster_label(String customer_cluster_label);
 
     public BaseCommand build();
 }

@@ -19,8 +19,10 @@ import com.qubole.qds.sdk.java.api.ClusterApi;
 import com.qubole.qds.sdk.java.api.CommandApi;
 import com.qubole.qds.sdk.java.api.DbTapApi;
 import com.qubole.qds.sdk.java.api.HiveMetadataApi;
+import com.qubole.qds.sdk.java.api.NotebookAPI;
 import com.qubole.qds.sdk.java.api.ReportApi;
 import com.qubole.qds.sdk.java.api.SchedulerApi;
+import com.qubole.qds.sdk.java.api.sparkjobserver.AppApi;
 import com.qubole.qds.sdk.java.details.RequestDetails;
 import com.qubole.qds.sdk.java.details.ForPage;
 import javax.ws.rs.client.InvocationCallback;
@@ -74,6 +76,20 @@ public interface QdsClient extends Closeable
      * @return scheduler factory
      */
     public SchedulerApi scheduler();
+
+    /**
+     * Return spark job server apps api factory
+     *
+     * @return spark job server apps api factory
+     */
+    public AppApi sparkJobServerApp();
+
+    /**
+     * Return notebook api factory
+     *
+     * @return notebook api factory
+     */
+    public NotebookAPI notebook();
 
     /**
      * Low-level request invoker. Not normally used directly. Use the api factories instead.

@@ -33,5 +33,9 @@ public interface DbSimpleExportCommandBuilder extends InvokableBuilder<CommandRe
 
     public DbSimpleExportCommandBuilder tags(String[] queryTags);
 
+    public DbSimpleExportCommandBuilder use_customer_cluster(boolean use_customer_cluster);
+
+    public DbSimpleExportCommandBuilder customer_cluster_label(String customer_cluster_label);
+
     public BaseCommand build();
 }

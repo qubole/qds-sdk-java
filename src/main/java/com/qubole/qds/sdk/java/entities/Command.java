@@ -44,6 +44,8 @@ public class Command
     private String timeout;
     private long submit_time;
     private String qlog;
+    private String name;
+    private String[] tags;
 
     public Command()
     {
@@ -53,7 +55,7 @@ public class Command
                    String created_at, int user_id, String nominal_time, String command_type, CommandMetaData meta_data,
                    SubCommands command, String sequence_id, int pid, String label, int num_result_dir,
                    boolean can_notify, int progress, long start_time, long end_time, String path, int id,
-                   String timeout, long submit_time, String qlog)
+                   String timeout, long submit_time, String qlog, String name, String[] tags)
     {
         this.status = status;
         this.pool = pool;
@@ -79,6 +81,8 @@ public class Command
         this.timeout = timeout;
         this.submit_time = submit_time;
         this.qlog = qlog;
+        this.name = name;
+        this.tags = tags;
     }
 
     public String getStatus()
@@ -319,5 +323,21 @@ public class Command
     public void setQlog(String qlog)
     {
         this.qlog = qlog;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String[] getTags() {
+        return tags;
+    }
+
+    public void setTags(String[] tags) {
+        this.tags = tags;
     }
 }

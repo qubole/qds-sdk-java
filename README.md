@@ -8,7 +8,7 @@ The SDK is available in The Central Repository. To use the SDK, add the followin
 <dependency>
     <groupId>com.qubole.qds-sdk-java</groupId>
     <artifactId>qds-sdk-java</artifactId>
-    <version>0.7.0</version>
+    <version>0.9.1</version>
 </dependency>
 ```
 
@@ -22,6 +22,7 @@ In your application initialization code, allocate a QdsClient object:
 QdsConfiguration configuration = new DefaultQdsConfiguration(YOUR_API_KEY);
 QdsClient client = QdsClientFactory.newClient(configuration);
 ```
+YOUR_API_KEY referenced in above code is a placeholder for Qubole API Token. Please refer to following documentation for  further details on how to obtain them: http://docs.qubole.com/en/latest/rest-api/api_overview.html#authentication
 
 Then, make api calls as needed. E.g.
 

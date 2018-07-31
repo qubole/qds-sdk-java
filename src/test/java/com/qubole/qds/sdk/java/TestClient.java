@@ -67,6 +67,47 @@ public class TestClient
     }
 
     @Test
+    public void testWebTargetWithParameters() throws URISyntaxException
+    {
+        QdsConfiguration configuration = new DefaultQdsConfiguration("foo");
+        final AtomicReference<WebTarget> webTargetReference = new AtomicReference<WebTarget>(null);
+        QdsClientImpl client = new QdsClientImpl(configuration)
+        {
+            @Override
+            protected <T> Future<T> invokePreparedRequest(RequestDetails entity, Class<T> responseType, AsyncInvoker invoker)
+            {
+                return null;
+            }
+
+            @Override
+            protected <T> Future<T> invokePreparedRequest(RequestDetails entity, GenericType<T> responseType, AsyncInvoker invoker)
+            {
+                return null;
+            }
+
+            @Override
+            protected WebTarget prepareTarget(ForPage forPage, RequestDetails entity, String[] additionalPaths)
+            {
+                WebTarget webTarget = super.prepareTarget(forPage, entity, additionalPaths);
+                webTargetReference.set(webTarget);
+                return webTarget;
+            }
+        };
+        String startDate = "2018-07-13T00:00:00Z";
+        String endDate = "2018-07-13T23:59:59Z";
+        boolean allUsers = false;
+        boolean qProps = false;
+        client.command().startDate(startDate).endDate(endDate).allUsers(allUsers).includeQueryProperties(qProps).history().invoke();
+        WebTarget webTarget = webTargetReference.get();
+        Assert.assertNotNull(webTarget);
+        Assert.assertTrue(webTarget.getUri().toString().contains("end_date="+endDate));
+        Assert.assertTrue(webTarget.getUri().toString().contains("include_query_properties="+qProps));
+        Assert.assertTrue(webTarget.getUri().toString().contains("all_users="+0));
+        Assert.assertTrue(webTarget.getUri().toString().contains("start_date="+startDate));
+    }
+
+
+    @Test
     public void testWebTargetWithPaging() throws URISyntaxException
     {
         QdsConfiguration configuration = new DefaultQdsConfiguration("foo");

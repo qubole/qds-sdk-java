@@ -15,6 +15,7 @@
  */
 package com.qubole.qds.sdk.java.details;
 
+import java.util.Arrays;
 import com.qubole.qds.sdk.java.api.BaseCommand;
 import com.qubole.qds.sdk.java.api.DbSimpleImportCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
@@ -28,6 +29,21 @@ class DbSimpleImportCommandBuilderImpl extends CommandBuilderImplBase implements
     public DbSimpleImportCommandBuilder hive_table(String hive_table)
     {
         node.put("hive_table", hive_table);
+        return this;
+    }
+
+    @Override
+    public DbSimpleImportCommandBuilder hive_serde(String hive_serde)
+    {
+        node.put("hive_serde", hive_serde);
+        return this;
+    }
+
+    @Override
+    public DbSimpleImportCommandBuilder db_columns(String[] db_columns)
+    {
+        String dbCols = Arrays.toString(db_columns);
+        node.put("db_columns", dbCols.substring(1, dbCols.length()-1));
         return this;
     }
 
@@ -62,6 +78,20 @@ class DbSimpleImportCommandBuilderImpl extends CommandBuilderImplBase implements
     @Override
     public DbSimpleImportCommandBuilder tags(String[] queryTags) {
         node.putPOJO("tags", queryTags);
+        return this;
+    }
+
+    @Override
+    public DbSimpleImportCommandBuilder use_customer_cluster(boolean use_customer_cluster)
+    {
+        node.put("use_customer_cluster", use_customer_cluster);
+        return this;
+    }
+
+    @Override
+    public DbSimpleImportCommandBuilder customer_cluster_label(String customer_cluster_label)
+    {
+        node.put("customer_cluster_label", customer_cluster_label);
         return this;
     }
 
