@@ -2,115 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6bc69d04-78a8-47ab-801a-926f23e39896" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_amazonaws_aws_java_sdk_1_7_9.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_beust_jcommander_1_27.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_9_7.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_7.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_9_7.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_jaxrs_jackson_jaxrs_base_2_8_4.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_jaxrs_jackson_jaxrs_json_provider_2_8_4.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_jaxb_annotations_2_8_4.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_16_0_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_ws_rs_javax_ws_rs_api_2_1_m05.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__joda_time_joda_time_2_10_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_beanshell_bsh_2_0b4.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_hk2_external_aopalliance_repackaged_2_5_0_b36.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_hk2_external_javax_inject_2_5_0_b36.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_hk2_hk2_api_2_5_0_b36.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_hk2_hk2_locator_2_5_0_b36.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_hk2_hk2_utils_2_5_0_b36.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_hk2_osgi_resource_locator_1_0_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jersey_bundles_repackaged_jersey_guava_2_26_b03.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jersey_core_jersey_client_2_26_b03.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jersey_core_jersey_common_2_26_b03.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jersey_ext_jersey_entity_filtering_2_26_b03.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jersey_media_jersey_media_json_jackson_2_26_b03.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_20_0_GA.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_testng_testng_6_8_8.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/qds-sdk-java.iml" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/AppBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/AppBuilderImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/BaseCommandImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/BaseCommandImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/ClusterConfigBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/ClusterConfigBuilderImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/CommandApiImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/CommandApiImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/CommandBuilderImplBase.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/CommandBuilderImplBase.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/CompositeCommandBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/CompositeCommandBuilderImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/CreateScheduleCommandBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/CreateScheduleCommandBuilderImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/DbAdvancedExportCommandBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/DbAdvancedExportCommandBuilderImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/DbAdvancedImportCommandBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/DbAdvancedImportCommandBuilderImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/DbSimpleExportCommandBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/DbSimpleExportCommandBuilderImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/DbSimpleImportCommandBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/DbSimpleImportCommandBuilderImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/DbTapBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/DbTapBuilderImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/HadoopCommandBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/HadoopCommandBuilderImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/HiveCommandBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/HiveCommandBuilderImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/NotebookCommandBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/NotebookCommandBuilderImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/PigCommandBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/PigCommandBuilderImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/PrestoCommandBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/PrestoCommandBuilderImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/QdsClientImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/QdsClientImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/ShellCommandBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/ShellCommandBuilderImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/SparkCommandBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/SparkCommandBuilderImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/StoreTablePropertiesBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/details/StoreTablePropertiesBuilderImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Account.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Account.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/AccountCredentials.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/AccountCredentials.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/AddNode.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/AddNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/AllCommandsReport.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/AllCommandsReport.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/CanonicalHiveCommandsReport.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/CanonicalHiveCommandsReport.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/CanonicalQuery.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/CanonicalQuery.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Cluster.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Cluster.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/ClusterItem.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/ClusterItem.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/ClusterMetrics.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/ClusterMetrics.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/ClusterNode.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/ClusterNode.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/ClusterNodeOld.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/ClusterNodeOld.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/ClusterState.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/ClusterState.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Command.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Command.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/CommandMetaData.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/CommandMetaData.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/CommandResponse.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/CommandResponse.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Commands.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Commands.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/DbTap.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/DbTap.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/DbTapList.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/DbTapList.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/DependencyInfo.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/DependencyInfo.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Ec2Settings.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Ec2Settings.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/FairSchedulerSettings.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/FairSchedulerSettings.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/HadoopSettings.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/HadoopSettings.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/HiveTable.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/HiveTable.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Interval.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Interval.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Message.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Message.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/NameAndType.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/NameAndType.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/NameTypePosition.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/NameTypePosition.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/NodeOperation.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/NodeOperation.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Notebook.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Notebook.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/NotebookResult.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/NotebookResult.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/PagingInfo.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/PagingInfo.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/PrestoSettings.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/PrestoSettings.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Query.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Query.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/ResultValue.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/ResultValue.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Schedule.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Schedule.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/ScheduleCommand.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/ScheduleCommand.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SchedulesResponse.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SchedulesResponse.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Schema.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Schema.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SchemaListDescribed.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SchemaListDescribed.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SchemaOrdinal.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SchemaOrdinal.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SecuritySettings.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SecuritySettings.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SpotInstanceSettings.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SpotInstanceSettings.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/State.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/State.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Status.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/Status.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SubCommands.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SubCommands.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SubCommandsDeserializer.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SubCommandsDeserializer.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SuccessAndStatus.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SuccessAndStatus.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/TableProperties.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/TableProperties.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/sparkjobserver/App.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/sparkjobserver/App.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/sparkjobserver/AppItem.java" afterPath="$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/sparkjobserver/AppItem.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/qubole/qds/sdk/java/TestClient.java" afterPath="$PROJECT_DIR$/src/test/java/com/qubole/qds/sdk/java/TestClient.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/qubole/qds/sdk/java/unittests/AbstractTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/qubole/qds/sdk/java/unittests/AbstractTest.java" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -190,7 +82,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SubCommandsDeserializer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="540">
-              <caret line="58" column="23" lean-forward="true" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
+              <caret line="58" column="23" lean-forward="false" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -527,12 +419,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1542260187059</updated>
-      <workItem from="1542260188453" duration="14631000" />
+      <workItem from="1542260188453" duration="15687000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14631000" />
+    <option name="totallyTimeSpent" value="15687000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -891,7 +783,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/qubole/qds/sdk/java/entities/SubCommandsDeserializer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
-          <caret line="58" column="23" lean-forward="true" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
+          <caret line="58" column="23" lean-forward="false" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
           <folding />
         </state>
       </provider>
