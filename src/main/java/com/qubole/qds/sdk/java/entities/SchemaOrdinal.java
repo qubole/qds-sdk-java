@@ -15,7 +15,7 @@
  */
 package com.qubole.qds.sdk.java.entities;
 
-import org.codehaus.jackson.annotate.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 
 import java.util.List;
 import java.util.Map;

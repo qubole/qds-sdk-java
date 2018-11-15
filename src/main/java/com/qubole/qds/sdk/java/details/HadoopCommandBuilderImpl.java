@@ -18,7 +18,7 @@ package com.qubole.qds.sdk.java.details;
 import com.qubole.qds.sdk.java.api.HadoopCommandBuilder;
 import com.qubole.qds.sdk.java.api.BaseCommand;
 import com.qubole.qds.sdk.java.client.QdsClient;
-import org.codehaus.jackson.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 class HadoopCommandBuilderImpl extends CommandBuilderImplBase implements HadoopCommandBuilder
 {

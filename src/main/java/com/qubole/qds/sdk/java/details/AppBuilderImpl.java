@@ -17,7 +17,7 @@ package com.qubole.qds.sdk.java.details;
 
 import java.io.IOException;
 import java.util.Map;
-import org.codehaus.jackson.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.qubole.qds.sdk.java.api.sparkjobserver.AppBuilder;
 
 public class AppBuilderImpl implements AppBuilder

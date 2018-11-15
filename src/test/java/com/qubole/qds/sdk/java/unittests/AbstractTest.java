@@ -16,7 +16,7 @@
 package com.qubole.qds.sdk.java.unittests;
 
 import java.util.Map;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import com.amazonaws.util.json.JSONObject;
