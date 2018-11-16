@@ -18,7 +18,7 @@ package com.qubole.qds.sdk.java.details;
 import com.qubole.qds.sdk.java.api.CreateScheduleCommandBuilder;
 import com.qubole.qds.sdk.java.entities.DependencyInfo;
 import com.qubole.qds.sdk.java.entities.ScheduleCommand;
-import org.codehaus.jackson.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;

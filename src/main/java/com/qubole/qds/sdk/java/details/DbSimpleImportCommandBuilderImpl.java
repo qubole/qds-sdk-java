@@ -19,7 +19,7 @@ import java.util.Arrays;
 import com.qubole.qds.sdk.java.api.BaseCommand;
 import com.qubole.qds.sdk.java.api.DbSimpleImportCommandBuilder;
 import com.qubole.qds.sdk.java.client.QdsClient;
-import org.codehaus.jackson.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 class DbSimpleImportCommandBuilderImpl extends CommandBuilderImplBase implements DbSimpleImportCommandBuilder
 {

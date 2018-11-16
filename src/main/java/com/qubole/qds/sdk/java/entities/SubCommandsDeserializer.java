@@ -16,11 +16,11 @@
 
 package com.qubole.qds.sdk.java.entities;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.map.DeserializationContext;
-import org.codehaus.jackson.map.JsonDeserializer;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -51,21 +51,21 @@ public class SubCommandsDeserializer extends JsonDeserializer<SubCommands>
         // or it can have an array with tag sub_commands
         // which will have Command objects for all the sub commands
         Iterator<Map.Entry<String, JsonNode>> elementsIterator =
-                node.getFields();
+                node.fields();
         while (elementsIterator.hasNext())
         {
             Map.Entry<String, JsonNode> element = elementsIterator.next();
             String name = element.getKey();
             JsonNode val = element.getValue();
             if (name.equalsIgnoreCase("sub_commands")) {
-                Command[] subCommands = mapper.readValue(val, Command[].class);
+                Command[] subCommands = mapper.readValue(jp, Command[].class);
                 if (subCommands != null) {
                     compositeCommand.setsub_commands(subCommands);
                 }
             }
             else {
                 // put it in hash map as earlier
-                compositeCommand.put(name, val.getTextValue());
+                compositeCommand.put(name, val.textValue());
             }
         }
         return compositeCommand;
