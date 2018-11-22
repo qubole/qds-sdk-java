@@ -58,10 +58,10 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <jersey-version>2.26-b03</jersey-version>
-        <guava-version>16.0.1</guava-version>
+        <guava-version>27.0-android</guava-version>
         <jackson.version>2.9.7</jackson.version>
-        <testng-version>6.8.8</testng-version>
-        <aws-java-sdk-version>1.7.9</aws-java-sdk-version>
+        <testng-version>6.14.3</testng-version>
+        <aws-java-sdk-version>1.10.77</aws-java-sdk-version>
     </properties>
 
     <dependencies>
@@ -111,6 +111,13 @@
             <version>${testng-version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.6</version>
+        </dependency>
+
     </dependencies>
 
     <build>
