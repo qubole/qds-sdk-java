@@ -4,7 +4,7 @@
 
     <groupId>com.qubole.qds-sdk-java</groupId>
     <artifactId>qds-sdk-java-examples</artifactId>
-    <version>0.9.4</version>
+    <version>0.9.4-snapshot</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
