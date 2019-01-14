@@ -16,7 +16,7 @@
         <dependency>
             <groupId>com.qubole.qds-sdk-java</groupId>
             <artifactId>qds-sdk-java</artifactId>
-            <version>0.9.4</version>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 
