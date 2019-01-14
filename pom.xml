@@ -22,7 +22,7 @@
     <groupId>com.qubole.qds-sdk-java</groupId>
     <artifactId>qds-sdk-java</artifactId>
     <name>Qubole Data Service Java SDK</name>
-    <version>1.0.0</version>
+    <version>1.0.0-snapshot</version>
     <description>
         A Java library that provides the tools you need to
         authenticate with, and use the Qubole Data Service API.
