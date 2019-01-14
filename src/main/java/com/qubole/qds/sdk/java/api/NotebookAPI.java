@@ -27,8 +27,8 @@ public interface NotebookAPI
     *
     * @param name name of the notebook
     * @param location location of the notebook
-    * @param note_type type of the notebook, available are "spark" and "presto"
-    * @param cluster_id cluster id of the cluster to associate notebook with
+    * @param noteType type of the notebook, available are "spark" and "presto"
+    * @param clusterId cluster id of the cluster to associate notebook with
     * @return new builder
     */
     public InvokableBuilder<NotebookResult> create(String name, String location, String noteType, String clusterId);
@@ -38,8 +38,8 @@ public interface NotebookAPI
     *
     * @param name name of the notebook
     * @param location location of the notebook
-    * @param cluster_id cluster id of the cluster to associate notebook with
-    * @param notebook_id notebook id to configure
+    * @param clusterId cluster id of the cluster to associate notebook with
+    * @param notebookId notebook id to configure
     * @return new builder
     */
     public InvokableBuilder<NotebookResult> configure(String name, String location, String clusterId, String notebookId);
@@ -49,23 +49,23 @@ public interface NotebookAPI
      *
      * @param name name of the notebook
      * @param location location of the notebook
-     * @param cluster_id cluster id of the cluster to associate notebook with
-     * @param cloned_from_notebook notebook id from which the new notebook is cloned
+     * @param clusterId cluster id of the cluster to associate notebook with
+     * @param clonedFromNotebook notebook id from which the new notebook is cloned
      * @return new builder
      */
      public InvokableBuilder<NotebookResult> clone(String name, String location, String clusterId, String clonedFromNotebook);
 
      /**
       * Corresponds to http://docs.qubole.com/en/latest/rest-api/notebook_api/bind-notebook.html
-      * @param cluster_id cluster id of the cluster who needs to be associated with notebook
-      * @param notebook_id notebook id
+      * @param clusterId cluster id of the cluster who needs to be associated with notebook
+      * @param notebookId notebook id
       * @return new builder
       */
       public InvokableBuilder<NotebookResult> bindNotebookToCluster(String clusterId, String notebookId);
 
        /**
         * Corresponds to http://docs.qubole.com/en/latest/rest-api/notebook_api/delete-notebook.html
-        * @param notebook_id notebook id
+        * @param notebookId notebook id
         * @return new builder
         */
         public InvokableBuilder<NotebookResult> delete(String notebookId);
