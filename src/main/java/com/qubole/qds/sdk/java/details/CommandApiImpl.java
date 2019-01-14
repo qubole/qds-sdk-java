@@ -22,7 +22,7 @@ import com.qubole.qds.sdk.java.entities.Command;
 import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.entities.Commands;
 import com.qubole.qds.sdk.java.entities.Status;
-import org.codehaus.jackson.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import javax.ws.rs.core.Response;
 

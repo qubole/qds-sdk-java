@@ -20,6 +20,7 @@ import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.details.RequestDetails;
 import com.qubole.qds.sdk.java.details.ForPage;
 import com.qubole.qds.sdk.java.details.QdsClientImpl;
+import org.apache.http.client.utils.URIBuilder;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import javax.ws.rs.client.AsyncInvoker;
@@ -100,10 +101,10 @@ public class TestClient
         client.command().startDate(startDate).endDate(endDate).allUsers(allUsers).includeQueryProperties(qProps).history().invoke();
         WebTarget webTarget = webTargetReference.get();
         Assert.assertNotNull(webTarget);
-        Assert.assertTrue(webTarget.getUri().toString().contains("end_date="+endDate));
+        Assert.assertTrue(webTarget.getUri().toString().contains("end_date="+endDate.replaceAll(":", "%3A")));
         Assert.assertTrue(webTarget.getUri().toString().contains("include_query_properties="+qProps));
         Assert.assertTrue(webTarget.getUri().toString().contains("all_users="+0));
-        Assert.assertTrue(webTarget.getUri().toString().contains("start_date="+startDate));
+        Assert.assertTrue(webTarget.getUri().toString().contains("start_date="+startDate.replaceAll(":", "%3A")));
     }
 
 
