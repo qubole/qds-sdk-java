@@ -20,7 +20,6 @@ import com.qubole.qds.sdk.java.entities.CompositeScheduleCommand;
 import com.qubole.qds.sdk.java.entities.DependencyInfo;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.qubole.qds.sdk.java.entities.ScheduleCommand;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
