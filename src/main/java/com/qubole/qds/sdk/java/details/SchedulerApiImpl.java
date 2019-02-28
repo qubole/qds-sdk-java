@@ -95,6 +95,7 @@ class SchedulerApiImpl implements SchedulerApi
     @Override
     public InvokableBuilder<Schedule> create(CreateScheduleCommandBuilder configBuilder)
     {
+        System.out.println("Request : " + configBuilder.toString());
         RequestDetails entity = new RequestDetails(configBuilder.toString(), RequestDetails.Method.POST);
         return new GenericInvokableBuilderImpl<Schedule>(client, entity, Schedule.class, "scheduler");
     }

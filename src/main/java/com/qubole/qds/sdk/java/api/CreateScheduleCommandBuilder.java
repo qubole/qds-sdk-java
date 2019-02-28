@@ -15,8 +15,10 @@
  */
 package com.qubole.qds.sdk.java.api;
 
+import com.qubole.qds.sdk.java.entities.CompositeScheduleCommand;
 import com.qubole.qds.sdk.java.entities.DependencyInfo;
 import com.qubole.qds.sdk.java.entities.ScheduleCommand;
+
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +27,8 @@ public interface CreateScheduleCommandBuilder
     public CreateScheduleCommandBuilder command_type(String command_type);
 
     public CreateScheduleCommandBuilder command(ScheduleCommand command);
+
+    public CreateScheduleCommandBuilder compositecommand(CompositeScheduleCommand command);
 
     public CreateScheduleCommandBuilder macros(List<Map<String, String>> macros);
 

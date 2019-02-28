@@ -57,8 +57,9 @@ public class SubCommandsDeserializer extends JsonDeserializer<SubCommands>
             Map.Entry<String, JsonNode> element = elementsIterator.next();
             String name = element.getKey();
             JsonNode val = element.getValue();
+           // System.out.println("Name = " + name + ";Value = " + val);
             if (name.equalsIgnoreCase("sub_commands")) {
-                Command[] subCommands = mapper.readValue(jp, Command[].class);
+                Command[] subCommands = mapper.treeToValue(val, Command[].class);
                 if (subCommands != null) {
                     compositeCommand.setsub_commands(subCommands);
                 }
