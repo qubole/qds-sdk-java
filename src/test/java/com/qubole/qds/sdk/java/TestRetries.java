@@ -58,9 +58,9 @@ public class TestRetries
             {
                 server.close();
             }
-            catch ( IOException e )
+            catch (IOException e )
             {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
             finally
             {
