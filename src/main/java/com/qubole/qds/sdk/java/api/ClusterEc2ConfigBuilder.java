@@ -15,6 +15,7 @@
  */
 package com.qubole.qds.sdk.java.api;
 
+
 public interface ClusterEc2ConfigBuilder
 {
     public ClusterConfigBuilder compute_secret_key(String compute_secret_key);
@@ -24,4 +25,8 @@ public interface ClusterEc2ConfigBuilder
     public ClusterConfigBuilder aws_preferred_availability_zone(String aws_preferred_availability_zone);
     public ClusterConfigBuilder subnet_id(String subnet_id);
     public ClusterConfigBuilder vpc_id(String vpc_id);
+    public ClusterConfigBuilder role_instance_profile(String role_instance_profile);
+    public ClusterConfigBuilder bastion_node_public_dns(String bastion_node_public_dns);
+    public ClusterConfigBuilder bastion_node_port(int bastion_node_port);
+    public ClusterConfigBuilder bastion_node_user(String bastion_node_user);
 }
