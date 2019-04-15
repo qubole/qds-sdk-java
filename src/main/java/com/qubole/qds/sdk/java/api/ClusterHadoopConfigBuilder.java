@@ -18,6 +18,7 @@ package com.qubole.qds.sdk.java.api;
 
 public interface ClusterHadoopConfigBuilder
 {
+
     public ClusterFairSchedulerConfigBuilder fairscheduler_settings();
     public ClusterConfigBuilder use_spark(boolean use_spark);
     public ClusterConfigBuilder use_hbase(boolean use_hbase);

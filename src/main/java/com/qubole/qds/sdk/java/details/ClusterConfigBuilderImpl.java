@@ -42,9 +42,9 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
 
     public ObjectNode getNode()
     {
-        ObjectNode clusterNode = QdsClientImpl.getMapper().createObjectNode();
-        clusterNode.putPOJO("cluster", node);
-        return clusterNode;
+        /*ObjectNode clusterNode = QdsClientImpl.getMapper().createObjectNode();
+        clusterNode.putPOJO("cluster", node);*/
+        return node;
     }
 
     @Override
@@ -146,7 +146,7 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
                 return new ClusterSpotInstanceConfigBuilder()
                 {
                     @Override
-                    public ClusterConfigBuilder maximum_bid_price_percentage(String maximum_bid_price_percentage)
+                    public ClusterConfigBuilder maximum_bid_price_percentage(double maximum_bid_price_percentage)
                     {
                         spot_instance_settings.put("maximum_bid_price_percentage", maximum_bid_price_percentage);
                         return ClusterConfigBuilderImpl.this;
@@ -176,7 +176,7 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
                 }
                 return new ClusterSpotInstanceConfigBuilder() {
                     @Override
-                    public ClusterConfigBuilder maximum_bid_price_percentage(String maximum_bid_price_percentage) {
+                    public ClusterConfigBuilder maximum_bid_price_percentage(double maximum_bid_price_percentage) {
                         stable_spot_instance_settings.put("maximum_bid_price_percentage", maximum_bid_price_percentage);
                         return ClusterConfigBuilderImpl.this;
                     }
