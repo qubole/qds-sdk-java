@@ -18,7 +18,6 @@ package com.qubole.qds.sdk.java.details;
 import com.qubole.qds.sdk.java.api.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.qubole.qds.sdk.java.entities.InstanceWeight;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
