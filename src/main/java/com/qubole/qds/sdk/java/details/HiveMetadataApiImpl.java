@@ -26,6 +26,7 @@ import com.qubole.qds.sdk.java.client.QdsClient;
 import com.qubole.qds.sdk.java.entities.NameAndType;
 import com.qubole.qds.sdk.java.entities.SchemaListDescribed;
 import com.qubole.qds.sdk.java.entities.Status;
+import com.qubole.qds.sdk.java.entities.TablePartitionsAndLocation;
 import com.qubole.qds.sdk.java.entities.TableProperties;
 import javax.ws.rs.core.GenericType;
 import java.util.List;
@@ -77,6 +78,16 @@ class HiveMetadataApiImpl implements HiveMetadataApi
         String[] schemaElems = getSchemaElems(tableName);
         return new GenericInvokableBuilderImpl<Status>(client, new RequestDetails(null, RequestDetails.Method.DELETE),
                 Status.class, "hive", schemaElems[0], schemaElems[1], "properties");
+    }
+
+    @Override
+    public InvokableBuilder<List<TablePartitionsAndLocation>> viewTablePartitionsAndLocation(String tableName)
+    {
+        GenericType<List<TablePartitionsAndLocation>> genericType = new GenericType<List<TablePartitionsAndLocation>>(){};
+        String [] schemaElems = getSchemaElems(tableName);
+        RequestDetails requestDetails = new RequestDetails(null, RequestDetails.Method.GET);
+        return new GenericInvokableBuilderImpl<List<TablePartitionsAndLocation>>(client, requestDetails, genericType,
+                "hive", schemaElems[0], schemaElems[1], "partitions");
     }
 
     @Override
