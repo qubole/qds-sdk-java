@@ -15,11 +15,7 @@
  */
 package com.qubole.qds.sdk.java.api;
 
-import com.qubole.qds.sdk.java.entities.ClusterItem;
-import com.qubole.qds.sdk.java.entities.ClusterMetrics;
-import com.qubole.qds.sdk.java.entities.ClusterState;
-import com.qubole.qds.sdk.java.entities.Command;
-import com.qubole.qds.sdk.java.entities.Message;
+import com.qubole.qds.sdk.java.entities.*;
 
 import java.util.List;
 
@@ -93,7 +89,7 @@ public interface ClusterApi
      * @param configBuilder config values - use {@link #clusterConfig()}
      * @return new builder
      */
-    public InvokableBuilder<ClusterItem> create(ClusterConfigBuilder configBuilder);
+    public InvokableBuilder<Cluster> create(ClusterConfigBuilder configBuilder);
 
     /**
      * Corresponds to http://www.qubole.com/docs/delete-cluster/
