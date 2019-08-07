@@ -49,7 +49,7 @@ public class AsyncExample {
                     String s = client.command().logs("" + cr.getId()).invoke().get();
                     System.err.println(s);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 } finally {
                     client.close();
                     doneSignal.countDown();
