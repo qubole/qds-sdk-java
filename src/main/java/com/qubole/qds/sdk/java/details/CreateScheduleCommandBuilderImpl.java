@@ -16,9 +16,10 @@
 package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.api.CreateScheduleCommandBuilder;
+import com.qubole.qds.sdk.java.entities.CompositeScheduleCommand;
 import com.qubole.qds.sdk.java.entities.DependencyInfo;
-import com.qubole.qds.sdk.java.entities.ScheduleCommand;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.qubole.qds.sdk.java.entities.ScheduleCommand;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,13 @@ class CreateScheduleCommandBuilderImpl implements CreateScheduleCommandBuilder
 
     @Override
     public CreateScheduleCommandBuilder command(ScheduleCommand command)
+    {
+        node.putPOJO("command", command);
+        return this;
+    }
+
+    @Override
+    public  CreateScheduleCommandBuilder compositecommand(CompositeScheduleCommand command)
     {
         node.putPOJO("command", command);
         return this;

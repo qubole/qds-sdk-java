@@ -18,10 +18,11 @@ package com.qubole.qds.sdk.java.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ScheduleCommand
-{
+public class ScheduleCommand {
     private boolean approx_mode;
     private String query;
+    private String inline;
+    private String command_type;
     private boolean approx_aggregations;
     private boolean sample;
     private String loader_stable;
@@ -29,99 +30,124 @@ public class ScheduleCommand
     private String loader_table_name;
     private String md_cmd;
 
-    public ScheduleCommand()
-    {
+    public static class ScheduleCommandBuilder {
+        private final String query;
+        private String command_type = null;
+        private boolean approx_mode = false;
+        private boolean approx_aggregations = false;
+        private boolean sample = false;
+        private String loader_stable = null;
+        private String script_location = null;
+        private String loader_table_name = null;
+        private String md_cmd = null;
+
+        public ScheduleCommandBuilder(String query) {
+            this.query = query;
+        }
+
+        public ScheduleCommandBuilder command_type(String command_type) {
+            this.command_type = command_type;
+            return this;
+        }
+
+        public ScheduleCommandBuilder approx_mode(boolean approx_mode) {
+            this.approx_mode = approx_mode;
+            return this;
+        }
+
+        public ScheduleCommandBuilder approx_aggregations(boolean approx_aggregations) {
+            this.approx_aggregations = approx_aggregations;
+            return this;
+        }
+
+        public ScheduleCommandBuilder sample(boolean sample) {
+            this.sample = sample;
+            return this;
+        }
+
+        public ScheduleCommandBuilder loader_stable(String loader_stable) {
+            this.loader_stable = loader_stable;
+            return this;
+        }
+
+        public ScheduleCommandBuilder script_location(String script_location) {
+            this.script_location = script_location;
+            return this;
+        }
+
+        public ScheduleCommandBuilder loader_table_name(String loader_table_name) {
+            this.loader_table_name = loader_table_name;
+            return this;
+        }
+
+        public ScheduleCommandBuilder md_cmd(String md_cmd) {
+            this.md_cmd = md_cmd;
+            return this;
+        }
+
+        public ScheduleCommand build() {
+            return new ScheduleCommand(this);
+        }
     }
 
-    public ScheduleCommand(boolean approx_mode, String query, boolean approx_aggregations, boolean sample, String loader_stable, String script_location, String loader_table_name, String md_cmd)
-    {
-        this.approx_mode = approx_mode;
-        this.query = query;
-        this.approx_aggregations = approx_aggregations;
-        this.sample = sample;
-        this.loader_stable = loader_stable;
-        this.script_location = script_location;
-        this.loader_table_name = loader_table_name;
-        this.md_cmd = md_cmd;
+    public ScheduleCommand(){}
+    private ScheduleCommand(ScheduleCommandBuilder builder) {
+        query = builder.query;
+        command_type = builder.command_type;
+        approx_mode = builder.approx_mode;
+        approx_aggregations = builder.approx_aggregations;
+        sample = builder.sample;
+        loader_stable = builder.loader_stable;
+        script_location = builder.script_location;
+        loader_table_name = builder.loader_table_name;
+        md_cmd = builder.md_cmd;
+
+        if (command_type.equalsIgnoreCase("shellcommand"))
+        {
+            inline = query;
+            query = null;
+        }
     }
 
-    public boolean isApprox_mode()
-    {
+
+    public boolean isApprox_mode() {
         return approx_mode;
     }
 
-    public void setApprox_mode(boolean approx_mode)
-    {
-        this.approx_mode = approx_mode;
+    public String getCommand_type() {
+        return command_type;
     }
 
-    public String getQuery()
-    {
+    public String getQuery() {
         return query;
     }
 
-    public void setQuery(String query)
+    public String getInline()
     {
-        this.query = query;
+        return inline;
     }
 
-    public boolean isApprox_aggregations()
-    {
+    public boolean isApprox_aggregations() {
         return approx_aggregations;
     }
 
-    public void setApprox_aggregations(boolean approx_aggregations)
-    {
-        this.approx_aggregations = approx_aggregations;
-    }
-
-    public boolean isSample()
-    {
+    public boolean isSample() {
         return sample;
     }
 
-    public void setSample(boolean sample)
-    {
-        this.sample = sample;
-    }
-
-    public String getLoader_stable()
-    {
+    public String getLoader_stable() {
         return loader_stable;
     }
 
-    public void setLoader_stable(String loader_stable)
-    {
-        this.loader_stable = loader_stable;
-    }
-
-    public String getScript_location()
-    {
+    public String getScript_location() {
         return script_location;
     }
 
-    public void setScript_location(String script_location)
-    {
-        this.script_location = script_location;
-    }
-
-    public String getLoader_table_name()
-    {
+    public String getLoader_table_name() {
         return loader_table_name;
     }
 
-    public void setLoader_table_name(String loader_table_name)
-    {
-        this.loader_table_name = loader_table_name;
-    }
-
-    public String getMd_cmd()
-    {
+    public String getMd_cmd() {
         return md_cmd;
-    }
-
-    public void setMd_cmd(String md_cmd)
-    {
-        this.md_cmd = md_cmd;
     }
 }

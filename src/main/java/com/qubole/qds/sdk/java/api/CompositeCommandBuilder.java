@@ -27,4 +27,6 @@ public interface CompositeCommandBuilder extends InvokableBuilder<CommandRespons
     public CompositeCommandBuilder clusterLabel(String clusterLabel);
 
     public CompositeCommandBuilder addSubCommand(BaseCommand command);
+
+    public BaseCommand build();
 }
