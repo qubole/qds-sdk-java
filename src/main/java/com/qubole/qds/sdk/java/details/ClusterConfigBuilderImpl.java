@@ -348,6 +348,34 @@ class ClusterConfigBuilderImpl implements ClusterConfigBuilder
                 return ClusterConfigBuilderImpl.this;
             }
 
+            @Override
+            public ClusterConfigBuilder role_instance_profile(String role_instance_profile)
+            {
+                ec2_settings.put("role_instance_profile", role_instance_profile);
+                return ClusterConfigBuilderImpl.this;
+            }
+
+            @Override
+            public ClusterConfigBuilder bastion_node_public_dns(String bastion_node_public_dns)
+            {
+                ec2_settings.put("bastion_node_public_dns", bastion_node_public_dns);
+                return ClusterConfigBuilderImpl.this;
+            }
+
+            @Override
+            public ClusterConfigBuilder bastion_node_port(int bastion_node_port)
+            {
+                ec2_settings.put("bastion_node_port", bastion_node_port);
+                return ClusterConfigBuilderImpl.this;
+            }
+
+            @Override
+            public ClusterConfigBuilder bastion_node_user(String bastion_node_user)
+            {
+                ec2_settings.put("bastion_node_user", bastion_node_user);
+                return ClusterConfigBuilderImpl.this;
+            }
+
         };
     }
 }
