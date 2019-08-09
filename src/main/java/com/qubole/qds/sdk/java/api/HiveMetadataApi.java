@@ -18,6 +18,7 @@ package com.qubole.qds.sdk.java.api;
 import com.qubole.qds.sdk.java.entities.NameAndType;
 import com.qubole.qds.sdk.java.entities.SchemaListDescribed;
 import com.qubole.qds.sdk.java.entities.Status;
+import com.qubole.qds.sdk.java.entities.TablePartitionsAndLocation;
 import com.qubole.qds.sdk.java.entities.TableProperties;
 import java.util.List;
 
@@ -57,6 +58,14 @@ public interface HiveMetadataApi
      * @return builder
      */
     public InvokableBuilder<Status> deleteTableProperties(String tableName);
+
+    /**
+     * Corresponds to https://docs.qubole.com/en/latest/rest-api/hive_metadata_api/get_table_partitions.html
+     *
+     * @param tableName the table name
+     * @return builder
+     */
+    public InvokableBuilder<List<TablePartitionsAndLocation>> viewTablePartitionsAndLocation(String tableName);
 
     /**
      * @return new builder
