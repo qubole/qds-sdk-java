@@ -38,6 +38,7 @@ public class DefaultQdsConfiguration implements QdsConfiguration
 {
     private final String apiEndpoint;
     private final String apiToken;
+    private final String apiVersion;
     private final ClientConfig jerseyConfiguration;
 
     public static final String API_ENDPOINT = "https://api.qubole.com/api";
@@ -51,7 +52,7 @@ public class DefaultQdsConfiguration implements QdsConfiguration
      */
     public DefaultQdsConfiguration(String apiToken)
     {
-        this(API_ENDPOINT, apiToken, null, new StandardRetry(), newRetryConnectorAllocator());
+        this(API_ENDPOINT, apiToken, API_VERSION, null, new StandardRetry(), newRetryConnectorAllocator());
     }
 
     /**
@@ -60,7 +61,17 @@ public class DefaultQdsConfiguration implements QdsConfiguration
      */
     public DefaultQdsConfiguration(String apiEndpoint, String apiToken)
     {
-        this(apiEndpoint, apiToken, null, new StandardRetry(), newRetryConnectorAllocator());
+        this(apiEndpoint, apiToken, API_VERSION, null, new StandardRetry(), newRetryConnectorAllocator());
+    }
+
+    /**
+     * @param apiEndpoint endpoint
+     * @param apiToken your API token
+     * @param apiVersion the api version to be used(if different from tne default v1.2)
+     */
+    public DefaultQdsConfiguration(String apiEndpoint, String apiToken, String apiVersion)
+    {
+        this(apiEndpoint, apiToken, apiVersion, null, new StandardRetry(), newRetryConnectorAllocator());
     }
 
     /**
@@ -68,9 +79,9 @@ public class DefaultQdsConfiguration implements QdsConfiguration
      * @param apiToken your API token
      * @param jerseyConfiguration jersey client configuration or null for default
      */
-    public DefaultQdsConfiguration(String apiEndpoint, String apiToken, ClientConfig jerseyConfiguration)
+    public DefaultQdsConfiguration(String apiEndpoint, String apiToken, String apiVersion, ClientConfig jerseyConfiguration)
     {
-        this(apiEndpoint, apiToken, jerseyConfiguration, new StandardRetry(), newRetryConnectorAllocator());
+        this(apiEndpoint, apiToken, apiVersion, jerseyConfiguration, new StandardRetry(), newRetryConnectorAllocator());
     }
 
     @VisibleForTesting
@@ -95,13 +106,15 @@ public class DefaultQdsConfiguration implements QdsConfiguration
     /**
      * @param apiEndpoint endpoint
      * @param apiToken your API token
+     * @param apiVersion the api version to be used(if different from the default)
      * @param jerseyConfiguration jersey client configuration or null for default
      * @param retry the retry to use
      */
-    public DefaultQdsConfiguration(String apiEndpoint, String apiToken, ClientConfig jerseyConfiguration, final Retry retry, final RetryConnectorAllocator retryConnectorAllocator)
+    public DefaultQdsConfiguration(String apiEndpoint, String apiToken, String apiVersion, ClientConfig jerseyConfiguration, final Retry retry, final RetryConnectorAllocator retryConnectorAllocator)
     {
         this.apiEndpoint = Preconditions.checkNotNull(apiEndpoint, "apiEndpoint cannot be null");
         this.apiToken = Preconditions.checkNotNull(apiToken, "apiToken cannot be null");
+        this.apiVersion = Preconditions.checkNotNull(apiVersion, "apiVersion cannot be null");
 
         if (jerseyConfiguration == null)
         {
@@ -148,6 +161,6 @@ public class DefaultQdsConfiguration implements QdsConfiguration
     @Override
     public String getApiVersion()
     {
-        return API_VERSION;
+        return apiVersion;
     }
 }

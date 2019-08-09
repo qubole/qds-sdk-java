@@ -19,14 +19,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.qubole.qds.sdk.java.api.*;
 import com.qubole.qds.sdk.java.client.QdsClient;
-import com.qubole.qds.sdk.java.entities.AddNode;
-import com.qubole.qds.sdk.java.entities.ClusterItem;
-import com.qubole.qds.sdk.java.entities.ClusterMetrics;
-import com.qubole.qds.sdk.java.entities.ClusterState;
-import com.qubole.qds.sdk.java.entities.Command;
-import com.qubole.qds.sdk.java.entities.Message;
-import com.qubole.qds.sdk.java.entities.NodeOperation;
-import com.qubole.qds.sdk.java.entities.State;
+import com.qubole.qds.sdk.java.entities.*;
 
 import javax.ws.rs.core.GenericType;
 import java.util.HashMap;
@@ -97,10 +90,10 @@ class ClusterApiImpl implements ClusterApi
     }
 
     @Override
-    public InvokableBuilder<ClusterItem> create(ClusterConfigBuilder configBuilder)
+    public InvokableBuilder<Cluster> create(ClusterConfigBuilder configBuilder)
     {
         RequestDetails entity = new RequestDetails(configBuilder.toString(), RequestDetails.Method.POST);
-        return new GenericInvokableBuilderImpl<ClusterItem>(client, entity, ClusterItem.class, "clusters");
+        return new GenericInvokableBuilderImpl<Cluster>(client, entity, Cluster.class, "clusters");
     }
 
     @Override

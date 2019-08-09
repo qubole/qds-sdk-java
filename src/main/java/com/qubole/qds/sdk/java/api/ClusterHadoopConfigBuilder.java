@@ -15,20 +15,14 @@
  */
 package com.qubole.qds.sdk.java.api;
 
-import java.util.Map;
 
 public interface ClusterHadoopConfigBuilder
 {
-    public ClusterConfigBuilder master_instance_type(String master_instance_type);
+
     public ClusterFairSchedulerConfigBuilder fairscheduler_settings();
-    public ClusterConfigBuilder max_nodes(int max_nodes);
     public ClusterConfigBuilder use_spark(boolean use_spark);
-    public ClusterConfigBuilder slave_instance_type(String slave_instance_type);
-    public ClusterConfigBuilder slave_request_type(String slave_request_type);
     public ClusterConfigBuilder use_hbase(boolean use_hbase);
     public ClusterConfigBuilder use_hadoop2(boolean use_hadoop2);
-    public ClusterConfigBuilder initial_nodes(int initial_nodes);
     public ClusterConfigBuilder custom_config(String custom_config);
-    public ClusterConfigBuilder custom_ec2_tags(Map<String, String> custom_ec2_tags);
-    public ClusterSpotInstanceConfigBuilder spot_instance_settings();
+    public ClusterConfigBuilder use_qubole_placement_policy(boolean use_qubole_placement_policy);
 }
