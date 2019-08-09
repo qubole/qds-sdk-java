@@ -29,7 +29,7 @@ import com.qubole.qds.sdk.java.entities.Command;
 
 public class TestCluster extends AbstractTest
 {
-    @Test
+    /*@Test
     public void testClusterClone() throws Exception
     {
         String randomclusterId = "123";
@@ -42,7 +42,7 @@ public class TestCluster extends AbstractTest
         JSONObject expectedRequestData = new JSONObject();
         expectedRequestData.put("cluster", clusterParams);
         assertRequestDetails(invokeargs, "POST", "clusters/"+randomclusterId+"/clone", expectedRequestData, null, ClusterItem.class);
-    }
+    }*/
     
     @Test
     public void testClusterAddNode() throws Exception
