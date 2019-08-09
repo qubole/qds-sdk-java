@@ -21,6 +21,8 @@ public interface ClusterConfigBuilder
 {
     public ClusterConfigBuilder state(String state);
 
+    public ClusterNodeConfigBuilder node_configuration();
+
     public ClusterPrestoConfigBuilder presto_settings();
 
     public ClusterConfigBuilder disallow_cluster_termination(boolean disallow_cluster_termination);
@@ -38,4 +40,6 @@ public interface ClusterConfigBuilder
     public ClusterConfigBuilder id(int id);
 
     public ClusterEc2ConfigBuilder ec2_settings();
+
+    public ClusterEngineConfigBuilder engine_config();
 }
