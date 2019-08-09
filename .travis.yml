@@ -4,6 +4,3 @@ language: java
 jdk:
   - oraclejdk7
   - oraclejdk8
-branches:
-  only:
-    - master
