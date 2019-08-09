@@ -98,7 +98,7 @@ public class TestRetries
                 };
             }
         };
-        DefaultQdsConfiguration configuration = new DefaultQdsConfiguration("http://localhost:" + TEST_PORT, "bar", clientConfig, new StandardRetry(1000, 3), retryConnectorAllocator);
+        DefaultQdsConfiguration configuration = new DefaultQdsConfiguration("http://localhost:" + TEST_PORT, "v1.2","bar", clientConfig, new StandardRetry(1000, 3), retryConnectorAllocator);
         QdsClient client = new QdsClientImpl(configuration);
         try
         {
@@ -143,7 +143,7 @@ public class TestRetries
                 };
             }
         };
-        DefaultQdsConfiguration configuration = new DefaultQdsConfiguration("http://localhost:" + TEST_PORT, "bar", clientConfig, new StandardRetry(1000, 3), retryConnectorAllocator);
+        DefaultQdsConfiguration configuration = new DefaultQdsConfiguration("http://localhost:" + TEST_PORT, "v1.2", "bar", clientConfig, new StandardRetry(1000, 3), retryConnectorAllocator);
         QdsClient client = new QdsClientImpl(configuration);
         String value = client.command().logs("100").invoke().get();  // logs is set to retry
         Assert.assertTrue(hadRetry.get());
@@ -175,7 +175,7 @@ public class TestRetries
                 };
             }
         };
-        DefaultQdsConfiguration configuration = new DefaultQdsConfiguration("http://localhost:" + TEST_PORT, "bar", new ClientConfig(), new StandardRetry(1000, 3), retryConnectorAllocator);
+        DefaultQdsConfiguration configuration = new DefaultQdsConfiguration("http://localhost:" + TEST_PORT, "v1.2", "bar", new ClientConfig(), new StandardRetry(1000, 3), retryConnectorAllocator);
         QdsClient client = new QdsClientImpl(configuration);
         String value = client.command().logs("100").invoke().get();  // logs is set to retry
         Assert.assertTrue(hadRetry.get());
