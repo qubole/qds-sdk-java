@@ -23,6 +23,11 @@ public class ErrorResponseFilter implements ClientResponseFilter {
                 if (responseContext.hasEntity()) {
                     String error = CharStreams.toString(
                         new InputStreamReader(responseContext.getEntityStream(), Charsets.UTF_8));
+                    //Add trace_id support
+                    String trace_id = responseContext.getHeaderString('X-Qubole-Trace-Id');
+                    String display_message = "Request ID is '" + trace_id + "' .Please share it with Qubole Support team for any assistance";
+                    LOG.severe(display_message);
+                    System.err.println(display_message);
                     LOG.severe(error);
                     System.err.println(error);
                 }
