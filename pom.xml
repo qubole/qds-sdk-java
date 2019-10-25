@@ -62,6 +62,7 @@
         <jackson.version>2.9.7</jackson.version>
         <testng-version>6.14.3</testng-version>
         <aws-java-sdk-version>1.10.77</aws-java-sdk-version>
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
@@ -117,7 +118,6 @@
             <artifactId>httpclient</artifactId>
             <version>4.5.6</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -125,10 +125,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.8.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -341,6 +341,20 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <profile>
+            <id>jdk11-compliant</id>
+            <properties>
+                <java.version>11</java.version>
+                <javax-activation-version>1.1.1</javax-activation-version>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>javax.activation</groupId>
+                    <artifactId>activation</artifactId>
+                    <version>${javax-activation-version}</version>
+                </dependency>
+            </dependencies>
         </profile>
     </profiles>
 
