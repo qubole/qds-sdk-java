@@ -24,10 +24,12 @@ public class ErrorResponseFilter implements ClientResponseFilter {
                     String error = CharStreams.toString(
                         new InputStreamReader(responseContext.getEntityStream(), Charsets.UTF_8));
                     //Add trace_id support
-                    String trace_id = responseContext.getHeaderString('X-Qubole-Trace-Id');
-                    String display_message = "Request ID is '" + trace_id + "' .Please share it with Qubole Support team for any assistance";
-                    LOG.severe(display_message);
-                    System.err.println(display_message);
+                    String traceId = responseContext.getHeaderString("X-Qubole-Trace-Id");
+                    if (traceId != null && !traceId.isEmpty()){
+                        String displayMessage = "Request ID is '" + traceId + "' .Please share it with Qubole Support team for any assistance";
+                        LOG.severe(displayMessage);
+                        System.err.println(displayMessage);
+                    }
                     LOG.severe(error);
                     System.err.println(error);
                 }
@@ -37,5 +39,4 @@ public class ErrorResponseFilter implements ClientResponseFilter {
             LOG.warning("Error while checking response code: " + e.getMessage());
         }
     }
-
 }
