@@ -38,7 +38,12 @@ public class StandardRetryPolicy implements RetryPolicy
 
     public StandardRetryPolicy(int maxRetries)
     {
-        this.maxRetries = maxRetries;
+        if (maxRetries > 5) {
+            this.maxRetries = 5;
+        }
+        else{
+            this.maxRetries = maxRetries;
+        }
     }
 
     @SuppressWarnings("SimplifiableIfStatement")

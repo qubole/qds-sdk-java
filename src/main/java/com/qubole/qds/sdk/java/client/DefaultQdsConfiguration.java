@@ -93,12 +93,6 @@ public class DefaultQdsConfiguration implements QdsConfiguration
 
     public DefaultQdsConfiguration(String apiEndpoint, String apiToken, int maxRetries, int baseRetryDelay)
     {
-        if (maxRetries > 5){
-            maxRetries = 5;
-        }
-        if (baseRetryDelay > 10){
-            baseRetryDelay = 10;
-        }
         this(api_endpoint, apiToken, API_VERSION, null, new StandardRetry((long) TimeUnit.SECONDS.toMillis(baseRetryDelay), maxRetries), newRetryConnectorAllocator());
     }
 
