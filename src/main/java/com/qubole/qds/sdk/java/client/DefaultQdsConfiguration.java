@@ -99,10 +99,8 @@ public class DefaultQdsConfiguration implements QdsConfiguration
         if (baseRetryDelay > 10){
             baseRetryDelay = 10;
         }
-        this(api_endpoint, apiToken, API_VERSION, null, new StandardRetry((long)TimeUnit.SECONDS.toMillis(baseRetryDelay), maxRetries), newRetryConnectorAllocator());
+        this(api_endpoint, apiToken, API_VERSION, null, new StandardRetry( (long) TimeUnit.SECONDS.toMillis(baseRetryDelay), maxRetries), newRetryConnectorAllocator());
     }
-
-    
 
     @VisibleForTesting
     public interface RetryConnectorAllocator
