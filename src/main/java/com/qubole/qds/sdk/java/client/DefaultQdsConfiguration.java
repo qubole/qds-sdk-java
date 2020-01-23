@@ -84,16 +84,25 @@ public class DefaultQdsConfiguration implements QdsConfiguration
         this(apiEndpoint, apiToken, apiVersion, jerseyConfiguration, new StandardRetry(), newRetryConnectorAllocator());
     }
 
-    public DefaultQdsConfiguration(String apiEndpoint, int max_retries, int base_retry_delay)
+    /**
+     * @param apiEndpoint endpoint
+     * @param apiToken your API token
+     * @param maxRetries number of re-attempts for an api-call in case of retryable exceptions. defaults to 5.
+     * @param baseRetryDelay base sleep interval for exponential backoff in case of retryable exceptions. defaults to 10s.
+     */
+
+    public DefaultQdsConfiguration(String apiEndpoint, String apiToken, int maxRetries, int baseRetryDelay)
     {
-        if (max_retries > 5){
-            max_retries = 5;
+        if (maxRetries > 5){
+            maxRetries = 5;
         }
-        if (base_retry_delay > 10){
-            base_retry_delay = 10;
+        if (baseRetryDelay > 10){
+            baseRetryDelay = 10;
         }
-        this(apiEndpoint, apiToken, apiVersion, null, new StandardRetry((long)TimeUnit.SECONDS.toMillis(base_retry_delay), max_retries), newRetryConnectorAllocator());
+        this(api_endpoint, apiToken, API_VERSION, null, new StandardRetry((long)TimeUnit.SECONDS.toMillis(baseRetryDelay), maxRetries), newRetryConnectorAllocator());
     }
+
+    
 
     @VisibleForTesting
     public interface RetryConnectorAllocator
