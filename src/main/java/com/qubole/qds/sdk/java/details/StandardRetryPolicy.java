@@ -71,7 +71,7 @@ public class StandardRetryPolicy implements RetryPolicy
             {
                 LOG.info(String.format("Retrying request due to status %d, retryCount: %d - request: %s", responseStatus, retryCount, uri));
                 return true;
-            }        
+            }
         }
         return shouldBeRetried(uri, exception, mode);
     }
