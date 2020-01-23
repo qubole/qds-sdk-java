@@ -69,10 +69,9 @@ public class StandardRetryPolicy implements RetryPolicy
             int responseStatus = response.getStatus();
             if (responseStatus == 429 || responseStatus == 502 || responseStatus == 503 || responseStatus == 504)
             {
-                LOG.info(String.format("Retrying request due to status %d, retryCount: %d - request: %s",responseStatus, retryCount, uri));
+                LOG.info(String.format("Retrying request due to status %d, retryCount: %d - request: %s", responseStatus, retryCount, uri));
                 return true;
-            }
-        
+            }        
         }
         return shouldBeRetried(uri, exception, mode);
     }
