@@ -24,7 +24,7 @@ public class ExponentialBackoffRetry implements RetrySleeper
 
     public ExponentialBackoffRetry()
     {
-        this(30000);
+        this(10000);
     }
 
     public ExponentialBackoffRetry(long baseSleepTimeMs)
