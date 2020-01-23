@@ -28,7 +28,7 @@ public class ExponentialBackoffRetry implements RetrySleeper
     }
 
     public ExponentialBackoffRetry(long baseSleepTimeMs)
-    {   
+    {
         if (baseSleepTimeMs > 10000){
             this.baseSleepTimeMs = 10000;
         }
