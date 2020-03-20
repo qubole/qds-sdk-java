@@ -38,7 +38,7 @@ public class StandardRetryPolicy implements RetryPolicy
 
     public StandardRetryPolicy(int maxRetries)
     {
-        this. maxRetries = Math.min(5, maxRetries);
+        this.maxRetries = Math.min(5, maxRetries);
     }
 
     @SuppressWarnings("SimplifiableIfStatement")
