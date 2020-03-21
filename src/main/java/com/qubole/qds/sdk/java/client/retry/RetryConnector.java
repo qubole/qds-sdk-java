@@ -84,7 +84,8 @@ public class RetryConnector implements Connector
         {
             if (tryRetry(request, tryCount, null, e))
             {
-                return internalApply(request, tryCount + 1);
+                ClientRequest retryRequest = new ClientRequest(request);
+                return internalApply(retryRequest, tryCount + 1);
             }
             throw e;
         }
@@ -93,7 +94,8 @@ public class RetryConnector implements Connector
         {
             if (tryRetry(request, tryCount, clientResponse, null))
             {
-                return internalApply(request, tryCount + 1);
+                ClientRequest retryRequest = new ClientRequest(request);
+                return internalApply(retryRequest, tryCount + 1);
             }
         }
 
@@ -142,7 +144,8 @@ public class RetryConnector implements Connector
                 }
             }
         };
-        connector.apply(request, localCallback);
+        ClientRequest retryRequest = new ClientRequest(request);
+        connector.apply(retryRequest, localCallback);
         return SettableFuture.create(); // just a dummy
     }
 
