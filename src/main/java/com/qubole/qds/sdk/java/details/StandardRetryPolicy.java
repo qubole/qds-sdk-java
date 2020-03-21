@@ -29,7 +29,7 @@ public class StandardRetryPolicy implements RetryPolicy
 
     private final int maxRetries;
 
-    private static final int DEFAULT_MAX_RETRIES = 5;
+    private static final int DEFAULT_MAX_RETRIES = 6;
 
     public StandardRetryPolicy()
     {
@@ -38,7 +38,7 @@ public class StandardRetryPolicy implements RetryPolicy
 
     public StandardRetryPolicy(int maxRetries)
     {
-        this.maxRetries = Math.min(5, maxRetries);
+        this.maxRetries = Math.min(6, maxRetries);
     }
 
     @SuppressWarnings("SimplifiableIfStatement")
@@ -47,7 +47,7 @@ public class StandardRetryPolicy implements RetryPolicy
     {
         if (retryCount >= maxRetries)
         {
-            LOG.warning(String.format("Retries exceeded. retryCount: %d - maxRetries: %d", retryCount, maxRetries));
+            LOG.warning(String.format("Retries exceeded. retryCount: %d - maxRetries: %d", retryCount+1, maxRetries));
             return false;
         }
 
@@ -55,7 +55,7 @@ public class StandardRetryPolicy implements RetryPolicy
         {
             if (response.getStatusInfo().getFamily() == Response.Status.Family.SERVER_ERROR)
             {
-                LOG.info(String.format("Retrying request due to Status %d. retryCount: %d - request: %s", response.getStatus(), retryCount, uri));
+                LOG.info(String.format("Retrying request due to Status %d. retryCount: %d - request: %s", response.getStatus(), retryCount+1, uri));
                 return true;
             }
         }
@@ -64,7 +64,7 @@ public class StandardRetryPolicy implements RetryPolicy
             int responseStatus = response.getStatus();
             if (responseStatus == 429 || responseStatus == 502 || responseStatus == 503 || responseStatus == 504)
             {
-                LOG.info(String.format("Retrying request due to status %d, retryCount: %d - request: %s", responseStatus, retryCount, uri));
+                LOG.info(String.format("Retrying request due to status %d, retryCount: %d - request: %s", responseStatus, retryCount+1, uri));
                 return true;
             }
         }
