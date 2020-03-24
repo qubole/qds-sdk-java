@@ -22,7 +22,7 @@
     <groupId>com.qubole.qds-sdk-java</groupId>
     <artifactId>qds-sdk-java</artifactId>
     <name>Qubole Data Service Java SDK</name>
-    <version>1.1.0</version>
+    <version>1.2.1-SNAPSHOT</version>
     <description>
         A Java library that provides the tools you need to
         authenticate with, and use the Qubole Data Service API.
@@ -31,7 +31,9 @@
 
     <scm>
         <url>https://github.com/qubole/qds-sdk-java.git</url>
-    </scm>
+        <developerConnection>scm:git:git@github.com:qubole/qds-sdk-java.git</developerConnection>
+        <tag>qds-sdk-java-1.2.0</tag>
+  </scm>
 
     <licenses>
         <license>
@@ -332,7 +334,7 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.3</version>
+                        <version>1.6.4</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ossrh</serverId>
