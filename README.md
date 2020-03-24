@@ -16,7 +16,7 @@ NOTE: see the bullet below regarding Jersery 2.0
 
 ### JDK 11 Build
 
-By default the library is built with java 8, but if you need a `jdk11` version, run the command:
+By default the library is built with the `jdk8`, but if you need a `jdk11` version, run the command:
 
 ```
 mvn clean install -P jdk11-compliant
