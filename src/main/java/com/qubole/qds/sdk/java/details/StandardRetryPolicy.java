@@ -50,21 +50,22 @@ public class StandardRetryPolicy implements RetryPolicy
             LOG.warning(String.format("Retries exceeded. retryCount: %d - maxRetries: %d", retryCount+1, maxRetries));
             return false;
         }
-
-        if ((response != null) && (mode == Mode.RETRY_ALL))
-        {
-            if (response.getStatusInfo().getFamily() == Response.Status.Family.SERVER_ERROR)
-            {
-                LOG.info(String.format("Retrying request due to Status %d. retryCount: %d - request: %s", response.getStatus(), retryCount+1, uri));
-                return true;
-            }
-        }
+        /* Always retry on 429 and 503 error codes irrespective of HTTP method type */
         if (response != null)
         {
             int responseStatus = response.getStatus();
             if (responseStatus == 429 || responseStatus == 503)
             {
                 LOG.info(String.format("Retrying request due to status %d, retryCount: %d - request: %s", responseStatus, retryCount+1, uri));
+                return true;
+            }
+        }
+
+        if ((response != null) && (mode == Mode.RETRY_ALL))
+        {
+            if (response.getStatusInfo().getFamily() == Response.Status.Family.SERVER_ERROR)
+            {
+                LOG.info(String.format("Retrying request due to Status %d. retryCount: %d - request: %s", response.getStatus(), retryCount+1, uri));
                 return true;
             }
         }
