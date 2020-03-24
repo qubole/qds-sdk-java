@@ -14,7 +14,16 @@ The SDK is available in The Central Repository. To use the SDK, add the followin
 
 NOTE: see the bullet below regarding Jersery 2.0
 
+### JDK 11 Build
+
+By default the library is built with the `jdk8`, but if you need a `jdk11` version, run the command:
+
+```
+mvn clean install -P jdk11-compliant
+```
+
 ## Usage
+
 
 In your application initialization code, allocate a QdsClient object:
 
