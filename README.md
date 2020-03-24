@@ -21,6 +21,7 @@ By default the library is built with java 8, but if you need a `jdk11` version, 
 ```
 mvn clean install -P jdk11-compliant
 ```
+
 ## Usage
 
 
