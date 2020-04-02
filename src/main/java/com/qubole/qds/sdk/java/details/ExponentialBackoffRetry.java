@@ -17,25 +17,28 @@ package com.qubole.qds.sdk.java.details;
 
 import com.qubole.qds.sdk.java.client.retry.RetrySleeper;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 public class ExponentialBackoffRetry implements RetrySleeper
 {
+    private static final Logger LOG = Logger.getLogger(ExponentialBackoffRetry.class.getName());
     private final long baseSleepTimeMs;
 
     public ExponentialBackoffRetry()
     {
-        this(30000);
+        this(10000);
     }
 
     public ExponentialBackoffRetry(long baseSleepTimeMs)
     {
-        this.baseSleepTimeMs = baseSleepTimeMs;
+        this.baseSleepTimeMs = Math.min(10000, baseSleepTimeMs);
     }
 
     @Override
     public void sleep(int retryCount) throws InterruptedException
     {
         long sleepMs = (long) (baseSleepTimeMs * Math.pow(2, retryCount));
+        LOG.info(String.format("Sleeping before retry for %d seconds..", sleepMs/1000));
         TimeUnit.MILLISECONDS.sleep(sleepMs);
     }
 }
