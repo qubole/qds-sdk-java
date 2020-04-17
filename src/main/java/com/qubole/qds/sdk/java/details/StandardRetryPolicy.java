@@ -29,7 +29,7 @@ public class StandardRetryPolicy implements RetryPolicy
 
     private final int maxRetries;
 
-    private static final int DEFAULT_MAX_RETRIES = 6;
+    private static final int DEFAULT_MAX_RETRIES = 7;
 
     public StandardRetryPolicy()
     {
@@ -38,7 +38,7 @@ public class StandardRetryPolicy implements RetryPolicy
 
     public StandardRetryPolicy(int maxRetries)
     {
-        this.maxRetries = Math.min(6, maxRetries);
+        this.maxRetries = Math.min(7, maxRetries);
     }
 
     @SuppressWarnings("SimplifiableIfStatement")
