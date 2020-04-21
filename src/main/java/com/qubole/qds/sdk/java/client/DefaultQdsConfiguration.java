@@ -87,7 +87,7 @@ public class DefaultQdsConfiguration implements QdsConfiguration
     /**
      * @param apiEndpoint endpoint
      * @param apiToken your API token
-     * @param maxRetries number of re-attempts for an api-call in case of retryable exceptions. defaults to 6.
+     * @param maxRetries number of re-attempts for an api-call in case of retryable exceptions. defaults to 7.
      * @param baseRetryDelay base sleep interval for exponential backoff in case of retryable exceptions. defaults to 10s.
      */
 
