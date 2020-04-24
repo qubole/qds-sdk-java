@@ -174,5 +174,4 @@ public class RetryConnector implements Connector
             return true;
         }
         return false;
-    }
-}
+    }}
