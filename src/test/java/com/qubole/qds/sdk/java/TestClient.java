@@ -15,12 +15,13 @@
  */
 package com.qubole.qds.sdk.java;
 
+import com.google.common.collect.ImmutableList;
+import com.qubole.qds.sdk.java.api.BaseCommand;
 import com.qubole.qds.sdk.java.client.DefaultQdsConfiguration;
 import com.qubole.qds.sdk.java.client.QdsConfiguration;
 import com.qubole.qds.sdk.java.details.RequestDetails;
 import com.qubole.qds.sdk.java.details.ForPage;
 import com.qubole.qds.sdk.java.details.QdsClientImpl;
-import org.apache.http.client.utils.URIBuilder;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import javax.ws.rs.client.AsyncInvoker;
@@ -98,13 +99,21 @@ public class TestClient
         String endDate = "2018-07-13T23:59:59Z";
         boolean allUsers = false;
         boolean qProps = false;
-        client.command().startDate(startDate).endDate(endDate).allUsers(allUsers).includeQueryProperties(qProps).history().invoke();
+
+        client.command()
+                .startDate(startDate)
+                .endDate(endDate)
+                .allUsers(allUsers)
+                .commandType(ImmutableList.of(BaseCommand.COMMAND_TYPE.HIVE, BaseCommand.COMMAND_TYPE.PRESTO))
+                .includeQueryProperties(qProps).history().invoke();
+
         WebTarget webTarget = webTargetReference.get();
         Assert.assertNotNull(webTarget);
         Assert.assertTrue(webTarget.getUri().toString().contains("end_date="+endDate.replaceAll(":", "%3A")));
         Assert.assertTrue(webTarget.getUri().toString().contains("include_query_properties="+qProps));
         Assert.assertTrue(webTarget.getUri().toString().contains("all_users="+0));
         Assert.assertTrue(webTarget.getUri().toString().contains("start_date="+startDate.replaceAll(":", "%3A")));
+        Assert.assertTrue(webTarget.getUri().toString().contains("command_type=HiveCommand%2CPrestoCommand"));
     }
 
 

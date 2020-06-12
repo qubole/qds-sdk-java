@@ -20,6 +20,7 @@ import com.qubole.qds.sdk.java.entities.CommandResponse;
 import com.qubole.qds.sdk.java.entities.Commands;
 
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 /**
  * Corresponds to http://www.qubole.com/docs/documentation/command-api/
@@ -161,4 +162,7 @@ public interface CommandApi
     public CommandApi includeQueryProperties(boolean includeQueryProperties);
 
     public CommandApi endDate(String endDate);
+
+    public CommandApi commandType(List<BaseCommand.COMMAND_TYPE> commandTypes);
+
 }

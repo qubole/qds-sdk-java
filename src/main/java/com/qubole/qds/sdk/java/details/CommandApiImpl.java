@@ -26,7 +26,12 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import javax.ws.rs.core.Response;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import static com.google.common.base.CaseFormat.UPPER_CAMEL;
+import static com.google.common.base.CaseFormat.UPPER_UNDERSCORE;
 
 class CommandApiImpl implements CommandApi
 {
@@ -186,4 +191,15 @@ class CommandApiImpl implements CommandApi
         return this;
     }
 
+    @Override
+    public CommandApi commandType(List<BaseCommand.COMMAND_TYPE> commandTypes) {
+
+        String commandTypeCsv = commandTypes.stream()
+                .filter(type -> type != BaseCommand.COMMAND_TYPE.NONE)
+                .map(i -> UPPER_UNDERSCORE.to(UPPER_CAMEL, i + "_COMMAND"))
+                .collect(Collectors.joining(","));
+
+        parameters.put("command_type", commandTypeCsv);
+        return this;
+    }
 }
