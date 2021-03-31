@@ -60,7 +60,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <jersey-version>2.26-b03</jersey-version>
-        <guava-version>27.0-android</guava-version>
+        <guava-version>29.0-android</guava-version>
         <jackson.version>2.10.3</jackson.version>
         <testng-version>6.14.3</testng-version>
         <aws-java-sdk-version>1.10.77</aws-java-sdk-version>
